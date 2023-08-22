@@ -1,16 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted } from 'vue'
+import axios from 'axios'
 
 defineProps<{ msg: string }>()
 
-const count = ref(0)
+onMounted(async () => {
+  try {
+    const response = await axios.get('https://demo2.gcreate.com.tw/gc_godpray/wp-json/my-plugin/v1/get-products')
+    console.log('API 請求結果:', response.data)
+  } catch (error) {
+    console.error('API 請求失敗:', error)
+  }
+})
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1 class="text-center bg-gray-100 p-5">{{ msg }}</h1>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

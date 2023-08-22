@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
+import { useCounterStore } from "./store/counter"
+const store = useCounterStore()
+const clickAdd = () => {
+  store.increment()
+}
 </script>
 
 <template>
   <div>
+    <h1>{{ store.count }}</h1>
+    <button @click="clickAdd">add</button>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
