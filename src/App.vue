@@ -1,24 +1,13 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import { useCounterStore } from "./store/counter"
-const store = useCounterStore()
-const clickAdd = () => {
-  store.increment()
-}
+// @ts-ignore
+import Header from "@/components/global/header/Header.vue"
+import Footer from "./components/global/Footer.vue";
 </script>
 
 <template>
-  <div>
-    <h1>{{ store.count }}</h1>
-    <button @click="clickAdd">add</button>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+<Header />
+  <router-view />
+<Footer />
 </template>
 
 <style scoped>
