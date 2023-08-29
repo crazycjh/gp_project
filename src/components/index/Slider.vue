@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted,onUnmounted,ref } from "vue";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -16,13 +16,30 @@ interface Slider {
 }
 const sliders = ref<Slider[]>([]);
 const modules = [Autoplay, Pagination, Navigation];
+
+//js控制navigators rwd
+const navigationSidesOffsetDesktop = ref('70px');
+const adjustNavigationSidesOffset = () => {
+  if (window.innerWidth <= 640) {
+    navigationSidesOffsetDesktop.value = '20px';
+  } else {
+    navigationSidesOffsetDesktop.value = '70px';
+  }
+};
+onMounted(() => {
+  adjustNavigationSidesOffset();
+  window.addEventListener('resize', adjustNavigationSidesOffset);
+});
+onUnmounted(() => {
+  window.removeEventListener('resize', adjustNavigationSidesOffset);
+});
+//輪播取得資料
 onMounted(async () => {
   try {
     const response = await axios.get(
       "https://demo2.gcreate.com.tw/gc_godpray/api/gc/get-sliders"
     );
     sliders.value = response.data;
-    console.log("API 請求結果:", response.data);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
@@ -33,46 +50,42 @@ onMounted(async () => {
     <swiper
       :style="{
         '--swiper-navigation-color': '#fff',
-        '--swiper-navigation-sides-offset': '70px',
-        '--swiper-pagination-color':'#CEB96E',
+        '--swiper-navigation-sides-offset': navigationSidesOffsetDesktop,
+        '--swiper-pagination-color': '#CEB96E',
       }"
       :slides-per-view="1"
       :loop="true"
-      :autoplay="{
-        delay: 2500,
-        disableOnInteraction: false,
-      }"
       :modules="modules"
       :pagination="{
         clickable: true,
       }"
       :navigation="true"
-      class="h-600"
+      class="h-600 swiper-container"
     >
-      <swiper-slide
-        class="w-full bg-cover bg-center"
+    <swiper-slide
+        class="w-full bg-cover bg-center relative"
         v-for="slider in sliders"
-        :style="{ 'background-image': `url(${slider.image})` }"
       >
-        <div class="flex flex-col justify-center items-center h-full"> <!-- 使用 text-center 来置中标题 -->
-          <h2 class="text-3xl mb-2 text-white">{{ slider.title }}</h2>
-          <h3 class="text-xl mb-4 text-white">{{ slider.subtitle }}</h3>
-          <router-link :to="`${slider.link}`" class="slider_button">了解更多</router-link>
+        <div class="h-full w-full z-10" :style="{ 'background-image': `url(${slider.image})`, 'filter': 'brightness(50%)' }"></div>
+        <div class="flex flex-col justify-center items-center absolute inset-0">
+          <h2 class="text-3xl mb-2 text-white relative z-50">{{ slider.title }}</h2>
+          <h3 class="text-xl mb-4 text-white relative z-50">{{ slider.subtitle }}</h3>
+          <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link>
         </div>
       </swiper-slide>
     </swiper>
   </div>
 </template>
 <style scoped>
-.slider_button{
+.slider_button {
   cursor: pointer;
-  display:flex;
+  display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   width: 114px;
   height: 43px;
-  padding:10px,20px,10px,20px;
-  background-color: #CEB96E;
-  color:#ffffff;
+  padding: 10px, 20px, 10px, 20px;
+  background-color: #ceb96e;
+  color: #ffffff;
 }
 </style>

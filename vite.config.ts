@@ -7,7 +7,7 @@ export default defineConfig({
   base: '/gc_godpray_frontend/',
   plugins: [vue()],
   server: {
-    port: 5174 
+    port: 3000 
   },
   resolve: {
     alias: {
