@@ -6,6 +6,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import LinkBtn from "../widget/LinkBtn.vue";
 
 interface Slider {
   image: String;
@@ -70,22 +71,10 @@ onMounted(async () => {
         <div class="flex flex-col justify-center items-center absolute inset-0">
           <h2 class="text-3xl mb-2 text-white relative z-50">{{ slider.title }}</h2>
           <h3 class="text-xl mb-4 text-white relative z-50">{{ slider.subtitle }}</h3>
-          <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link>
+          <!-- <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link> -->
+          <LinkBtn :link="slider.link" />
         </div>
       </swiper-slide>
     </swiper>
   </div>
 </template>
-<style scoped>
-.slider_button {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 114px;
-  height: 43px;
-  padding: 10px, 20px, 10px, 20px;
-  background-color: #ceb96e;
-  color: #ffffff;
-}
-</style>
