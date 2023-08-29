@@ -64,7 +64,7 @@ onMounted(async () => {
     >
     <swiper-slide
         class="w-full bg-cover bg-center relative"
-        v-for="slider in sliders"
+        v-for="slider in sliders" :key="slider.id"
       >
         <div class="h-full w-full z-10" :style="{ 'background-image': `url(${slider.image})`, 'filter': 'brightness(50%)' }"></div>
         <div class="flex flex-col justify-center items-center absolute inset-0">
