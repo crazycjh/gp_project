@@ -47,7 +47,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="px-360">
+  <div class="md:px-360">
    <Title title="推薦廟宇" />
     <swiper
       :style="{
@@ -55,7 +55,12 @@ onMounted(async () => {
         '--swiper-pagination-bottom':'-6px',
         '--swiper-pagination-bullet-inactive-color':'#ffffff'
       }"
-      :slides-per-view="4"
+       :breakpoints="{
+        '640': {
+          slidesPerView: 4,
+        },
+      }"
+      :slides-per-view="2"
       :spaceBetween="10"
       :loop="true"
       :modules="modules"

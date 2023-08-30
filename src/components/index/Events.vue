@@ -4,10 +4,10 @@ import LinkBtn from "../widget/LinkBtn.vue";
 </script>
 <template>
    <Title title="最新活動" />
-   <div class="flex justify-center flex-wrap gap-5 px-360">
+   <div class="flex justify-center flex-wrap gap-5 md:px-360">
       <div class="flex">
-         <div>
-            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events1.svg" alt="">
+         <div class="event_img">
+            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events1.svg" alt="">
          </div>
          <div class="ml-10px flex flex-col justify-center">
             <p class="mb-10px date">2023.11.06</p>
@@ -16,7 +16,7 @@ import LinkBtn from "../widget/LinkBtn.vue";
       </div>
       <div class="flex">
          <div>
-            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events2.svg" alt="">
+            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events2.svg" alt="">
          </div>
          <div class="ml-10px flex flex-col justify-center">
             <p class="mb-10px date">2023.11.06</p>
@@ -25,7 +25,7 @@ import LinkBtn from "../widget/LinkBtn.vue";
       </div>
       <div class="flex">
          <div>
-            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events3.svg" alt="">
+            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events3.svg" alt="">
          </div>
          <div class="ml-10px flex flex-col justify-center">
             <p class="mb-10px date">2023.11.06</p>
@@ -34,7 +34,7 @@ import LinkBtn from "../widget/LinkBtn.vue";
       </div>
       <div class="flex">
          <div>
-            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events4.png" alt="">
+            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events4.png" alt="">
          </div>
          <div class="ml-10px flex flex-col justify-center">
             <p class="mb-10px date">2023.11.06</p>
@@ -45,6 +45,13 @@ import LinkBtn from "../widget/LinkBtn.vue";
    </div>
 </template>
 <style scoped>
+@media (max-width: 480px) {
+   .event_img{
+      width: 136px !important;
+      height: 136px !important;
+   } 
+}
+
 .date{
    color: #920000;
    font-family: Noto Serif TC;

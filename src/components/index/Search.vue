@@ -3,7 +3,7 @@ import Title from '@/components/widget/Title.vue'
 </script>
 <template>
    <Title title="全台廟宇搜尋" />
-   <div class="flex justify-center items-center">
+   <div class="flex justify-center items-center flex-wrap">
       <div class="relative inline-block">
          <select class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-2">
             <option>全台縣市</option>
@@ -20,8 +20,8 @@ import Title from '@/components/widget/Title.vue'
             <path d="M6.5 12L0.00480833 1.2235e-06L12.9952 8.78432e-08L6.5 12Z" fill="#333333"/>
          </svg>
       </div>
-      <div class="flex">
-         <input class="custom_input" type="text">
+      <div class="flex input_area">
+         <input placeholder="請輸入關鍵字..." class="custom_input" type="text">
          <img src="../../assets/index/search.svg" alt="">
       </div>
    </div>
@@ -44,5 +44,19 @@ import Title from '@/components/widget/Title.vue'
    flex-shrink: 0;
    background: #EEE;
    color:#EEEEEE;
+}
+@media (max-width: 480px) {
+   .input_area{
+      margin-left:-16px;
+      margin-top:10px;
+      width: 320px;
+   }
+   .custom_input{
+      width: 290px;
+   }
+}
+.custom_input{
+  padding-left: 5px; 
+  padding-right: 5px; 
 }
 </style>

@@ -20,8 +20,8 @@
                     </li>
                 </ul>
             </div>
-            <div>
-                <p class="whitespace-nowrap text-white">客服電話：0912-345-678 服務信箱：service@XXXX.com.tw</p>
+            <div class="max-md:text-center">
+                <p class="md:whitespace-nowrap text-white">客服電話：0912-345-678 服務信箱：service@XXXX.com.tw</p>
             </div>
             <div class="flex gap-5 justify-center">
                 <img src="../../assets/footer/yt.svg" alt="">

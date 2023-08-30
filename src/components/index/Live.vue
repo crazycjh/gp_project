@@ -2,9 +2,9 @@
 import Title from '@/components/widget/Title.vue'
 </script>
 <template>
-   <div class="px-360">
+   <div class="md:px-360">
       <Title title="廟宇直播" />
-      <div class="flex w-full justify-center gap-2">
+      <div class="flex w-full justify-center gap-2 max-md:flex-col text-center">
          <div>
             <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo2.jpg" alt="">
             <h4 class="live">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
