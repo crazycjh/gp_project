@@ -72,7 +72,7 @@ onMounted(async () => {
           <h2 class="text-3xl mb-2 text-white relative z-50">{{ slider.title }}</h2>
           <h3 class="text-xl mb-4 text-white relative z-50">{{ slider.subtitle }}</h3>
           <!-- <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link> -->
-          <LinkBtn :link="slider.link" />
+          <LinkBtn :link="slider.link" text="了解更多"/>
         </div>
       </swiper-slide>
     </swiper>

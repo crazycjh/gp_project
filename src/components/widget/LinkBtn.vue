@@ -1,11 +1,12 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  link: String 
+  link: String, 
+  text:String
 });
 </script>
 <template>
-    <router-link :to="link" class="slider_button relative z-50">了解更多</router-link>
+    <router-link :to="link" class="slider_button relative z-50">{{text}}</router-link>
 </template>
 <style scoped>
 .slider_button {
@@ -18,5 +19,10 @@ const props = defineProps({
   padding: 10px, 20px, 10px, 20px;
   background-color: #ceb96e;
   color: #ffffff;
+}
+.slider_button:hover{
+  border: 1px solid #CEB96E;
+  background: #FFF;
+  color: #CEB96E;
 }
 </style>

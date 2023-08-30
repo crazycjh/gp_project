@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  title: String 
+  title: String,
+  white:Boolean 
 });
 </script>
 <template>
@@ -18,7 +19,7 @@ const props = defineProps({
                 </clipPath>
             </defs>
         </svg>
-        <h3>{{ title }}</h3>
+        <h3 :class="{'custom': white}">{{ title }}</h3>
     </div>
 </template>
 <style scoped>
@@ -34,5 +35,8 @@ h3{
     font-weight: 700;
     line-height: normal;
     letter-spacing: 4.8px;
+}
+.custom{
+    color:#ffffff;
 }
 </style>

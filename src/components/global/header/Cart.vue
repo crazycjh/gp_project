@@ -12,6 +12,6 @@
 </script>
 <template>
     <div>
-        <img src="../../../assets/header/Vector.svg" alt="">
+        <img src="../../../assets/header/cart_icon.svg" alt="">
     </div>
 </template>

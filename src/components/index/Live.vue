@@ -2,15 +2,17 @@
 import Title from '@/components/widget/Title.vue'
 </script>
 <template>
-   <Title title="廟宇直播" />
-   <div class="flex w-full justify-center gap-2">
-      <div>
-         <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo2.jpg" alt="">
-         <h4 class="live">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
-      </div>
-      <div>
-         <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo1.jpg" alt="">
-         <h4 class="live">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
+   <div class="px-360">
+      <Title title="廟宇直播" />
+      <div class="flex w-full justify-center gap-2">
+         <div>
+            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo2.jpg" alt="">
+            <h4 class="live">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
+         </div>
+         <div>
+            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo1.jpg" alt="">
+            <h4 class="live">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
+         </div>
       </div>
    </div>
 </template>

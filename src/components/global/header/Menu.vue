@@ -4,7 +4,12 @@ import Cart from './Cart.vue';
 </script>
 <template>
     <div class="flex justify-between">
-        <router-link to="/"><img src="../../../assets/header/Group 74.svg" alt=""></router-link>
+        <router-link to="/">
+            <div class="flex">
+                <img src="../../../assets/header/logo.svg" alt="">
+                <img src="../../../assets/header/logo_title.svg" alt="">
+            </div>
+        </router-link>
         <ul class="flex gap-5 items-center hidden lg:flex">
             <li class="nav-item">
                 <router-link to="/allTemple/" class="nav-link">全台廟宇</router-link>
@@ -41,6 +46,6 @@ import Cart from './Cart.vue';
     font-family: "Noto Sans TC", sans-serif;
 }
 .nav-link{
-    color:#000000;
+    color:#FFFFFF;
 }
 </style>

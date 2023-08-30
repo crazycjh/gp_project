@@ -1,5 +1,5 @@
 <template>
     <div>
-        <img src="../../../assets/header/user_icon 1.svg" alt="">
+        <img src="../../../assets/header/user_icon.svg" alt="">
     </div>
 </template>

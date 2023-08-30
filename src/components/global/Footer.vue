@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-amber-800">
+    <div class="bg-red-800">
         <div class="px-11 lg:px-360 xl:px-750 py-30 flex flex-col gap-10px items-center">
             <div>
                 <ul class="flex gap-1">
