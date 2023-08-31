@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import Title from '@/components/widget/Title.vue'
+import router from "../../router";
+const goSearch = (()=>{
+  router.push('/searchPage');
+})
 </script>
 <template>
    <Title title="全台廟宇搜尋" />
@@ -22,7 +26,7 @@ import Title from '@/components/widget/Title.vue'
       </div>
       <div class="flex input_area">
          <input placeholder="請輸入關鍵字..." class="custom_input" type="text">
-         <img src="../../assets/index/search.svg" alt="">
+         <img src="../../assets/index/search.svg" alt="" @click="goSearch">
       </div>
    </div>
 </template>

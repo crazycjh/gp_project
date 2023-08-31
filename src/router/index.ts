@@ -61,6 +61,16 @@ const routes = [
     name: "CustomerService",
     component: () => import("@/views/CustomerService.vue")
   },
+  {
+    path: "/searchPage",
+    name: "SearchPage",
+    component: () => import("@/views/SearchPage.vue")
+  },
+  {
+    path: "/temple",
+    name: "Temple",
+    component: () => import("@/views/temple/inner.vue")
+  },
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

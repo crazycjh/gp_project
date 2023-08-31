@@ -3,9 +3,9 @@ import Member from './Member.vue';
 import Cart from './Cart.vue';
 </script>
 <template>
-    <div class="flex justify-between">
-        <router-link to="/">
-            <div class="flex">
+    <div class="flex justify-between h-full">
+        <router-link class="flex items-center" to="/">
+            <div class="flex items-center">
                 <img src="../../../assets/header/logo.svg" alt="">
                 <img src="../../../assets/header/logo_title.svg" alt="">
             </div>
@@ -38,7 +38,7 @@ import Cart from './Cart.vue';
                 <Cart />
             </li>
         </ul>
-        <img class="block lg:hidden" src="../../../assets/header/Group 67.svg" alt="">
+        <img class="block lg:hidden mr-5" src="../../../assets/header/Group67.svg" width="30" height="24" alt="">
     </div>
 </template>
 <style scoped>

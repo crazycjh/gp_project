@@ -47,7 +47,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="md:px-360">
+  <div class="px-10 lg:px-360">
    <Title title="推薦廟宇" />
     <swiper
       :style="{
@@ -78,35 +78,35 @@ onMounted(async () => {
       </swiper-slide> -->
       <swiper-slide>
         <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand1.png)` }"></div>
-        <div>
+        <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名1</h5>
             <h6 class="area">台北市萬華區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
         <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand2.png)` }"></div>
-        <div>
+        <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名2</h5>
             <h6 class="area">新北市三重區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
         <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand3.png)` }"></div>
-        <div>
+        <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名3</h5>
             <h6 class="area">桃園市龍潭區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
         <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand4.png)` }"></div>
-        <div>
+        <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名4</h5>
             <h6 class="area">新竹縣湖口區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
         <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand4.png)` }"></div>
-        <div>
+        <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名4</h5>
             <h6 class="area">新竹縣湖口區</h6>
         </div>
@@ -119,6 +119,7 @@ onMounted(async () => {
 </template>
 <style scoped>
 .title{
+    letter-spacing: 2.4px;
     color: #ffffff;
     font-family: Noto Serif TC;
     font-size: 20px;

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-
 const props = defineProps({
   link: String, 
   text:String
 });
 </script>
 <template>
-    <router-link :to="link" class="slider_button relative z-50">{{text}}</router-link>
+    <router-link v-if="props.link" :to="props.link.toString()" class="slider_button relative z-30">{{text}}</router-link>
 </template>
 <style scoped>
 .slider_button {
+  letter-spacing: 2px;
   cursor: pointer;
   display: flex;
   align-items: center;

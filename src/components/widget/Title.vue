@@ -19,7 +19,7 @@ const props = defineProps({
                 </clipPath>
             </defs>
         </svg>
-        <h3 :class="{'custom': white}">{{ title }}</h3>
+        <h3 :class="{'custom': props.white}">{{ props.title }}</h3>
     </div>
 </template>
 <style scoped>

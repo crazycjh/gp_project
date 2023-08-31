@@ -2,18 +2,19 @@
 import Title from '@/components/widget/Title.vue'
 </script>
 <template>
-   <div class="md:px-360">
+   <div class="px-10 md:px-270 lg:px-360 relative">
       <Title title="廟宇直播" />
-      <div class="flex w-full justify-center gap-2 max-md:flex-col text-center">
-         <div>
+      <div class="flex w-full justify-center gap-40px lg:gap-2  max-lg:flex-col text-center">
+         <div class="z-10 w-full">
             <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo2.jpg" alt="">
-            <h4 class="live">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
+            <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
-         <div>
+         <div class="z-10 w-full">
             <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo1.jpg" alt="">
-            <h4 class="live">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
+            <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
       </div>
+      <img class="tree_right" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg2.svg" alt="">
    </div>
 </template>
 <style scoped>
@@ -25,5 +26,16 @@ import Title from '@/components/widget/Title.vue'
    font-style: normal;
    font-weight: 400;
    line-height: normal;
+   letter-spacing: 2.4px;
+}
+@media (max-width: 1024px) {
+   .tree_right{
+      display: none;
+   }
+}
+.tree_right{
+   position: absolute;
+   top:30%;
+   right:0;
 }
 </style>

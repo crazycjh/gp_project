@@ -61,20 +61,36 @@ onMounted(async () => {
         clickable: true,
       }"
       :navigation="true"
-      class="h-600 swiper-container"
+      class="h-400 md:h-600 swiper-container"
     >
     <swiper-slide
         class="w-full bg-cover bg-center relative"
-        v-for="slider in sliders" :key="slider.id"
+        v-for="slider in sliders" :key="slider.id.toString()"
       >
         <div class="h-full w-full z-10" :style="{ 'background-image': `url(${slider.image})`, 'filter': 'brightness(50%)' }"></div>
         <div class="flex flex-col justify-center items-center absolute inset-0">
-          <h2 class="text-3xl mb-2 text-white relative z-50">{{ slider.title }}</h2>
-          <h3 class="text-xl mb-4 text-white relative z-50">{{ slider.subtitle }}</h3>
+          <h2 class="text-3xl mb-2 text-white relative z-50 title">{{ slider.title }}</h2>
+          <h3 class="text-xl mb-4 text-white relative z-50 subtitle">{{ slider.subtitle }}</h3>
           <!-- <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link> -->
-          <LinkBtn :link="slider.link" text="了解更多"/>
+          <LinkBtn :link="slider.link.toString()" text="了解更多"/>
         </div>
       </swiper-slide>
     </swiper>
   </div>
 </template>
+<style scoped>
+.title{
+  letter-spacing: 6px;
+}
+.subtitle{
+  letter-spacing: 3.6px;
+}
+@media (max-width: 1024px) {
+  .title{
+  letter-spacing: 3.6px;
+}
+.subtitle{
+  letter-spacing: 2.4px;
+}
+}
+</style>

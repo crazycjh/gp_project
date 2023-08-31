@@ -4,9 +4,9 @@ import LinkBtn from "../widget/LinkBtn.vue";
 </script>
 <template>
    <Title title="最新活動" />
-   <div class="flex justify-center flex-wrap gap-5 md:px-360">
+   <div class="flex justify-center flex-wrap gap-5 px-10 lg:px-360 relative">
       <div class="flex">
-         <div class="event_img">
+         <div>
             <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events1.svg" alt="">
          </div>
          <div class="ml-10px flex flex-col justify-center">
@@ -41,12 +41,16 @@ import LinkBtn from "../widget/LinkBtn.vue";
             <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
          </div>
       </div>
-      <LinkBtn text="更多活動" link="/more"/>
+      <img class="tree_left" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg3.svg" alt="">
+   </div>
+   <div class="flex justify-center py-30">
+      <LinkBtn text="更多活動" link="/latest"/>
    </div>
 </template>
 <style scoped>
 @media (max-width: 480px) {
    .event_img{
+      object-fit: cover;
       width: 136px !important;
       height: 136px !important;
    } 
@@ -61,11 +65,22 @@ import LinkBtn from "../widget/LinkBtn.vue";
    line-height: normal;
 }
 .title{
+   letter-spacing: 2.4px;
    color: #000;
    font-family: Noto Serif TC;
    font-size: 20px;
    font-style: normal;
    font-weight: 400;
    line-height: normal;
+}
+@media (max-width: 1024px) {
+   .tree_left{
+      display: none;
+   }
+}
+.tree_left{
+   position: absolute;
+   top:10%;
+   left:0;
 }
 </style>
