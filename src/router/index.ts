@@ -71,6 +71,11 @@ const routes = [
     name: "Temple",
     component: () => import("@/views/temple/inner.vue")
   },
+  {
+    path: "/latest/inner",
+    name: "LastestInner",
+    component: () => import("@/views/latest/inner.vue")
+  },
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

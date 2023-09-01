@@ -8,12 +8,12 @@ import Title from '@/components/widget/Title.vue'
       <div class="flex w-full justify-center gap-40px lg:gap-2  max-lg:flex-col text-center">
          <div class="z-10 w-full">
             <!-- <img class="w-full" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo2.jpg" alt=""> -->
-            <iframe class="w-full" width="586" height="329" src="https://www.youtube.com/embed/4lOBPxcRt3I?si=NWr9xRZ_olmut_Mh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe class="w-full" width="586" height="329" src="https://www.youtube.com/embed/4lOBPxcRt3I?autoplay=1&mute=1&si=NWr9xRZ_olmut_Mh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
          <div class="z-10 w-full">
             <!-- <img class="w-full" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo1.jpg" alt=""> -->
-            <iframe class="w-full" width="586" height="329" src="https://www.youtube.com/embed/H2Hr2F486dg?si=9lLXwlY8IVq1UF22" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe class="w-full" width="586" height="329" src="https://www.youtube.com/embed/H2Hr2F486dg?autoplay=1&mute=1&si=9lLXwlY8IVq1UF22" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
       </div>

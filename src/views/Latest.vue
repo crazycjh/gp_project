@@ -22,7 +22,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link to="/latest/inner">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
