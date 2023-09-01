@@ -6,27 +6,29 @@ const goSearch = (()=>{
 })
 </script>
 <template>
-   <Title title="全台廟宇搜尋" />
-   <div class="flex justify-center items-center flex-wrap">
-      <div class="relative inline-block">
-         <select class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-2">
-            <option>全台縣市</option>
-         </select>
-         <svg class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-            <path d="M6.5 12L0.00480833 1.2235e-06L12.9952 8.78432e-08L6.5 12Z" fill="#333333"/>
-         </svg>
-      </div>
-      <div class="relative inline-block">
-         <select class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-4">
-            <option value="">主神</option>
-         </select>
-         <svg class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-            <path d="M6.5 12L0.00480833 1.2235e-06L12.9952 8.78432e-08L6.5 12Z" fill="#333333"/>
-         </svg>
-      </div>
-      <div class="flex input_area">
-         <input placeholder="請輸入關鍵字..." class="custom_input" type="text">
-         <img src="../../assets/index/search.svg" alt="" @click="goSearch">
+   <div class="mx-auto max-w-1200px">
+      <Title title="全台廟宇搜尋" />
+      <div class="flex justify-center items-center flex-wrap">
+         <div class="relative inline-block">
+            <select class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-2">
+               <option>全台縣市</option>
+            </select>
+            <svg class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+               <path d="M6.5 12L0.00480833 1.2235e-06L12.9952 8.78432e-08L6.5 12Z" fill="#333333"/>
+            </svg>
+         </div>
+         <div class="relative inline-block">
+            <select class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-4">
+               <option value="">主神</option>
+            </select>
+            <svg class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+               <path d="M6.5 12L0.00480833 1.2235e-06L12.9952 8.78432e-08L6.5 12Z" fill="#333333"/>
+            </svg>
+         </div>
+         <div class="flex input_area">
+            <input placeholder="請輸入關鍵字..." class="custom_input" type="text">
+            <img src="../../assets/index/search.svg" alt="" @click="goSearch">
+         </div>
       </div>
    </div>
 </template>

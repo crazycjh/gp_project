@@ -1,12 +1,15 @@
 <script setup lang="ts">
+const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
     <div class="relative flex justify-center items-center">
-        <img class="h-300 object-cover" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/god_banner.jpg" alt="">
+        <img class="h-300 object-cover" :src="`${backend}wp-content/uploads/2023/08/god_banner.jpg`" alt="">
         <h2 class="title z-10">最新活動</h2>
     </div>
     <div class="border-b border-gray-300">
-        <h6 class="py-2 px-10 lg:ml-350">首頁/最新活動</h6>
+        <div class="mx-auto max-w-1200px">
+            <h6 class="py-2">首頁/最新活動</h6>
+        </div>
     </div>
     <div class="tags flex justify-center gap-10px my-50px max-lg:flex-wrap">
         <button class="active btn rounded-none">最新消息</button>
@@ -14,65 +17,65 @@
         <button class="btn rounded-none">聖誕千秋</button>
         <button class="btn rounded-none">廟宇繞境</button>
     </div>
-    <div class="lg:px-350">
-        <div class="flex gap-30px flex-wrap mt-40px">
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+    <div class="mx-auto max-w-1200px">
+        <div class="w-full flex gap-10px flex-wrap mt-40px justify-center">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link to="/">了解更多...</router-link>
             </div>
@@ -114,10 +117,6 @@
 @media(min-width: 1024px){
     .block{
         width:280px;
-    }
-    .photo{
-        width: 280px;
-        height:213.75px;
     }
 }
 h4{ 

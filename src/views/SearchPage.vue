@@ -1,107 +1,110 @@
 <script setup lang="ts">
 import Search from '../components/index/Search.vue'
+const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
     <div class="relative flex justify-center items-center">
-        <img class="h-300 object-cover" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_banner.jpg" alt="">
+        <img class="h-300 object-cover" :src="`${backend}wp-content/uploads/2023/08/temple_banner.jpg`" alt="">
         <h2 class="title z-10">全台廟宇</h2>
     </div>
     <div class="border-b border-gray-300">
-        <h6 class="py-2 px-10 lg:ml-350">首頁/全台廟宇</h6>
+        <div class="mx-auto max-w-1200px">
+            <h6 class="py-2">首頁/全台廟宇</h6>
+        </div>
     </div>
-    <div class="lg:px-350">
+    <div class="mx-auto max-w-1200px">
         <Search />
-        <div class="flex gap-30px flex-wrap mt-40px">
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+        <div class="w-full flex gap-30px flex-wrap mt-40px">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/temple">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link to="/">了解更多></router-link>
             </div>
-            <div class="flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/temple_demo_img1.jpg" alt="">
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       

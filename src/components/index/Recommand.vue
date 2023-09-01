@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import LinkBtn from "../widget/LinkBtn.vue";
 import Title from '@/components/widget/Title.vue'
+const backend = import.meta.env.VITE_BACKEND_PATH
 interface Slider {
   image: String;
   id: String;
@@ -47,7 +48,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="px-10 lg:px-360">
+  <div class="px-10 mx-auto max-w-1200px">
    <Title title="推薦廟宇" />
     <swiper
       :style="{
@@ -77,35 +78,35 @@ onMounted(async () => {
         </div>
       </swiper-slide> -->
       <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand1.png)` }"></div>
+        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand1.png)` }"></div>
         <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名1</h5>
             <h6 class="area">台北市萬華區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand2.png)` }"></div>
+        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand2.png)` }"></div>
         <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名2</h5>
             <h6 class="area">新北市三重區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand3.png)` }"></div>
+        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand3.png)` }"></div>
         <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名3</h5>
             <h6 class="area">桃園市龍潭區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand4.png)` }"></div>
+        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand4.png)` }"></div>
         <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名4</h5>
             <h6 class="area">新竹縣湖口區</h6>
         </div>
       </swiper-slide>
       <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/recommand4.png)` }"></div>
+        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand4.png)` }"></div>
         <div class="max-md:px-10px">
             <h5 class="title mt-10px">廟宇全名4</h5>
             <h6 class="area">新竹縣湖口區</h6>

@@ -1,51 +1,55 @@
 <script setup lang="ts">
 import Title from '@/components/widget/Title.vue'
 import LinkBtn from "../widget/LinkBtn.vue";
+const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
-   <Title title="最新活動" />
-   <div class="flex justify-center flex-wrap gap-5 px-10 lg:px-360 relative">
-      <div class="flex">
-         <div>
-            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events1.svg" alt="">
+   <div class="relative">
+      <Title title="最新活動" />
+      <div class="flex justify-center flex-wrap gap-5 px-10 mx-auto max-w-1200px">
+         <div class="flex">
+            <div>
+               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events1.svg`">
+            </div>
+            <div class="ml-10px flex flex-col justify-center">
+               <p class="mb-10px date">2023.11.06</p>
+               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
+            </div>
          </div>
-         <div class="ml-10px flex flex-col justify-center">
-            <p class="mb-10px date">2023.11.06</p>
-            <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
+         <div class="flex">
+            <div>
+               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events2.svg`" alt="">
+            </div>
+            <div class="ml-10px flex flex-col justify-center">
+               <p class="mb-10px date">2023.11.06</p>
+               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
+            </div>
+         </div>
+         <div class="flex">
+            <div>
+               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events3.svg`" alt="">
+            </div>
+            <div class="ml-10px flex flex-col justify-center">
+               <p class="mb-10px date">2023.11.06</p>
+               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
+            </div>
+         </div>
+         <div class="flex">
+            <div>
+               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events4.png`" alt="">
+            </div>
+            <div class="ml-10px flex flex-col justify-center">
+               <p class="mb-10px date">2023.11.06</p>
+               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
+            </div>
          </div>
       </div>
-      <div class="flex">
-         <div>
-            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events2.svg" alt="">
-         </div>
-         <div class="ml-10px flex flex-col justify-center">
-            <p class="mb-10px date">2023.11.06</p>
-            <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
-         </div>
+      <div class="flex justify-center py-30">
+         <LinkBtn text="更多活動" link="/latest"/>
       </div>
-      <div class="flex">
-         <div>
-            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events3.svg" alt="">
-         </div>
-         <div class="ml-10px flex flex-col justify-center">
-            <p class="mb-10px date">2023.11.06</p>
-            <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
-         </div>
-      </div>
-      <div class="flex">
-         <div>
-            <img class="event_img" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/events4.png" alt="">
-         </div>
-         <div class="ml-10px flex flex-col justify-center">
-            <p class="mb-10px date">2023.11.06</p>
-            <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
-         </div>
-      </div>
-      <img class="tree_left" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg3.svg" alt="">
+      <img class="tree_left" src="${backend}gc_godpray/wp-content/uploads/2023/08/home_bg3.svg" alt="">
    </div>
-   <div class="flex justify-center py-30">
-      <LinkBtn text="更多活動" link="/latest"/>
-   </div>
+  
 </template>
 <style scoped>
 @media (max-width: 480px) {
@@ -79,8 +83,9 @@ import LinkBtn from "../widget/LinkBtn.vue";
    }
 }
 .tree_left{
+   z-index:-1;
    position: absolute;
-   top:10%;
+   top:30%;
    left:0;
 }
 </style>

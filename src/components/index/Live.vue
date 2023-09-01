@@ -2,20 +2,24 @@
 import Title from '@/components/widget/Title.vue'
 </script>
 <template>
-   <div class="px-10 md:px-270 lg:px-360 relative">
+<div class="relative">
+   <div class="px-10 mx-auto max-w-1200px">
       <Title title="廟宇直播" />
       <div class="flex w-full justify-center gap-40px lg:gap-2  max-lg:flex-col text-center">
          <div class="z-10 w-full">
-            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo2.jpg" alt="">
+            <!-- <img class="w-full" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo2.jpg" alt=""> -->
+            <iframe class="w-full" width="586" height="329" src="https://www.youtube.com/embed/4lOBPxcRt3I?si=NWr9xRZ_olmut_Mh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
          <div class="z-10 w-full">
-            <img src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo1.jpg" alt="">
+            <!-- <img class="w-full" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/video_demo1.jpg" alt=""> -->
+            <iframe class="w-full" width="586" height="329" src="https://www.youtube.com/embed/H2Hr2F486dg?si=9lLXwlY8IVq1UF22" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
       </div>
-      <img class="tree_right" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg2.svg" alt="">
    </div>
+   <img class="tree_right" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg2.svg" alt="">
+</div>
 </template>
 <style scoped>
 .live{
