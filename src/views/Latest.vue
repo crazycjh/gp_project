@@ -12,7 +12,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
         </div>
     </div>
     <div class="tags flex justify-center gap-10px my-50px max-lg:flex-wrap">
-        <button class="active btn rounded-none">最新消息</button>
+        <button class="btn rounded-none">最新消息</button>
         <button class="btn rounded-none">熱門活動</button>
         <button class="btn rounded-none">聖誕千秋</button>
         <button class="btn rounded-none">廟宇繞境</button>
@@ -105,11 +105,9 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     color:#777777;
 }
 .btn:hover{
-    border:none;
-}
-.active{
     background-color: #CEB96E;
     color:#ffffff;
+    border:none;
 }
 .photo{
     width: 100%;

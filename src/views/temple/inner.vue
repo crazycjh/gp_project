@@ -4,10 +4,10 @@
 <template>
     <div class="border-b border-gray-300">
         <div class="mx-auto max-w-1200px">
-            <h6 class="py-2">首頁/鎮南宮</h6>
+            <h6 class="max-lg:px-10px py-2">首頁/鎮南宮</h6>
         </div>
     </div>
-    <div  class="mx-auto max-w-1200px mt-40px mb-100">
+    <div  class="max-lg:px-10px mx-auto max-w-1200px mt-40px mb-100px">
         <div class="flex flex-col lg:flex-row items-center ">
             <div>
                 <img  :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
@@ -35,8 +35,8 @@
             <h4 class="border_title">直播影片</h4>
         </div>
         <div class="custom_border">
-            <div class="flex flex-col lg:flex-row py-30">
-                <div class="flex flex-col justify-center max-w-570px px-10 mr-20px">
+            <div class="flex flex-col lg:flex-row py-30px">
+                <div class="flex flex-col justify-center max-w-570px px-10px mr-20px">
                     <h5 class="inner_title">活動標題活動標題活動標題活動標題活動標題活動標題活動標題</h5>
                     <p>簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹</p>
                 </div>
@@ -45,17 +45,16 @@
                 </div>
             </div>
         </div>
-        <div class="mt-50px py-1">
+        <div class="mt-50px py-1px">
             <h4 class="border_title">廟宇服務</h4>
         </div>
-        <div class="custom_border py-20 custom_bottom">
-            <h6 class="service mb-2 px-10">|點燈|</h6>
-            <div class="flex flex-col lg:flex-row justify-between mb-25px px-10">
+        <div class="custom_border py-20px custom_bottom">
+            <h6 class="service mb-10px px-10px">|點燈|</h6>
+            <div class="flex flex-col lg:flex-row justify-between mb-25px px-10px">
                 <p class="max-w-960px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介短介紹簡短介紹簡短介紹簡短介簡短介紹簡短介紹簡短介紹簡短介紹</p>
                 <button class="btn btn6">
                     <a href="#">光明燈詳細介紹</a>
                 </button>
-
             </div>
             <div class="flex flex-wrap gap-10px max-lg:justify-center">
                 <div class="flex flex-col">
@@ -100,9 +99,9 @@
                 </div>
             </div>
         </div>
-        <div class="py-20">
-            <h6 class="service mb-2 px-10">|疏文|</h6>
-            <div class="flex flex-col lg:flex-row justify-between mb-25px px-10">
+        <div class="py-20px">
+            <h6 class="service mb-2 px-10px">|疏文|</h6>
+            <div class="flex flex-col lg:flex-row justify-between mb-25px px-10px">
                 <p class="max-w-960px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介短介紹簡短介紹簡短介紹簡短介簡短介紹簡短介紹簡短介紹簡短介紹</p>
                 <button class="btn btn6">
                     <a href="#">光明燈詳細介紹</a>

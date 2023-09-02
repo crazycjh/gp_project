@@ -68,7 +68,7 @@ onMounted(async () => {
       :pagination="{
         clickable: true,
       }"
-      class="h-260 swiper-container"
+      class="h-260px swiper-container"
     >
       <!-- <swiper-slide v-for="slider in sliders" :key="slider.id">
         <div class="h-70% w-full object-fill" :style="{ 'background-image': `url(${slider.image})` }"></div>

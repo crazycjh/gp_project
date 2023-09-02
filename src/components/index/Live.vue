@@ -3,7 +3,7 @@ import Title from '@/components/widget/Title.vue'
 </script>
 <template>
 <div class="relative">
-   <div class="px-10 mx-auto max-w-1200px">
+   <div class="px-10px mx-auto max-w-1200px">
       <Title title="廟宇直播" />
       <div class="flex w-full justify-center gap-40px lg:gap-2  max-lg:flex-col text-center">
          <div class="z-10 w-full">

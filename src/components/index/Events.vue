@@ -6,7 +6,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 <template>
    <div class="relative">
       <Title title="最新活動" />
-      <div class="flex justify-center flex-wrap gap-5 px-10 mx-auto max-w-1200px">
+      <div class="flex justify-center flex-wrap gap-5 px-10px mx-auto max-w-1200px">
          <div class="flex">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events1.svg`">

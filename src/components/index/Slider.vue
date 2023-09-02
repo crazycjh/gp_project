@@ -61,7 +61,7 @@ onMounted(async () => {
         clickable: true,
       }"
       :navigation="true"
-      class="h-400 md:h-600 swiper-container"
+      class="h-400px md:h-600px swiper-container"
     >
     <swiper-slide
         class="w-full bg-cover bg-center relative"

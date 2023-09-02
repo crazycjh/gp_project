@@ -1,6 +1,6 @@
 <template>
     <div class="bg-red-800">
-        <div class="px-11 py-30 flex flex-col gap-10px items-center">
+        <div class="px-11px py-30px flex flex-col gap-10px items-center">
             <div>
                 <ul class="flex gap-1">
                     <li>
