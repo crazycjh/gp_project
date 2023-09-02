@@ -5,20 +5,20 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 <template>
    <div class="relative">
       <Title title="服務項目" />
-      <div class=" flex gap-40px justify-center mt-20 lg:mb-60 flex-wrap mx-auto max-w-1200px">
-         <div class="md:transform md:-translate-y-10 z-10">
+      <div class="flex gap-40px justify-center mt-20px mb-20px lg:mb-60px flex-wrap mx-auto max-w-1200px max-lg:max-w-570px ">
+         <div class="lg:transform lg:-translate-y-10 z-10">
             <img :src="`${backend}wp-content/uploads/2023/08/service_img1.png`" alt="">
             <h6 class="item">點燈</h6>
          </div>
-         <div class="md:transform md:translate-y-10 z-10">
+         <div class="lg:transform lg:translate-y-10 z-10">
             <img :src="`${backend}wp-content/uploads/2023/08/service_img2.png`" alt="">
             <h6 class="item">法會</h6>
          </div>
-         <div class="md:transform md:-translate-y-10 z-10">
+         <div class="lg:transform lg:-translate-y-10 z-10">
             <img :src="`${backend}wp-content/uploads/2023/08/service_img3.png`" alt="">
             <h6 class="item">安太歲</h6>
          </div>
-         <div class="md:transform md:translate-y-10 z-10">
+         <div class="lg:transform lg:translate-y-10 z-10">
             <img :src="`${backend}wp-content/uploads/2023/08/service_img4.png`" alt="">
             <h6 class="item">疏文</h6>
          </div>

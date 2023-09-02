@@ -9,7 +9,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
          <div class="w-full lg:w-400px bg-red-800 h-full flex flex-col items-center gap-5">
             <Title title="文創商品" white="true" />
             <h5>內文內文內文內文內文內文內文內文內文內文內文內文內文內文</h5>
-            <LinkBtn class="btn" text="更多商品" link="/more" />
+            <LinkBtn class="mb-20px" text="更多商品" link="/more" />
          </div>
          <div>
             <img class="bg-repeat lg:h-340px"  :src="`${backend}wp-content/uploads/2023/08/home_product_img.jpg`" alt="">
@@ -19,11 +19,6 @@ const backend = import.meta.env.VITE_BACKEND_PATH
    
 </template>
 <style scoped>
-@media (max-width: 480px) {
-   .btn{
-      margin: 20px;
-   }
-}
 h5{
    max-width:333px;
    color: #FFF;

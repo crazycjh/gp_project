@@ -28,6 +28,7 @@ export default {
         '60px':'60px',
         '14rem':'14rem',
         '100px':'100px',
+        '120px':'120px',
         '350px':'350px',
       },
       spacing: {
@@ -47,8 +48,10 @@ export default {
       },
       gap:{
         '10px':'10px',
-        '40px':'40px',
         '30px':'30px',
+        '40px':'40px',
+        '80px':'80px',
+        '120px':'120px',
       },
       width:{
         '25%':'25%',
@@ -57,9 +60,9 @@ export default {
       },
       maxWidth: {
         '275px':'275px',
+        '570px':'570px',
         '890px':'890px',
         '915px':'915px',
-        '570px':'570px',
         '960px':'960px',
         '1200px': '1200px',
         '1250px': '1250px', 

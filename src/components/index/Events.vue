@@ -44,10 +44,10 @@ const backend = import.meta.env.VITE_BACKEND_PATH
             </div>
          </div>
       </div>
-      <div class="flex justify-center py-30">
+      <div class="flex justify-center py-30px">
          <LinkBtn text="更多活動" link="/latest"/>
       </div>
-      <img class="tree_left" src="${backend}gc_godpray/wp-content/uploads/2023/08/home_bg3.svg" alt="">
+      <img class="tree_left" :src="`${backend}/wp-content/uploads/2023/08/home_bg3.svg`" alt="">
    </div>
   
 </template>
