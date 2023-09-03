@@ -24,7 +24,7 @@
                 </div>
                 <div class="flex mb-20px">
                     <img class="icon" :src="`${backend}wp-content/uploads/2023/08/phone_icon.svg`" alt="">
-                    <p>主神 : 媽祖、月下老人</p>
+                    <p>03-123-4567</p>
                 </div>
                 <div>
                     <p class="max-w-570px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短</p>

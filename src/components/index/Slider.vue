@@ -10,7 +10,7 @@ import LinkBtn from "../widget/LinkBtn.vue";
 
 interface Slider {
   image: String;
-  id: String;
+  id: Number;
   title: String;
   subtitle: String;
   link: String;
@@ -38,7 +38,7 @@ onUnmounted(() => {
 onMounted(async () => {
   try {
     const response = await axios.get(
-      "https://demo2.gcreate.com.tw/gc_godpray/api/gc/get-sliders"
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/get-sliders`
     );
     sliders.value = response.data;
   } catch (error) {
@@ -86,11 +86,11 @@ onMounted(async () => {
   letter-spacing: 3.6px;
 }
 @media (max-width: 1024px) {
-  .title{
-  letter-spacing: 3.6px;
-}
-.subtitle{
-  letter-spacing: 2.4px;
-}
+    .title{
+    letter-spacing: 3.6px;
+    }
+    .subtitle{
+    letter-spacing: 2.4px;
+    }
 }
 </style>
