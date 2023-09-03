@@ -12,7 +12,7 @@
             <div>
                 <img  :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
             </div>
-            <div class="flex flex-col ml-20px">
+            <div class="flex flex-col ml-20px w-full">
                 <h4 class="title mb-20px">廟宇全名1</h4>
                 <div class="flex mb-10px">
                     <img class="icon" :src="`${backend}wp-content/uploads/2023/08/incense_burner_icon.svg`" alt="">

@@ -7,7 +7,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
         <h2 class="title z-10">最新活動</h2>
     </div>
     <div class="border-b border-gray-300">
-        <div class="mx-auto max-w-1200px">
+        <div class="px-10px mx-auto max-w-1200px">
             <h6 class="py-2">首頁/最新活動</h6>
         </div>
     </div>
