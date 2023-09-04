@@ -70,7 +70,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 }
 .title{
    letter-spacing: 2.4px;
-   color: #000;
+   color: #000000;
    font-family: Noto Serif TC;
    font-size: 20px;
    font-style: normal;

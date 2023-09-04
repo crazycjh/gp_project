@@ -106,6 +106,9 @@ const backend = import.meta.env.VITE_BACKEND_PATH
   </div>
 </template>
 <style scoped>
+h3,h4,h5,p{
+    color:#000000;
+}
 .tag{
     font-family: Noto Serif TC;
     font-size: 20px;
@@ -150,6 +153,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     box-sizing: border-box;
 }
 .title {
+  color:#000000;
   font-family: Noto Serif TC;
   font-size: 20px;
   font-weight: 500;

@@ -118,6 +118,9 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     </div>
 </template>
 <style scoped>
+h4,p{
+    color:#000000;
+}
 .title{
     position: absolute;
     font-family: Noto Serif TC;

@@ -27,7 +27,7 @@ import LinkBtn from "../widget/LinkBtn.vue";
 <style scoped>
 .live{
    margin-top:12px;
-   color: #000;
+   color: #000000;
    font-family: Noto Serif TC;
    font-size: 20px;
    font-style: normal;

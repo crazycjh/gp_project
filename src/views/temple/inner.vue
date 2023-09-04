@@ -159,6 +159,9 @@
     </div>
 </template>
 <style scoped>
+p,h3,h4,h5,h6{
+    color:#000000;
+}
 .btn6 {
   position: relative;
   border: none;
