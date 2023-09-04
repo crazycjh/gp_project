@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted,onUnmounted,ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import LinkBtn from "../widget/LinkBtn.vue";
-
+const backend = import.meta.env.VITE_BACKEND_PATH;
 interface Slider {
   image: String;
   id: Number;
@@ -19,20 +19,20 @@ const sliders = ref<Slider[]>([]);
 const modules = [Autoplay, Pagination, Navigation];
 
 //js控制navigators rwd
-const navigationSidesOffsetDesktop = ref('70px');
+const navigationSidesOffsetDesktop = ref("70px");
 const adjustNavigationSidesOffset = () => {
   if (window.innerWidth <= 640) {
-    navigationSidesOffsetDesktop.value = '20px';
+    navigationSidesOffsetDesktop.value = "20px";
   } else {
-    navigationSidesOffsetDesktop.value = '70px';
+    navigationSidesOffsetDesktop.value = "70px";
   }
 };
 onMounted(() => {
   adjustNavigationSidesOffset();
-  window.addEventListener('resize', adjustNavigationSidesOffset);
+  window.addEventListener("resize", adjustNavigationSidesOffset);
 });
 onUnmounted(() => {
-  window.removeEventListener('resize', adjustNavigationSidesOffset);
+  window.removeEventListener("resize", adjustNavigationSidesOffset);
 });
 //輪播取得資料
 onMounted(async () => {
@@ -63,34 +63,65 @@ onMounted(async () => {
       :navigation="true"
       class="h-400px md:h-600px swiper-container"
     >
-    <swiper-slide
-        class="w-full bg-cover bg-center relative"
-        v-for="slider in sliders" :key="slider.id.toString()"
-      >
-        <div class="h-full w-full z-10" :style="{ 'background-image': `url(${slider.image})`, 'filter': 'brightness(50%)' }"></div>
+      <swiper-slide class="w-full bg-cover bg-center relative">
+        <div
+          class="h-full w-full z-10"
+          :style="{
+            'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/shutterstock_606447887.jpg)`,
+            filter: 'brightness(50%)',
+          }"
+        ></div>
         <div class="flex flex-col justify-center items-center absolute inset-0">
-          <h2 class="text-3xl mb-2 text-white relative z-50 title">{{ slider.title }}</h2>
-          <h3 class="text-xl mb-4 text-white relative z-50 subtitle">{{ slider.subtitle }}</h3>
+          <h2 class="text-3xl mb-2 text-white relative z-50 title">直播</h2>
+          <h3 class="text-xl mb-4 text-white relative z-50 subtitle">
+            直播副標題
+          </h3>
           <!-- <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link> -->
-          <LinkBtn :link="slider.link.toString()" text="了解更多"/>
+          <LinkBtn link="/more" text="觀看直播" red="true" icon="true"/>
+        </div>
+      </swiper-slide>
+      <swiper-slide
+        class="w-full bg-cover bg-center relative"
+        v-for="slider in sliders"
+        :key="slider.id.toString()"
+      >
+        <div
+          class="h-full w-full z-10"
+          :style="{
+            'background-image': `url(${slider.image})`,
+            filter: 'brightness(50%)',
+          }"
+        ></div>
+        <div class="flex flex-col justify-center items-center absolute inset-0">
+          <h2 class="text-3xl mb-2 text-white relative z-50 title">
+            {{ slider.title }}
+          </h2>
+          <h3 class="text-xl mb-4 text-white relative z-50 subtitle">
+            {{ slider.subtitle }}
+          </h3>
+          <!-- <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link> -->
+          <LinkBtn :link="slider.link.toString()" text="了解更多" />
         </div>
       </swiper-slide>
     </swiper>
   </div>
 </template>
 <style scoped>
-.title{
+.title {
   letter-spacing: 6px;
 }
-.subtitle{
+
+.subtitle {
   letter-spacing: 3.6px;
 }
+
 @media (max-width: 1024px) {
-    .title{
+  .title {
     letter-spacing: 3.6px;
-    }
-    .subtitle{
+  }
+
+  .subtitle {
     letter-spacing: 2.4px;
-    }
+  }
 }
 </style>

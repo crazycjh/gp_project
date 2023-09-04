@@ -21,3 +21,6 @@ import Product from '@/components/index/Product.vue'
         <Service />
         <Product />
 </template>
+<style>
+
+</style>

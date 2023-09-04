@@ -35,3 +35,8 @@
         </div>
     </div>
 </template>
+<style scoped>
+a:hover{
+    color:#ceb96e;
+}
+</style>

@@ -26,6 +26,7 @@ export default {
         '40px':'40px',
         '50px':'50px',
         '60px':'60px',
+        '80px':'80px',
         '14rem':'14rem',
         '100px':'100px',
         '120px':'120px',

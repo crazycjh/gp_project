@@ -1,13 +1,25 @@
 <script setup lang="ts">
+const backend = import.meta.env.VITE_BACKEND_PATH
 const props = defineProps({
   link: String, 
-  text:String
+  text:String,
+  red:Boolean,
+  icon:Boolean,
 });
 </script>
 <template>
-    <router-link v-if="props.link" :to="props.link.toString()" class="slider_button relative z-30">{{text}}</router-link>
+    <router-link v-if="props.link" :to="props.link.toString()" :class="{'red':red}" class="slider_button relative z-30">
+      <img v-if="icon" class="mr-1" :src="`${backend}wp-content/uploads/2023/09/live-icon-01.svg`" alt="" >
+       {{text}}
+    </router-link>
 </template>
 <style scoped>
+img{
+  width: 100px;
+}
+.red{
+  background-color:#920000 !important;
+}
 .slider_button {
   letter-spacing: 2px;
   cursor: pointer;

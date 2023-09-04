@@ -24,7 +24,7 @@ const props = defineProps({
 </template>
 <style scoped>
 .wind{
-    margin-top: 40px;
+    margin-top: 80px;
     margin-bottom: 5px;
 }
 h3{ 

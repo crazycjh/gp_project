@@ -19,7 +19,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
       <span class="date mb-10px">2023.9.18</span>
       <img class="mb-10px" src="../../assets/latest/social.png" alt="" />
       <img class="mb-10px w-full"
-        src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/blog_demo_img2.jpg"
+        :src="`${backend}wp-content/uploads/2023/08/blog_demo_img2.jpg`"
         alt=""
       />
       <p class="max-h-1036px overflow-y-auto mb-30px w-full">

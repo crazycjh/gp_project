@@ -3,7 +3,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
     <div class="relative flex justify-center items-center">
-        <img class="h-300 object-cover" :src="`${backend}wp-content/uploads/2023/08/god_banner.jpg`" alt="">
+        <img class="h-300 object-cover" :src="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" alt="">
         <h2 class="title z-10">最新活動</h2>
     </div>
     <div class="border-b border-gray-300">

@@ -5,7 +5,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 <template>
    <div class="relative">
       <Title title="服務項目" />
-      <div class="flex gap-40px justify-center mt-20px mb-20px lg:mb-60px flex-wrap mx-auto max-w-1200px max-lg:max-w-570px ">
+      <div class="flex gap-40px justify-center mt-20px mb-20px lg:mt-80px lg:mb-100px flex-wrap mx-auto max-w-1200px max-lg:max-w-570px ">
          <div class="lg:transform lg:-translate-y-10 z-10">
             <img :src="`${backend}wp-content/uploads/2023/08/service_img1.png`" alt="">
             <h6 class="item">點燈</h6>
@@ -23,8 +23,8 @@ const backend = import.meta.env.VITE_BACKEND_PATH
             <h6 class="item">疏文</h6>
          </div>
       </div>
-      <img class="tree_right" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg2.svg" alt="">
-      <img class="tree_left" src="https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg3.svg" alt="">
+      <img class="tree_right" :src="`${backend}wp-content/uploads/2023/08/home_bg2.svg`" alt="">
+      <img class="tree_left" :src="`${backend}wp-content/uploads/2023/08/home_bg3.svg`" alt="">
    </div>
 </template>
 <style scoped>

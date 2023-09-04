@@ -7,35 +7,38 @@
             <h6 class="max-lg:px-10px py-2">首頁/鎮南宮</h6>
         </div>
     </div>
+    <div class="w-full">
+        <iframe class="w-full" width="100%" height="284" src="https://www.youtube.com/embed/BMFmPOHany0" title="北港朝天宮正殿直播- 本服務由麥睿資訊人生地圖提供" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
     <div  class="max-lg:px-10px mx-auto max-w-1200px mt-40px mb-100px">
-        <div class="flex flex-col lg:flex-row items-center ">
-            <div>
-                <img  :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-            </div>
-            <div class="flex flex-col ml-20px w-full">
-                <h4 class="title mb-20px">廟宇全名1</h4>
-                <div class="flex mb-10px">
-                    <img class="icon" :src="`${backend}wp-content/uploads/2023/08/incense_burner_icon.svg`" alt="">
-                    <p>主神 : 媽祖、月下老人</p>
+        <div class="mt-50px py-1">
+            <h4 class="border_title">廟宇介紹</h4>
+        </div>
+        <div class="custom_border">
+            <div class="flex flex-col lg:flex-row items-center pt-30px">
+                <div>
+                    <img  :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 </div>
-                <div class="flex mb-10px">
-                    <img class="icon" :src="`${backend}wp-content/uploads/2023/08/map_icon.svg`" alt="">
-                    <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號</p>
-                </div>
-                <div class="flex mb-20px">
-                    <img class="icon" :src="`${backend}wp-content/uploads/2023/08/phone_icon.svg`" alt="">
-                    <p>03-123-4567</p>
-                </div>
+                <div class="flex flex-col ml-20px w-full">
+                    <h4 class="title mb-20px">廟宇全名1</h4>
+                    <div class="flex mb-10px">
+                        <img class="icon" :src="`${backend}wp-content/uploads/2023/08/incense_burner_icon.svg`" alt="">
+                        <p>主神 : 媽祖、月下老人</p>
+                    </div>
+                    <div class="flex mb-10px">
+                        <img class="icon" :src="`${backend}wp-content/uploads/2023/08/map_icon.svg`" alt="">
+                        <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號</p>
+                    </div>
+                    <div class="flex mb-20px">
+                        <img class="icon" :src="`${backend}wp-content/uploads/2023/08/phone_icon.svg`" alt="">
+                        <p>03-123-4567</p>
+                    </div>
                 <div>
                     <p class="max-w-570px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短</p>
                 </div>
             </div>
         </div>
-        <div class="mt-50px py-1">
-            <h4 class="border_title">直播影片</h4>
-        </div>
-        <div class="custom_border">
-            <div class="flex flex-col lg:flex-row py-30px">
+            <!-- <div class="flex flex-col lg:flex-row py-30px">
                 <div class="flex flex-col justify-center max-w-570px px-10px mr-20px">
                     <h5 class="inner_title">活動標題活動標題活動標題活動標題活動標題活動標題活動標題</h5>
                     <p>簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹</p>
@@ -43,7 +46,7 @@
                 <div>
                     <img class="w-full" :src="`${backend}wp-content/uploads/2023/08/video_demo2.jpg`" alt="">
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="mt-50px py-1px">
             <h4 class="border_title">廟宇服務</h4>
@@ -104,7 +107,7 @@
             <div class="flex flex-col lg:flex-row justify-between mb-25px px-10px">
                 <p class="max-w-960px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介短介紹簡短介紹簡短介紹簡短介簡短介紹簡短介紹簡短介紹簡短介紹</p>
                 <button class="btn btn6">
-                    <a href="#">光明燈詳細介紹</a>
+                    <a href="#">疏文詳細介紹</a>
                 </button>
             </div>
             <div class="flex flex-wrap gap-10px max-lg:justify-center">
@@ -162,7 +165,7 @@
   letter-spacing: 2.4px;
   padding:10px 50px 10px 20px;
   background: #ffffff00;
-  
+  border-radius: 0px !important;
 }
 .btn6::before {
 	content: "";
@@ -175,16 +178,17 @@
 	right: -3px;
 	bottom: 9px;
 }
-
-.btn6:hover {
-  padding:10px 50px 10px 30px;
-}
-
-a{
+.btn6 a{
   text-decoration:none;
   color:black;
-
 }
+.btn6:hover a{
+  color:#CEB96E;
+}
+.btn6:hover{
+    padding:10px 40px 10px 30px;
+}
+
 .custom_bottom{
     border-bottom: 1px solid #EEEEEE;
 }

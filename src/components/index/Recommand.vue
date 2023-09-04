@@ -39,7 +39,7 @@ onUnmounted(() => {
 onMounted(async () => {
   try {
     const response = await axios.get(
-      "https://demo2.gcreate.com.tw/gc_godpray/api/gc/get-sliders"
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/get-sliders`
     );
     sliders.value = response.data;
   } catch (error) {

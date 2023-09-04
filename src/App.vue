@@ -5,9 +5,12 @@ import Footer from "./components/global/Footer.vue";
 </script>
 
 <template>
-<Header />
-  <router-view />
-<Footer />
+   <div class="cover">
+      <Header />
+        <router-view />
+      <Footer />
+   </div>
+
 </template>
 
 <style scoped>
@@ -22,5 +25,11 @@ import Footer from "./components/global/Footer.vue";
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.cover{
+    background-image: url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/08/home_bg1.svg);
+    background-repeat: repeat;
+    background-size: 282px auto;
+    background-color: #ffffff;
 }
 </style>
