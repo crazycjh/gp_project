@@ -7,7 +7,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import LinkBtn from "../widget/LinkBtn.vue";
-const backend = import.meta.env.VITE_BACKEND_PATH;
 interface Slider {
   image: String;
   id: Number;

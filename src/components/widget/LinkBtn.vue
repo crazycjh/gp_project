@@ -3,8 +3,8 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 const props = defineProps({
   link: String, 
   text:String,
-  red:Boolean,
-  icon:Boolean,
+  red: [String, Boolean], 
+  icon: [String, Boolean], 
 });
 </script>
 <template>
@@ -15,7 +15,7 @@ const props = defineProps({
 </template>
 <style scoped>
 img{
-  width: 100px;
+  width: 24px;
 }
 .red{
   background-color:#920000 !important;
