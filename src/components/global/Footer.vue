@@ -24,10 +24,10 @@
                 <p class="md:whitespace-nowrap text-white">客服電話：0912-345-678 服務信箱：service@XXXX.com.tw</p>
             </div>
             <div class="flex gap-5 justify-center">
-                <img src="../../assets/footer/yt.svg" alt="">
-                <img src="../../assets/footer/fb.svg" alt="">
-                <img src="../../assets/footer/ig.svg" alt="">
-                <img src="../../assets/footer/line.svg" alt="">
+                <img class="logo" src="../../assets/footer/yt.svg" alt="">
+                <img class="logo" src="../../assets/footer/fb.svg" alt="">
+                <img class="logo" src="../../assets/footer/ig.svg" alt="">
+                <img class="logo" src="../../assets/footer/line.svg" alt="">
             </div>
             <div>
                 <p class="whitespace-nowrap text-white">神界祈福平台Ⓒ2023 All Rights Reserved</p>
@@ -38,5 +38,8 @@
 <style scoped>
 a:hover{
     color:#ceb96e;
+}
+.logo:hover{
+    background-color: #ceb96e;
 }
 </style>

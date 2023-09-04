@@ -3,6 +3,10 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontSize:{
+        '14px':'14px',
+        '16px':'16px',
+      },
       padding: {
         '10px':'10px',
         '11px':'11px',
@@ -18,6 +22,7 @@ export default {
       
       },
       margin:{
+        '020px':'-20px',
         '10px':'10px',
         '15px':'15px',
         '20px':'20px',
@@ -55,7 +60,13 @@ export default {
         '120px':'120px',
       },
       width:{
+        '15%':'15%',
+        '18%':'18%',
+        '23%':'23%',
         '25%':'25%',
+        '40%':'40%',
+        '45%':'45%',
+        '80%':'80%',
         '290px':'290px',
         '400px':'400px',
       },
@@ -70,7 +81,11 @@ export default {
       },
       maxHeight:{
         '1036px':'1036px',
-      }
+      },
+      scrrens:{
+        'md':'768px',
+        'lg':'1024px',
+      },
     },
   },
   plugins: [],

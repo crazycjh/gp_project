@@ -57,7 +57,10 @@ onMounted(async () => {
         '--swiper-pagination-bullet-inactive-color':'#ffffff'
       }"
        :breakpoints="{
-        '640': {
+        md: {
+          slidesPerView: 3,
+        },
+        lg: {
           slidesPerView: 4,
         },
       }"

@@ -3,21 +3,21 @@ import Title from '@/components/widget/Title.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
-    <div class="main pb-30px relative">
+    <div class="main pb-80px relative">
         <Title title="主祀神" />
         <div class="flex gap-10px flex-wrap justify-center mx-auto max-w-1250px relative z-10">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img1.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img2.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img3.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img4.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img5.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img6.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img7.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img8.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img9.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img10.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img11.svg`" alt="">
-                <img :src="`${backend}wp-content/uploads/2023/08/god_img12.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img1.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img2.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img3.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img4.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img5.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img6.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img7.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img8.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img9.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img10.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img11.svg`" alt="">
+                <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img12.svg`" alt="">
         </div>
         <img class="left" :src="`${backend}wp-content/uploads/2023/08/god_bg1.svg`" alt="">
         <img class="right" :src="`${backend}/wp-content/uploads/2023/08/god_bg2.svg`" alt="">
@@ -29,7 +29,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 }
 .left{
     position: absolute;
-    top:0;
+    bottom:0;
 }
 .right{
     position: absolute;

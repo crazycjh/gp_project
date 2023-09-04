@@ -66,7 +66,7 @@ onMounted(async () => {
         <div
           class="h-full w-full z-10"
           :style="{
-            'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/shutterstock_606447887.jpg)`,
+            'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/home_banner1-3.jpg)`,
             filter: 'brightness(50%)',
           }"
         ></div>

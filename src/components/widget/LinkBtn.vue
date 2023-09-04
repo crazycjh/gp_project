@@ -15,10 +15,19 @@ const props = defineProps({
 </template>
 <style scoped>
 img{
-  width: 24px;
+  width: 20px;
 }
 .red{
+  width: 150px !important;
   background-color:#920000 !important;
+}
+.red:hover{
+  background-color: #ffffff !important;
+  color:#920000 !important;
+  border:none !important;
+}
+.red:hover img{
+  color:#920000;
 }
 .slider_button {
   letter-spacing: 2px;
@@ -28,7 +37,7 @@ img{
   justify-content: center;
   width: 114px;
   height: 43px;
-  padding: 10px, 20px, 10px, 20px;
+  padding: 10px 20px;
   background-color: #ceb96e;
   color: #ffffff;
 }

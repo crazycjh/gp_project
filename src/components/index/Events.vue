@@ -7,7 +7,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
    <div class="relative">
       <Title title="最新活動" />
       <div class="flex justify-center flex-wrap gap-5 px-10px mx-auto max-w-1200px">
-         <div class="flex z-10">
+         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events1.svg`">
             </div>
@@ -16,7 +16,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
                <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
             </div>
          </div>
-         <div class="flex z-10">
+         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events2.svg`" alt="">
             </div>
@@ -25,7 +25,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
                <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
             </div>
          </div>
-         <div class="flex z-10">
+         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events3.svg`" alt="">
             </div>
@@ -34,7 +34,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
                <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
             </div>
          </div>
-         <div class="flex z-10">
+         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events4.png`" alt="">
             </div>
@@ -80,6 +80,14 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 @media (max-width: 1024px) {
    .tree_left{
       display: none;
+   }
+   .title{
+      font-size:12px;
+   }
+}
+@media(max-width:1440px){
+   .title{
+      font-size:16px;
    }
 }
 .tree_left{

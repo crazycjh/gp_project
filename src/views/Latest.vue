@@ -12,7 +12,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
         </div>
     </div>
     <div class="tags flex justify-center gap-10px my-50px max-lg:flex-wrap">
-        <button class="btn rounded-none">最新消息</button>
+        <button class="btn rounded-none">全部</button>
         <button class="btn rounded-none">熱門活動</button>
         <button class="btn rounded-none">聖誕千秋</button>
         <button class="btn rounded-none">廟宇繞境</button>
@@ -20,64 +20,75 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     <div class="mx-auto max-w-1200px">
         <div class="w-full flex gap-10px flex-wrap mt-40px justify-center">
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+                <router-link to="/latest/inner">
+                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+                </router-link>
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/latest/inner">了解更多...</router-link>
+                <router-link class="more" to="/latest/inner">了解更多...</router-link>
+            </div>
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link to="/latest/inner">
+                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+                </router-link>
+                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
+                <router-link class="more" to="/">了解更多...</router-link>
+            </div>
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link to="/latest/inner">
+                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+                </router-link>
+                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
+                <router-link class="more" to="/">了解更多...</router-link>
+            </div>
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link to="/latest/inner">
+                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+                </router-link>
+               
+                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
+                <router-link class="more" to="/">了解更多...</router-link>
+            </div>
+            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link to="/latest/inner">
+                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+                </router-link>
+                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link to="/">了解更多...</router-link>
+                <router-link class="more" to="/">了解更多...</router-link>
             </div>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
@@ -134,7 +145,7 @@ p{
     letter-spacing: 0em;
     text-align: left;
 }
-a{  
+.more{  
     margin-top: -4px;
     color:#CEB96E;
 }
