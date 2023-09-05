@@ -4,15 +4,12 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-const modules = [Autoplay, Pagination, Navigation];
+import Breadcrumb from "../../components/widget/Breadcrumb.vue";
+const modules = [Autoplay, Pagination, Navigation]
 const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
-  <div class="border-b border-gray-300">
-    <div class="mx-auto max-w-1200px">
-      <h6 class="max-lg:px-10px py-2">首頁/文章標題標題</h6>
-    </div>
-  </div>
+  <Breadcrumb title="首頁/文章標題標題" />
   <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px">
     <div class="max-w-915px pr-10px w-full">
       <h3 class="title mb-10px">DEMO12-活動標題活動標題活動標題活動標題活動</h3>

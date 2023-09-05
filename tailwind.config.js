@@ -12,6 +12,7 @@ export default {
         '11px':'11px',
         '20px':'20px',
         '30px':'30px',
+        '50px':'50px',
         '80px':'80px',
         '160px':'160px',
         '270px':'270px',
@@ -41,6 +42,7 @@ export default {
         '10px': '10px', // 10px
       },
       height: {
+        '33px':'33px',
         '70%': '70%',
         '80px':'80px',
         '340px':'340px',
@@ -54,6 +56,7 @@ export default {
       },
       gap:{
         '10px':'10px',
+        '20px':'20px',
         '30px':'30px',
         '40px':'40px',
         '80px':'80px',
@@ -67,6 +70,7 @@ export default {
         '40%':'40%',
         '45%':'45%',
         '80%':'80%',
+        '90%':'90%',
         '290px':'290px',
         '400px':'400px',
       },
@@ -83,9 +87,14 @@ export default {
         '1036px':'1036px',
       },
       scrrens:{
+        'ssm':'430px',
         'md':'768px',
         'lg':'1024px',
       },
+      flexGrow: {
+        3: '3',
+        7:'7',
+      }
     },
   },
   plugins: [],

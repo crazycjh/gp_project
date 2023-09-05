@@ -5,8 +5,8 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
    <div class="mx-auto max-w-1200px">
-      <div class=" lg:h-340px lg:my-80px flex-column lg:flex">
-         <div class="w-full lg:w-400px bg-red-800 h-full flex flex-col items-center gap-5">
+      <div class="lg:h-340px lg:my-80px flex-column lg:flex mx-auto">
+         <div class="w-full lg:w-400px bg-red-800 h-full flex flex-col items-center gap-5 max-lg:pb-50px">
             <Title title="文創商品" white="true" />
             <h5 class="mt-020px">內文內文內文內文內文內文內文內文內文內文內文內文內文內文</h5>
             <LinkBtn class="mb-20px" text="更多商品" link="/more" />

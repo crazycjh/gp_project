@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 const backend = import.meta.env.VITE_BACKEND_PATH
 const props = defineProps({
   link: String, 
@@ -6,12 +7,27 @@ const props = defineProps({
   red: [String, Boolean], 
   icon: [String, Boolean], 
 });
+const normalIcon = `${backend}wp-content/uploads/2023/09/live-icon-01.svg`
+const activeIcon = `${backend}wp-content/uploads/2023/09/live-icon-02.svg`
+const isHover = ref<boolean>(false);
+const toggleHover = ((isHovering:boolean) =>{
+  isHover.value = isHovering
+})
 </script>
 <template>
-    <router-link v-if="props.link" :to="props.link.toString()" :class="{'red':red}" class="slider_button relative z-30">
-      <img v-if="icon" class="mr-1" :src="`${backend}wp-content/uploads/2023/09/live-icon-01.svg`" alt="" >
+    <div v-if="red">
+      <router-link v-if="props.link" :to="props.link.toString()" :class="{'red':red}" class="slider_button relative z-30"  @mouseover="toggleHover(true)"
+      @mouseout="toggleHover(false)">
+        <img v-if="icon"  class="mr-1" :src="isHover ? activeIcon : normalIcon" alt="" >
        {{text}}
     </router-link>
+    </div>
+    <div v-else>
+      <router-link v-if="props.link" :to="props.link.toString()" :class="{'red':red}" class="slider_button relative z-30">
+       {{text}}
+      </router-link>
+    </div>
+    
 </template>
 <style scoped>
 img{

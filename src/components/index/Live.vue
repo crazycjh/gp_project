@@ -13,7 +13,7 @@ import LinkBtn from "../widget/LinkBtn.vue";
             <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
          <div class="z-10 w-full">
-            <iframe class="w-full" width="586" height="329"  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fluzhupapago%2Fvideos%2F1991149747826499%2F&show_text=false&width=560&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+            <iframe class="w-full" width="586" height="300"  src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fluzhupapago%2Fvideos%2F1991149747826499%2F&show_text=false&width=560&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
             <h4 class="live text-left">直播活動標題直播活動標題直播活動標題直播活動標題活動標題...</h4>
          </div>
       </div>
@@ -27,7 +27,7 @@ import LinkBtn from "../widget/LinkBtn.vue";
 <style scoped>
 .live{
    margin-top:12px;
-   color: #000000;
+   color: #000;
    font-family: Noto Serif TC;
    font-size: 20px;
    font-style: normal;

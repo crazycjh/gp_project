@@ -1,46 +1,45 @@
 <script setup lang="ts">
 const backend = import.meta.env.VITE_BACKEND_PATH
+import Breadcrumb from '../components/widget/Breadcrumb.vue'
+import TopCover from '../components/widget/TopCover.vue'
 </script>
 <template>
-    <div class="relative flex justify-center items-center">
-        <img class="h-300 object-cover" :src="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" alt="">
-        <h2 class="title z-10">最新活動</h2>
-    </div>
-    <div class="border-b border-gray-300">
-        <div class="px-10px mx-auto max-w-1200px">
-            <h6 class="py-2">首頁/最新活動</h6>
+    <TopCover :image="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" title="最新活動" />
+    <Breadcrumb title="首頁/最新活動" />
+    <div class="tags flex justify-center max-md:px-100px gap-10px my-50px flex-wrap">
+        <div class="flex gap-10px">
+            <button class="active btn rounded-none">全部</button>
+            <button class="btn rounded-none">熱門活動</button>
+        </div>
+        <div class="flex gap-10px">
+            <button class="btn rounded-none">聖誕千秋</button>
+            <button class="btn rounded-none">廟宇繞境</button>
         </div>
     </div>
-    <div class="tags flex justify-center gap-10px my-50px max-lg:flex-wrap">
-        <button class="btn rounded-none">全部</button>
-        <button class="btn rounded-none">熱門活動</button>
-        <button class="btn rounded-none">聖誕千秋</button>
-        <button class="btn rounded-none">廟宇繞境</button>
-    </div>
     <div class="mx-auto max-w-1200px">
-        <div class="w-full flex gap-10px flex-wrap mt-40px justify-center">
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+        <div class="w-full flex gap-30px flex-wrap mt-40px justify-center">
+            <div class="w-full  flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <router-link to="/latest/inner">
                     <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 </router-link>
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/latest/inner">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <router-link to="/latest/inner">
                     <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 </router-link>
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <router-link to="/latest/inner">
                     <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 </router-link>
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <router-link to="/latest/inner">
                     <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 </router-link>
@@ -48,44 +47,44 @@ const backend = import.meta.env.VITE_BACKEND_PATH
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <router-link to="/latest/inner">
                     <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 </router-link>
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
                 <router-link class="more" to="/">了解更多...</router-link>
@@ -97,6 +96,10 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     </div>
 </template>
 <style scoped>
+.active{
+    background-color: #CEB96E !important;
+    color:#ffffff !important;
+}
 .title{
     position: absolute;
     font-family: Noto Serif TC;

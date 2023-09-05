@@ -23,11 +23,15 @@
             <div class="max-md:text-center">
                 <p class="md:whitespace-nowrap text-white">客服電話：0912-345-678 服務信箱：service@XXXX.com.tw</p>
             </div>
-            <div class="flex gap-5 justify-center">
-                <img class="logo" src="../../assets/footer/yt.svg" alt="">
-                <img class="logo" src="../../assets/footer/fb.svg" alt="">
-                <img class="logo" src="../../assets/footer/ig.svg" alt="">
-                <img class="logo" src="../../assets/footer/line.svg" alt="">
+            <div class="flex  justify-center">
+                <div class="yt"></div>
+                <!-- <img class="logo yt" src="../../assets/footer/yt.svg" alt=""> -->
+                <div class="fb"></div>
+                <!-- <img class="logo" src="../../assets/footer/fb.svg" alt=""> -->
+                <div class="ig"></div>
+                <!-- <img class="logo" src="../../assets/footer/ig.svg" alt=""> -->
+                <div class="line"></div>
+                <!-- <img class="logo" src="../../assets/footer/line.svg" alt=""> -->
             </div>
             <div>
                 <p class="whitespace-nowrap text-white">神界祈福平台Ⓒ2023 All Rights Reserved</p>
@@ -39,7 +43,40 @@
 a:hover{
     color:#ceb96e;
 }
-.logo:hover{
-    background-color: #ceb96e;
+.yt{
+    height: 33px;
+    width: 65px;
+    background-image: url(../../assets/footer/yt.svg);
+    background-repeat: no-repeat;
+}
+.yt:hover{
+    background-image: url(../../assets/footer/yt2.svg);
+}
+.fb{
+    height: 33px;
+    width: 50px;
+    background-image: url(../../assets/footer/fb.svg);
+    background-repeat: no-repeat;
+}
+.fb:hover{
+    background-image: url(../../assets/footer/fb2.svg);
+}
+.ig{
+    height: 33px;
+    width: 50px;
+    background-image: url(../../assets/footer/ig.svg);
+    background-repeat: no-repeat;
+}
+.ig:hover{
+    background-image: url(../../assets/footer/ig2.svg);
+}
+.line{
+    helineht: 33px;
+    width: 50px;
+    background-image: url(../../assets/footer/line.svg);
+    background-repeat: no-repeat;
+}
+.line:hover{
+    background-image: url(../../assets/footer/line2.svg);
 }
 </style>

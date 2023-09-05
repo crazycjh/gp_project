@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import Search from '../components/index/Search.vue'
+import Breadcrumb from '../components/widget/Breadcrumb.vue'
+import TopCover from '../components/widget/TopCover.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <template>
-    <div class="relative flex justify-center items-center">
-        <img class="h-300 object-cover" :src="`${backend}wp-content/uploads/2023/08/god_banner.jpg`" alt="">
-        <h2 class="title z-10">主神</h2>
-    </div>
-    <div class="border-b border-gray-300">
-        <div class="mx-auto max-w-1200px">
-            <h6 class="py-2">首頁/全台廟宇</h6>
-        </div>
-    </div>
+    <TopCover :image="`${backend}wp-content/uploads/2023/08/god_banner.jpg`" title="主神" />
+    <Breadcrumb title="首頁/主神" />
     <div class="mx-auto max-w-1200px">
         <Search />
-        <div class="w-full flex gap-30px flex-wrap mt-40px">
+        <div class="w-full flex gap-30px flex-wrap mt-40px justify-center">
             <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 <h4>廟宇全名1</h4>

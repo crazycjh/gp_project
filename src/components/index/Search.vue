@@ -51,9 +51,7 @@ const goSearch = (()=>{
                   <option>金門縣</option>
                   <option>連江縣</option>
                </select>
-               <svg class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-                  <path d="M6.5 12L0.00480833 1.2235e-06L12.9952 8.78432e-08L6.5 12Z" fill="#333333"/>
-               </svg>
+               <img class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
             </div>
             <div class="relative inline-block">
                <select v-model="god" class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-20px">
@@ -62,14 +60,12 @@ const goSearch = (()=>{
                   <option>觀世音菩薩</option>
                   <option>關公</option>
                </select>
-               <svg class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none" xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
-                  <path d="M6.5 12L0.00480833 1.2235e-06L12.9952 8.78432e-08L6.5 12Z" fill="#333333"/>
-               </svg>
+               <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
             </div>
          </div>   
          <div class="flex input_area">
             <input v-model="searchText" placeholder="請輸入關鍵字..." class="custom_input" type="text" @keyup.enter="goSearch">
-            <img src="../../assets/index/search.svg" alt="" @click="goSearch">
+            <img class="icon" src="../../assets/index/search.svg" alt="" @click="goSearch">
          </div>
       </div>
    </div>
@@ -92,6 +88,9 @@ const goSearch = (()=>{
    flex-shrink: 0;
    background: #EEE;
 }
+.icon:hover{
+   background-color: #543118;
+}
 @media (max-width: 1024px) {
    .input_area{
       margin-left:-16px;
@@ -99,7 +98,7 @@ const goSearch = (()=>{
       width: 320px;
    }
    .custom_input{
-      width: 290px;
+      width: 287px;
    }
 }
 .custom_input{

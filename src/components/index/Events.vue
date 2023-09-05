@@ -7,16 +7,16 @@ const backend = import.meta.env.VITE_BACKEND_PATH
    <div class="relative">
       <Title title="最新活動" />
       <div class="flex justify-center flex-wrap gap-5 px-10px mx-auto max-w-1200px">
-         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
+         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events1.svg`">
             </div>
             <div class="ml-10px flex flex-col justify-center">
                <p class="mb-10px date">2023.11.06</p>
-               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
+               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...1111111111</h6>
             </div>
          </div>
-         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
+         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events2.svg`" alt="">
             </div>
@@ -25,7 +25,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
                <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
             </div>
          </div>
-         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
+         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events3.svg`" alt="">
             </div>
@@ -34,7 +34,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
                <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
             </div>
          </div>
-         <div class="flex z-10 max-md:w-80% max-2xl:w-45%">
+         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
             <div>
                <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events4.png`" alt="">
             </div>
@@ -52,9 +52,11 @@ const backend = import.meta.env.VITE_BACKEND_PATH
   
 </template>
 <style scoped>
+.event_img{
+   object-fit: cover;
+}
 @media (max-width: 480px) {
    .event_img{
-      object-fit: cover;
       width: 136px !important;
       height: 136px !important;
    } 
@@ -81,13 +83,15 @@ const backend = import.meta.env.VITE_BACKEND_PATH
    .tree_left{
       display: none;
    }
-   .title{
-      font-size:12px;
+   .event_img{
+      width: 200px !important;
+      height: 110px !important;
    }
 }
 @media(max-width:1440px){
    .title{
       font-size:16px;
+      letter-spacing: 0;
    }
 }
 .tree_left{

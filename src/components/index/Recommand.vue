@@ -48,23 +48,24 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="px-10 mx-auto max-w-1200px">
+  <div class="px-10px mx-auto max-w-1200px">
    <Title title="推薦廟宇" />
     <swiper
+      :slides-per-view="2"
       :style="{
         '--swiper-pagination-color': '#CEB96E',
         '--swiper-pagination-bottom':'-6px',
         '--swiper-pagination-bullet-inactive-color':'#ffffff'
       }"
        :breakpoints="{
-        md: {
+       '768': {
           slidesPerView: 3,
         },
-        lg: {
+        '1024': {
           slidesPerView: 4,
         },
       }"
-      :slides-per-view="2"
+     
       :spaceBetween="10"
       :loop="true"
       :modules="modules"
