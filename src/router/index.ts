@@ -67,7 +67,7 @@ const routes = [
     component: () => import("@/views/SearchPage.vue")
   },
   {
-    path: "/temple",
+    path: "/temple/:templeID",
     name: "Temple",
     component: () => import("@/views/temple/inner.vue")
   },

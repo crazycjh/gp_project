@@ -1,7 +1,15 @@
 <script setup lang="ts">
-    const backend = import.meta.env.VITE_BACKEND_PATH
-    import Breadcrumb from '../../components/widget/Breadcrumb.vue';
-    import TopCover from '../../components/widget/TopCover.vue';
+import { onMounted, ref } from "vue";
+import { useRoute } from 'vue-router';
+const backend = import.meta.env.VITE_BACKEND_PATH
+import Breadcrumb from '../../components/widget/Breadcrumb.vue';
+import TopCover from '../../components/widget/TopCover.vue';
+
+const templeID = ref<Number>();
+onMounted(() => {
+  const route = useRoute();
+  templeID.value = Number(route.params.templeID);
+});
 </script>
 <template>
     <!-- <div class="w-full">

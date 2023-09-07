@@ -68,7 +68,7 @@ onMounted(async () => {
           :style="{
             'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/home_banner1-3.jpg)`,
             filter: 'brightness(50%)',
-            'transform-origin': 'center center'
+            'background-position': 'center center'
           }"
         ></div>
         <div class="flex flex-col justify-center items-center absolute inset-0">
@@ -90,6 +90,7 @@ onMounted(async () => {
           :style="{
             'background-image': `url(${slider.image})`,
             filter: 'brightness(50%)',
+            'background-position': 'center center'
           }"
         ></div>
         <div class="flex flex-col justify-center items-center absolute inset-0">

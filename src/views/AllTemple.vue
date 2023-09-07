@@ -1,8 +1,32 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
 import Search from '../components/index/Search.vue'
 import Breadcrumb from '../components/widget/Breadcrumb.vue'
 import TopCover from '../components/widget/TopCover.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
+import axios from "axios";
+interface Temple{
+    id:Number;
+    image_url:String;
+    name:String;
+    main_god:String;
+    address:String;
+    total:Number;
+}
+const temples = ref<Temple[]>([]);
+const total = ref<Number>();
+    onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/temple`
+    );
+    temples.value = response.data.data;
+    total.value = response.data.total;
+    console.log(temples.value);
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
 </script>
 <template>
     <TopCover :image="`${backend}wp-content/uploads/2023/08/temple_banner.jpg`" title="全台廟宇" />
@@ -10,15 +34,14 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     <div class="mx-auto max-w-1200px">
         <Search />
         <div class="w-full flex gap-30px flex-wrap mt-40px justify-center">
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <router-link  to="/temple"><img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt=""></router-link>
-                <h4>廟宇全名1</h4>
-                <p>主神 : 媽祖、月下老人</p>
-                <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
-                安里頭濱路二段426號</p>
-                <router-link class="more" to="/temple">了解更多></router-link>
+            <div v-for="item in temples" :key="item.id.toString()" class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link  :to="`/temple/${item.id}`"><img class="photo" :src="item.image_url.toString()" alt=""></router-link>
+                <h4>{{ item.name }}</h4>
+                <p>{{ item.main_god }}</p>
+                <p>{{ item.address }}</p>
+                <router-link class="more" :to="`/temple/${item.id}`">了解更多></router-link>
             </div>
-            <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
+            <!-- <div class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <router-link to="/temple"><img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img2.jpg`" alt=""></router-link>
                 <h4>廟宇全名1</h4>
                 <p>主神 : 媽祖、月下老人</p>
@@ -105,7 +128,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
                 <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號鎮竹       
                 安里頭濱路二段426號</p>
                 <router-link class="more" to="/">了解更多></router-link>
-            </div>
+            </div> -->
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
             <p>上一頁  1 2 3  下一頁</p>
