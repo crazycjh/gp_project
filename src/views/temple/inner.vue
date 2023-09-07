@@ -1,22 +1,66 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useRoute } from 'vue-router';
+import axios from "axios";
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Breadcrumb from '../../components/widget/Breadcrumb.vue';
 import TopCover from '../../components/widget/TopCover.vue';
-
-const templeID = ref<Number>();
+// interface Temple{
+//     id:Number;
+//     image_url:String;
+//     name:String;
+//     main_god:String;
+//     address:String;
+//     phone:String;
+//     info:String;
+//     total:Number;
+//     light_content:String;
+//     shuwen_content:String;
+// }
+// interface Service{
+//     id:Number;
+//     name:String;
+//     price:Number;
+//     image_url:String;
+// }
+// const temple = ref<Temple[]>([]);
+// const light = ref<Service[]>([]);
+// const shuwen = ref<Service[]>([]);
+// const templeID = ref<Number>();
+const templeID = ref();
+const main_god = ref();
+const temple = ref([]);
+const light = ref([]);
+const shuwen = ref([]);
 onMounted(() => {
   const route = useRoute();
   templeID.value = Number(route.params.templeID);
 });
+
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${backend}/api/gc/temple/${templeID.value}`
+    );
+    temple.value = response.data.data;
+    light.value = response.data.light;
+    shuwen.value = response.data.shuwen;
+    main_god.value = temple.value.main_god.split(',').join('、')
+    console.log(main_god.value);
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+  
+});
+
 </script>
 <template>
     <!-- <div class="w-full">
         <iframe class="w-full" width="100%" height="284" src="https://www.youtube.com/embed/BMFmPOHany0" title="北港朝天宮正殿直播- 本服務由麥睿資訊人生地圖提供" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div> -->
     <TopCover :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/>
-    <Breadcrumb title="首頁/鎮瀾宮" />
+    <Breadcrumb :title="`首頁/${temple.name}`" />
     <div  class="px-10px mx-auto max-w-1200px mt-40px mb-100px">
         <div class="mt-50px py-1">
             <h4 class="border_title">廟宇介紹</h4>
@@ -27,21 +71,21 @@ onMounted(() => {
                     <img class="w-full" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
                 </div>
                 <div class="flex flex-col ml-20px w-full">
-                    <h4 class="title mt-20px mb-20px">廟宇全名1</h4>
+                    <h4 class="title mt-20px mb-20px">{{temple.name}}</h4>
                     <div class="flex mb-10px">
                         <img class="icon mr-10px" :src="`${backend}wp-content/uploads/2023/08/incense_burner_icon.svg`" alt="">
-                        <p>主神 : 媽祖、月下老人</p>
+                        <p>{{ main_god }}</p>
                     </div>
                     <div class="flex mb-10px">
                         <img class="icon mr-10px" :src="`${backend}wp-content/uploads/2023/08/map_icon.svg`" alt="">
-                        <p>地址 : 宜蘭縣頭城鎮竹安里頭濱路二段426號</p>
+                        <p>{{ temple.address }}</p>
                     </div>
                     <div class="flex mb-20px">
                         <img class="icon mr-10px" :src="`${backend}wp-content/uploads/2023/08/phone_icon.svg`" alt="">
-                        <p>03-123-4567</p>
+                        <p>{{ temple.phone}}</p>
                     </div>
                 <div>
-                    <p class="max-w-570px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短</p>
+                    <p class="max-w-570px">{{ temple.info }}</p>
                 </div>
             </div>
         </div>
@@ -61,102 +105,32 @@ onMounted(() => {
         <div class="custom_border py-20px custom_bottom">
             <h6 class="service mb-10px px-10px">|點燈|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
-                <p class="md:max-w-960px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介短介紹簡短介紹簡短介紹簡短介簡短介紹簡短介紹簡短介紹簡短介紹</p>
+                <p class="md:max-w-960px">{{ temple.light_content }}</p>
                 <button class="btn btn6">
                     <a href="#">光明燈詳細介紹</a>
                 </button>
             </div>
             <div class="flex flex-wrap gap-10px max-lg:justify-center">
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45% " >
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5 class="service_active">安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
+                <div v-for="item in light" :key="item.id.toString()" class="flex flex-col lg:w-18% md:w-23% max-md:w-45% " >
+                    <img class="light" :src="item.image_url.toString()" alt="">
+                    <h5 class="service_active">{{item.name}}</h5>
+                    <span class="service_price">{{item.price}}</span>
                 </div>
             </div>
         </div>
         <div class="py-20px">
             <h6 class="service mb-2 px-10px">|疏文|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
-                <p class="max-w-960px">簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介紹簡短介短介紹簡短介紹簡短介紹簡短介簡短介紹簡短介紹簡短介紹簡短介紹</p>
+                <p class="max-w-960px">{{ temple.shuwen_content }}</p>
                 <button class="btn btn6">
                     <a href="#">疏文詳細介紹</a>
                 </button>
             </div>
             <div class="flex flex-wrap gap-10px max-lg:justify-center">
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5 class="service_active">歷代祖先</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5>補財庫</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5>個人祖先</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
-                </div>
-                <div class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="`${backend}wp-content/uploads/2023/08/shuwen_img2.png`" alt="">
-                    <h5>安太歲</h5>
-                    <span class="service_price">NT.500</span>
+                <div v-for="item in shuwen" :key="item.id.toString()" class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
+                    <img class="light" :src="item.image_url.toString()" alt="">
+                    <h5 class="service_active">{{item.name}}</h5>
+                    <span class="service_price">{{item.price}}</span>
                 </div>
             </div>
         </div>
