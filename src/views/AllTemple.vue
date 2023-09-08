@@ -5,16 +5,16 @@ import Breadcrumb from '../components/widget/Breadcrumb.vue'
 import TopCover from '../components/widget/TopCover.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 import axios from "axios";
-interface Temple{
-    id:Number;
-    image_url:String;
-    name:String;
-    main_god:String;
-    address:String;
-    total:Number;
-}
-const temples = ref<Temple[]>([]);
-const total = ref<Number>();
+// interface Temple{
+//     id:Number;
+//     image_url:String;
+//     name:String;
+//     main_god:String;
+//     address:String;
+//     total:Number;
+// }
+const temples = ref([])
+const total = ref();
 onMounted(async () => {
   try {
     const response = await axios.get(

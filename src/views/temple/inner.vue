@@ -5,28 +5,6 @@ import axios from "axios";
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Breadcrumb from '../../components/widget/Breadcrumb.vue';
 import TopCover from '../../components/widget/TopCover.vue';
-// interface Temple{
-//     id:Number;
-//     image_url:String;
-//     name:String;
-//     main_god:String;
-//     address:String;
-//     phone:String;
-//     info:String;
-//     total:Number;
-//     light_content:String;
-//     shuwen_content:String;
-// }
-// interface Service{
-//     id:Number;
-//     name:String;
-//     price:Number;
-//     image_url:String;
-// }
-// const temple = ref<Temple[]>([]);
-// const light = ref<Service[]>([]);
-// const shuwen = ref<Service[]>([]);
-// const templeID = ref<Number>();
 const templeID = ref();
 const main_god = ref();
 const temple = ref([]);
@@ -44,22 +22,22 @@ onMounted(async () => {
       `${backend}/api/gc/temple/${templeID.value}`
     );
     temple.value = response.data.data;
+    console.log(temple.value);
     light.value = response.data.light;
     shuwen.value = response.data.shuwen;
+    console.log(shuwen.value);
     main_god.value = temple.value.main_god.split(',').join('、')
-    console.log(main_god.value);
+    console.log(typeof(temple.value.live_iframe));
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
-  
 });
-
 </script>
 <template>
-    <!-- <div class="w-full">
-        <iframe class="w-full" width="100%" height="284" src="https://www.youtube.com/embed/BMFmPOHany0" title="北港朝天宮正殿直播- 本服務由麥睿資訊人生地圖提供" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div> -->
-    <TopCover :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/>
+    <TopCover v-if="!temple.live_iframe" :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/>
+    <div  v-if="temple.live_iframe">
+        <iframe class="w-full h-300" width="560" height="315" :src="temple.live_iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
     <Breadcrumb :title="`首頁/${temple.name}`" />
     <div  class="px-10px mx-auto max-w-1200px mt-40px mb-100px">
         <div class="mt-50px py-1">
@@ -111,8 +89,8 @@ onMounted(async () => {
                 </button>
             </div>
             <div class="flex flex-wrap gap-10px max-lg:justify-center">
-                <div v-for="item in light" :key="item.id.toString()" class="flex flex-col lg:w-18% md:w-23% max-md:w-45% " >
-                    <img class="light" :src="item.image_url.toString()" alt="">
+                <div v-for="item in light" :key="item.id" class="flex flex-col lg:w-18% md:w-23% max-md:w-45% " >
+                    <img class="light" :src="item.image_url" alt="">
                     <h5 class="service_active">{{item.name}}</h5>
                     <span class="service_price">{{item.price}}</span>
                 </div>
@@ -127,8 +105,8 @@ onMounted(async () => {
                 </button>
             </div>
             <div class="flex flex-wrap gap-10px max-lg:justify-center">
-                <div v-for="item in shuwen" :key="item.id.toString()" class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
-                    <img class="light" :src="item.image_url.toString()" alt="">
+                <div v-for="item in shuwen" :key="item.id" class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
+                    <img class="light" :src="item.image_url" alt="">
                     <h5 class="service_active">{{item.name}}</h5>
                     <span class="service_price">{{item.price}}</span>
                 </div>
