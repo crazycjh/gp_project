@@ -16,16 +16,16 @@ const toggleHover = ((isHovering:boolean) =>{
 </script>
 <template>
     <div v-if="red">
-      <a v-if="props.link" :href="props.link" :class="{'red':red}" class="slider_button relative z-30"  @mouseover="toggleHover(true)"
+      <router-link v-if="props.link" :to="props.link.toString()" :class="{'red':red}" class="slider_button relative z-30"  @mouseover="toggleHover(true)"
       @mouseout="toggleHover(false)">
         <img v-if="icon"  class="mr-1" :src="isHover ? activeIcon : normalIcon" alt="" >
        {{text}}
-    </a>
+    </router-link>
     </div>
     <div v-else>
-      <a v-if="props.link" :href="props.link" :class="{'red':red}" class="slider_button relative z-30">
+      <router-link v-if="props.link" :to="props.link.toString()" :class="{'red':red}" class="slider_button relative z-30">
        {{text}}
-      </a>
+      </router-link>
     </div>
     
 </template>

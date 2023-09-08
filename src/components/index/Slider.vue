@@ -14,7 +14,8 @@ interface Slider {
   subtitle: String;
   link: String;
 }
-const sliders = ref<Slider[]>([]);
+const live = ref([]);
+const sliders = ref([]);
 const modules = [Autoplay, Pagination, Navigation];
 
 //js控制navigators rwd
@@ -39,7 +40,8 @@ onMounted(async () => {
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/get-sliders`
     );
-    sliders.value = response.data;
+    live.value = response.data.live
+    sliders.value = response.data.sliders;
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
@@ -66,24 +68,24 @@ onMounted(async () => {
         <div
           class="h-full w-full z-10"
           :style="{
-            'background-image': `url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/home_banner1-3.jpg)`,
+            'background-image': `url(${live.image}`,
             filter: 'brightness(50%)',
             'background-position': 'center center'
           }"
         ></div>
         <div class="flex flex-col justify-center items-center absolute inset-0">
-          <h2 class="text-3xl mb-2 text-white relative z-50 title">直播</h2>
+          <h2 class="text-3xl mb-2 text-white relative z-50 title">{{live.title}}</h2>
           <h3 class="text-xl mb-4 text-white relative z-50 subtitle">
-            直播副標題
+            {{live.subtitle}}
           </h3>
           <!-- <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link> -->
-          <LinkBtn link="/more" text="觀看直播" red="true" icon="true"/>
+          <LinkBtn :link="live.link" text="觀看直播" red="true" icon="true"/>
         </div>
       </swiper-slide>
       <swiper-slide
         class="w-full bg-cover bg-center relative"
         v-for="slider in sliders"
-        :key="slider.id.toString()"
+        :key="slider.id"
       >
         <div
           class="h-full w-full z-10"

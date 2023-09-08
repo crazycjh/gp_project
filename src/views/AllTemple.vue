@@ -22,7 +22,6 @@ onMounted(async () => {
     );
     temples.value = response.data.data;
     total.value = response.data.total;
-    console.log(temples.value);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }

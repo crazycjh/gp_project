@@ -6,7 +6,7 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import LinkBtn from "../widget/LinkBtn.vue";
+import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
 import Title from '@/components/widget/Title.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 interface Slider {
@@ -39,9 +39,10 @@ onUnmounted(() => {
 onMounted(async () => {
   try {
     const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/get-sliders`
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/recommand`
     );
-    sliders.value = response.data;
+    sliders.value = response.data.recommand;
+    console.log(sliders.value);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
@@ -74,51 +75,19 @@ onMounted(async () => {
       }"
       class="h-260px swiper-container"
     >
-      <!-- <swiper-slide v-for="slider in sliders" :key="slider.id">
-        <div class="h-70% w-full object-fill" :style="{ 'background-image': `url(${slider.image})` }"></div>
-        <div>
-            <h5 class="title mt-10px">廟宇全名</h5>
-            <h6 class="area">台北市萬華區</h6>
-        </div>
-      </swiper-slide> -->
-      <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand1.png)` }"></div>
+
+      <swiper-slide v-for="item in sliders" :key="item.id">
+        <a :href="item.link">
+          <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${item.image})` }"></div>
+        </a>
         <div class="max-md:px-10px">
-            <h5 class="title mt-10px">廟宇全名1</h5>
-            <h6 class="area">台北市萬華區</h6>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand2.png)` }"></div>
-        <div class="max-md:px-10px">
-            <h5 class="title mt-10px">廟宇全名2</h5>
-            <h6 class="area">新北市三重區</h6>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand3.png)` }"></div>
-        <div class="max-md:px-10px">
-            <h5 class="title mt-10px">廟宇全名3</h5>
-            <h6 class="area">桃園市龍潭區</h6>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand4.png)` }"></div>
-        <div class="max-md:px-10px">
-            <h5 class="title mt-10px">廟宇全名4</h5>
-            <h6 class="area">新竹縣湖口區</h6>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${backend}wp-content/uploads/2023/08/recommand4.png)` }"></div>
-        <div class="max-md:px-10px">
-            <h5 class="title mt-10px">廟宇全名4</h5>
-            <h6 class="area">新竹縣湖口區</h6>
+            <h5 class="title mt-10px">{{ item.title}}</h5>
+            <h6 class="area">{{item.area}}</h6>
         </div>
       </swiper-slide>
     </swiper>
     <div class="flex justify-center mt-6">
-      <LinkBtn text="更多廟宇" link="/more"/>
+      <InnerLinkBtn text="更多廟宇" link="/allTemple"/>
     </div>
   </div>
 </template>
