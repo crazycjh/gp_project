@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": false,
+      // 其他選項...
+    }
+  }
+  

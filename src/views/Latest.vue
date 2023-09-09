@@ -51,8 +51,8 @@ const fetchData = async (type) => {
             <button class="btn rounded-none"  :class="{ active: currentActive === 'temple' }"  @click="fetchData('temple')">廟宇繞境</button>
         </div>
     </div>
-    <div class="mx-auto max-w-1200px">
-        <div class="w-full flex gap-30px flex-wrap mt-40px justify-center">
+    <div class="mx-auto max-w-960px">
+        <div class="w-full flex gap-30px flex-wrap mt-40px justify-start">
             <div v-for="item in posts" :key="item.id" class="w-full  flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
                 <router-link :to="`/latest/inner/${item.id}`">
                     <img class="photo" :src="item.image" alt="">
