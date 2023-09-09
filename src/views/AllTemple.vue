@@ -5,14 +5,6 @@ import Breadcrumb from '../components/widget/Breadcrumb.vue'
 import TopCover from '../components/widget/TopCover.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 import axios from "axios";
-// interface Temple{
-//     id:Number;
-//     image_url:String;
-//     name:String;
-//     main_god:String;
-//     address:String;
-//     total:Number;
-// }
 const temples = ref([])
 const total = ref();
 onMounted(async () => {
@@ -33,8 +25,8 @@ onMounted(async () => {
     <div class="mx-auto max-w-1200px">
         <Search />
         <div class="w-full flex gap-30px flex-wrap mt-40px justify-center">
-            <div v-for="item in temples" :key="item.id.toString()" class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <router-link  :to="`/temple/${item.id}`"><img class="photo" :src="item.image_url.toString()" alt=""></router-link>
+            <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link  :to="`/temple/${item.id}`"><img class="photo" :src="item.image_url" alt=""></router-link>
                 <h4>{{ item.name }}</h4>
                 <p>{{ item.main_god }}</p>
                 <p>{{ item.address }}</p>

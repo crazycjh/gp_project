@@ -22,12 +22,9 @@ onMounted(async () => {
       `${backend}/api/gc/temple/${templeID.value}`
     );
     temple.value = response.data.data;
-    console.log(temple.value);
     light.value = response.data.light;
     shuwen.value = response.data.shuwen;
-    console.log(shuwen.value);
     main_god.value = temple.value.main_god.split(',').join('、')
-    console.log(typeof(temple.value.live_iframe));
   } catch (error) {
     console.error("API 請求失敗:", error);
   }

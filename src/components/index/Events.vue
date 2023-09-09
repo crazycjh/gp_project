@@ -1,51 +1,41 @@
 <script setup lang="ts">
+import { onMounted,ref } from "vue";
+import axios from "axios";
 import Title from '@/components/widget/Title.vue'
-import LinkBtn from "../widget/LinkBtn.vue";
+import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
 const backend = import.meta.env.VITE_BACKEND_PATH
+
+const posts = ref([]);
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/latest/index`
+    );
+    posts.value = response.data.latest;
+    console.log(posts.value);
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
 </script>
 <template>
    <div class="relative">
       <Title title="最新活動" />
       <div class="flex justify-center flex-wrap gap-5 px-10px mx-auto max-w-1200px">
-         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
-            <div>
-               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events1.svg`">
-            </div>
+         <div v-for="item in posts" :key="item.id" class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
+            <router-link :to="`/latest/inner/${item.id}`">
+               <div>
+                  <img class="event_img" :src="`${item.image}`">
+               </div>
+            </router-link>
             <div class="ml-10px flex flex-col justify-center">
-               <p class="mb-10px date">2023.11.06</p>
-               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...1111111111</h6>
-            </div>
-         </div>
-         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
-            <div>
-               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events2.svg`" alt="">
-            </div>
-            <div class="ml-10px flex flex-col justify-center">
-               <p class="mb-10px date">2023.11.06</p>
-               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
-            </div>
-         </div>
-         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
-            <div>
-               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events3.svg`" alt="">
-            </div>
-            <div class="ml-10px flex flex-col justify-center">
-               <p class="mb-10px date">2023.11.06</p>
-               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
-            </div>
-         </div>
-         <div class="flex z-10 max-md:w-full max-md:px-10px max-2xl:w-45%">
-            <div>
-               <img class="event_img" :src="`${backend}wp-content/uploads/2023/08/events4.png`" alt="">
-            </div>
-            <div class="ml-10px flex flex-col justify-center">
-               <p class="mb-10px date">2023.11.06</p>
-               <h6 class="title max-w-xs">DEMO4-活動標題活動標題活動標題活動標題活動標題...</h6>
+               <p class="mb-10px date">{{ item.date }}</p>
+               <h6 class="title max-w-xs">{{ item.title }}</h6>
             </div>
          </div>
       </div>
       <div class="flex justify-center py-30px">
-         <LinkBtn text="更多活動" link="/latest"/>
+         <InnerLinkBtn text="更多活動" link="/latest/all"/>
       </div>
       <img class="tree_left" :src="`${backend}/wp-content/uploads/2023/08/home_bg3.svg`" alt="">
    </div>

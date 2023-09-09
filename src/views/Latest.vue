@@ -1,93 +1,64 @@
 <script setup lang="ts">
+import { onMounted,ref } from "vue";
+import { useRoute,useRouter } from 'vue-router';
+import axios from "axios";
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Breadcrumb from '../components/widget/Breadcrumb.vue'
 import TopCover from '../components/widget/TopCover.vue'
+
+const posts = ref([]);
+const total = ref();
+const currentActive = ref();
+
+const route = useRoute();
+const router = useRouter()
+onMounted(() => {
+  currentActive.value = route.params.type;
+  console.log(currentActive.value);
+});
+onMounted(async () => {
+    fetchData(currentActive.value)
+});
+const fetchData = async (type) => {
+  console.log(type);
+  router.push(`${type}`)
+  currentActive.value = type; 
+  let apiUrl = `${backend}api/gc/latest`;
+  
+  if (type !== 'all') {
+    apiUrl += `?latest_type=${type}`;
+  }
+
+  try {
+    const response = await axios.get(apiUrl);
+    posts.value = response.data.latest;
+    total.value = response.data.total;
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+};
 </script>
 <template>
     <TopCover :image="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" title="最新活動" />
     <Breadcrumb title="首頁/最新活動" />
     <div class="tags flex justify-center max-md:px-100px gap-10px my-50px flex-wrap">
         <div class="flex gap-10px">
-            <button class="active btn rounded-none">全部</button>
-            <button class="btn rounded-none">熱門活動</button>
+            <button class="btn rounded-none" :class="{ active: currentActive === 'all' }" @click="fetchData('all')">全部</button>
+            <button class="btn rounded-none" :class="{ active: currentActive === 'hot' }" @click="fetchData('hot')">熱門活動</button>
         </div>
         <div class="flex gap-10px">
-            <button class="btn rounded-none">聖誕千秋</button>
-            <button class="btn rounded-none">廟宇繞境</button>
+            <button class="btn rounded-none" :class="{ active: currentActive === 'xmas' }" @click="fetchData('xmas')">聖誕千秋</button>
+            <button class="btn rounded-none"  :class="{ active: currentActive === 'temple' }"  @click="fetchData('temple')">廟宇繞境</button>
         </div>
     </div>
     <div class="mx-auto max-w-1200px">
         <div class="w-full flex gap-30px flex-wrap mt-40px justify-center">
-            <div class="w-full  flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <router-link to="/latest/inner">
-                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+            <div v-for="item in posts" :key="item.id" class="w-full  flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
+                <router-link :to="`/latest/inner/${item.id}`">
+                    <img class="photo" :src="item.image" alt="">
                 </router-link>
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/latest/inner">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <router-link to="/latest/inner">
-                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                </router-link>
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <router-link to="/latest/inner">
-                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                </router-link>
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <router-link to="/latest/inner">
-                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                </router-link>
-               
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <router-link to="/latest/inner">
-                    <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                </router-link>
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
-            </div>
-            <div class="w-full flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <img class="photo" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
-                <p>DEMO12-活動標題活動標題活動標題活動標題活動</p>
-                <router-link class="more" to="/">了解更多...</router-link>
+                <p>{{item.link}}</p>
+                <router-link class="more" :to="`/latest/${item.id}`">了解更多...</router-link>
             </div>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
@@ -99,6 +70,7 @@ import TopCover from '../components/widget/TopCover.vue'
 .active{
     background-color: #CEB96E !important;
     color:#ffffff !important;
+    border:none;
 }
 .title{
     position: absolute;
@@ -117,6 +89,7 @@ import TopCover from '../components/widget/TopCover.vue'
     padding: 10px 20px 10px 20px;
     background-color: #EEEEEE;
     color:#777777;
+    border:none;
 }
 .btn:hover{
     background-color: #CEB96E;
@@ -151,5 +124,8 @@ p{
 .more{  
     margin-top: -4px;
     color:#CEB96E;
+}
+.btn:focus{
+    outline:none;
 }
 </style>

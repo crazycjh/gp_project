@@ -7,7 +7,7 @@ const routes = [
     component: () => import("@/views/Home.vue")
   },
   {
-    path: "/latest",
+    path: "/latest/:type",
     name: "Latest",
     component: () => import("@/views/Latest.vue")
   },
@@ -72,7 +72,7 @@ const routes = [
     component: () => import("@/views/temple/inner.vue")
   },
   {
-    path: "/latest/inner",
+    path: "/latest/inner/:latestID",
     name: "LastestInner",
     component: () => import("@/views/latest/inner.vue")
   },
