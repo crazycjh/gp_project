@@ -2,7 +2,8 @@
 import {ref,watch} from "vue";
 // import axios from "axios";
 import Title from '@/components/widget/Title.vue'
-import router from "../../router";
+import { useRouter } from "vue-router";
+
 
 const city = ref<string>('全台縣市');
 const god = ref<string>('主神');
@@ -14,10 +15,11 @@ const searchText = ref<string>('');
 //    }
 // })
 //chatGTP建議 沒用過 其原理為由左至右前面成立才執行第二個
-watch(city,(newValue) => newValue && goSearch())
-watch(god,(newValue) => newValue && goSearch())
-const goSearch = (()=>{
-  router.push('/searchPage');
+const router = useRouter()
+watch(city,(newValue) => newValue && goSearch(newValue))
+watch(god,(newValue) => newValue && goSearch(newValue))
+const goSearch = ((newValue)=>{
+  router.push(`/search/${newValue}`);
 })
 </script>
 <template>
@@ -65,7 +67,7 @@ const goSearch = (()=>{
          </div>   
          <div class="flex input_area">
             <input v-model="searchText" placeholder="請輸入關鍵字..." class="custom_input" type="text" @keyup.enter="goSearch">
-            <img class="icon" src="../../assets/index/search.svg" alt="" @click="goSearch">
+            <img class="icon" src="../../assets/index/search.svg" alt="" @click="goSearch(searchText)">
          </div>
       </div>
    </div>

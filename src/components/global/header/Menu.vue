@@ -54,19 +54,19 @@ watch(isOpen,(newValue)=>{
         <div class="mobileMenu" v-show="isOpen">
             <ul class="mobileUl">
                 <li class="nav-item-mobile">
-                    <router-link to="/allTemple/" class="nav-link-mobile">全台廟宇</router-link>
+                    <router-link to="/allTemple/" class="nav-link-mobile" @click="isOpen = !isOpen">全台廟宇</router-link>
                 </li>
                 <li class="nav-item-mobile">
-                    <router-link to="/mainGod/" class="nav-link-mobile">主神</router-link>
+                    <router-link to="/mainGod/" class="nav-link-mobile" @click="isOpen = !isOpen">主神</router-link>
                 </li>
                 <li class="nav-item-mobile">
-                    <router-link to="/latest/" class="nav-link-mobile">最新活動</router-link>
+                    <router-link to="/latest/" class="nav-link-mobile" @click="isOpen = !isOpen">最新活動</router-link>
                 </li>
                 <li class="nav-item-mobile">
-                    <router-link to="/service/" class="nav-link-mobile">服務</router-link>
+                    <router-link to="/service/" class="nav-link-mobile" @click="isOpen = !isOpen">服務</router-link>
                 </li>
                 <li class="nav-item-mobile">
-                    <router-link to="/product/" class="nav-link-mobile">商城</router-link>
+                    <router-link to="/product/" class="nav-link-mobile" @click="isOpen = !isOpen">商城</router-link>
                 </li>
                 <li class="nav-item-mobile">
                     <router-link to="/qa/" class="nav-link-mobile">Q&A</router-link>

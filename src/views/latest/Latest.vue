@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { onMounted,ref } from "vue";
+import { onMounted,ref,computed,watch } from "vue";
 import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
 const backend = import.meta.env.VITE_BACKEND_PATH
-import Breadcrumb from '../components/widget/Breadcrumb.vue'
-import TopCover from '../components/widget/TopCover.vue'
-
+import Breadcrumb from '@/components/widget/Breadcrumb.vue'
+import TopCover from '@/components/widget/TopCover.vue'
+import Pagination from '@/components/widget/Pagination.vue'
 const posts = ref([]);
 const total = ref();
 const currentActive = ref();
@@ -14,15 +14,32 @@ const route = useRoute();
 const router = useRouter()
 onMounted(() => {
   currentActive.value = route.params.type;
-  console.log(currentActive.value);
 });
+
 onMounted(async () => {
     fetchData(currentActive.value)
 });
+
+const currentPage = ref(1)
+const itemsPerPage = ref(2)
+const changePage =((page)=>{
+    currentPage.value = page
+})
+
+const totalPages = computed(() => {
+    return Math.ceil(total.value / itemsPerPage.value);
+});
+
 const fetchData = async (type) => {
-  console.log(type);
+  if(type !== currentActive.value ){
+    currentPage.value = 1
+  }
   router.push(`${type}`)
-  currentActive.value = type; 
+  currentActive.value = type;
+  const params = {
+        limit:itemsPerPage.value, 
+        page:currentPage.value,
+  };
   let apiUrl = `${backend}api/gc/latest`;
   
   if (type !== 'all') {
@@ -30,13 +47,18 @@ const fetchData = async (type) => {
   }
 
   try {
-    const response = await axios.get(apiUrl);
+    const response = await axios.get(apiUrl,{
+       params:params,
+    });
     posts.value = response.data.latest;
     total.value = response.data.total;
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
 };
+watch(currentPage,(newValue) => newValue && fetchData(currentActive.value))
+
+
 </script>
 <template>
     <TopCover :image="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" title="最新活動" />
@@ -62,7 +84,7 @@ const fetchData = async (type) => {
             </div>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
-            <p>上一頁  1 2 3  下一頁</p>
+            <Pagination :total-pages="totalPages" :current-page="currentPage" @page-changed="changePage"/>
         </div>
     </div>
 </template>

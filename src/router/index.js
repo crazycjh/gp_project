@@ -9,12 +9,12 @@ const routes = [
   {
     path: "/latest/:type",
     name: "Latest",
-    component: () => import("@/views/Latest.vue")
+    component: () => import("@/views/latest/Latest.vue")
   },
   {
     path: "/allTemple",
     name: "AllTemple",
-    component: () => import("@/views/AllTemple.vue")
+    component: () => import("@/views/temple/AllTemple.vue")
   },
   {
     path: "/mainGod",
@@ -62,11 +62,6 @@ const routes = [
     component: () => import("@/views/CustomerService.vue")
   },
   {
-    path: "/searchPage",
-    name: "SearchPage",
-    component: () => import("@/views/SearchPage.vue")
-  },
-  {
     path: "/temple/:templeID",
     name: "Temple",
     component: () => import("@/views/temple/inner.vue")
@@ -75,6 +70,11 @@ const routes = [
     path: "/latest/inner/:latestID",
     name: "LastestInner",
     component: () => import("@/views/latest/inner.vue")
+  },
+  {
+    path: "/search/:content",
+    name: "Search",
+    component: () => import("@/views/SearchPage.vue")
   },
 ]
 const router = createRouter({
