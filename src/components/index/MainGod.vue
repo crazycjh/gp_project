@@ -4,32 +4,33 @@ import { ref } from 'vue';
 const backend = import.meta.env.VITE_BACKEND_PATH
 const currentImageIndex = ref<number>();
 const images = [
-  `${backend}wp-content/uploads/2023/09/god_img13.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img1.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img2.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img3.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img4.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img5.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img6.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img7.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img8.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img9.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img11.svg`,
-  `${backend}wp-content/uploads/2023/08/god_img12.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img01.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img02.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img03.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img04.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img05.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img06.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img07.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img08.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img09.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img010.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img011.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img012.svg`,
 ];
 const hoverImage = [
-  `${backend}wp-content/uploads/2023/09/god_img13_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img1_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img2_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img3_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img4_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img5_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img9_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img10_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img11_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img7_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img6_2.svg`,
-  `${backend}wp-content/uploads/2023/09/god_img8_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img01_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img02_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img03_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img04_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img05_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img06_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img07_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img08_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img09_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img010_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img011_2.svg`,
+  `${backend}wp-content/uploads/2023/09/god_img012_2.svg`,
+  
 ];
 const handleImageHover = (index: number) => {
   currentImageIndex.value = index;
@@ -48,7 +49,7 @@ const handleImageHover = (index: number) => {
                 @mouseover="handleImageHover(index)"
                 @mouseout="handleImageHover(99)"
             />
-            <!-- <img class="lg:w-15% md:w-23% max-md:45%" index="1" :src="`${backend}wp-content/uploads/2023/08/god_img1.svg`" alt="" @mouseover="handleImageHover(index)">
+            <!-- <img class="lg:w-15% md:w-23% max-md:45%" index="1" :src="`${backend}wp-content/uploads/2023/09/god_img1.svg`" alt="" @mouseover="handleImageHover(index)">
             <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img2.svg`" alt="">
             <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img3.svg`" alt="">
             <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img4.svg`" alt="">

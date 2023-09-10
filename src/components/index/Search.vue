@@ -67,7 +67,7 @@ const goSearch = ((newValue)=>{
          </div>   
          <div class="flex input_area">
             <input v-model="searchText" placeholder="請輸入關鍵字..." class="custom_input" type="text" @keyup.enter="goSearch">
-            <img class="icon" src="../../assets/index/search.svg" alt="" @click="goSearch(searchText)">
+            <div class="icon"  alt="" @click="goSearch(searchText)"></div>
          </div>
       </div>
    </div>
@@ -90,8 +90,12 @@ const goSearch = ((newValue)=>{
    flex-shrink: 0;
    background: #EEE;
 }
+.icon{
+   width: 30px;
+   background-image: url('../../assets/index/search.svg');
+}
 .icon:hover{
-   background-color: #543118;
+   background-image: url('../../assets/index/search2.svg');
 }
 @media (max-width: 1024px) {
    .input_area{

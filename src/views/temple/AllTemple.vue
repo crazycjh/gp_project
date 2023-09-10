@@ -47,7 +47,7 @@ watch(currentPage,(newValue) => newValue && fetchData())
     <Breadcrumb title="首頁/全台廟宇" />
     <div class="mx-auto max-w-1200px">
         <Search />
-        <div class="w-full flex gap-30px flex-wrap mt-40px justify-center">
+        <div class="w-full flex gap-30px flex-wrap mt-40px">
             <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <router-link  :to="`/temple/${item.id}`"><img class="photo" :src="item.image_url" alt=""></router-link>
                 <h4>{{ item.name }}</h4>

@@ -22,6 +22,7 @@ onMounted(async () => {
       `${backend}/api/gc/temple/${templeID.value}`
     );
     temple.value = response.data.data;
+    console.log(temple.value);
     light.value = response.data.light;
     shuwen.value = response.data.shuwen;
     main_god.value = temple.value.main_god.split(',').join('、')
@@ -43,15 +44,15 @@ onMounted(async () => {
         <div class="custom_border">
             <div class="flex flex-col lg:flex-row items-center pt-30px">
                 <div class="w-full">
-                    <img class="w-full" :src="`${backend}wp-content/uploads/2023/08/temple_demo_img1.jpg`" alt="">
+                    <img class="w-full" :src="`${temple.image_url}`" alt="">
                 </div>
                 <div class="flex flex-col ml-20px w-full">
                     <h4 class="title mt-20px mb-20px">{{temple.name}}</h4>
-                    <div class="flex mb-10px">
+                    <div v-if="main_god" class="flex mb-10px">
                         <img class="icon mr-10px" :src="`${backend}wp-content/uploads/2023/08/incense_burner_icon.svg`" alt="">
                         <p>{{ main_god }}</p>
                     </div>
-                    <div class="flex mb-10px">
+                    <div v-if="temple.address" class="flex mb-10px">
                         <img class="icon mr-10px" :src="`${backend}wp-content/uploads/2023/08/map_icon.svg`" alt="">
                         <p>{{ temple.address }}</p>
                     </div>
@@ -77,7 +78,7 @@ onMounted(async () => {
         <div class="mt-50px py-1px">
             <h4 class="border_title">廟宇服務</h4>
         </div>
-        <div class="custom_border py-20px custom_bottom">
+        <div v-if="temple.light_content && light" class="custom_border py-20px custom_bottom">
             <h6 class="service mb-10px px-10px">|點燈|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
                 <p class="md:max-w-960px">{{ temple.light_content }}</p>
@@ -89,11 +90,11 @@ onMounted(async () => {
                 <div v-for="item in light" :key="item.id" class="flex flex-col lg:w-18% md:w-23% max-md:w-45% " >
                     <img class="light" :src="item.image_url" alt="">
                     <h5 class="service_active">{{item.name}}</h5>
-                    <span class="service_price">{{item.price}}</span>
+                    <span class="service_price">NT.{{item.price}}</span>
                 </div>
             </div>
         </div>
-        <div class="py-20px">
+        <div v-if="temple.shuwen_content && shuwen" class="py-20px">
             <h6 class="service mb-2 px-10px">|疏文|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
                 <p class="max-w-960px">{{ temple.shuwen_content }}</p>
@@ -105,7 +106,7 @@ onMounted(async () => {
                 <div v-for="item in shuwen" :key="item.id" class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
                     <img class="light" :src="item.image_url" alt="">
                     <h5 class="service_active">{{item.name}}</h5>
-                    <span class="service_price">{{item.price}}</span>
+                    <span class="service_price">NT.{{item.price}}</span>
                 </div>
             </div>
         </div>
