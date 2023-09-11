@@ -45,7 +45,7 @@ onMounted(async () => {
             'background-position': 'center center'
           }">
         <div class="temple-banner container">
-            <div>
+            <div v-if="temple.live_iframe">
                 <div class="flex flex-col items-center mb-5">
                 <img class="wind" src="../../assets/widget/wind.svg" alt="">
                 <h3>廟宇直播</h3>
