@@ -12,9 +12,11 @@ const modules = [Autoplay, Pagination, Navigation]
 const backend = import.meta.env.VITE_BACKEND_PATH
 
 const latestID = ref();
+const currentUrl = ref('')
 onMounted(() => {
   const route = useRoute();
   latestID.value = Number(route.params.latestID);
+  currentUrl.value = window.location.href
 });
 
 const post = ref([]);
@@ -46,10 +48,13 @@ const goLatest = (type)=>{
 </script>
 <template>
   <Breadcrumb :title="`首頁/${post.title}`" />
-  <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px">
+  <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px mb:30px lg:mb-80px">
     <div class="max-w-915px pr-10px w-full">
       <h3 class="title mb-10px">{{ post.title }}</h3>
       <span class="date mb-10px">{{ post.date }}</span>
+      <!-- <a  href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent(location.href)) ));' title='分享給 LINE 好友'><img class="mb-10px" alt='分享給LINE好友 !' height='40' src='https://1.bp.blogspot.com/-FvoBw8lnlC8/WHgA91RmxiI/AAAAAAAAIvA/CazIGx6Jlp8PJ4pE40kt2XMxwFmeBSdjgCLcB/s1600/168x40.png' width='168'/>
+      </a> -->
+      <!-- <a :href="`https://social-plugins.line.me/lineit/share?url=${currentUrl}`"></a> -->
       <img class="mb-10px" src="../../assets/latest/social.png" alt="" />
       <img class="mb-10px w-full"
         :src="post.image"
@@ -81,7 +86,7 @@ const goLatest = (type)=>{
         <swiper-slide v-for="item in bottom_post" :key="item.id">
           <router-link :to="`/latest/${item.id}`">
             <div
-              class="h-70% w-full bg-cover bg-center"
+              class="h-70% w-full bg-cover bg-center image"
               :style="{
                 'background-image': `url(${item.image})`,
               }"
@@ -106,6 +111,9 @@ const goLatest = (type)=>{
   </div>
 </template>
 <style scoped>
+.image{
+  aspect-ratio: 16/9;
+}
 h3,h4,h5,p{
     color:#000000;
 }

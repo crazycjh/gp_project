@@ -4,15 +4,18 @@ import { useRoute } from 'vue-router';
 import axios from "axios";
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Breadcrumb from '../../components/widget/Breadcrumb.vue';
+import Title from "../../components/widget/Title.vue";
 import TopCover from '../../components/widget/TopCover.vue';
 const templeID = ref();
 const main_god = ref();
 const temple = ref([]);
 const light = ref([]);
 const shuwen = ref([]);
+
 onMounted(() => {
   const route = useRoute();
   templeID.value = Number(route.params.templeID);
+ 
 });
 
 
@@ -22,7 +25,6 @@ onMounted(async () => {
       `${backend}/api/gc/temple/${templeID.value}`
     );
     temple.value = response.data.data;
-    console.log(temple.value);
     light.value = response.data.light;
     shuwen.value = response.data.shuwen;
     main_god.value = temple.value.main_god.split(',').join('、')
@@ -32,11 +34,32 @@ onMounted(async () => {
 });
 </script>
 <template>
-    <TopCover v-if="!temple.live_iframe" :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/>
-    <div v-if="temple.live_iframe">
-        <div class="iframe_container" v-html="temple.live_iframe">
-        </div>
+    <!-- <TopCover v-if="!temple.live_iframe" :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/> -->
+    <!-- <div class="relative">
+        <h2 class="float_title">全台廟宇</h2>
+        <img class="w-full max-lg:hidden" :src="`${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg`" alt="">
+        <div v-if="temple.live_iframe" class="iframe_inner " v-html="temple.live_iframe"></div>
+    </div> -->
+    <div class="banner"  :style="{
+            'background-image': `url(${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg)`,
+            'background-position': 'center center'
+          }">
+        <div class="temple-banner container">
+            <div>
+                <div class="flex flex-col items-center mb-5">
+                <img class="wind" src="../../assets/widget/wind.svg" alt="">
+                <h3>廟宇直播</h3>
+            </div>
+            <!-- <h2>
+                廟宇直播
+            </h2> -->
+            </div>
+            <div v-if="temple.live_iframe" class="video-wrapper" v-html="temple.live_iframe">
+           
+            </div>
+        </div>    
     </div>
+   
     <Breadcrumb :title="`首頁/${temple.name}`" />
     <div  class="px-10px mx-auto max-w-1200px mt-40px mb-100px">
         <div class="mt-50px py-1">
@@ -114,6 +137,40 @@ onMounted(async () => {
     </div>
 </template>
 <style scoped>
+.banner {
+    display:flex;
+    margin: 0;
+    padding: 0;
+    /* background-image: url('https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/temple_post_banner1.jpg'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.temple-banner.container{
+   max-width: 600px;
+   margin: 0 auto;
+   width:100%;
+   justify-content: center;
+   padding:60px 0 150px 0;
+}
+
+
+
+
+h2{
+    font-size: 24px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+   /* .banner {
+   background-image: url('https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/temple_post_banner1.jpg');
+} */
+.temple-banner.container{
+   padding:30px;
+}
+  }
 p,h3,h4,h5,h6{
     color:#000000;
 }
@@ -221,5 +278,18 @@ p,h3,h4,h5,h6{
 .temple1{   
     width: 410px;
     height: 230px;
+}
+.wind{
+    margin-top: 80px;
+    margin-bottom: 5px;
+}
+h3{ 
+    color: #000000;
+    font-family: Noto Serif TC;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 4.8px;
 }
 </style>
