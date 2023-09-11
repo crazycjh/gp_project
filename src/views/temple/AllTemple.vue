@@ -30,8 +30,10 @@ const fetchData = async () => {
     console.error("API 請求失敗:", error);
   }
 }
+
+
 const currentPage = ref(1)
-const itemsPerPage = ref(2)
+const itemsPerPage = ref(12)
 const changePage =((page)=>{
     currentPage.value = page
 })
@@ -49,11 +51,13 @@ watch(currentPage,(newValue) => newValue && fetchData())
         <Search />
         <div class="w-full flex gap-30px flex-wrap mt-40px">
             <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <router-link  :to="`/temple/${item.id}`"><img class="photo" :src="item.image_url" alt=""></router-link>
-                <h4>{{ item.name }}</h4>
-                <p>{{ item.main_god }}</p>
-                <p>{{ item.address }}</p>
-                <router-link class="more" :to="`/temple/${item.id}`">了解更多></router-link>
+                <router-link class="flex flex-col gap-10px" :to="`/temple/${item.id}`">
+                    <img class="photo" :src="item.image_url" alt="">
+                    <h4>{{ item.name }}</h4>
+                    <p>主神：{{ item.main_god }}</p>
+                    <p>地址：{{ item.address }}</p>
+                <p class="more">了解更多</p>
+                </router-link>
             </div>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">

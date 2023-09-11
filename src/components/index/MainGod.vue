@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Title from '@/components/widget/Title.vue'
 import { ref } from 'vue';
+import { useRouter } from "vue-router";
 const backend = import.meta.env.VITE_BACKEND_PATH
 const currentImageIndex = ref<number>();
 const images = [
@@ -30,8 +31,15 @@ const hoverImage = [
   `${backend}wp-content/uploads/2023/09/god_img010_2.svg`,
   `${backend}wp-content/uploads/2023/09/god_img011_2.svg`,
   `${backend}wp-content/uploads/2023/09/god_img012_2.svg`,
-  
 ];
+const Gods = [
+    '靈安尊王','媽祖','關聖帝君','月下老人','王母娘娘','文昌帝君','財神爺','註生娘娘','釋迦佛','溫府千歲','觀音菩薩','玄天上帝'
+]
+const router = useRouter()
+const goSearch = ((index)=>{
+    router.push(`/search/s1=&s2=${Gods[index]}&s3=`);
+})
+
 const handleImageHover = (index: number) => {
   currentImageIndex.value = index;
 };
@@ -43,24 +51,13 @@ const handleImageHover = (index: number) => {
             <img
                 v-for="(image, index) in images"
                 :key="index"
-                class="lg:w-15% md:w-23% max-md:45%"
+                class="lg:w-15% md:w-23% max-md:45% cursor-pointer"
                 :src="index === currentImageIndex ? hoverImage[index] : image"
                 alt=""
                 @mouseover="handleImageHover(index)"
                 @mouseout="handleImageHover(99)"
+                @click="goSearch(index)"
             />
-            <!-- <img class="lg:w-15% md:w-23% max-md:45%" index="1" :src="`${backend}wp-content/uploads/2023/09/god_img1.svg`" alt="" @mouseover="handleImageHover(index)">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img2.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img3.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img4.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img5.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img6.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img7.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img8.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img9.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img11.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/08/god_img12.svg`" alt="">
-            <img class="lg:w-15% md:w-23% max-md:45%" :src="`${backend}wp-content/uploads/2023/09/god_img13.svg`" alt=""> -->
         </div>
         <img class="left" :src="`${backend}wp-content/uploads/2023/08/god_bg1.svg`" alt="">
         <img class="right" :src="`${backend}/wp-content/uploads/2023/08/god_bg2.svg`" alt="">

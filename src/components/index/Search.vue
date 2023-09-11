@@ -8,18 +8,12 @@ import { useRouter } from "vue-router";
 const city = ref<string>('全台縣市');
 const god = ref<string>('主神');
 const searchText = ref<string>('');
-//原版
-// watch(city,(newValue) => {
-//    if(newValue){
-//       goSearch()
-//    }
-// })
-//chatGTP建議 沒用過 其原理為由左至右前面成立才執行第二個
+
 const router = useRouter()
-watch(city,(newValue) => newValue && goSearch(newValue))
-watch(god,(newValue) => newValue && goSearch(newValue))
-const goSearch = ((newValue)=>{
-  router.push(`/search/${newValue}`);
+const goSearch = (()=>{
+   if(city.value === '全台縣市') city.value = ''
+   if(god.value ==='主神') god.value = ''
+  router.push(`/search/s1=${city.value}&s2=${god.value}&s3=${searchText.value}`);
 })
 </script>
 <template>
@@ -29,7 +23,7 @@ const goSearch = ((newValue)=>{
          <div>
             <div class="relative inline-block">
                <select v-model="city" class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-2">
-                  <option disabled selected>全台縣市</option>
+                  <option selected>全台縣市</option>
                   <option>台北市</option>
                   <option>新北市</option>
                   <option>桃園市</option>
@@ -57,17 +51,26 @@ const goSearch = ((newValue)=>{
             </div>
             <div class="relative inline-block">
                <select v-model="god" class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-20px">
-                  <option disabled selected>主神</option>
+                  <option selected>主神</option>
+                  <option>靈安尊王</option>
                   <option>媽祖</option>
-                  <option>觀世音菩薩</option>
-                  <option>關公</option>
+                  <option>關聖帝君</option>
+                  <option>月下老人</option>
+                  <option>王母娘娘</option>
+                  <option>文昌帝君</option>
+                  <option>財神爺</option>
+                  <option>註生娘娘</option>
+                  <option>釋迦佛</option>
+                  <option>溫府千歲</option>
+                  <option>觀音菩薩</option>
+                  <option>玄天上帝</option>
                </select>
                <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
             </div>
          </div>   
          <div class="flex input_area">
             <input v-model="searchText" placeholder="請輸入關鍵字..." class="custom_input" type="text" @keyup.enter="goSearch">
-            <div class="icon"  alt="" @click="goSearch(searchText)"></div>
+            <div class="icon"  alt="" @click="goSearch()"></div>
          </div>
       </div>
    </div>
@@ -85,6 +88,7 @@ const goSearch = ((newValue)=>{
    color:#333333;
 }
 .custom_input{
+   color:#000000;
    width: 200px;
    height: 30px;
    flex-shrink: 0;

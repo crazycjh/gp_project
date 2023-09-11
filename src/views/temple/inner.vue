@@ -33,8 +33,9 @@ onMounted(async () => {
 </script>
 <template>
     <TopCover v-if="!temple.live_iframe" :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/>
-    <div  v-if="temple.live_iframe">
-        <iframe class="w-full h-300" width="560" height="315" :src="temple.live_iframe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div v-if="temple.live_iframe">
+        <div class="iframe_container" v-html="temple.live_iframe">
+        </div>
     </div>
     <Breadcrumb :title="`首頁/${temple.name}`" />
     <div  class="px-10px mx-auto max-w-1200px mt-40px mb-100px">
@@ -81,7 +82,7 @@ onMounted(async () => {
         <div v-if="temple.light_content && light" class="custom_border py-20px custom_bottom">
             <h6 class="service mb-10px px-10px">|點燈|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
-                <p class="md:max-w-960px">{{ temple.light_content }}</p>
+                <p class="md:w-60%">{{ temple.light_content }}</p>
                 <button class="btn btn6">
                     <a href="#">光明燈詳細介紹</a>
                 </button>
@@ -97,7 +98,7 @@ onMounted(async () => {
         <div v-if="temple.shuwen_content && shuwen" class="py-20px">
             <h6 class="service mb-2 px-10px">|疏文|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
-                <p class="max-w-960px">{{ temple.shuwen_content }}</p>
+                <p class="md:w-60%">{{ temple.shuwen_content }}</p>
                 <button class="btn btn6">
                     <a href="#">疏文詳細介紹</a>
                 </button>

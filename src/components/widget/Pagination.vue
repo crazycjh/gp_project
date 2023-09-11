@@ -71,16 +71,24 @@
   };
   </script>
   <style scoped>
-  .pagination li {
+  .pagination li a{
+    color:#000000 !important;
     padding: 5px;
+  }
+  .pagination li a:hover{
+    color: #ceb96e !important; 
   }
   a.disabled-link {
     color: gray; 
-    cursor: not-allowed; 
+    cursor: not-allowed;
+    display: none; 
   }
   a.disabled-link:hover {
-    color: gray; 
+    color: #ceb96e !important; 
     cursor: not-allowed; 
+  }
+  .page_link{
+    color:#000000 !important;
   }
   </style>
   

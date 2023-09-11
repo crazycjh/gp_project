@@ -21,7 +21,7 @@
                 </ul>
             </div>
             <div class="max-md:text-center">
-                <p class="md:whitespace-nowrap text-white">客服電話：0912-345-678 服務信箱：service@XXXX.com.tw</p>
+                <p class="md:whitespace-nowrap text-white">客服電話：<a href="tel:0912345678">0912-345-678</a> Service：<a href="mailto:example@gmail.com">@XXXX.com.tw</a> </p>
             </div>
             <div class="flex  justify-center">
                 <div class="yt"></div>

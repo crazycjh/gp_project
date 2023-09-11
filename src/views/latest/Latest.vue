@@ -21,7 +21,7 @@ onMounted(async () => {
 });
 
 const currentPage = ref(1)
-const itemsPerPage = ref(2)
+const itemsPerPage = ref(12)
 const changePage =((page)=>{
     currentPage.value = page
 })
@@ -51,6 +51,7 @@ const fetchData = async (type) => {
        params:params,
     });
     posts.value = response.data.latest;
+    console.log(posts.value);
     total.value = response.data.total;
   } catch (error) {
     console.error("API 請求失敗:", error);
@@ -74,13 +75,13 @@ watch(currentPage,(newValue) => newValue && fetchData(currentActive.value))
         </div>
     </div>
     <div class="mx-auto max-w-1200px">
-        <div class="w-full flex gap-30px flex-wrap mt-40px">
+        <div class="w-full flex gap-20px flex-wrap mt-40px">
             <div v-for="item in posts" :key="item.id" class="w-full  flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px">
-                <router-link :to="`/latest/inner/${item.id}`">
+                <router-link class="flex flex-col gap-10px" :to="`/latest/inner/${item.id}`">
                     <img class="photo" :src="item.image" alt="">
+                    <p>{{item.title}}</p>
+                    <p class="more">了解更多...</p>
                 </router-link>
-                <p>{{item.link}}</p>
-                <router-link class="more" :to="`/latest/${item.id}`">了解更多...</router-link>
             </div>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
@@ -146,6 +147,7 @@ p{
 .more{  
     margin-top: -4px;
     color:#CEB96E;
+    font-size:16px;
 }
 .btn:focus{
     outline:none;

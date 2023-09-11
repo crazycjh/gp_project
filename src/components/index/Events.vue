@@ -12,7 +12,6 @@ onMounted(async () => {
       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/latest/index`
     );
     posts.value = response.data.latest;
-    console.log(posts.value);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
@@ -50,6 +49,10 @@ onMounted(async () => {
       width: 136px !important;
       height: 136px !important;
    } 
+}
+.event_img{
+   width: 243px;
+   height: 136px;
 }
 
 .date{
