@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import Title from '@/components/widget/Title.vue'
 import axios from "axios";
 import LinkBtn from "../widget/LinkBtn.vue";

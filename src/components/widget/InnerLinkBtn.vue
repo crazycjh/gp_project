@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { ref } from 'vue';
 const backend = import.meta.env.VITE_BACKEND_PATH
 const props = defineProps({
@@ -9,8 +9,8 @@ const props = defineProps({
 });
 const normalIcon = `${backend}wp-content/uploads/2023/09/live-icon-01.svg`
 const activeIcon = `${backend}wp-content/uploads/2023/09/live-icon-02.svg`
-const isHover = ref<boolean>(false);
-const toggleHover = ((isHovering:boolean) =>{
+const isHover = ref(false);
+const toggleHover = ((isHovering) =>{
   isHover.value = isHovering
 })
 </script>

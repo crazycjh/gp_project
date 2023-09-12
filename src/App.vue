@@ -1,5 +1,4 @@
-<script setup lang="ts">
-// @ts-ignore
+<script setup>
 import Header from "@/components/global/header/Header.vue"
 import Footer from "./components/global/Footer.vue";
 </script>

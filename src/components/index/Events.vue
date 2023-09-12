@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { onMounted,ref } from "vue";
 import axios from "axios";
 import Title from '@/components/widget/Title.vue'

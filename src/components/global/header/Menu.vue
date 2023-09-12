@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup >
 import Member from './Member.vue';
 import Cart from './Cart.vue';
 import { ref,watch } from 'vue';
 //控制手機板選單，鎖屏
-const isOpen = ref<boolean>(false);
+const isOpen = ref(false);
 watch(isOpen,(newValue)=>{
     newValue ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
 })

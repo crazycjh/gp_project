@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { onMounted, onUnmounted, ref } from "vue";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -7,13 +7,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import LinkBtn from "../widget/LinkBtn.vue";
-interface Slider {
-  image: String;
-  id: Number;
-  title: String;
-  subtitle: String;
-  link: String;
-}
 const live = ref([]);
 const sliders = ref([]);
 const modules = [Autoplay, Pagination, Navigation];
@@ -101,7 +94,7 @@ onMounted(async () => {
             {{ slider.subtitle }}
           </h3>
           <!-- <router-link :to="`${slider.link}`" class="slider_button relative z-50">了解更多</router-link> -->
-          <LinkBtn :link="slider.link.toString()" text="了解更多" />
+          <LinkBtn :link="slider.link" text="了解更多" />
         </div>
       </swiper-slide>
     </swiper>

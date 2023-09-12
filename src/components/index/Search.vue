@@ -1,13 +1,13 @@
-<script setup lang="ts">
+<script setup >
 import {ref,watch} from "vue";
 // import axios from "axios";
 import Title from '@/components/widget/Title.vue'
 import { useRouter } from "vue-router";
 
 
-const city = ref<string>('全台縣市');
-const god = ref<string>('主神');
-const searchText = ref<string>('');
+const city = ref('全台縣市');
+const god = ref('主神');
+const searchText = ref('');
 
 const router = useRouter()
 const goSearch = (()=>{

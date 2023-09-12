@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import Title from '@/components/widget/Title.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 </script>

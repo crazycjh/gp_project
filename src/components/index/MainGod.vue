@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup >
 import Title from '@/components/widget/Title.vue'
 import { ref } from 'vue';
 import { useRouter } from "vue-router";
 const backend = import.meta.env.VITE_BACKEND_PATH
-const currentImageIndex = ref<number>();
+const currentImageIndex = ref();
 const images = [
   `${backend}wp-content/uploads/2023/09/god_img01.svg`,
   `${backend}wp-content/uploads/2023/09/god_img02.svg`,
@@ -40,7 +40,7 @@ const goSearch = ((index)=>{
     router.push(`/search/s1=&s2=${Gods[index]}&s3=`);
 })
 
-const handleImageHover = (index: number) => {
+const handleImageHover = (index) => {
   currentImageIndex.value = index;
 };
 </script>

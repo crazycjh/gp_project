@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { onMounted,onUnmounted,ref } from "vue";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -9,14 +9,8 @@ import "swiper/css/navigation";
 import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
 import Title from '@/components/widget/Title.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
-interface Slider {
-  image: String;
-  id: String;
-  title: String;
-  subtitle: String;
-  link: String;
-}
-const sliders = ref<Slider[]>([]);
+
+const sliders = ref([]);
 const modules = [Autoplay, Pagination, Navigation];
 
 //js控制navigators rwd

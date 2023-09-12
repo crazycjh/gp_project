@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { onMounted,ref,computed,watch } from "vue";
 import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";

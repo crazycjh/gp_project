@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { onMounted, ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 // import Search from '@/components/index/Search.vue'

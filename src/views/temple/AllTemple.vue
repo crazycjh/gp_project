@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup >
 import { onMounted, ref,computed,watch } from "vue";
 import Search from '@/components/index/Search.vue'
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
