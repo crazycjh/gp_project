@@ -74,11 +74,10 @@ onMounted(async () => {
       }"
       class="h-260px swiper-container"
     >
-
       <swiper-slide v-for="item in sliders" :key="item.id">
-        <a :href="item.link">
+        <router-link :to="`/temple/${item.id}`">
           <div class="h-70% w-full bg-cover bg-center" :style="{ 'background-image': `url(${item.image})` }"></div>
-        </a>
+        </router-link>
         <div class="max-md:px-10px">
             <h5 class="title mt-10px">{{ item.title}}</h5>
             <h6 class="area">{{item.area}}</h6>

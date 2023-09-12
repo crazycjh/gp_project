@@ -43,6 +43,7 @@ h6{
    font-weight: 700;
    line-height: normal;
    letter-spacing: 4px;
+   cursor: pointer;
 }
 @media (max-width: 1440px) {
    .tree_right{
@@ -69,5 +70,8 @@ h6{
 }
 .service_img:hover + .item {
    color:#ceb96e;
+}
+.service_img{
+   cursor: pointer;
 }
 </style>

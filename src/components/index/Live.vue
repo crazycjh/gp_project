@@ -13,7 +13,6 @@ onMounted(async () => {
     );
    //  live= response.data.live
    live.push(...response.data.live)
-    console.log(live);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }

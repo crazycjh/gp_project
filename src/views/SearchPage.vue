@@ -49,6 +49,7 @@ const fetchData = async () => {
         );
         temples.value = response.data.data;
         total.value = response.data.total;
+        console.log(response.data);
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
@@ -80,7 +81,7 @@ const goSearch = (() => {
     <div class="mx-auto max-w-1200px">
         <div class="mx-auto max-w-1200px">
             <Title title="全台廟宇搜尋" />
-            <div class="flex max-lg:flex-col justify-center items-center flex-wrap">
+            <div class="flex max-lg:flex-col justify-center items-center flex-wrap max-xl:justify-center">
                 <div>
                     <div class="relative inline-block">
                         <select v-model="s1Value"
@@ -146,7 +147,7 @@ const goSearch = (() => {
                     <img class="photo" :src="item.image_url" alt="">
                     <h4>{{ item.name }}</h4>
                     <p>主神：{{ item.main_god }}</p>
-                    <p>地址：{{ item.address }}</p>
+                    <p>地址：{{item.location}}{{ item.address }}</p>
                 <p class="more">了解更多</p>
                 </router-link>
             </div>

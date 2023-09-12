@@ -75,7 +75,7 @@ watch(currentPage,(newValue) => newValue && fetchData(currentActive.value))
         </div>
     </div>
     <div class="mx-auto max-w-1200px">
-        <div class="w-full flex gap-20px flex-wrap mt-40px">
+        <div class="w-full flex gap-20px flex-wrap mt-40px max-xl:justify-center">
             <div v-for="item in posts" :key="item.id" class="w-full  flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px mt-40px">
                 <router-link class="flex flex-col gap-10px" :to="`/latest/inner/${item.id}`">
                     <img class="photo" :src="item.image" alt="">

@@ -33,29 +33,42 @@ onMounted(async () => {
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
-  // try {
-  //   const response = await axios.get(`${backend}/api/gc/latest`);
-  //   bottom_post.value = response.data.latest;
-  //   console.log(bottom_post.value);
-  // } catch (error) {
-  //   console.error("API 請求失敗:", error);
-  // }
+ 
 });
 const router = useRouter();
 const goLatest = (type)=>{
   router.push(`/latest/${type}`)
 }
+const lineShare = () =>{
+  const shareUrl = `https://social-plugins.line.me/lineit/share?url=${currentUrl.value}`;
+  openWindow(shareUrl)
+}
+const fbShare = () =>{
+  const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl.value}`;
+  openWindow(shareUrl)
+}
+const openWindow = (shareUrl) =>{
+  const windowWidth = 500;
+  const windowHeight = 550;
+  const windowLeft = window.screen.width - windowWidth;
+  const windowTop = window.screen.height / 2 - windowHeight / 2;
+  const windowFeatures = `width=${windowWidth},height=${windowHeight},left=${windowLeft},top=${windowTop}`;
+  window.open(shareUrl, '_blank', windowFeatures);
+}
 </script>
 <template>
-  <Breadcrumb :title="`首頁/${post.title}`" />
+  <Breadcrumb v-if="post.title" :title="`首頁/${post.title}`" />
   <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px mb:30px lg:mb-80px">
     <div class="max-w-915px pr-10px w-full">
       <h3 class="title mb-10px">{{ post.title }}</h3>
       <span class="date mb-10px">{{ post.date }}</span>
       <!-- <a  href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent(location.href)) ));' title='分享給 LINE 好友'><img class="mb-10px" alt='分享給LINE好友 !' height='40' src='https://1.bp.blogspot.com/-FvoBw8lnlC8/WHgA91RmxiI/AAAAAAAAIvA/CazIGx6Jlp8PJ4pE40kt2XMxwFmeBSdjgCLcB/s1600/168x40.png' width='168'/>
       </a> -->
-      <!-- <a :href="`https://social-plugins.line.me/lineit/share?url=${currentUrl}`"></a> -->
-      <img class="mb-10px" src="../../assets/latest/social.png" alt="" />
+      <a :href="`https://social-plugins.line.me/lineit/share?url=${currentUrl}`"></a>
+      <div class="flex gap-10px">
+        <img class="mb-10px" src="../../assets/latest/fb.svg" alt="" @click="fbShare"/>
+        <img class="mb-10px" src="../../assets/latest/line.svg" alt="" @click="lineShare"/>
+      </div>
       <img class="mb-10px w-full"
         :src="post.image"
         alt=""
