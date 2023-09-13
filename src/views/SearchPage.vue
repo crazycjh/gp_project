@@ -1,13 +1,14 @@
 <script setup >
 import { onMounted, ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
 // import Search from '@/components/index/Search.vue'
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
 import TopCover from '@/components/widget/TopCover.vue'
 import Pagination from '@/components/widget/Pagination.vue'
 import Title from "../components/widget/Title.vue";
 const backend = import.meta.env.VITE_BACKEND_PATH
-import axios from "axios";
+
 
 
 const route = useRoute()
@@ -15,14 +16,26 @@ const searchText = ref()
 const s1Value = ref('');
 const s2Value = ref('');
 const s3Value = ref('');
+const godArray = ref([])
 onMounted(() => {
     searchText.value = route.params.content;
     const urlParams = new URLSearchParams(searchText.value);
     s1Value.value = urlParams.get('s1');
     s2Value.value = urlParams.get('s2');
     s3Value.value = urlParams.get('s3');
-
 });
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
+    );
+    godArray.value = response.data.split(',')
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
+
 
 const temples = ref([])
 const total = ref();
@@ -117,18 +130,7 @@ const goSearch = (() => {
                         <select v-model="s2Value"
                             class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-20px">
                             <option  selected value="">主神</option>
-                            <option>靈安尊王</option>
-                            <option>媽祖</option>
-                            <option>關聖帝君</option>
-                            <option>月下老人</option>
-                            <option>王母娘娘</option>
-                            <option>文昌帝君</option>
-                            <option>財神爺</option>
-                            <option>註生娘娘</option>
-                            <option>釋迦佛</option>
-                            <option>溫府千歲</option>
-                            <option>觀音菩薩</option>
-                            <option>玄天上帝</option>
+                            <option v-for="item in godArray" :key="item">{{ item }}</option>
                         </select>
                         <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none"
                             src="../assets/index/arrow_down.svg" alt="">

@@ -8,6 +8,7 @@ import TopCover from '@/components/widget/TopCover.vue'
 import Pagination from '@/components/widget/Pagination.vue'
 const posts = ref([]);
 const total = ref();
+const type = ref([]);
 const currentActive = ref();
 
 const route = useRoute();
@@ -18,6 +19,7 @@ onMounted(() => {
 
 onMounted(async () => {
     fetchData(currentActive.value)
+    fetchType()
 });
 
 const currentPage = ref(1)
@@ -51,31 +53,38 @@ const fetchData = async (type) => {
        params:params,
     });
     posts.value = response.data.latest;
-    console.log(posts.value);
     total.value = response.data.total;
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+};
+
+const fetchType = async () => {
+ 
+  let apiUrl = `${backend}api/gc/latest/type`;
+
+  try {
+    const response = await axios.get(apiUrl);
+    type.value = response.data.type
+    console.log(type.value);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
 };
 watch(currentPage,(newValue) => newValue && fetchData(currentActive.value))
 
-
 </script>
 <template>
     <TopCover :image="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" title="最新活動" />
     <Breadcrumb title="首頁/最新活動" />
     <div class="tags flex justify-center max-md:px-100px gap-10px my-50px flex-wrap">
-        <div class="flex gap-10px">
+        <div class="flex gap-10px max-md:gap-20px max-md:max-w-570px max-w-1200px flex-wrap justify-center">
             <button class="btn rounded-none" :class="{ active: currentActive === 'all' }" @click="fetchData('all')">全部</button>
-            <button class="btn rounded-none" :class="{ active: currentActive === 'hot' }" @click="fetchData('hot')">熱門活動</button>
-        </div>
-        <div class="flex gap-10px">
-            <button class="btn rounded-none" :class="{ active: currentActive === 'xmas' }" @click="fetchData('xmas')">聖誕千秋</button>
-            <button class="btn rounded-none"  :class="{ active: currentActive === 'temple' }"  @click="fetchData('temple')">廟宇繞境</button>
+            <button v-for="item in type" :key="item.term_id" class="btn rounded-none" :class="{ active: currentActive === item.slug }" @click="fetchData(item.slug)">{{ item.name }}</button>
         </div>
     </div>
     <div class="mx-auto max-w-1200px">
-        <div class="w-full flex gap-20px flex-wrap mt-40px max-xl:justify-center">
+        <div class="w-full flex gap-20px  flex-wrap mt-40px max-xl:justify-center">
             <div v-for="item in posts" :key="item.id" class="w-full  flex flex-col sm:w-45% lg:w-full gap-10px block max-lg:px-10px mt-40px">
                 <router-link class="flex flex-col gap-10px" :to="`/latest/inner/${item.id}`">
                     <img class="photo" :src="item.image" alt="">

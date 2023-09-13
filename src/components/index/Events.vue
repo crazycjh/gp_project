@@ -38,7 +38,6 @@ onMounted(async () => {
       </div>
       <img class="tree_left" :src="`${backend}/wp-content/uploads/2023/08/home_bg3.svg`" alt="">
    </div>
-  
 </template>
 <style scoped>
 .event_img{

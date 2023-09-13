@@ -1,8 +1,22 @@
-<script setup >
-import {ref,watch} from "vue";
-// import axios from "axios";
+<script setup>
+import {ref,watch,onMounted} from "vue";
+import axios from 'axios';
 import Title from '@/components/widget/Title.vue'
 import { useRouter } from "vue-router";
+
+
+const godArray = ref([])
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
+    );
+    godArray.value = response.data.split(',')
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
+
 
 
 const city = ref('全台縣市');
@@ -52,18 +66,7 @@ const goSearch = (()=>{
             <div class="relative inline-block">
                <select v-model="god" class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-20px">
                   <option selected>主神</option>
-                  <option>靈安尊王</option>
-                  <option>媽祖</option>
-                  <option>關聖帝君</option>
-                  <option>月下老人</option>
-                  <option>王母娘娘</option>
-                  <option>文昌帝君</option>
-                  <option>財神爺</option>
-                  <option>註生娘娘</option>
-                  <option>釋迦佛</option>
-                  <option>溫府千歲</option>
-                  <option>觀音菩薩</option>
-                  <option>玄天上帝</option>
+                  <option v-for="item in godArray" :key="item">{{ item }}</option>
                </select>
                <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
             </div>

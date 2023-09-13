@@ -71,7 +71,7 @@ a:hover{
     background-image: url(../../assets/footer/ig2.svg);
 }
 .line{
-    helineht: 33px;
+    height: 33px;
     width: 50px;
     background-image: url(../../assets/footer/line.svg);
     background-repeat: no-repeat;

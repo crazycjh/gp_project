@@ -102,15 +102,15 @@ onMounted(async () => {
                     <a href="#">光明燈詳細介紹</a>
                 </button>
             </div>
-            <div class="flex flex-wrap gap-10px max-lg:justify-center">
-                <div v-for="item in light" :key="item.id" class="flex flex-col lg:w-18% md:w-23% max-md:w-45% ">
+            <div class="flex flex-wrap gap-10px  max-md:justify-between">
+                <div v-for="item in light" :key="item.id" class="flex flex-col lg:w-15% md:w-18% max-md:w-45% ">
                     <img class="light" :src="item.image_url" alt="">
                     <h5 class="service_active">{{ item.name }}</h5>
                     <span class="service_price">NT.{{ item.price }}</span>
                 </div>
             </div>
         </div>
-        <div v-if="temple.shuwen_content && shuwen.length !== 0" class="py-20px">
+        <div v-if="temple.shuwen_content && shuwen.length !== 0" class="py-20px service_border">
             <h6 class="service mb-2 px-10px">|疏文|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
                 <p class="md:w-60%">{{ temple.shuwen_content }}</p>
@@ -118,8 +118,8 @@ onMounted(async () => {
                     <a href="#">疏文詳細介紹</a>
                 </button>
             </div>
-            <div class="flex flex-wrap gap-10px max-lg:justify-center">
-                <div v-for="item in shuwen" :key="item.id" class="flex flex-col lg:w-18% md:w-23% max-md:w-45%">
+            <div class="flex flex-wrap gap-10px max-md:justify-between">
+                <div v-for="item in shuwen" :key="item.id" class="flex flex-col lg:w-15% md:w-18% max-md:w-45%">
                     <img class="light" :src="item.image_url" alt="">
                     <h5 class="service_active">{{ item.name }}</h5>
                     <span class="service_price">NT.{{ item.price }}</span>
@@ -149,10 +149,6 @@ onMounted(async () => {
     justify-content: center;
     padding: 60px 0 150px 0;
 }
-
-
-
-
 h2 {
     font-size: 24px;
     text-align: center;
@@ -177,9 +173,8 @@ h6 {
 }
 
 .btn6 {
-    margin-left: 20px;
     max-height: 50px;
-    /* width:200px; */
+    width:200px;
     position: relative;
     border: none;
     border-bottom: 1px solid #CEB96E;
