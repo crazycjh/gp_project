@@ -5,64 +5,78 @@
         <div>
             <Title title="全台廟宇搜尋" />
             <div class="flex justify-center gap-10px mb-12px">
-                <button class="tag" :class="{active:activeTag === 'city'}" @click="tagToogle('city')">找縣市主神</button>
-                <button class="tag" :class="{active:activeTag === 'name'}" @click="tagToogle('name')">搜廟宇名稱</button>
+                <button class="tag" :class="{ active: activeTag === 'city' }" @click="tagToogle('city')">找縣市主神</button>
+                <button class="tag" :class="{ active: activeTag === 'name' }" @click="tagToogle('name')">搜廟宇名稱</button>
             </div>
-            <div class="search_wrapper flex justify-center">
-                <div v-show="search1" class="flex w-full">
-                    <div class="flex w-full mr-20px">
-                        <h4 class="tag_name">縣市</h4>
-                        <div class="relative w-full">
-                            <select v-model="s1Value" class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                                <option value="" selected>全台縣市</option>
-                                <option v-for="item in cities" :key="item">{{ item }}</option>
-                            </select>
-                            <img class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none" src="../assets/index/arrow_down.svg" alt="">
+            <div class="px-10px">
+                <div class="search_wrapper flex justify-center">
+                    <div v-show="search1" class="flex w-full">
+                        <div class="flex w-full mr-20px">
+                            <h4 class="tag_name">縣市</h4>
+                            <div class="relative w-full">
+                                <select v-model="s1Value"
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
+                                    <option value="" selected>全台縣市</option>
+                                    <option v-for="item in cities" :key="item">{{ item }}</option>
+                                </select>
+                                <img class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none"
+                                    src="../assets/index/arrow_down.svg" alt="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex w-full">
-                        <h4 class="tag_name">主神</h4>
-                        <div class="relative w-full">
-                            <select v-model="s2Value" class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select mr-2">
-                                <option  value="" selected>主神</option>
-                                <option v-for="item in godArray" :key="item">{{ item }}</option>
-                            </select>
-                            <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none" src="../assets/index/arrow_down.svg" alt="">
+                        <div class="flex w-full">
+                            <h4 class="tag_name">主神</h4>
+                            <div class="relative w-full">
+                                <select v-model="s2Value"
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select mr-2">
+                                    <option value="" selected>主神</option>
+                                    <option v-for="item in godArray" :key="item">{{ item }}</option>
+                                </select>
+                                <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none"
+                                    src="../assets/index/arrow_down.svg" alt="">
+                            </div>
                         </div>
+                        <div class="icon w-full" alt="" @click="goSearch()"></div>
                     </div>
-                    <div class="icon w-full"  alt="" @click="goSearch()"></div>
-                </div>   
-                <div v-show="search2" class="flex input_area w-full justify-center">
-                    <h4 class="tag_name">搜尋</h4>
-                    <input v-model="s3Value" placeholder="請輸入關鍵字..." class="custom_input mr-2" type="text" @keyup.enter="goSearch">
-                    <div class="icon"  alt="" @click="goSearch()"></div>
+                    <div v-show="search2" class="flex input_area w-full justify-center">
+                        <h4 class="tag_name">搜尋</h4>
+                        <input v-model="s3Value" placeholder="請輸入關鍵字..." class="custom_input mr-2" type="text"
+                            @keyup.enter="goSearch">
+                        <div class="icon" alt="" @click="goSearch()"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="px-10px">
+            <div class="search_list">
+                <h5 class="search_text">條件:</h5>
+                <div class="flex justify-between">
+                    <div class="flex gap-20px">
+                        <span class="search_text" v-if="s1Value">{{ s1Value }} <img class="clear"
+                                src="../assets/index/clear_icon.svg" alt="" @click="s1Value = ''"></span>
+                        <span class="search_text" v-if="s2Value">{{ s2Value }} <img class="clear"
+                                src="../assets/index/clear_icon.svg" alt="" @click="s2Value = ''"></span>
+                        <span class="search_text" v-if="s3Value">{{ s3Value }} <img class="clear"
+                                src="../assets/index/clear_icon.svg" alt="" @click="s3Value = ''"></span>
+                    </div>
+                    <button class="reset_btn" @click="resetSearch">重設條件</button>
                 </div>
             </div>
         </div>
-        <div class="search_list">
-            <h5 class="search_text">條件:</h5>
-            <div class="flex justify-between">
-                <div class="flex gap-20px">
-                    <span class="search_text" v-if="s1Value">{{ s1Value }} <img class="clear" src="../assets/index/clear_icon.svg" alt="" @click="s1Value =''"></span>
-                    <span class="search_text" v-if="s2Value">{{ s2Value }} <img class="clear" src="../assets/index/clear_icon.svg" alt="" @click="s2Value =''"></span>
-                    <span class="search_text" v-if="s3Value">{{ s3Value }} <img class="clear" src="../assets/index/clear_icon.svg" alt="" @click="s3Value =''"></span>
-                </div>
-                <button class="reset_btn" @click="resetSearch">重設條件</button>
-            </div>
-        </div>
+
         <div class="w-full flex gap-30px flex-wrap mt-40px">
             <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <router-link class="flex flex-col gap-10px" :to="`/temple/${item.id}`">
                     <img class="photo" :src="item.image_url" alt="">
                     <h4>{{ item.name }}</h4>
                     <p>主神：{{ item.main_god }}</p>
-                    <p>地址：{{item.location}}{{ item.address }}</p>
+                    <p>地址：{{ item.location }}{{ item.address }}</p>
                     <p class="more">了解更多</p>
                 </router-link>
             </div>
         </div>
         <div class="flex justify-center" v-if="temples.length === 0">
-            <h4 >查無廟宇，請重新輸入篩選條件!</h4>
+            <h4>查無廟宇，請重新輸入篩選條件!</h4>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
             <Pagination :total-pages="totalPages" :current-page="currentPage" @page-changed="changePage" />
@@ -93,40 +107,40 @@ const search1 = ref(true)
 const search2 = ref(false)
 const activeTag = ref('city')
 const cities = ref([
-  '台北市',
-  '新北市',
-  '桃園市',
-  '台中市',
-  '台南市',
-  '高雄市',
-  '基隆市',
-  '新竹市',
-  '嘉義市',
-  '新竹縣',
-  '苗栗縣',
-  '彰化縣',
-  '南投縣',
-  '雲林縣',
-  '嘉義縣',
-  '屏東縣',
-  '宜蘭縣',
-  '花蓮縣',
-  '台東縣',
-  '金門縣',
-  '澎湖縣',
-  '連江縣'
+    '台北市',
+    '新北市',
+    '桃園市',
+    '台中市',
+    '台南市',
+    '高雄市',
+    '基隆市',
+    '新竹市',
+    '嘉義市',
+    '新竹縣',
+    '苗栗縣',
+    '彰化縣',
+    '南投縣',
+    '雲林縣',
+    '嘉義縣',
+    '屏東縣',
+    '宜蘭縣',
+    '花蓮縣',
+    '台東縣',
+    '金門縣',
+    '澎湖縣',
+    '連江縣'
 ]);
 
-const tagToogle =((target) =>{
-   if(target === 'city'){
-      search1.value = true
-      search2.value = false
-      activeTag.value = 'city'
-   }else if(target === 'name'){
-      search1.value = false
-      search2.value = true
-      activeTag.value = 'name'
-   }
+const tagToogle = ((target) => {
+    if (target === 'city') {
+        search1.value = true
+        search2.value = false
+        activeTag.value = 'city'
+    } else if (target === 'name') {
+        search1.value = false
+        search2.value = true
+        activeTag.value = 'name'
+    }
 })
 onMounted(() => {
     searchText.value = route.params.content;
@@ -137,14 +151,14 @@ onMounted(() => {
 });
 
 onMounted(async () => {
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
-    );
-    godArray.value = response.data.split(',')
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
+    try {
+        const response = await axios.get(
+            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
+        );
+        godArray.value = response.data.split(',')
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    }
 });
 
 
@@ -199,7 +213,7 @@ const goSearch = (() => {
     fetchData()
 })
 
-const resetSearch = (()=>{
+const resetSearch = (() => {
     s1Value.value = '';
     s2Value.value = '';
     s3Value.value = '';
@@ -207,11 +221,12 @@ const resetSearch = (()=>{
 </script>
 
 <style scoped>
-.clear{
+.clear {
     width: 10px;
     height: 10px;
 }
-.reset_btn{
+
+.reset_btn {
     width: 93px;
     height: 30px;
     font-family: Noto Serif TC;
@@ -221,20 +236,22 @@ const resetSearch = (()=>{
     letter-spacing: 0.1em;
     text-align: center;
     background-color: #ffffff;
-    color:#333333;
-    border-radius:0;
-    border:none;
-    outline:none;
+    color: #333333;
+    border-radius: 0;
+    border: none;
+    outline: none;
 }
-.search_list{
-    padding:8px 16px;
-   height: 80px;
-   max-width: 670px;
-   margin:0 auto;
-   background-color: #F1F1F1;
+
+.search_list {
+    padding: 8px 16px;
+    height: 80px;
+    max-width: 670px;
+    margin: 0 auto;
+    background-color: #F1F1F1;
 }
-.search_text{
-    color:#000000;
+
+.search_text {
+    color: #000000;
     font-family: Noto Serif TC;
     font-size: 16px;
     font-weight: 700;
@@ -243,52 +260,58 @@ const resetSearch = (()=>{
     text-align: left;
     display: flex;
     align-items: center;
-    gap:3px;
+    gap: 3px;
 }
-.tag_name{
-   font-family: Noto Serif TC;
-   font-size: 16px;
-   font-weight: 700;
-   line-height: 23px;
-   letter-spacing: 0.1em;
-   text-align: left;
-   color:#000000;
-   display: flex;
-   align-items: center;
-   margin-right: 12px;
-   min-width: 36px;
+
+.tag_name {
+    font-family: Noto Serif TC;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    min-width: 36px;
 }
-@media (max-width:768px){
-   .tag_name{
-      margin-right: 0;
-   }
+
+@media (max-width:768px) {
+    .tag_name {
+        margin-right: 0;
+    }
 }
-.search_wrapper{
-   height: 60px;
-   max-width: 670px;
-   margin:0 auto;
-   background-color: #ffffff;
-   box-shadow: 4px 4px 10px 0px #00000040;
-   display:flex;
-   align-items: center;
-   padding-left:12px;
-   padding-right: 12px;
-   margin-bottom: 25px;
+
+.search_wrapper {
+    height: 60px;
+    max-width: 670px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    box-shadow: 4px 4px 10px 0px #00000040;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 25px;
 }
-.tag{
-   width: 111px;
-   height: 30px;
-   top: 77px;
-   left: 220px;
-   background-color: #AAAAAA;
-   color:white;
-   border-radius:0;
-   border:none;
-   outline:none;
+
+.tag {
+    width: 111px;
+    height: 30px;
+    top: 77px;
+    left: 220px;
+    background-color: #AAAAAA;
+    color: white;
+    border-radius: 0;
+    border: none;
+    outline: none;
 }
-.tag.active{
-   background-color: #CEB96E;
+
+.tag.active {
+    background-color: #CEB96E;
 }
+
 h4,
 p {
     color: #000000;
@@ -347,7 +370,7 @@ p {
 
 .custom_select {
     display: flex;
-    width:100%;
+    width: 100%;
     height: 30px;
     padding: 0px 10px;
     justify-content: space-between;
@@ -359,20 +382,21 @@ p {
 
 .custom_input {
     color: #000000;
-    width:85%;
+    width: 85%;
     height: 30px;
     flex-shrink: 0;
     background: #EEE;
 }
 
-.icon{
-   background-repeat: no-repeat;
-   width: 60px;
-   height: 30px;
-   background-image: url('../assets/index/search4.svg');
+.icon {
+    background-repeat: no-repeat;
+    width: 60px;
+    height: 30px;
+    background-image: url('../assets/index/search4.svg');
 }
-.icon:hover{
-   background-image: url('../assets/index/search2.svg');
+
+.icon:hover {
+    background-image: url('../assets/index/search2.svg');
 }
 
 @media (max-width: 1024px) {
