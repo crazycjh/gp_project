@@ -1,61 +1,3 @@
-<script setup >
-import { useRoute,useRouter } from 'vue-router';
-import { onMounted, ref, computed } from "vue";
-import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import Breadcrumb from "../../components/widget/Breadcrumb.vue";
-const modules = [Autoplay, Pagination, Navigation]
-const backend = import.meta.env.VITE_BACKEND_PATH
-
-const latestID = ref();
-const currentUrl = ref('')
-onMounted(() => {
-  const route = useRoute();
-  latestID.value = Number(route.params.latestID);
-  currentUrl.value = window.location.href
-});
-
-const post = ref([]);
-const bottom_post = ref([]);
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(
-      `${backend}/api/gc/latest/${latestID.value}`
-    );
-    post.value = response.data.latest;
-    bottom_post.value = response.data.relate;
-    console.log(response.data.relate);
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
- 
-});
-const router = useRouter();
-const goLatest = (type)=>{
-  router.push(`/latest/${type}`)
-}
-const lineShare = () =>{
-  const shareUrl = `https://social-plugins.line.me/lineit/share?url=${currentUrl.value}`;
-  openWindow(shareUrl)
-}
-const fbShare = () =>{
-  const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl.value}`;
-  openWindow(shareUrl)
-}
-const openWindow = (shareUrl) =>{
-  const windowWidth = 500;
-  const windowHeight = 550;
-  const windowLeft = window.screen.width - windowWidth;
-  const windowTop = window.screen.height / 2 - windowHeight / 2;
-  const windowFeatures = `width=${windowWidth},height=${windowHeight},left=${windowLeft},top=${windowTop}`;
-  window.open(shareUrl, '_blank', windowFeatures);
-}
-</script>
 <template>
   <Breadcrumb v-if="post.title" :title="`首頁/${post.title}`" />
   <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px mb:30px lg:mb-80px">
@@ -123,6 +65,65 @@ const openWindow = (shareUrl) =>{
     </div>
   </div>
 </template>
+<script setup >
+import { useRoute,useRouter } from 'vue-router';
+import { onMounted, ref, computed } from "vue";
+import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import Breadcrumb from "../../components/widget/Breadcrumb.vue";
+const modules = [Autoplay, Pagination, Navigation]
+const backend = import.meta.env.VITE_BACKEND_PATH
+
+const latestID = ref();
+const currentUrl = ref('')
+onMounted(() => {
+  const route = useRoute();
+  latestID.value = Number(route.params.latestID);
+  currentUrl.value = window.location.href
+});
+
+const post = ref([]);
+const bottom_post = ref([]);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${backend}/api/gc/latest/${latestID.value}`
+    );
+    post.value = response.data.latest;
+    bottom_post.value = response.data.relate;
+    console.log(response.data.relate);
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+ 
+});
+const router = useRouter();
+const goLatest = (type)=>{
+  router.push(`/latest/${type}`)
+}
+const lineShare = () =>{
+  const shareUrl = `https://social-plugins.line.me/lineit/share?url=${currentUrl.value}`;
+  openWindow(shareUrl)
+}
+const fbShare = () =>{
+  const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl.value}`;
+  openWindow(shareUrl)
+}
+const openWindow = (shareUrl) =>{
+  const windowWidth = 500;
+  const windowHeight = 550;
+  const windowLeft = window.screen.width - windowWidth;
+  const windowTop = window.screen.height / 2 - windowHeight / 2;
+  const windowFeatures = `width=${windowWidth},height=${windowHeight},left=${windowLeft},top=${windowTop}`;
+  window.open(shareUrl, '_blank', windowFeatures);
+}
+</script>
+
 <style scoped>
 .image{
   aspect-ratio: 16/9;

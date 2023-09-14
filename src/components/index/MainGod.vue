@@ -1,3 +1,22 @@
+<template>
+    <div class="main pb-80px relative">
+        <Title title="主祀神" />
+        <div class="flex gap-10px flex-wrap justify-center mx-auto max-w-1250px relative z-10">
+            <img
+                v-for="(image, index) in images"
+                :key="index"
+                class="lg:w-15% md:w-23% max-md:45% cursor-pointer"
+                :src="index === currentImageIndex ? hoverImage[index] : image"
+                alt=""
+                @mouseover="handleImageHover(index)"
+                @mouseout="handleImageHover(99)"
+                @click="goSearch(index)"
+            />
+        </div>
+        <img class="left" :src="`${backend}wp-content/uploads/2023/08/god_bg1.svg`" alt="">
+        <img class="right" :src="`${backend}/wp-content/uploads/2023/08/god_bg2.svg`" alt="">
+    </div>
+</template>
 <script setup >
 import Title from '@/components/widget/Title.vue'
 import { ref } from 'vue';
@@ -44,25 +63,7 @@ const handleImageHover = (index) => {
   currentImageIndex.value = index;
 };
 </script>
-<template>
-    <div class="main pb-80px relative">
-        <Title title="主祀神" />
-        <div class="flex gap-10px flex-wrap justify-center mx-auto max-w-1250px relative z-10">
-            <img
-                v-for="(image, index) in images"
-                :key="index"
-                class="lg:w-15% md:w-23% max-md:45% cursor-pointer"
-                :src="index === currentImageIndex ? hoverImage[index] : image"
-                alt=""
-                @mouseover="handleImageHover(index)"
-                @mouseout="handleImageHover(99)"
-                @click="goSearch(index)"
-            />
-        </div>
-        <img class="left" :src="`${backend}wp-content/uploads/2023/08/god_bg1.svg`" alt="">
-        <img class="right" :src="`${backend}/wp-content/uploads/2023/08/god_bg2.svg`" alt="">
-    </div>
-</template>
+
 <style scoped>
 .main{
     background-color: #F4F1E4;

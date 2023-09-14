@@ -1,16 +1,17 @@
+<template>
+  <div class="cover">
+     <Header />
+       <router-view />
+     <Footer />
+  </div>
+
+</template>
 <script setup>
 import Header from "@/components/global/header/Header.vue"
 import Footer from "./components/global/Footer.vue";
 </script>
 
-<template>
-   <div class="cover">
-      <Header />
-        <router-view />
-      <Footer />
-   </div>
 
-</template>
 
 <style scoped>
 .logo {

@@ -1,10 +1,10 @@
-<script setup >
-</script>
 <template>
     <div class="icon">
         <!-- <img src="../../../assets/header/cart_icon.svg" alt=""> -->
     </div>
 </template>
+<script setup >
+</script>
 <style scoped>
 .icon{
     width: 33px;

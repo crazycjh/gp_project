@@ -1,49 +1,3 @@
-<script setup >
-import { onMounted, ref,computed,watch } from "vue";
-import Search from '@/components/index/Search.vue'
-import Breadcrumb from '@/components/widget/Breadcrumb.vue'
-import TopCover from '@/components/widget/TopCover.vue'
-import Pagination from '@/components/widget/Pagination.vue'
-const backend = import.meta.env.VITE_BACKEND_PATH
-import axios from "axios";
-const temples = ref([])
-const total = ref();
-onMounted(async () => {
-    fetchData()
-});
-
-const fetchData = async () => {
-  try {
-    const params = {
-        limit:itemsPerPage.value, 
-        page:currentPage.value,
-    };
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/temple`,
-      {
-       params:params,
-      }
-    );
-    temples.value = response.data.data;
-    total.value = response.data.total;
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-}
-
-
-const currentPage = ref(1)
-const itemsPerPage = ref(12)
-const changePage =((page)=>{
-    currentPage.value = page
-})
-
-const totalPages = computed(() => {
-    return Math.ceil(total.value / itemsPerPage.value);
-});
-
-watch(currentPage,(newValue) => newValue && fetchData())
-</script>
 <template>
     <TopCover :image="`${backend}wp-content/uploads/2023/08/temple_banner.jpg`" title="全台廟宇" />
     <Breadcrumb title="首頁/全台廟宇" />
@@ -65,6 +19,50 @@ watch(currentPage,(newValue) => newValue && fetchData())
         </div>
     </div>
 </template>
+<script setup >
+import { onMounted, ref,computed,watch } from "vue";
+import Search from '@/components/index/Search.vue'
+import Breadcrumb from '@/components/widget/Breadcrumb.vue'
+import TopCover from '@/components/widget/TopCover.vue'
+import Pagination from '@/components/widget/Pagination.vue'
+const backend = import.meta.env.VITE_BACKEND_PATH
+import axios from "axios";
+const temples = ref([])
+const total = ref();
+onMounted(async () => {
+    fetchData()
+});
+const fetchData = async () => {
+  try {
+    const params = {
+        limit:itemsPerPage.value, 
+        page:currentPage.value,
+    };
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/temple`,
+      {
+       params:params,
+      }
+    );
+    temples.value = response.data.data;
+    total.value = response.data.total;
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+}
+const currentPage = ref(1)
+const itemsPerPage = ref(12)
+const changePage =((page)=>{
+    currentPage.value = page
+})
+
+const totalPages = computed(() => {
+    return Math.ceil(total.value / itemsPerPage.value);
+});
+
+watch(currentPage,(newValue) => newValue && fetchData())
+</script>
+
 <style scoped>
 h4,p{
     color:#000000;

@@ -1,35 +1,3 @@
-<script setup>
-import {ref,watch,onMounted} from "vue";
-import axios from 'axios';
-import Title from '@/components/widget/Title.vue'
-import { useRouter } from "vue-router";
-
-
-const godArray = ref([])
-onMounted(async () => {
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
-    );
-    godArray.value = response.data.split(',')
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-});
-
-
-
-const city = ref('全台縣市');
-const god = ref('主神');
-const searchText = ref('');
-
-const router = useRouter()
-const goSearch = (()=>{
-   if(city.value === '全台縣市') city.value = ''
-   if(god.value ==='主神') god.value = ''
-  router.push(`/search/s1=${city.value}&s2=${god.value}&s3=${searchText.value}`);
-})
-</script>
 <template>
    <div class="mx-auto max-w-1200px">
       <Title title="全台廟宇搜尋" />
@@ -78,6 +46,39 @@ const goSearch = (()=>{
       </div>
    </div>
 </template>
+<script setup>
+import {ref,watch,onMounted} from "vue";
+import axios from 'axios';
+import Title from '@/components/widget/Title.vue'
+import { useRouter } from "vue-router";
+
+
+const godArray = ref([])
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
+    );
+    godArray.value = response.data.split(',')
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
+
+
+
+const city = ref('全台縣市');
+const god = ref('主神');
+const searchText = ref('');
+
+const router = useRouter()
+const goSearch = (()=>{
+   if(city.value === '全台縣市') city.value = ''
+   if(god.value ==='主神') god.value = ''
+  router.push(`/search/s1=${city.value}&s2=${god.value}&s3=${searchText.value}`);
+})
+</script>
+
 <style scoped>
 .custom_select{
    display: flex;

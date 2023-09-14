@@ -1,13 +1,3 @@
-<script setup >
-import Member from './Member.vue';
-import Cart from './Cart.vue';
-import { ref,watch } from 'vue';
-//控制手機板選單，鎖屏
-const isOpen = ref(false);
-watch(isOpen,(newValue)=>{
-    newValue ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
-})
-</script>
 <template>
     <div class="flex justify-between h-full">
         <img @click="isOpen = !isOpen" class="block lg:hidden mr-5" src="../../../assets/header/Group67.svg" width="30" height="24" alt="">
@@ -77,6 +67,16 @@ watch(isOpen,(newValue)=>{
     <div class="mask" v-show="isOpen" @click="isOpen = !isOpen"></div>
     <img class="close" v-show="isOpen" @click="isOpen = !isOpen" src="../../../assets/header/Union.svg" alt="">
 </template>
+<script setup >
+import Member from './Member.vue';
+import Cart from './Cart.vue';
+import { ref,watch } from 'vue';
+//控制手機板選單，鎖屏
+const isOpen = ref(false);
+watch(isOpen,(newValue)=>{
+    newValue ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
+})
+</script>
 <style scoped>
 .slide-fade-enter-active {
   transition: all 0.5s ease-out;

@@ -1,4 +1,18 @@
-<script setup >
+<template>
+  <div v-if="red">
+    <a v-if="props.link" :href="props.link" :class="{ 'red': red }" class="slider_button relative z-30"
+      @mouseover="toggleHover(true)" @mouseout="toggleHover(false)">
+      <img v-if="icon" class="mr-1" :src="isHover ? activeIcon : normalIcon" alt="">
+      {{ text }}
+    </a>
+  </div>
+  <div v-else>
+    <a v-if="props.link" :href="props.link" :class="{ 'red': red }" class="slider_button relative z-30">
+      {{ text }}
+    </a>
+  </div>
+</template>
+<script setup>
 import { ref } from 'vue';
 const backend = import.meta.env.VITE_BACKEND_PATH
 const props = defineProps({
@@ -14,20 +28,7 @@ const toggleHover = ((isHovering) => {
   isHover.value = isHovering
 })
 </script>
-<template>
-  <div v-if="red">
-    <a v-if="props.link" :href="props.link" :class="{ 'red': red }" class="slider_button relative z-30"
-      @mouseover="toggleHover(true)" @mouseout="toggleHover(false)">
-      <img v-if="icon" class="mr-1" :src="isHover ? activeIcon : normalIcon" alt="">
-      {{ text }}
-    </a>
-  </div>
-  <div v-else>
-    <a v-if="props.link" :href="props.link" :class="{ 'red': red }" class="slider_button relative z-30">
-      {{ text }}
-    </a>
-  </div>
-</template>
+
 <style scoped>
 img {
   width: 20px;

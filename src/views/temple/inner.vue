@@ -1,38 +1,3 @@
-<script setup >
-import { onMounted, ref, computed } from "vue";
-import { useRoute } from 'vue-router';
-import axios from "axios";
-const backend = import.meta.env.VITE_BACKEND_PATH
-import Breadcrumb from '../../components/widget/Breadcrumb.vue';
-import Title from "../../components/widget/Title.vue";
-import TopCover from '../../components/widget/TopCover.vue';
-const templeID = ref();
-const main_god = ref();
-const temple = ref([]);
-const light = ref([]);
-const shuwen = ref([]);
-
-onMounted(() => {
-    const route = useRoute();
-    templeID.value = Number(route.params.templeID);
-
-});
-
-
-onMounted(async () => {
-    try {
-        const response = await axios.get(
-            `${backend}/api/gc/temple/${templeID.value}`
-        );
-        temple.value = response.data.data;
-        light.value = response.data.light;
-        shuwen.value = response.data.shuwen;
-        main_god.value = temple.value.main_god.split(',').join('、')
-    } catch (error) {
-        console.error("API 請求失敗:", error);
-    }
-});
-</script>
 <template>
     <!-- <TopCover v-if="!temple.live_iframe" :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/> -->
     <!-- <div class="relative">
@@ -128,6 +93,42 @@ onMounted(async () => {
         </div>
     </div>
 </template>
+<script setup >
+import { onMounted, ref, computed } from "vue";
+import { useRoute } from 'vue-router';
+import axios from "axios";
+const backend = import.meta.env.VITE_BACKEND_PATH
+import Breadcrumb from '../../components/widget/Breadcrumb.vue';
+import Title from "../../components/widget/Title.vue";
+import TopCover from '../../components/widget/TopCover.vue';
+const templeID = ref();
+const main_god = ref();
+const temple = ref([]);
+const light = ref([]);
+const shuwen = ref([]);
+
+onMounted(() => {
+    const route = useRoute();
+    templeID.value = Number(route.params.templeID);
+
+});
+
+
+onMounted(async () => {
+    try {
+        const response = await axios.get(
+            `${backend}/api/gc/temple/${templeID.value}`
+        );
+        temple.value = response.data.data;
+        light.value = response.data.light;
+        shuwen.value = response.data.shuwen;
+        main_god.value = temple.value.main_god.split(',').join('、')
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    }
+});
+</script>
+
 <style scoped>
 .service_border{
     border-bottom: 1px solid #EEEEEE;

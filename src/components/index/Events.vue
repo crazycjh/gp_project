@@ -1,22 +1,3 @@
-<script setup >
-import { onMounted,ref } from "vue";
-import axios from "axios";
-import Title from '@/components/widget/Title.vue'
-import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
-const backend = import.meta.env.VITE_BACKEND_PATH
-
-const posts = ref([]);
-onMounted(async () => {
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/latest/index`
-    );
-    posts.value = response.data.latest;
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-});
-</script>
 <template>
    <div class="relative">
       <Title title="最新活動" />
@@ -39,6 +20,26 @@ onMounted(async () => {
       <img class="tree_left" :src="`${backend}/wp-content/uploads/2023/08/home_bg3.svg`" alt="">
    </div>
 </template>
+<script setup >
+import { onMounted,ref } from "vue";
+import axios from "axios";
+import Title from '@/components/widget/Title.vue'
+import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
+const backend = import.meta.env.VITE_BACKEND_PATH
+
+const posts = ref([]);
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/latest/index`
+    );
+    posts.value = response.data.latest;
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
+</script>
+
 <style scoped>
 .event_img{
    object-fit: cover;

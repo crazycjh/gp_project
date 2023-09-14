@@ -1,7 +1,3 @@
-<script setup >
-import Title from '@/components/widget/Title.vue'
-const backend = import.meta.env.VITE_BACKEND_PATH
-</script>
 <template>
    <div class="relative">
       <Title title="服務項目" />
@@ -27,6 +23,11 @@ const backend = import.meta.env.VITE_BACKEND_PATH
       <img class="tree_left" :src="`${backend}wp-content/uploads/2023/08/home_bg3.svg`" alt="">
    </div>
 </template>
+<script setup >
+import Title from '@/components/widget/Title.vue'
+const backend = import.meta.env.VITE_BACKEND_PATH
+</script>
+
 <style scoped>
 @media (max-width: 1440px) {
    img{

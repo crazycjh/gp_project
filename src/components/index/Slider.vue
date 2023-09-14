@@ -1,3 +1,48 @@
+<template>
+    <div>
+      <swiper
+        :style="{
+          '--swiper-navigation-color': '#fff',
+          '--swiper-navigation-sides-offset': navigationSidesOffsetDesktop,
+          '--swiper-pagination-color': '#CEB96E',
+        }"
+        :slides-per-view="1"
+        :loop="true"
+        :modules="modules"
+        :pagination="{
+          clickable: true,
+        }"
+        :navigation="true"
+        class="h-400px md:h-600px swiper-container"
+      >
+        <swiper-slide
+          class="w-full bg-cover bg-center relative"
+          v-for="slider in sliders"
+          :key="slider.id"
+        >
+          <div
+            class="h-full w-full z-10"
+            :style="{
+              'background-image': `url(${slider.image})`,
+              filter: 'brightness(50%)',
+              'background-position': 'center center'
+            }"
+          >
+          </div>
+          <div class="flex flex-col justify-center items-center absolute inset-0">
+            <h2 class="text-3xl mb-2 text-white relative z-50 title">
+              {{ slider.title }}
+            </h2>
+            <h3 class="text-xl mb-4 text-white relative z-50 subtitle">
+              {{ slider.subtitle }}
+            </h3>
+            <LinkBtn v-if="slider.is_live === '0'" :link="slider.link" text="了解更多" />
+            <LinkBtn v-if="slider.is_live === '1'" :link="slider.link" text="觀看直播" red="true" icon="true"/>
+          </div>
+        </swiper-slide>
+      </swiper>
+    </div>
+  </template>
 <script setup >
 import { onMounted, onUnmounted, ref } from "vue";
 import axios from "axios";
@@ -39,51 +84,7 @@ onMounted(async () => {
   }
 });
 </script>
-<template>
-  <div>
-    <swiper
-      :style="{
-        '--swiper-navigation-color': '#fff',
-        '--swiper-navigation-sides-offset': navigationSidesOffsetDesktop,
-        '--swiper-pagination-color': '#CEB96E',
-      }"
-      :slides-per-view="1"
-      :loop="true"
-      :modules="modules"
-      :pagination="{
-        clickable: true,
-      }"
-      :navigation="true"
-      class="h-400px md:h-600px swiper-container"
-    >
-      <swiper-slide
-        class="w-full bg-cover bg-center relative"
-        v-for="slider in sliders"
-        :key="slider.id"
-      >
-        <div
-          class="h-full w-full z-10"
-          :style="{
-            'background-image': `url(${slider.image})`,
-            filter: 'brightness(50%)',
-            'background-position': 'center center'
-          }"
-        >
-        </div>
-        <div class="flex flex-col justify-center items-center absolute inset-0">
-          <h2 class="text-3xl mb-2 text-white relative z-50 title">
-            {{ slider.title }}
-          </h2>
-          <h3 class="text-xl mb-4 text-white relative z-50 subtitle">
-            {{ slider.subtitle }}
-          </h3>
-          <LinkBtn v-if="slider.is_live === '0'" :link="slider.link" text="了解更多" />
-          <LinkBtn v-if="slider.is_live === '1'" :link="slider.link" text="觀看直播" red="true" icon="true"/>
-        </div>
-      </swiper-slide>
-    </swiper>
-  </div>
-</template>
+
 <style scoped>
 .title {
   letter-spacing: 6px;

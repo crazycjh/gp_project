@@ -1,8 +1,3 @@
-<script setup >
-import Title from '@/components/widget/Title.vue'
-import LinkBtn from '../widget/LinkBtn.vue';
-const backend = import.meta.env.VITE_BACKEND_PATH
-</script>
 <template>
    <div class="mx-auto max-w-1200px">
       <div class="lg:h-340px lg:my-80px flex-column lg:flex mx-auto">
@@ -16,8 +11,13 @@ const backend = import.meta.env.VITE_BACKEND_PATH
          </div>
       </div>
    </div>
-   
 </template>
+<script setup >
+import Title from '@/components/widget/Title.vue'
+import LinkBtn from '../widget/LinkBtn.vue';
+const backend = import.meta.env.VITE_BACKEND_PATH
+</script>
+
 <style scoped>
 h5{
    max-width:333px;

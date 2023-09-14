@@ -1,9 +1,3 @@
-<script setup >
-
-const props = defineProps({
-  title: String,
-});
-</script>
 <template>
     <div class="border-b border-gray-300 bg-white">
         <div class="px-10px max-w-1200px mx-auto">
@@ -11,3 +5,9 @@ const props = defineProps({
         </div>
     </div>
 </template>
+<script setup >
+const props = defineProps({
+  title: String,
+});
+</script>
+

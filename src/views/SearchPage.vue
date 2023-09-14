@@ -1,3 +1,77 @@
+<template>
+    <TopCover :image="`${backend}wp-content/uploads/2023/08/temple_banner.jpg`" title="搜尋頁面" />
+    <Breadcrumb title="首頁/搜尋頁面" />
+    <div class="mx-auto max-w-1200px">
+        <div class="mx-auto max-w-1200px">
+            <Title title="全台廟宇搜尋" />
+            <div class="flex max-lg:flex-col justify-center items-center flex-wrap max-xl:justify-center">
+                <div>
+                    <div class="relative inline-block">
+                        <select v-model="s1Value"
+                            class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-2">
+                            <option  selected value="">全台縣市</option>
+                            <option>台北市</option>
+                            <option>新北市</option>
+                            <option>桃園市</option>
+                            <option>台中市</option>
+                            <option>台南市</option>
+                            <option>高雄市</option>
+                            <option>基隆市</option>
+                            <option>新竹市</option>
+                            <option>嘉義市</option>
+                            <option>新竹縣</option>
+                            <option>苗栗縣</option>
+                            <option>彰化縣</option>
+                            <option>南投縣</option>
+                            <option>雲林縣</option>
+                            <option>嘉義縣</option>
+                            <option>屏東縣</option>
+                            <option>宜蘭縣</option>
+                            <option>花蓮縣</option>
+                            <option>台東縣</option>
+                            <option>澎湖縣</option>
+                            <option>金門縣</option>
+                            <option>連江縣</option>
+                        </select>
+                        <img class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none"
+                            src="../assets/index/arrow_down.svg" alt="">
+                    </div>
+                    <div class="relative inline-block">
+                        <select v-model="s2Value"
+                            class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-20px">
+                            <option  selected value="">主神</option>
+                            <option v-for="item in godArray" :key="item">{{ item }}</option>
+                        </select>
+                        <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none"
+                            src="../assets/index/arrow_down.svg" alt="">
+                    </div>
+                </div>
+                <div class="flex input_area">
+                    <input v-model="s3Value" placeholder="請輸入關鍵字..." class="custom_input" type="text"
+                        @keyup.enter="goSearch">
+                    <div class="icon" alt="" @click="goSearch()"></div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full flex gap-30px flex-wrap mt-40px">
+            <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link class="flex flex-col gap-10px" :to="`/temple/${item.id}`">
+                    <img class="photo" :src="item.image_url" alt="">
+                    <h4>{{ item.name }}</h4>
+                    <p>主神：{{ item.main_god }}</p>
+                    <p>地址：{{item.location}}{{ item.address }}</p>
+                <p class="more">了解更多</p>
+                </router-link>
+            </div>
+        </div>
+        <div class="flex justify-center" v-if="temples.length === 0">
+            <h4 >查無廟宇，請重新輸入篩選條件!</h4>
+        </div>
+        <div class="flex justify-center my-30px lg:my-50px">
+            <Pagination :total-pages="totalPages" :current-page="currentPage" @page-changed="changePage" />
+        </div>
+    </div>
+</template>
 <script setup >
 import { onMounted, ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -88,80 +162,7 @@ const goSearch = (() => {
     fetchData()
 })
 </script>
-<template>
-    <TopCover :image="`${backend}wp-content/uploads/2023/08/temple_banner.jpg`" title="搜尋頁面" />
-    <Breadcrumb title="首頁/搜尋頁面" />
-    <div class="mx-auto max-w-1200px">
-        <div class="mx-auto max-w-1200px">
-            <Title title="全台廟宇搜尋" />
-            <div class="flex max-lg:flex-col justify-center items-center flex-wrap max-xl:justify-center">
-                <div>
-                    <div class="relative inline-block">
-                        <select v-model="s1Value"
-                            class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-2">
-                            <option  selected value="">全台縣市</option>
-                            <option>台北市</option>
-                            <option>新北市</option>
-                            <option>桃園市</option>
-                            <option>台中市</option>
-                            <option>台南市</option>
-                            <option>高雄市</option>
-                            <option>基隆市</option>
-                            <option>新竹市</option>
-                            <option>嘉義市</option>
-                            <option>新竹縣</option>
-                            <option>苗栗縣</option>
-                            <option>彰化縣</option>
-                            <option>南投縣</option>
-                            <option>雲林縣</option>
-                            <option>嘉義縣</option>
-                            <option>屏東縣</option>
-                            <option>宜蘭縣</option>
-                            <option>花蓮縣</option>
-                            <option>台東縣</option>
-                            <option>澎湖縣</option>
-                            <option>金門縣</option>
-                            <option>連江縣</option>
-                        </select>
-                        <img class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none"
-                            src="../assets/index/arrow_down.svg" alt="">
-                    </div>
-                    <div class="relative inline-block">
-                        <select v-model="s2Value"
-                            class="appearance-none bg-transparent border border-transparent text-gray-700 pr-8 custom_select mr-20px">
-                            <option  selected value="">主神</option>
-                            <option v-for="item in godArray" :key="item">{{ item }}</option>
-                        </select>
-                        <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none"
-                            src="../assets/index/arrow_down.svg" alt="">
-                    </div>
-                </div>
-                <div class="flex input_area">
-                    <input v-model="s3Value" placeholder="請輸入關鍵字..." class="custom_input" type="text"
-                        @keyup.enter="goSearch">
-                    <div class="icon" alt="" @click="goSearch()"></div>
-                </div>
-            </div>
-        </div>
-        <div class="w-full flex gap-30px flex-wrap mt-40px">
-            <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <router-link class="flex flex-col gap-10px" :to="`/temple/${item.id}`">
-                    <img class="photo" :src="item.image_url" alt="">
-                    <h4>{{ item.name }}</h4>
-                    <p>主神：{{ item.main_god }}</p>
-                    <p>地址：{{item.location}}{{ item.address }}</p>
-                <p class="more">了解更多</p>
-                </router-link>
-            </div>
-        </div>
-        <div class="flex justify-center" v-if="temples.length === 0">
-            <h4 >查無廟宇，請重新輸入篩選條件!</h4>
-        </div>
-        <div class="flex justify-center my-30px lg:my-50px">
-            <Pagination :total-pages="totalPages" :current-page="currentPage" @page-changed="changePage" />
-        </div>
-    </div>
-</template>
+
 <style scoped>
 h4,
 p {

@@ -1,3 +1,24 @@
+<template>
+    <TopCover :image="`${backend}wp-content/uploads/2023/08/god_banner.jpg`" title="主神" />
+    <Breadcrumb title="首頁/主神" />
+    <div class="mx-auto max-w-1200px">
+        <Search />
+        <div class="w-full flex gap-30px flex-wrap mt-40px max-xl:justify-center">
+            <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
+                <router-link class="flex flex-col gap-10px" :to="`/temple/${item.id}`">
+                    <img class="photo" :src="item.image_url" alt="">
+                    <h4>{{ item.name }}</h4>
+                    <p>主神：{{ item.main_god }}</p>
+                    <p>地址：{{item.location}}{{ item.address }}</p>
+                <p class="more">了解更多</p>
+                </router-link>
+            </div>
+        </div>
+        <div class="flex justify-center my-30px lg:my-50px">
+            <Pagination :total-pages="totalPages" :current-page="currentPage" @page-changed="changePage"/>
+        </div>
+    </div>
+</template>
 <script setup>
 import { onMounted, ref,computed,watch } from "vue";
 import Search from '@/components/index/Search.vue'
@@ -42,27 +63,7 @@ const totalPages = computed(() => {
 
 watch(currentPage,(newValue) => newValue && fetchData())
 </script>
-<template>
-    <TopCover :image="`${backend}wp-content/uploads/2023/08/god_banner.jpg`" title="主神" />
-    <Breadcrumb title="首頁/主神" />
-    <div class="mx-auto max-w-1200px">
-        <Search />
-        <div class="w-full flex gap-30px flex-wrap mt-40px max-xl:justify-center">
-            <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
-                <router-link class="flex flex-col gap-10px" :to="`/temple/${item.id}`">
-                    <img class="photo" :src="item.image_url" alt="">
-                    <h4>{{ item.name }}</h4>
-                    <p>主神：{{ item.main_god }}</p>
-                    <p>地址：{{item.location}}{{ item.address }}</p>
-                <p class="more">了解更多</p>
-                </router-link>
-            </div>
-        </div>
-        <div class="flex justify-center my-30px lg:my-50px">
-            <Pagination :total-pages="totalPages" :current-page="currentPage" @page-changed="changePage"/>
-        </div>
-    </div>
-</template>
+
 <style scoped>
 .title{
     position: absolute;
