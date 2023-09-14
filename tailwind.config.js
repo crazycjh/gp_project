@@ -25,6 +25,7 @@ export default {
       margin:{
         '020px':'-20px',
         '10px':'10px',
+        '12px':'12px',
         '15px':'15px',
         '20px':'20px',
         '25px':'25px',
@@ -32,6 +33,7 @@ export default {
         '40px':'40px',
         '50px':'50px',
         '60px':'60px',
+        '70px':'70px',
         '80px':'80px',
         '14rem':'14rem',
         '100px':'100px',
@@ -77,6 +79,7 @@ export default {
       },
       maxWidth: {
         '275px':'275px',
+        '300px':'300px',
         '570px':'570px',
         '890px':'890px',
         '915px':'915px',

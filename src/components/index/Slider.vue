@@ -87,10 +87,12 @@ onMounted(async () => {
 
 <style scoped>
 .title {
+  font-weight: 700;
   letter-spacing: 6px;
 }
 
 .subtitle {
+  font-weight:500;
   letter-spacing: 3.6px;
 }
 
