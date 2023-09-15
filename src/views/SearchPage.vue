@@ -31,7 +31,7 @@
                                     <option value="" selected>主神</option>
                                     <option v-for="item in godArray" :key="item">{{ item }}</option>
                                 </select>
-                                <img class="absolute right-0 top-0 mt-2 mr-6 pointer-events-none"
+                                <img class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none"
                                     src="../assets/index/arrow_down.svg" alt="">
                             </div>
                         </div>

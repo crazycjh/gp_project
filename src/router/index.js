@@ -69,7 +69,7 @@ const routes = [
   {
     path: "/latest/inner/:latestID",
     name: "LastestInner",
-    component: () => import("@/views/latest/inner.vue")
+    component: () => import("@/views/latest/inner.vue"),
   },
   {
     path: "/search/:content",

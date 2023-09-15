@@ -22,7 +22,7 @@
                     <router-link to="/service/" class="nav-link">服務</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/product/" class="nav-link">商城</router-link>
+                    <router-link to="/product/" class="nav-link">文創商品</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/qa/" class="nav-link">Q&A</router-link>
@@ -56,7 +56,7 @@
                     <router-link to="/service/" class="nav-link-mobile" @click="isOpen = !isOpen">服務</router-link>
                 </li>
                 <li class="nav-item-mobile">
-                    <router-link to="/product/" class="nav-link-mobile" @click="isOpen = !isOpen">商城</router-link>
+                    <router-link to="/product/" class="nav-link-mobile" @click="isOpen = !isOpen">文創商品</router-link>
                 </li>
                 <li class="nav-item-mobile">
                     <router-link to="/qa/" class="nav-link-mobile">Q&A</router-link>

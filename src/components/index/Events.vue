@@ -17,7 +17,7 @@
       <div class="flex justify-center py-30px">
          <InnerLinkBtn text="更多活動" link="/latest/all"/>
       </div>
-      <img class="tree_left" :src="`${backend}/wp-content/uploads/2023/08/home_bg3.svg`" alt="">
+      <img class="tree_left" src="../../assets/index/tree_left.svg" alt="">
    </div>
 </template>
 <script setup >

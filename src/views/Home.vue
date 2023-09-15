@@ -9,6 +9,7 @@
     </div>
     <MainGod />
     <Service />
+    <Todo />
     <Product />
 </template>
 <script setup >
@@ -20,6 +21,7 @@ import Recommand from '@/components/index/Recommand.vue'
 import MainGod from '@/components/index/MainGod.vue'
 import Service from '@/components/index/Service.vue'
 import Product from '@/components/index/Product.vue'
+import Todo from '../components/index/Todo.vue'
 </script>
 <style>
 

@@ -13,8 +13,8 @@
                 @click="goSearch(index)"
             />
         </div>
-        <img class="left" :src="`${backend}wp-content/uploads/2023/08/god_bg1.svg`" alt="">
-        <img class="right" :src="`${backend}/wp-content/uploads/2023/08/god_bg2.svg`" alt="">
+        <img class="left" src="../../assets/index/god_bg1.svg" alt="">
+        <img class="right" src="../../assets/index/god_bg2.svg" alt="">
     </div>
 </template>
 <script setup >

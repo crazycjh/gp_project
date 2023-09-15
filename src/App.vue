@@ -1,7 +1,7 @@
 <template>
   <div class="cover">
      <Header />
-       <router-view />
+       <router-view  :key="$route.path"/>
      <Footer />
   </div>
 
@@ -27,7 +27,7 @@ import Footer from "./components/global/Footer.vue";
   filter: drop-shadow(0 0 2em #42b883aa);
 }
 .cover{
-    background-image: url(https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/home_bg1_2.svg);
+    background-image: url('../src/assets/index/home_bg1_2.svg');
     background-repeat: repeat;
     background-size: 282px auto;
     background-color: #ffffff;

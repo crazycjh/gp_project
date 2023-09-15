@@ -153,14 +153,14 @@ watch(activeGod,(newValue) => {
     white-space:nowrap;
     font-family: Noto Serif TC;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 550;
     line-height: 23px;
     letter-spacing: 0.2em;
     text-align: left;
-    color:#888888;
+    color:#AAA;
 }
 .tag:hover{
-    border-bottom: 1px solid #AAAAAA;
+    border-bottom: 1px solid #AAA;
 }
 .filter_section h2{
     font-family: Noto Serif TC;

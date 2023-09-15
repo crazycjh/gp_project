@@ -10,7 +10,7 @@
             </div>
          </div>
       </div>
-      <img class="tree_right" :src="`${backend}wp-content/uploads/2023/08/home_bg2.svg`" alt="">
+      <img class="tree_right" src="../../assets/index/tree_right.svg" alt="">
    </div>
    </template>
 <script setup >
@@ -20,7 +20,6 @@ import LinkBtn from "../widget/LinkBtn.vue";
 import { onMounted, ref, reactive } from "vue";
 const backend = import.meta.env.VITE_BACKEND_PATH
 const live = reactive([]);
-const test = ref('<iframe width="560" height="315" src="https://www.youtube.com/embed/U3Y-0i3bbjk?si=Ac6FFvn2avV3np0l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>')
 onMounted(async () => {
   try {
     const response = await axios.get(

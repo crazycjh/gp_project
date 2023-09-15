@@ -2,12 +2,12 @@
   <Breadcrumb v-if="post.title" :title="`首頁/${post.title}`" />
   <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px mb:30px lg:mb-80px">
     <div class="max-w-915px pr-10px w-full">
-      <h3 class="title mb-10px">{{ post.title }}</h3>
+      <h1 class="title mb-10px">{{ post.title }}</h1>
       <span class="date mb-10px">{{ post.date }}</span>
       <!-- <a  href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent(location.href)) ));' title='分享給 LINE 好友'><img class="mb-10px" alt='分享給LINE好友 !' height='40' src='https://1.bp.blogspot.com/-FvoBw8lnlC8/WHgA91RmxiI/AAAAAAAAIvA/CazIGx6Jlp8PJ4pE40kt2XMxwFmeBSdjgCLcB/s1600/168x40.png' width='168'/>
       </a> -->
       <a :href="`https://social-plugins.line.me/lineit/share?url=${currentUrl}`"></a>
-      <div class="flex gap-10px">
+      <div class="flex gap-10px mt-10px">
         <img class="mb-10px" src="../../assets/latest/fb.svg" alt="" @click="fbShare"/>
         <img class="mb-10px" src="../../assets/latest/line.svg" alt="" @click="lineShare"/>
       </div>
@@ -39,7 +39,7 @@
         class="h-350px swiper-container"
       >
         <swiper-slide v-for="item in bottom_post" :key="item.id">
-          <router-link :to="`/latest/${item.id}`">
+          <router-link :to="`/latest/inner/${item.id}`">
             <div
               class="h-70% w-full bg-cover bg-center image"
               :style="{
@@ -48,15 +48,15 @@
             ></div>
           </router-link>
           <div class="max-md:px-10px">
-            <h5 class="title mt-10px">{{ item.title }}</h5>
+            <h3 class="slider_title mt-10px">{{ item.title }}</h3>
           </div>
         </swiper-slide> 
       </swiper> 
     </div>
-    <div class="hidden lg:block max-w-275px px-10px">
+    <div class="hidden lg:block max-w-275px px-10px left_border">
         <h5 class="subtitle mb-30px">最新活動</h5>
         <p v-for="item in bottom_post" :key="item.id" class="event">
-          <router-link :to="`/latest/${item.id}`">{{ item.title }}</router-link>
+          <router-link :to="`/latest/inner/${item.id}`">{{ item.title }}</router-link>
         </p>
         <h5 class="subtitle mb-30px">活動分類</h5>
         <p class="tag mb-10px" @click="goLatest('hot')">熱門活動</p>
@@ -67,7 +67,7 @@
 </template>
 <script setup >
 import { useRoute,useRouter } from 'vue-router';
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -77,14 +77,15 @@ import "swiper/css/navigation";
 import Breadcrumb from "../../components/widget/Breadcrumb.vue";
 const modules = [Autoplay, Pagination, Navigation]
 const backend = import.meta.env.VITE_BACKEND_PATH
-
-const latestID = ref();
+// instance?.proxy?.$forceupdate();
+const latestID = ref('');
 const currentUrl = ref('')
 onMounted(() => {
   const route = useRoute();
-  latestID.value = Number(route.params.latestID);
+  latestID.value = route.params.latestID;
   currentUrl.value = window.location.href
 });
+
 
 const post = ref([]);
 const bottom_post = ref([]);
@@ -125,6 +126,13 @@ const openWindow = (shareUrl) =>{
 </script>
 
 <style scoped>
+.slider_title{
+  font-size: 20px;
+}
+.left_border{
+  padding-left: 20px;
+  border-left:1px solid #EEEEEE;
+}
 .image{
   aspect-ratio: 16/9;
 }
@@ -141,6 +149,7 @@ h3,h4,h5,p{
     color:#333333;
 }
 .event{
+  margin-top: 10px;
     font-family: Noto Serif TC;
     font-size: 20px;
     font-weight: 500;
@@ -155,6 +164,7 @@ h3,h4,h5,p{
     color:#CEB96E;
 }
 .subtitle{
+  margin-top: 40px;
     font-family: Noto Serif TC;
     font-size: 24px;
     font-weight: 500;
@@ -177,11 +187,16 @@ h3,h4,h5,p{
 .title {
   color:#000000;
   font-family: Noto Serif TC;
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 500;
-  line-height: 29px;
-  letter-spacing: 0em;
+  line-height: 1.3em;
+  letter-spacing: 3px;
   text-align: left;
+}
+@media (max-width:768px){
+  .title{
+    font-size: 20px;
+  }
 }
 .date {
   font-family: Noto Serif TC;

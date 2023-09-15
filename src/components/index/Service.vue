@@ -19,8 +19,8 @@
             <h6 class="item">疏文</h6>
          </div>
       </div>
-      <img class="tree_right" :src="`${backend}wp-content/uploads/2023/08/home_bg2.svg`" alt="">
-      <img class="tree_left" :src="`${backend}wp-content/uploads/2023/08/home_bg3.svg`" alt="">
+      <img class="tree_right" src="../../assets/index/tree_right.svg" alt="">
+      <img class="tree_left" src="../../assets/index/tree_left.svg" alt="">
    </div>
 </template>
 <script setup >

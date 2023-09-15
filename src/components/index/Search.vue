@@ -8,7 +8,7 @@
       <div class="px-10px">
          <div class="search_wrapper flex justify-center items-center">
             <div v-show="search1" class="flex w-full">
-               <div class="flex w-full">
+               <div class="flex w-full mr-20px">
                   <h4 class="tag_name">縣市</h4>
                   <div class="relative w-full">
                      <select v-model="city" class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
@@ -138,7 +138,7 @@ const enterSearch = () => {
 }
 .search_wrapper{
    height: 60px;
-   max-width: 670px;
+   max-width: 700px;
    margin:0 auto;
    background-color: #ffffff;
    box-shadow: 4px 4px 10px 0px #00000040;

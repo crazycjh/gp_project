@@ -12,6 +12,7 @@ export default {
         '11px':'11px',
         '20px':'20px',
         '30px':'30px',
+        '40px':'40px',
         '50px':'50px',
         '80px':'80px',
         '160px':'160px',
@@ -78,8 +79,10 @@ export default {
         '400px':'400px',
       },
       maxWidth: {
+        '180px':'180px',
         '275px':'275px',
         '300px':'300px',
+        '400px':'400px',
         '570px':'570px',
         '890px':'890px',
         '915px':'915px',

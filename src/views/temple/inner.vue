@@ -1,10 +1,4 @@
 <template>
-    <!-- <TopCover v-if="!temple.live_iframe" :image="`${backend}wp-content/uploads/2023/09/shutterstock_606447887.jpg`"/> -->
-    <!-- <div class="relative">
-        <h2 class="float_title">全台廟宇</h2>
-        <img class="w-full max-lg:hidden" :src="`${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg`" alt="">
-        <div v-if="temple.live_iframe" class="iframe_inner " v-html="temple.live_iframe"></div>
-    </div> -->
     <div class="banner" :style="{
         'background-image': `url(${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg)`,
         'background-position': 'center center'
@@ -15,12 +9,8 @@
                     <img class="wind" src="../../assets/widget/wind.svg" alt="">
                     <h3>廟宇直播</h3>
                 </div>
-                <!-- <h2>
-                廟宇直播
-            </h2> -->
             </div>
             <div v-if="temple.live_iframe" class="video-wrapper" v-html="temple.live_iframe">
-
             </div>
         </div>
     </div>
