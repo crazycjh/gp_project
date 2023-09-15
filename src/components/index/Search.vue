@@ -6,7 +6,7 @@
             <button class="tag" :class="{active:activeTag === 'name'}" @click="tagToogle('name')">搜廟宇名稱</button>
       </div>
       <div class="px-10px">
-         <div class="search_wrapper flex justify-center">
+         <div class="search_wrapper flex justify-center items-center">
             <div v-show="search1" class="flex w-full">
                <div class="flex w-full">
                   <h4 class="tag_name">縣市</h4>
@@ -32,7 +32,7 @@
             </div>   
             <div v-show="search2" class="flex input_area w-full justify-center">
                <h4 class="tag_name">搜尋</h4>
-               <input v-model="searchText" placeholder="請輸入關鍵字..." class="custom_input mr-2" type="text" @keyup.enter="goSearch">
+               <input v-model="searchText" placeholder="請輸入關鍵字..." class="custom_input mr-2" type="text" @keyup.enter="enterSearch">
                <div class="icon"  alt="" @click="goSearch()"></div>
             </div>
          </div>
@@ -91,7 +91,7 @@ const cities = ref([
   '連江縣'
 ]);
 
-const tagToogle =((target) =>{
+const tagToogle = (target) =>{
    if(target === 'city'){
       search1.value = true
       search2.value = false
@@ -101,14 +101,20 @@ const tagToogle =((target) =>{
       search2.value = true
       activeTag.value = 'name'
    }
-})
+}
 
 const router = useRouter()
-const goSearch = (()=>{
+const goSearch = ()=>{
    if(city.value === '全台縣市') city.value = ''
    if(god.value ==='主神') god.value = ''
   router.push(`/search/s1=${city.value}&s2=${god.value}&s3=${searchText.value}`);
-})
+}
+
+const enterSearch = () => {
+   if (city.value !== '' || god.value !== '' || searchText.value !== '') {
+      goSearch();
+    }
+}
 </script>
 
 <style scoped>
@@ -174,8 +180,9 @@ const goSearch = (()=>{
    background: #EEE;
 }
 .icon{
+   margin-left: 10px;
    background-repeat: no-repeat;
-   width: 60px;
+   width: 68px;
    height: 30px;
    background-image: url('../../assets/index/search4.svg');
 }

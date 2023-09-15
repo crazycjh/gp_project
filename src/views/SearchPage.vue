@@ -9,7 +9,7 @@
                 <button class="tag" :class="{ active: activeTag === 'name' }" @click="tagToogle('name')">搜廟宇名稱</button>
             </div>
             <div class="px-10px">
-                <div class="search_wrapper flex justify-center">
+                <div class="search_wrapper flex justify-center items-center">
                     <div v-show="search1" class="flex w-full">
                         <div class="flex w-full mr-20px">
                             <h4 class="tag_name">縣市</h4>
@@ -40,12 +40,11 @@
                     <div v-show="search2" class="flex input_area w-full justify-center">
                         <h4 class="tag_name">搜尋</h4>
                         <input v-model="s3Value" placeholder="請輸入關鍵字..." class="custom_input mr-2" type="text"
-                            @keyup.enter="goSearch">
+                            @keyup.enter="enterSearch">
                         <div class="icon" alt="" @click="goSearch()"></div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="px-10px">
             <div class="search_list">
@@ -64,7 +63,7 @@
             </div>
         </div>
 
-        <div class="w-full flex gap-30px flex-wrap mt-40px">
+        <div class="w-full flex gap-30px flex-wrap mt-40px max-xl:justify-center">
             <div v-for="item in temples" :key="item.id" class="w-full flex flex-col gap-10px block max-lg:px-10px">
                 <router-link class="flex flex-col gap-10px" :to="`/temple/${item.id}`">
                     <img class="photo" :src="item.image_url" alt="">
@@ -195,9 +194,9 @@ const fetchData = async () => {
 
 const currentPage = ref(1)
 const itemsPerPage = ref(12)
-const changePage = ((page) => {
+const changePage = (page) => {
     currentPage.value = page
-})
+}
 
 const totalPages = computed(() => {
     return Math.ceil(total.value / itemsPerPage.value);
@@ -206,18 +205,24 @@ const totalPages = computed(() => {
 watch(currentPage, (newValue) => newValue && fetchData())
 
 const router = useRouter()
-const goSearch = (() => {
+const goSearch = () => {
     //    if(s1Value.value === '全台縣市') s1Value.value = ''
     //    if(s2Value.value ==='主神') s2Value.value = ''
     router.push(`/search/s1=${s1Value.value}&s2=${s2Value.value}&s3=${s3Value.value}`);
     fetchData()
-})
+}
 
-const resetSearch = (() => {
+const resetSearch = () => {
     s1Value.value = '';
     s2Value.value = '';
     s3Value.value = '';
-})
+}
+
+const enterSearch = () =>{
+    if (s1Value.value !== '' || s2Value.value !== '' || s3Value.value !== '') {
+      goSearch();
+    }
+}
 </script>
 
 <style scoped>
@@ -389,8 +394,9 @@ p {
 }
 
 .icon {
+    margin-left: 10px;
     background-repeat: no-repeat;
-    width: 60px;
+    width: 68px;
     height: 30px;
     background-image: url('../assets/index/search4.svg');
 }
