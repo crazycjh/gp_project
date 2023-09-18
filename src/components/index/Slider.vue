@@ -12,6 +12,10 @@
         :pagination="{
           clickable: true,
         }"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false,
+        }"
         :navigation="true"
         class="h-400px md:h-600px swiper-container"
       >
@@ -25,7 +29,8 @@
             :style="{
               'background-image': `url(${slider.image})`,
               filter: 'brightness(50%)',
-              'background-position': 'center center'
+              'background-position': 'center center',
+              'background-size':'cover'
             }"
           >
           </div>
@@ -36,8 +41,8 @@
             <h3 class="text-xl mb-4 text-white relative z-50 subtitle">
               {{ slider.subtitle }}
             </h3>
-            <LinkBtn v-if="slider.is_live === '0'" :link="slider.link" text="了解更多" />
-            <LinkBtn v-if="slider.is_live === '1'" :link="slider.link" text="觀看直播" red="true" icon="true"/>
+            <LinkBtn v-if="slider.is_live === '0'" :link="slider.link" text="了解更多" :blank="slider.is_blank" />
+            <LinkBtn v-if="slider.is_live === '1'" :link="slider.link" text="觀看直播" red="true" icon="true" :blank="slider.is_blank"/>
           </div>
         </swiper-slide>
       </swiper>
@@ -78,7 +83,6 @@ onMounted(async () => {
       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/get-sliders`
     );
     sliders.value = response.data.sliders;
-    console.log(sliders.value);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }

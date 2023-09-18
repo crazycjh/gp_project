@@ -4,8 +4,6 @@
     <div class="max-w-915px pr-10px w-full">
       <h1 class="title mb-10px">{{ post.title }}</h1>
       <span class="date mb-10px">{{ post.date }}</span>
-      <!-- <a  href='javascript: void(window.open(&apos;https://lineit.line.me/share/ui?url=&apos; .concat(encodeURIComponent(location.href)) ));' title='分享給 LINE 好友'><img class="mb-10px" alt='分享給LINE好友 !' height='40' src='https://1.bp.blogspot.com/-FvoBw8lnlC8/WHgA91RmxiI/AAAAAAAAIvA/CazIGx6Jlp8PJ4pE40kt2XMxwFmeBSdjgCLcB/s1600/168x40.png' width='168'/>
-      </a> -->
       <a :href="`https://social-plugins.line.me/lineit/share?url=${currentUrl}`"></a>
       <div class="flex gap-10px mt-10px">
         <img class="mb-10px" src="../../assets/latest/fb.svg" alt="" @click="fbShare"/>
@@ -18,6 +16,7 @@
       <p class="max-h-1036px overflow-y-auto mb-30px w-full">
         {{ post.content }}
       </p>
+      <h5 class="subtitle mb-30px left">相關文章</h5>
       <swiper
         :style="{
           '--swiper-pagination-color': '#CEB96E',
@@ -28,6 +27,10 @@
           '640': {
             slidesPerView: 3,
           },
+        }"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false,
         }"
         :slides-per-view="1"
         :spaceBetween="10"
@@ -41,7 +44,7 @@
         <swiper-slide v-for="item in bottom_post" :key="item.id">
           <router-link :to="`/latest/inner/${item.id}`">
             <div
-              class="h-70% w-full bg-cover bg-center image"
+              class="w-full bg-cover bg-center image"
               :style="{
                 'background-image': `url(${item.image})`,
               }"
@@ -180,6 +183,16 @@ h3,h4,h5,p{
     bottom:-8px;
     left:0;
     width: 24%; 
+    height: 100%;
+    border-bottom: 2px solid #920000; 
+    box-sizing: border-box;
+}
+.left::after{
+    content:'';
+    position:absolute;
+    bottom:-8px;
+    left:0;
+    width: 8%; 
     height: 100%;
     border-bottom: 2px solid #920000; 
     box-sizing: border-box;

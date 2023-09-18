@@ -8,6 +8,7 @@ export default {
         '16px':'16px',
       },
       padding: {
+        '0px':'0px',
         '10px':'10px',
         '11px':'11px',
         '20px':'20px',
@@ -15,6 +16,8 @@ export default {
         '40px':'40px',
         '50px':'50px',
         '80px':'80px',
+        '100px':'100px',
+        '120px':'120px',
         '160px':'160px',
         '270px':'270px',
         '360px': '360px',

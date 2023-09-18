@@ -13,13 +13,16 @@
                     <router-link to="/allTemple/" class="nav-link">全台廟宇</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/mainGod/" class="nav-link">主神</router-link>
+                    <router-link to="/mainGod/all" class="nav-link">主神</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/latest/all" class="nav-link">最新活動</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/service/" class="nav-link">服務</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link to="/todo/" class="nav-link">代辦事項</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/product/" class="nav-link">文創商品</router-link>
@@ -54,6 +57,9 @@
                 </li>
                 <li class="nav-item-mobile">
                     <router-link to="/service/" class="nav-link-mobile" @click="isOpen = !isOpen">服務</router-link>
+                </li>
+                <li class="nav-item-mobile">
+                    <router-link to="/todo/" class="nav-link-mobile" @click="isOpen = !isOpen">代辦事項</router-link>
                 </li>
                 <li class="nav-item-mobile">
                     <router-link to="/product/" class="nav-link-mobile" @click="isOpen = !isOpen">文創商品</router-link>

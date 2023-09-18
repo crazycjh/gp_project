@@ -19,7 +19,12 @@ const routes = [
   {
     path: "/mainGod",
     name: "MainGod",
-    component: () => import("@/views/MainGod.vue")
+    component: () => import("@/views/mainGod/MainGod.vue")
+  },
+  {
+    path: "/mainGod/:god",
+    name: "MainGodDefault",
+    component: () => import("@/views/mainGod/MainGodDefault.vue")
   },
   {
     path: "/service",
@@ -75,6 +80,11 @@ const routes = [
     path: "/search/:content",
     name: "Search",
     component: () => import("@/views/SearchPage.vue")
+  },
+  {
+    path: "/todo",
+    name: "Todo",
+    component: () => import("@/views/Todo.vue")
   },
 ]
 const router = createRouter({

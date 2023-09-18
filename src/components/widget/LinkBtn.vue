@@ -1,13 +1,13 @@
 <template>
   <div v-if="red">
     <a v-if="props.link" :href="props.link" :class="{ 'red': red }" class="slider_button relative z-30"
-      @mouseover="toggleHover(true)" @mouseout="toggleHover(false)">
+      @mouseover="toggleHover(true)" @mouseout="toggleHover(false)" :target="props.blank === '1' ? '_blank' : '_self'">
       <img v-if="icon" class="mr-1" :src="isHover ? activeIcon : normalIcon" alt="">
       {{ text }}
     </a>
   </div>
   <div v-else>
-    <a v-if="props.link" :href="props.link" :class="{ 'red': red }" class="slider_button relative z-30">
+    <a v-if="props.link" :href="props.link" :class="{ 'red': red }" class="slider_button relative z-30" :target="props.blank === '1' ? '_blank' : '_self'">
       {{ text }}
     </a>
   </div>
@@ -20,6 +20,7 @@ const props = defineProps({
   text: String,
   red: [String, Boolean],
   icon: [String, Boolean],
+  blank:String,
 });
 const normalIcon = `${backend}wp-content/uploads/2023/09/live-icon-01.svg`
 const activeIcon = `${backend}wp-content/uploads/2023/09/live-icon-02.svg`

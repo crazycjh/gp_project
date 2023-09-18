@@ -1,10 +1,10 @@
 <template>
-    <div class="flex mx-auto max-w-1200px md:px-50px">
-        <img class="hidden lg:block" src="../../assets/index/temple_bg02.svg" alt="">
+    <div class="flex lg:flex max-lg:flex-col-reverse  mx-auto max-w-1200px md:px-50px">
+        <img class="" src="../../assets/index/temple_bg02.svg" alt="">
         <div class="py-40px px-20px w-full">
             <h4 class="title mb-20px">| 代辦事項 |</h4>
-            <div class="flex max-sm:flex-col max-sm:gap-20px sm:justify-between w-full sm:items-center">
-                <p class="max-w-400px  max-ld:max-w-300px">內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
+            <div class="flex max-md:flex-col max-sm:gap-20px sm:justify-between w-full sm:items-center">
+                <p class="md:max-w-400px max-md:max-w-570px">內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
                 <div class="flex max-md:justify-center">
                     <InnerLinkBtn text="了解更多" link="/latest/all" />
                 </div>
@@ -34,5 +34,10 @@ import InnerLinkBtn from '../widget/InnerLinkBtn.vue';
     line-height: 29px;
     letter-spacing: 0.2em;
     text-align: left;
+ }
+ @media(max-width:1024px){
+    .title{
+        text-align: center;
+    }
  }
  </style>

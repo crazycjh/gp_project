@@ -59,7 +59,10 @@ onMounted(async () => {
           slidesPerView: 4,
         },
       }"
-     
+      :autoplay="{
+        delay: 2500,
+        disableOnInteraction: false,
+      }"
       :spaceBetween="10"
       :loop="true"
       :modules="modules"

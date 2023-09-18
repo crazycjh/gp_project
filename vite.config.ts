@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'; // 添加這行來引入 path 模組
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({

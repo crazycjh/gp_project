@@ -1,5 +1,5 @@
 <template>
-    <TopCover :image="`${backend}wp-content/uploads/2023/08/temple_banner.jpg`" title="搜尋結果" />
+    <TopCover :image="`${backend}wp-content/uploads/2023/09/search_banner.jpg`" title="搜尋結果" />
     <Breadcrumb title="首頁/搜尋結果" />
     <div class="mx-auto max-w-1200px">
         <div>
@@ -203,11 +203,12 @@ const totalPages = computed(() => {
 });
 
 watch(currentPage, (newValue) => newValue && fetchData())
+watch(s1Value, (newValue) => newValue !== undefined && fetchData())
+watch(s2Value, (newValue) => newValue !== undefined && fetchData())
+watch(s3Value, (newValue) => newValue !== undefined && fetchData())
 
 const router = useRouter()
 const goSearch = () => {
-    //    if(s1Value.value === '全台縣市') s1Value.value = ''
-    //    if(s2Value.value ==='主神') s2Value.value = ''
     router.push(`/search/s1=${s1Value.value}&s2=${s2Value.value}&s3=${s3Value.value}`);
     fetchData()
 }

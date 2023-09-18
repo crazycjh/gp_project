@@ -1,20 +1,19 @@
 <template>
-    <div class="banner" :style="{
-        'background-image': `url(${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg)`,
-        'background-position': 'center center'
+   <div class="banner" :style="{
+    'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg)`,
+    'background-position': 'center center',
     }">
-        <div class="temple-banner container">
+        <div class="temple-banner container relative">
             <div v-if="temple.live_iframe">
                 <div class="flex flex-col items-center mb-5">
                     <img class="wind" src="../../assets/widget/wind.svg" alt="">
                     <h3>廟宇直播</h3>
                 </div>
             </div>
-            <div v-if="temple.live_iframe" class="video-wrapper" v-html="temple.live_iframe">
+            <div v-if="temple.live_iframe" class="video-wrapper z-10 " v-html="temple.live_iframe">
             </div>
         </div>
     </div>
-
     <Breadcrumb v-if="temple.name" :title="`首頁/${temple.name}`" />
     <div class="px-10px mx-auto max-w-1200px mt-40px mb-100px">
         <div class="mt-50px py-1">
@@ -110,6 +109,7 @@ onMounted(async () => {
             `${backend}/api/gc/temple/${templeID.value}`
         );
         temple.value = response.data.data;
+        console.log(temple.value);
         light.value = response.data.light;
         shuwen.value = response.data.shuwen;
         main_god.value = temple.value.main_god.split(',').join('、')
@@ -124,6 +124,7 @@ onMounted(async () => {
     border-bottom: 1px solid #EEEEEE;
 }
 .banner {
+    min-height: 400px;
     display: flex;
     margin: 0;
     padding: 0;
@@ -134,7 +135,7 @@ onMounted(async () => {
 }
 
 .temple-banner.container {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
     width: 100%;
     justify-content: center;

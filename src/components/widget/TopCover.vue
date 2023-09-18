@@ -1,6 +1,6 @@
 <template>
     <div class="relative flex justify-center items-center">
-        <img class="h-300 object-cover image" :src="props.image" alt="">
+        <img class="h-300 object-cover image w-full" :src="props.image" alt="">
         <h2 class="title z-10">{{ props.title }}</h2>
     </div>
 </template>
