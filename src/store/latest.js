@@ -11,7 +11,6 @@ export const uselatest = defineStore('latest', () => {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_PATH}/api/gc/latest/type`
         );
-        console.log(response);
         types.value = response.data.type
       } catch (error) {
         console.error("API 請求失敗:", error);

@@ -7,8 +7,15 @@
 
 </template>
 <script setup>
+//自製元件
 import Header from "@/components/global/header/Header.vue"
 import Footer from "./components/global/Footer.vue";
+
+//pinia
+import { uselatest } from '@/store/latest.js'
+const latest = uselatest(); 
+import { useGods } from '@/store/gods.js'
+const godsStore = useGods(); 
 </script>
 
 
