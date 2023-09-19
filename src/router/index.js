@@ -16,13 +16,13 @@ const routes = [
     name: "AllTemple",
     component: () => import("@/views/temple/AllTemple.vue")
   },
+  // {
+  //   path: "/mainGod",
+  //   name: "MainGod",
+  //   component: () => import("@/views/mainGod/MainGod.vue")
+  // },
   {
     path: "/mainGod",
-    name: "MainGod",
-    component: () => import("@/views/mainGod/MainGod.vue")
-  },
-  {
-    path: "/mainGod/:god",
     name: "MainGodDefault",
     component: () => import("@/views/mainGod/MainGodDefault.vue")
   },

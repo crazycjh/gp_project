@@ -29,7 +29,7 @@
                                 <select v-model="s2Value"
                                     class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select mr-2">
                                     <option value="" selected>主神</option>
-                                    <option v-for="item in godArray" :key="item">{{ item }}</option>
+                                    <option v-for="item in godsStore.originGodArray" :key="item">{{ item }}</option>
                                 </select>
                                 <img class="absolute right-0 top-0 mt-2 mr-4 pointer-events-none"
                                     src="../assets/index/arrow_down.svg" alt="">
@@ -83,16 +83,23 @@
     </div>
 </template>
 <script setup >
+//官方套件
 import { onMounted, ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
-// import Search from '@/components/index/Search.vue'
+const route = useRoute()
+
+//自製元件
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
 import TopCover from '@/components/widget/TopCover.vue'
 import Pagination from '@/components/widget/Pagination.vue'
 import Title from "../components/widget/Title.vue";
 const backend = import.meta.env.VITE_BACKEND_PATH
-const route = useRoute()
+
+//pinia
+import { useGods } from '@/store/gods.js'
+const godsStore = useGods(); 
+
 
 //初始化參數
 const searchText = ref()
@@ -100,9 +107,9 @@ const s1Value = ref('');
 const s2Value = ref('');
 const s3Value = ref('');
 const godArray = ref([])
-//地區主神
+
+//地區主神 關鍵字
 const search1 = ref(true)
-//關鍵字
 const search2 = ref(false)
 const activeTag = ref('city')
 const cities = ref([
@@ -130,17 +137,14 @@ const cities = ref([
     '連江縣'
 ]);
 
+//控制標籤
 const tagToogle = ((target) => {
-    if (target === 'city') {
-        search1.value = true
-        search2.value = false
-        activeTag.value = 'city'
-    } else if (target === 'name') {
-        search1.value = false
-        search2.value = true
-        activeTag.value = 'name'
-    }
+    search1.value = target === 'city';
+    search2.value = target === 'name';
+    activeTag.value = target;
 })
+
+//取得搜尋資料
 onMounted(() => {
     searchText.value = route.params.content;
     const urlParams = new URLSearchParams(searchText.value);
@@ -149,25 +153,12 @@ onMounted(() => {
     s3Value.value = urlParams.get('s3');
 });
 
-onMounted(async () => {
-    try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
-        );
-        godArray.value = response.data.split(',')
-    } catch (error) {
-        console.error("API 請求失敗:", error);
-    }
-});
-
-
+//取資料
 const temples = ref([])
 const total = ref();
-
 onMounted(async () => {
     fetchData()
 });
-
 const fetchData = async () => {
     try {
         const params = {
@@ -192,33 +183,37 @@ const fetchData = async () => {
     }
 }
 
+//分頁系統
 const currentPage = ref(1)
 const itemsPerPage = ref(12)
 const changePage = (page) => {
     currentPage.value = page
 }
-
 const totalPages = computed(() => {
     return Math.ceil(total.value / itemsPerPage.value);
 });
 
+//監聽觸發
 watch(currentPage, (newValue) => newValue && fetchData())
 watch(s1Value, (newValue) => newValue !== undefined && fetchData())
 watch(s2Value, (newValue) => newValue !== undefined && fetchData())
 watch(s3Value, (newValue) => newValue !== undefined && fetchData())
 
+//跳頁
 const router = useRouter()
 const goSearch = () => {
     router.push(`/search/s1=${s1Value.value}&s2=${s2Value.value}&s3=${s3Value.value}`);
     fetchData()
 }
 
+//清空搜尋條件
 const resetSearch = () => {
     s1Value.value = '';
     s2Value.value = '';
     s3Value.value = '';
 }
 
+//enter觸發
 const enterSearch = () =>{
     if (s1Value.value !== '' || s2Value.value !== '' || s3Value.value !== '') {
       goSearch();

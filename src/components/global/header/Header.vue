@@ -6,6 +6,7 @@
     </div>
 </template>
 <script setup >
+//自製元件
 import Menu from './Menu.vue';
 </script>
 <style scoped>

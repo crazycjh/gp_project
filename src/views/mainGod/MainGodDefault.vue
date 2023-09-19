@@ -6,7 +6,7 @@
             <div class="god_section mb-20px">
                 <h2>找主神</h2>
                 <span class="tag mr-10px" :class="{active: activeGod === ''}" @click="activeGod = ''">所有主神</span>
-                <span class="tag mr-10px" :class="{active: activeGod === item}" v-for="item in godArray" :key="item" @click="changeGod(item)">{{ item }}</span>
+                <span class="tag mr-10px" :class="{active: activeGod === item}" v-for="item in godsStore.originGodArray" :key="item" @click="changeGod(item)">{{ item }}</span>
             </div>
             <div class="city_section mb-20px">
                 <h2>找縣市</h2>
@@ -34,15 +34,25 @@
     </div>
 </template>
 <script setup >
+//官方套件
 import { onMounted, ref,computed,watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import axios from "axios";
+//自製元件
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
 import TopCover from '@/components/widget/TopCover.vue'
 import Pagination from '@/components/widget/Pagination.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
-import axios from "axios";
+
+//pinia
+import { useGods } from '@/store/gods.js'
+const godsStore = useGods(); 
+
+//初始化路由
 const route = useRoute()
 const router = useRouter()
+
+
 //初始化資料
 const defaultGod = ref('')
 const temples = ref([])
@@ -77,18 +87,17 @@ const cities = ref([
 
 const changeGod = (god) =>{
     activeGod.value = god
-    // router.push(`/mainGod/${activeGod.value}`)
 }
 
 //頁面生成時觸發
 onMounted(async () => {
-    if(route.params.god === 'all'){
-        activeGod.value =''
-    }else{
-        activeGod.value = route.params.god;
+    const godDefault = localStorage.getItem('god')
+    if(godDefault){
+        activeGod.value = godDefault
+        localStorage.removeItem('god')
     }
     fetchData()
-    fetchGod()
+    // fetchGod()
 });
 
 //取得廟宇資料
@@ -108,17 +117,6 @@ const fetchData = async () => {
     );
     temples.value = response.data.data;
     total.value = response.data.total;
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-}
-//取得主神資料
-const fetchGod = async () => {
- try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
-    );
-    godArray.value = response.data.split(',')
   } catch (error) {
     console.error("API 請求失敗:", error);
   }

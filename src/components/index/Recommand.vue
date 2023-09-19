@@ -1,17 +1,22 @@
-<script setup >
+<script setup>
+//官方套件
 import { onMounted,onUnmounted,ref } from "vue";
 import axios from "axios";
+
+//swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+const sliders = ref([]);
+const modules = [Autoplay, Pagination, Navigation];
+
+//自製元件
 import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
 import Title from '@/components/widget/Title.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 
-const sliders = ref([]);
-const modules = [Autoplay, Pagination, Navigation];
 
 //js控制navigators rwd
 const navigationSidesOffsetDesktop = ref('70px');

@@ -21,12 +21,16 @@
    </div>
 </template>
 <script setup >
+//官方套件
 import { onMounted,ref } from "vue";
 import axios from "axios";
+
+//自製元件
 import Title from '@/components/widget/Title.vue'
 import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
 const backend = import.meta.env.VITE_BACKEND_PATH
 
+//取得四筆最新活動
 const posts = ref([]);
 onMounted(async () => {
   try {

@@ -83,26 +83,31 @@
     </div>
 </template>
 <script setup >
+//官方套件
 import { onMounted, ref, computed } from "vue";
 import { useRoute } from 'vue-router';
 import axios from "axios";
+
+//自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Breadcrumb from '../../components/widget/Breadcrumb.vue';
 import Title from "../../components/widget/Title.vue";
 import TopCover from '../../components/widget/TopCover.vue';
+
+//初始化資料
 const templeID = ref();
 const main_god = ref();
 const temple = ref([]);
 const light = ref([]);
 const shuwen = ref([]);
 
+//取id
 onMounted(() => {
     const route = useRoute();
     templeID.value = Number(route.params.templeID);
-
 });
 
-
+//取個別資料
 onMounted(async () => {
     try {
         const response = await axios.get(

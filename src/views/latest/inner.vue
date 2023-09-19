@@ -69,18 +69,24 @@
   </div>
 </template>
 <script setup >
-import { useRoute,useRouter } from 'vue-router';
+//官方套件
 import { onMounted, ref, watch } from "vue";
+import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
+
+//swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import Breadcrumb from "../../components/widget/Breadcrumb.vue";
 const modules = [Autoplay, Pagination, Navigation]
+
+//自製元件
+import Breadcrumb from "../../components/widget/Breadcrumb.vue";
 const backend = import.meta.env.VITE_BACKEND_PATH
-// instance?.proxy?.$forceupdate();
+
+//取的id
 const latestID = ref('');
 const currentUrl = ref('')
 onMounted(() => {
@@ -89,10 +95,9 @@ onMounted(() => {
   currentUrl.value = window.location.href
 });
 
-
+//取得頁面資訊
 const post = ref([]);
 const bottom_post = ref([]);
-
 onMounted(async () => {
   try {
     const response = await axios.get(
@@ -100,16 +105,19 @@ onMounted(async () => {
     );
     post.value = response.data.latest;
     bottom_post.value = response.data.relate;
-    console.log(response.data.relate);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
  
 });
+
+//點擊換頁
 const router = useRouter();
 const goLatest = (type)=>{
   router.push(`/latest/${type}`)
 }
+
+//line.fb分享
 const lineShare = () =>{
   const shareUrl = `https://social-plugins.line.me/lineit/share?url=${currentUrl.value}`;
   openWindow(shareUrl)

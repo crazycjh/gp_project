@@ -13,6 +13,7 @@
     <Product />
 </template>
 <script setup >
+//自製元件
 import Slider from '@/components/index/Slider.vue'
 import Search from '@/components/index/Search.vue'
 import Live from '@/components/index/Live.vue'

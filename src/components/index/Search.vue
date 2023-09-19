@@ -23,7 +23,7 @@
                   <div class="relative w-full">
                      <select v-model="god" class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select mr-2">
                         <option selected>主神</option>
-                        <option v-for="item in godArray" :key="item">{{ item }}</option>
+                        <option v-for="item in godsStore.originGodArray" :key="item">{{ item }}</option>
                      </select>
                      <img class="absolute right-0 top-0 mt-2 max-md:mr-3  mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
                   </div>   
@@ -40,27 +40,21 @@
    </div>
 </template>
 <script setup>
+//官方套件
 import {ref,watch,onMounted} from "vue";
 import axios from 'axios';
-import Title from '@/components/widget/Title.vue'
 import { useRouter } from "vue-router";
 
+//自製元件
+import Title from '@/components/widget/Title.vue'
 
-const godArray = ref([])
-onMounted(async () => {
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
-    );
-    godArray.value = response.data.split(',')
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-});
+//pinia
+import { useGods } from '@/store/gods.js'
+const godsStore = useGods(); 
 
-//地區主神
+
+//地區主神，關鍵字
 const search1 = ref(true)
-//關鍵字
 const search2 = ref(false)
 const activeTag = ref('city')
 const city = ref('全台縣市');
@@ -91,18 +85,13 @@ const cities = ref([
   '連江縣'
 ]);
 
-const tagToogle = (target) =>{
-   if(target === 'city'){
-      search1.value = true
-      search2.value = false
-      activeTag.value = 'city'
-   }else if(target === 'name'){
-      search1.value = false
-      search2.value = true
-      activeTag.value = 'name'
-   }
-}
-
+//標籤區分
+const tagToogle = ((target) => {
+    search1.value = target === 'city';
+    search2.value = target === 'name';
+    activeTag.value = target;
+})
+//跳轉搜尋頁
 const router = useRouter()
 const goSearch = ()=>{
    if(city.value === '全台縣市') city.value = ''
@@ -110,6 +99,7 @@ const goSearch = ()=>{
   router.push(`/search/s1=${city.value}&s2=${god.value}&s3=${searchText.value}`);
 }
 
+//enter觸發
 const enterSearch = () => {
    if (city.value !== '' || god.value !== '' || searchText.value !== '') {
       goSearch();

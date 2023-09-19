@@ -13,19 +13,23 @@
       <img class="tree_right" src="../../assets/index/tree_right.svg" alt="">
    </div>
    </template>
-<script setup >
-import Title from '@/components/widget/Title.vue'
-import axios from "axios";
-import LinkBtn from "../widget/LinkBtn.vue";
+<script setup>
+//官方套件
 import { onMounted, ref, reactive } from "vue";
+import axios from "axios";
+
+//自製元件
+import Title from '@/components/widget/Title.vue'
+import LinkBtn from "../widget/LinkBtn.vue";
 const backend = import.meta.env.VITE_BACKEND_PATH
+
+//取得直播資料
 const live = reactive([]);
 onMounted(async () => {
   try {
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/live`
     );
-   //  live= response.data.live
    live.push(...response.data.live)
   } catch (error) {
     console.error("API 請求失敗:", error);

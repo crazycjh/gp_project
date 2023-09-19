@@ -15,6 +15,7 @@
    </div>
 </template>
 <script setup >
+//自製元件
 import Title from '@/components/widget/Title.vue'
 import LinkBtn from '../widget/LinkBtn.vue';
 const backend = import.meta.env.VITE_BACKEND_PATH

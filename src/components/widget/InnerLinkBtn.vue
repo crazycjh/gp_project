@@ -13,16 +13,23 @@
   </div>
 </template>
 <script setup >
+//官方套件
 import { ref } from 'vue';
+
+//自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
+const normalIcon = `${backend}wp-content/uploads/2023/09/live-icon-01.svg`
+const activeIcon = `${backend}wp-content/uploads/2023/09/live-icon-02.svg`
+
+
 const props = defineProps({
   link: String, 
   text:String,
   red: [String, Boolean], 
   icon: [String, Boolean], 
 });
-const normalIcon = `${backend}wp-content/uploads/2023/09/live-icon-01.svg`
-const activeIcon = `${backend}wp-content/uploads/2023/09/live-icon-02.svg`
+
+//控制hover
 const isHover = ref(false);
 const toggleHover = ((isHovering) =>{
   isHover.value = isHovering

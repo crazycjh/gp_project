@@ -19,6 +19,7 @@
     </div>
 </template>
 <script setup>
+//自製元件
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
 import TopCover from '@/components/widget/TopCover.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH

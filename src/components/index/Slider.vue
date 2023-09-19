@@ -49,16 +49,20 @@
     </div>
   </template>
 <script setup >
+//官方套件
 import { onMounted, onUnmounted, ref } from "vue";
 import axios from "axios";
+
+//swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import LinkBtn from "../widget/LinkBtn.vue";
-const sliders = ref([]);
 const modules = [Autoplay, Pagination, Navigation];
+
+//自製元件
+import LinkBtn from "../widget/LinkBtn.vue";
 
 //js控制navigators rwd
 const navigationSidesOffsetDesktop = ref("70px");
@@ -69,6 +73,8 @@ const adjustNavigationSidesOffset = () => {
     navigationSidesOffsetDesktop.value = "70px";
   }
 };
+
+//rwd調整箭頭位置
 onMounted(() => {
   adjustNavigationSidesOffset();
   window.addEventListener("resize", adjustNavigationSidesOffset);
@@ -76,7 +82,9 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", adjustNavigationSidesOffset);
 });
+
 //輪播取得資料
+const sliders = ref([]);
 onMounted(async () => {
   try {
     const response = await axios.get(

@@ -4,7 +4,7 @@
     <div class="tags flex justify-center max-md:px-100px gap-10px my-50px flex-wrap">
         <div class="flex gap-10px max-md:gap-20px max-md:max-w-570px max-w-1200px flex-wrap justify-center">
             <button class="btn rounded-none" :class="{ active: currentActive === 'all' }" @click="fetchData('all')">全部</button>
-            <button v-for="item in type" :key="item.term_id" class="btn rounded-none" :class="{ active: currentActive === item.slug }" @click="fetchData(item.slug)">{{ item.name }}</button>
+            <button v-for="item in latest.types" :key="item.term_id" class="btn rounded-none" :class="{ active: currentActive === item.slug }" @click="fetchData(item.slug)">{{ item.name }}</button>
         </div>
     </div>
     <div class="mx-auto max-w-1200px">
@@ -23,39 +23,41 @@
     </div>
 </template>
 <script setup >
+//官方套件
 import { onMounted,ref,computed,watch } from "vue";
 import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
+
+//自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
 import TopCover from '@/components/widget/TopCover.vue'
 import Pagination from '@/components/widget/Pagination.vue'
+
+//pinia
+import { uselatest } from '@/store/latest.js'
+const latest = uselatest(); 
+
+//資料初始化
 const posts = ref([]);
 const total = ref();
 const type = ref([]);
 const currentActive = ref();
-
 const route = useRoute();
 const router = useRouter()
+
+//取id
 onMounted(() => {
   currentActive.value = route.params.type;
 });
 
+//取資料和種類
 onMounted(async () => {
     fetchData(currentActive.value)
     fetchType()
 });
 
-const currentPage = ref(1)
-const itemsPerPage = ref(12)
-const changePage =((page)=>{
-    currentPage.value = page
-})
-
-const totalPages = computed(() => {
-    return Math.ceil(total.value / itemsPerPage.value);
-});
-
+//根據種類取資料
 const fetchData = async (type) => {
   if(type !== currentActive.value ){
     currentPage.value = 1
@@ -71,7 +73,6 @@ const fetchData = async (type) => {
   if (type !== 'all') {
     apiUrl += `?latest_type=${type}`;
   }
-
   try {
     const response = await axios.get(apiUrl,{
        params:params,
@@ -83,18 +84,28 @@ const fetchData = async (type) => {
   }
 };
 
+//取得種類
 const fetchType = async () => {
- 
   let apiUrl = `${backend}api/gc/latest/type`;
-
   try {
     const response = await axios.get(apiUrl);
     type.value = response.data.type
-    console.log(type.value);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
 };
+
+//分頁系統
+const currentPage = ref(1)
+const itemsPerPage = ref(12)
+const changePage =((page)=>{
+    currentPage.value = page
+})
+const totalPages = computed(() => {
+    return Math.ceil(total.value / itemsPerPage.value);
+});
+
+//監聽頁數
 watch(currentPage,(newValue) => newValue && fetchData(currentActive.value))
 
 </script>

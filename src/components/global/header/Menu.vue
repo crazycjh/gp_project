@@ -13,7 +13,7 @@
                     <router-link to="/allTemple/" class="nav-link">全台廟宇</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/mainGod/all" class="nav-link">主神</router-link>
+                    <router-link to="/mainGod/" class="nav-link">主神</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/latest/all" class="nav-link">最新活動</router-link>

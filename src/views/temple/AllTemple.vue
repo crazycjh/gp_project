@@ -11,7 +11,7 @@
             <div class="god_section mb-20px">
                 <h2>找主神</h2>
                 <span class="tag mr-10px" :class="{active: activeGod === ''}" @click="activeGod = ''">所有主神</span>
-                <span class="tag mr-10px" :class="{active: activeGod === item}" v-for="item in godArray" :key="item" @click="activeGod = item">{{ item }}</span>
+                <span class="tag mr-10px" :class="{active: activeGod === item}" v-for="item in godsStore.originGodArray" :key="item" @click="activeGod = item">{{ item }}</span>
             </div>
         </div>
         <div v-if="temples.length !== 0" class="w-full flex gap-30px flex-wrap mt-40px max-xl:justify-center">
@@ -34,12 +34,19 @@
     </div>
 </template>
 <script setup >
+//官方套件
 import { onMounted, ref,computed,watch } from "vue";
+import axios from "axios";
+
+//自製元件
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
 import TopCover from '@/components/widget/TopCover.vue'
 import Pagination from '@/components/widget/Pagination.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
-import axios from "axios";
+
+//pinia
+import { useGods } from '@/store/gods.js'
+const godsStore = useGods(); 
 
 //初始化資料
 const temples = ref([])
@@ -75,7 +82,7 @@ const cities = ref([
 //頁面生成時觸發
 onMounted(async () => {
     fetchData()
-    fetchGod()
+    // fetchGod()
 });
 
 //取得廟宇資料
@@ -99,17 +106,8 @@ const fetchData = async () => {
     console.error("API 請求失敗:", error);
   }
 }
-//取得主神資料
-const fetchGod = async () => {
- try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
-    );
-    godArray.value = response.data.split(',')
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-}
+
+//分頁系統
 const currentPage = ref(1)
 const itemsPerPage = ref(12)
 const changePage =((page)=>{
@@ -122,6 +120,7 @@ const totalPages = computed(() => {
 
 //監聽縣市，主神，頁數
 watch(currentPage,(newValue) => newValue && fetchData())
+
 //空字串也要監聽
 watch(activeCity,(newValue) =>  {
   if (newValue !== undefined) {
