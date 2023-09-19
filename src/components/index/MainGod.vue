@@ -35,7 +35,6 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 //pinia
 import { useGods } from '@/store/gods.js'
 const godsStore = useGods(); 
-
 //hover換圖
 const currentImageIndex = ref();
 const getGodImageUrl = (index) =>{
@@ -53,7 +52,7 @@ const isHovered = (index) =>{
 //跳頁預選
 const router = useRouter()
 const goSearch = ((index) => {
-    localStorage.setItem('god',godArray.value[index])
+    localStorage.setItem('god',godsStore.godArray[index])
     router.push('/mainGod')
 })
 

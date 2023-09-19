@@ -85,15 +85,15 @@ const fetchData = async (type) => {
 };
 
 //取得種類
-const fetchType = async () => {
-  let apiUrl = `${backend}api/gc/latest/type`;
-  try {
-    const response = await axios.get(apiUrl);
-    type.value = response.data.type
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-};
+// const fetchType = async () => {
+//   let apiUrl = `${backend}api/gc/latest/type`;
+//   try {
+//     const response = await axios.get(apiUrl);
+//     type.value = response.data.type
+//   } catch (error) {
+//     console.error("API 請求失敗:", error);
+//   }
+// };
 
 //分頁系統
 const currentPage = ref(1)
