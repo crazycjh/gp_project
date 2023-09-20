@@ -1,17 +1,40 @@
 <template>
+    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
     <TopCover :image="`${backend}wp-content/uploads/2023/08/god_banner.jpg`" title="主神" />
     <Breadcrumb title="首頁/主神" />
     <div class="mx-auto max-w-1200px ">
-        <div class="filter_section mt-70px mb-10px px-10px">
+        <div class="filter_section mt-70px mb-10px px-10px hidden md:block">
             <div class="god_section mb-20px">
                 <h2>找主神</h2>
-                <span class="tag mr-10px" :class="{active: activeGod === ''}" @click="activeGod = ''">所有主神</span>
-                <span class="tag mr-10px" :class="{active: activeGod === item}" v-for="item in godsStore.originGodArray" :key="item" @click="changeGod(item)">{{ item }}</span>
+                <button class="tag mr-10px mb-20px" :class="{active: activeGod === ''}" @click="activeGod = ''">所有主神</button>
+                <button class="tag mr-10px mb-20px" :class="{active: activeGod === item}" v-for="item in godsStore.originGodArray" :key="item" @click="changeGod(item)">{{ item }}</button>
             </div>
             <div class="city_section mb-20px">
                 <h2>找縣市</h2>
-                <span class="tag mr-10px" :class="{active: activeCity === ''}" @click="activeCity = ''">全台縣市</span>
-                <span class="tag mr-10px" :class="{active: activeCity === item}" v-for="item in cities" :key="item" @click="activeCity = item">{{ item }}</span>
+                <button class="tag mr-10px mb-20px" :class="{active: activeCity === ''}" @click="activeCity = ''">全台縣市</button>
+                <button class="tag mr-10px mb-20px" :class="{active: activeCity === item}" v-for="item in cities" :key="item" @click="activeCity = item">{{ item }}</button>
+            </div>
+        </div>
+        <div class="filter_section mt-70px mb-50px px-10px flex md:hidden">
+            <div class="w-full flex flex-col mr-20px">
+                <h2>找主神</h2>
+                <div class="relative w-full ">
+                    <select v-model="activeGod" class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select mr-2">
+                        <option selected value="">主神</option>
+                        <option v-for="item in godsStore.originGodArray" :key="item">{{ item }}</option>
+                    </select>
+                    <img class="absolute right-0 top-0 mt-2 max-md:mr-3  mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
+                </div>   
+            </div>
+            <div class="flex w-full  flex-col">
+                <h2>找縣市</h2>
+                <div class="relative w-full">
+                    <select v-model="activeCity" class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
+                        <option selected value="">全台縣市</option>
+                        <option v-for="item in cities" :key="item">{{ item }}</option>
+                    </select>
+                    <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
+                </div>
             </div>
         </div>
         <div v-if="temples.length !== 0" class="w-full flex gap-30px flex-wrap mt-40px max-xl:justify-center">
@@ -25,7 +48,7 @@
                 </router-link>
             </div>
         </div>
-        <div v-else>
+        <div v-if="temples.length === 0 && isLoading === false">
             <h4 class="noData px-10px">查無資料，請重新選擇篩選條件!</h4>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
@@ -38,6 +61,9 @@
 import { onMounted, ref,computed,watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
+
 //自製元件
 import Breadcrumb from '@/components/widget/Breadcrumb.vue'
 import TopCover from '@/components/widget/TopCover.vue'
@@ -101,7 +127,10 @@ onMounted(async () => {
 });
 
 //取得廟宇資料
+const isLoading = ref(false);
+const fullPage = ref(true);
 const fetchData = async () => {
+  isLoading.value = true;
   try {
     const params = {
         limit:itemsPerPage.value, 
@@ -119,6 +148,8 @@ const fetchData = async () => {
     total.value = response.data.total;
   } catch (error) {
     console.error("API 請求失敗:", error);
+  }  finally {
+    isLoading.value = false; 
   }
 }
 
@@ -149,6 +180,17 @@ watch(activeGod,(newValue) => {
 </script>
 
 <style scoped>
+.custom_select{
+   display: flex;
+   width:100%;
+   height: 30px;
+   padding: 0px 10px;
+   justify-content: space-between;
+   align-items: center;
+   flex-shrink: 0;
+   background: #EEE;
+   color:#333333;
+}
 .noData{
     font-family: Noto Serif TC;
     font-size: 24px;
@@ -159,21 +201,23 @@ watch(activeGod,(newValue) => {
     color: #543118;
 }
 .active{
-    color:#CEB96E !important;
+    color:#ffffff !important;
+    background-color: #CEB96E !important;
 }
 .tag{
     cursor: pointer;
-    white-space:nowrap;
-    font-family: Noto Serif TC;
-    font-size: 16px;
-    font-weight: 550;
-    line-height: 23px;
-    letter-spacing: 0.2em;
-    text-align: left;
-    color:#AAA;
+    font-weight: 700;
+    text-align: center;
+    color:#9B9B9B;
+    width: 110px;
+    height: 35px;
+    background-color: #EEEEEE;
+    border-radius: 0;
+    border: none;
+    outline: none;
 }
 .tag:hover{
-    border-bottom: 1px solid #AAA;
+    color:#000;
 }
 .filter_section h2{
     font-family: Noto Serif TC;

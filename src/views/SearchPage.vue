@@ -1,4 +1,5 @@
 <template>
+    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
     <TopCover :image="`${backend}wp-content/uploads/2023/09/search_banner.jpg`" title="搜尋結果" />
     <Breadcrumb title="首頁/搜尋結果" />
     <div class="mx-auto max-w-1200px">
@@ -74,7 +75,7 @@
                 </router-link>
             </div>
         </div>
-        <div class="flex justify-center" v-if="temples.length === 0">
+        <div class="flex justify-center" v-if="temples.length === 0 && isLoading === false">
             <h4>查無廟宇，請重新輸入篩選條件!</h4>
         </div>
         <div class="flex justify-center my-30px lg:my-50px">
@@ -87,6 +88,8 @@
 import { onMounted, ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 const route = useRoute()
 
 //自製元件
@@ -156,10 +159,13 @@ onMounted(() => {
 //取資料
 const temples = ref([])
 const total = ref();
+const isLoading = ref(false);
+const fullPage = ref(true);
 onMounted(async () => {
     fetchData()
 });
 const fetchData = async () => {
+    isLoading.value = true;
     try {
         const params = {
             limit: itemsPerPage.value,
@@ -180,7 +186,9 @@ const fetchData = async () => {
         console.log(response.data);
     } catch (error) {
         console.error("API 請求失敗:", error);
-    }
+    } finally {
+    isLoading.value = false; 
+  }
 }
 
 //分頁系統

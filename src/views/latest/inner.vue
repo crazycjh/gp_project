@@ -1,4 +1,5 @@
 <template>
+  <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
   <Breadcrumb v-if="post.title" :title="`首頁/${post.title}`" />
   <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px mb:30px lg:mb-80px">
     <div class="max-w-915px pr-10px w-full">
@@ -73,6 +74,8 @@
 import { onMounted, ref, watch } from "vue";
 import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -98,7 +101,10 @@ onMounted(() => {
 //取得頁面資訊
 const post = ref([]);
 const bottom_post = ref([]);
+const isLoading = ref(false);
+const fullPage = ref(true);
 onMounted(async () => {
+  isLoading.value = true;
   try {
     const response = await axios.get(
       `${backend}/api/gc/latest/${latestID.value}`
@@ -107,6 +113,8 @@ onMounted(async () => {
     bottom_post.value = response.data.relate;
   } catch (error) {
     console.error("API 請求失敗:", error);
+  } finally {
+    isLoading.value = false; 
   }
  
 });

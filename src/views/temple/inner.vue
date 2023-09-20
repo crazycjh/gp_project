@@ -1,4 +1,5 @@
 <template>
+    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
    <div class="banner" :style="{
     'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg)`,
     'background-position': 'center center',
@@ -87,6 +88,8 @@
 import { onMounted, ref, computed } from "vue";
 import { useRoute } from 'vue-router';
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
@@ -108,7 +111,10 @@ onMounted(() => {
 });
 
 //取個別資料
+const isLoading = ref(false);
+const fullPage = ref(true);
 onMounted(async () => {
+    isLoading.value = true;
     try {
         const response = await axios.get(
             `${backend}/api/gc/temple/${templeID.value}`
@@ -120,7 +126,9 @@ onMounted(async () => {
         main_god.value = temple.value.main_god.split(',').join('、')
     } catch (error) {
         console.error("API 請求失敗:", error);
-    }
+    } finally {
+    isLoading.value = false; 
+  }
 });
 </script>
 

@@ -53,7 +53,7 @@
                     <router-link to="/mainGod/" class="nav-link-mobile" @click="isOpen = !isOpen">主神</router-link>
                 </li>
                 <li class="nav-item-mobile">
-                    <router-link to="/latest/" class="nav-link-mobile" @click="isOpen = !isOpen">最新活動</router-link>
+                    <router-link to="/latest/all" class="nav-link-mobile" @click="isOpen = !isOpen">最新活動</router-link>
                 </li>
                 <li class="nav-item-mobile">
                     <router-link to="/service/" class="nav-link-mobile" @click="isOpen = !isOpen">服務</router-link>

@@ -1,4 +1,5 @@
 <template>
+    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
     <TopCover :image="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" title="最新活動" />
     <Breadcrumb title="首頁/最新活動" />
     <div class="tags flex justify-center max-md:px-100px gap-10px my-50px flex-wrap">
@@ -27,6 +28,8 @@
 import { onMounted,ref,computed,watch } from "vue";
 import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
@@ -58,6 +61,8 @@ onMounted(async () => {
 });
 
 //根據種類取資料
+const isLoading = ref(false);
+const fullPage = ref(true);
 const fetchData = async (type) => {
   if(type !== currentActive.value ){
     currentPage.value = 1
@@ -73,6 +78,7 @@ const fetchData = async (type) => {
   if (type !== 'all') {
     apiUrl += `?latest_type=${type}`;
   }
+  isLoading.value = true;
   try {
     const response = await axios.get(apiUrl,{
        params:params,
@@ -81,6 +87,8 @@ const fetchData = async (type) => {
     total.value = response.data.total;
   } catch (error) {
     console.error("API 請求失敗:", error);
+  } finally {
+    isLoading.value = false; 
   }
 };
 
@@ -143,7 +151,7 @@ watch(currentPage,(newValue) => newValue && fetchData(currentActive.value))
 .photo{
     width: 100%;
 }
-@media(min-width: 1024px){
+@media(width > 1024px){
     .block{
         width:280px;
     }
