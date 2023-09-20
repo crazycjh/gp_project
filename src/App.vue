@@ -3,10 +3,14 @@
      <Header />
        <router-view  :key="$route.path"/>
      <Footer />
+     <ModalsContainer />
   </div>
 
 </template>
 <script setup>
+//官方套件
+import { ModalsContainer } from 'vue-final-modal'
+
 //自製元件
 import Header from "@/components/global/header/Header.vue"
 import Footer from "./components/global/Footer.vue";
