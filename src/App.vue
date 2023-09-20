@@ -2,10 +2,10 @@
   <div class="cover">
      <Header />
        <router-view  :key="$route.path"/>
+       <ModalsContainer />
      <Footer />
-     <ModalsContainer />
   </div>
-
+ 
 </template>
 <script setup>
 //官方套件
@@ -38,6 +38,7 @@ const godsStore = useGods();
   filter: drop-shadow(0 0 2em #42b883aa);
 }
 .cover{
+    width: 100%;
     background-image: url('../src/assets/index/home_bg1_2.svg');
     background-repeat: repeat;
     background-size: 282px auto;

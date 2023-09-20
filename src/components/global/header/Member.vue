@@ -1,6 +1,19 @@
 <template>
-    <div class="icon"></div>
+    <div class="icon" @click="showLogin"></div>
 </template>
+<script setup>
+import { useModal } from 'vue-final-modal'
+import LoginModal from '../../modals/LoginModal.vue';
+
+const { open } = useModal({
+  component: LoginModal,
+})
+
+const showLogin = () =>{
+    open()
+}
+
+</script>
 <style scoped>
 .icon{
     width: 33px;

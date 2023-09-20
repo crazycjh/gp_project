@@ -74,9 +74,14 @@
     <img class="close" v-show="isOpen" @click="isOpen = !isOpen" src="../../../assets/header/Union.svg" alt="">
 </template>
 <script setup >
+//官方套件
+import { ref,watch } from 'vue';
+import { useModal } from 'vue-final-modal'
+
+//自製元件
 import Member from './Member.vue';
 import Cart from './Cart.vue';
-import { ref,watch } from 'vue';
+
 //控制手機板選單，鎖屏
 const isOpen = ref(false);
 watch(isOpen,(newValue)=>{
