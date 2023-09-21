@@ -2,16 +2,24 @@
     <div>
         <div class="flex mb-30px">
             <img class="check mr-5px" src="../../assets/modal/check_mark_icon.svg" alt="">
-            <p class="msg">lia9021102@gmail.com請到信箱取件重設密碼</p>
+            <p class="msg">{{ props.content }}</p>
         </div>
-        <button class="know_btn" @click="redirectLogin">我知道了</button>
+        <button v-show="!close" class="know_btn" @click="redirectLogin">我知道了</button>
+        <button v-show="close" class="know_btn" @click="closeModal">回頁面</button>
     </div>
 </template>
 <script setup>
-const emit = defineEmits(['redirect-login']);
+const props = defineProps({
+  content: String,
+  close:String | Boolean,
+});
+const emit = defineEmits(['redirect-login','close-modal']);
 
 const redirectLogin = () => {
     emit('redirect-login');
+}
+const closeModal = () => {
+    emit('close-modal');
 }
 </script>
 <style scoped>

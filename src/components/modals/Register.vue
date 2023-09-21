@@ -54,7 +54,7 @@ const email = ref('');
 const password = ref('');
 const accept = ref(false)
 const errorMessage = ref('');
-
+const emit = defineEmits(['redirect-register-success']);
 const sendRegister = async () => {
     if (!validateEmail(email.value)) {
         errorMessage.value = '請輸入有效電子郵件';
@@ -87,6 +87,7 @@ const sendRegister = async () => {
             const auth = useAuth()
             auth.setJWT(jwt)
             auth.setMember(response.data.data.user_id,response.data.data.email)
+            emit('redirect-register-success')
         }
     } catch (error) {
         console.error("API 请求失败:", error);

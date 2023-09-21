@@ -30,14 +30,16 @@
                     <button @click="activePage = 'register'">註冊會員</button>
                 </div>
             </div>
-            <Register v-show="activePage === 'register'" />
+            <Register v-show="activePage === 'register'" @redirect-register-success="activePage = 'registerSuccess'"/>
             <Forget v-show="activePage === 'forget'" @reset-password="activePage = 'afterSuccess'" />
-            <AfterSuccess v-show="activePage === 'afterSuccess'" @redirect-login="activePage = 'login'"/>
+            <AfterSuccess content="lia9021102@gmail.com請到信箱取件重設密碼" v-show="activePage === 'afterSuccess'" @redirect-login="activePage = 'login'"/>
+            <AfterSuccess content="註冊成功" close="true" v-show="activePage === 'registerSuccess'" @redirect-login="activePage = 'login'" @close-modal="emit('confirm')"/>
+            <AfterSuccess content="登入成功" close="true" v-show="activePage === 'loginSuccess'" @redirect-login="activePage = 'login'" @close-modal="emit('confirm')"/>
         </div>
       <slot />
     </VueFinalModal>
   </template>
-<script setup lang="ts">
+<script setup>
 //官方套件
 import { ref } from 'vue';
 import { VueFinalModal } from 'vue-final-modal'
@@ -58,6 +60,8 @@ const validateEmail = (email) => {
 const validatePassword = (password) => {
     return password.length >= 8;
 };
+
+//執行登入
 const errorMessage= ref('')
 const email = ref('');
 const password = ref('');
@@ -89,6 +93,7 @@ const sendLogin = async () => {
             const auth = useAuth()
             auth.setJWT(jwt)
             auth.setMember(response.data.data.user_id,response.data.data.email)
+            activePage.value = 'loginSuccess'
         }
     } catch (error) {
         console.error("API 请求失败:", error);
@@ -96,12 +101,8 @@ const sendLogin = async () => {
 }
 
 
-const emit = defineEmits<{
-    (e: 'confirm'): void
-  }>()
-
+const emit = defineEmits(['confirm']);
 const activePage = ref('login')
-
 const isPswViewed = ref(false)
 
 </script>

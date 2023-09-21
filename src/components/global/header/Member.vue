@@ -1,9 +1,17 @@
 <template>
-    <div class="icon" @click="showLogin"></div>
+    <div v-show="!auth.isLogin" class="icon" @click="showLogin"></div>
+    <router-link v-show="auth.isLogin" to="/member"><div class="icon"></div></router-link>
 </template>
 <script setup>
+//官方套件
+import { ref } from 'vue';
 import { useModal } from 'vue-final-modal'
+
+//自製套件
 import LoginModal from '../../modals/LoginModal.vue';
+import { useAuth } from '@/store/auth.js'
+const auth = useAuth();
+
 
 const { open, close } = useModal({
   component: LoginModal,
