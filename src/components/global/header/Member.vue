@@ -5,8 +5,13 @@
 import { useModal } from 'vue-final-modal'
 import LoginModal from '../../modals/LoginModal.vue';
 
-const { open } = useModal({
+const { open, close } = useModal({
   component: LoginModal,
+  attrs: {
+    onConfirm() {
+        close()
+    },
+  },
 })
 
 const showLogin = () =>{

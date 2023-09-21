@@ -17,7 +17,7 @@ export const uselatest = defineStore('latest', () => {
       }
     }
 
-    onMounted( latest);
+    onMounted( latest );
     
     return { types };
 });

@@ -57,7 +57,7 @@ onMounted(() => {
 //取資料和種類
 onMounted(async () => {
     fetchData(currentActive.value)
-    fetchType()
+    // fetchType()
 });
 
 //根據種類取資料
