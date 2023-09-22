@@ -12,7 +12,6 @@ import LoginModal from '../../modals/LoginModal.vue';
 import { useAuth } from '@/store/auth.js'
 const auth = useAuth();
 
-
 const { open, close } = useModal({
   component: LoginModal,
   attrs: {

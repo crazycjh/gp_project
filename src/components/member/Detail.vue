@@ -74,6 +74,21 @@
 import { ref,watch,onMounted } from 'vue';
 import axios from "axios";
 import { useRoute } from 'vue-router';
+import { useModal } from 'vue-final-modal'
+
+//自製組件
+import AlertModal from '../modals/AlertModal.vue';
+
+//控制modal
+const { open, close } = useModal({
+  component: AlertModal,
+  attrs: {
+    content:'更新會員資料成功',
+    onConfirm() {
+        close()
+    },
+  },
+})
 
 //取得user_id
 const backend = import.meta.env.VITE_BACKEND_PATH
@@ -102,7 +117,7 @@ const fetchData = async (id) => {
         address.value = response.data.data.address
         selectedCity.value = response.data.data.city
         selectedArea.value = response.data.data.area
-        console.log(response.data.data.area);
+        
     }
   } catch (error) {
     console.error("API 請求失敗:", error);
@@ -190,8 +205,9 @@ const updateProfile = async () => {
         );
         if(response.data.success === false){
             errorMessage.value = response.data.data
+
         }else{
-            
+            open()  
         }
     } catch (error) {
         console.error("API 请求失败:", error);

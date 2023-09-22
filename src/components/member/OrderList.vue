@@ -90,6 +90,14 @@
         </div>
     </div>
 </template>
+<script setup>
+//官方套件
+import { ref } from 'vue';
+
+
+//自製組件
+
+</script>
 <style scoped>
 .order_list_btn{
     width: 152px;
