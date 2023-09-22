@@ -2,7 +2,9 @@
     <VueFinalModal
       class="flex justify-center items-center"
       content-class="flex flex-col p-4 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800 "
-    >   
+    >   <div class="flex justify-end">
+          <img class="close" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
+        </div>
         <div class="w-360px px-10px pt-30px">
             <div class="flex mb-30px">
                 <img class="check mr-5px" src="../../assets/modal/check_mark_icon.svg" alt="">
