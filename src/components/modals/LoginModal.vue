@@ -112,6 +112,9 @@ const isPswViewed = ref(false)
 
 
 <style scoped>
+.error{
+    color:red;
+}
 .sub_title{
     font-size: 16px;
 }

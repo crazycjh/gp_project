@@ -87,7 +87,7 @@ const routes = [
     component: () => import("@/views/Todo.vue")
   },
   {
-    path: "/member",
+    path: "/member/:memberID",
     name: "Member",
     component: () => import("@/views/member/Index.vue")
   },

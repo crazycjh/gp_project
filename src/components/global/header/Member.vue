@@ -1,6 +1,6 @@
 <template>
     <div v-show="!auth.isLogin" class="icon" @click="showLogin"></div>
-    <router-link v-show="auth.isLogin" to="/member"><div class="icon"></div></router-link>
+    <router-link v-show="auth.isLogin" :to="`/member/${auth.member.user_id}`"><div class="icon"></div></router-link>
 </template>
 <script setup>
 //官方套件

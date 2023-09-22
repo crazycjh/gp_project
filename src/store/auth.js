@@ -18,7 +18,14 @@ export const useAuth = defineStore('auth', () => {
     isLogin.value = true
   }
 
-  return { jwt, member, isLogin, setJWT, setMember };
+  const logout = () => {
+    jwt.value = ''
+    member.value.user_id = ''
+    member.value.email = ''
+    isLogin.value = false
+  }
+
+  return { jwt, member, isLogin, setJWT, setMember,logout };
 }, {
   persist: true,
 },
