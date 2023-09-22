@@ -205,7 +205,7 @@ const isPswViewed = ref(false)
 
 const areas = ref([]);
 const updateAreas = () => {
-  selectedArea.value = ''; 
+//   selectedArea.value = ''; 
   const selectedCityAreas = areasByCity.value[selectedCity.value];
   areas.value = selectedCityAreas || [];
 };
