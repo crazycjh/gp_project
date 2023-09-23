@@ -210,7 +210,7 @@ const updateProfile = async () => {
             open()  
         }
     } catch (error) {
-        console.error("API 请求失败:", error);
+        console.error("API 請求失敗:", error);
     }
 }
 

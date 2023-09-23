@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { useAuth } from '@/store/auth.js'
 const routes = [
   {
     path: "/",
@@ -34,7 +35,13 @@ const routes = [
   {
     path: "/product",
     name: "Product",
-    component: () => import("@/views/Product.vue")
+    component: () => import("@/views/products/Product.vue")
+  },
+  {
+    path: "/product/light/:productID",
+    name: "LightInner",
+    component: () => import("@/views/products/Light.vue"),
+    meta: { requiresAuth: true }
   },
   {
     path: "/qa",
@@ -89,12 +96,28 @@ const routes = [
   {
     path: "/member/:memberID",
     name: "Member",
-    component: () => import("@/views/member/Index.vue")
+    component: () => import("@/views/member/Index.vue"),
+    meta: { requiresAuth: true }
   },
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
+
+// 添加路由守衛
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const auth = useAuth(); 
+    const isLoggedIn = auth.isLogin
+    if (!isLoggedIn) {
+      next('/'); 
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

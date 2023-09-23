@@ -59,7 +59,7 @@
             </div>
             <div class="flex flex-wrap gap-10px  max-md:justify-between">
                 <div v-for="item in light" :key="item.id" class="flex flex-col lg:w-15% md:w-18% max-md:w-45% ">
-                    <img class="light" :src="item.image_url" alt="">
+                    <img class="light" :src="item.image_url" alt="" @click="shopping(item.id)">
                     <h5 class="service_active">{{ item.name }}</h5>
                     <span class="service_price">NT.{{ item.price }}</span>
                 </div>
@@ -86,16 +86,20 @@
 <script setup >
 //官方套件
 import { onMounted, ref, computed } from "vue";
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
+import { useModal } from 'vue-final-modal'
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Breadcrumb from '../../components/widget/Breadcrumb.vue';
 import Title from "../../components/widget/Title.vue";
 import TopCover from '../../components/widget/TopCover.vue';
+import { useAuth } from '@/store/auth.js'
+import LoginModal from '@/components/modals/LoginModal.vue';
+
 
 //初始化資料
 const templeID = ref();
@@ -109,6 +113,25 @@ onMounted(() => {
     const route = useRoute();
     templeID.value = Number(route.params.templeID);
 });
+
+const auth = useAuth();
+const router = useRouter(); 
+const { open, close } = useModal({
+  component: LoginModal,
+  attrs: {
+    onConfirm() {
+        close()
+    },
+  },
+})
+//跳轉點燈內頁
+const shopping = (id) =>{
+    if(auth.isLogin){
+        router.push(`/product/light/${id}`)
+    }else{
+        open()
+    }
+}
 
 //取個別資料
 const isLoading = ref(false);
@@ -229,6 +252,7 @@ h6 {
 }
 
 .light {
+    cursor: pointer;
     object-fit: cover;
     margin-bottom: 10px;
     /* width: 191px;

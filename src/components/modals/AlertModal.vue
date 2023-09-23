@@ -10,7 +10,9 @@
                 <img class="check mr-5px" src="../../assets/modal/check_mark_icon.svg" alt="">
                 <p class="msg">{{ props.content }}</p>
             </div>
+            <button class="know_btn" @click="emit('confirm')">回頁面</button>
         </div>
+        
     </VueFinalModal>
   </template>
 <script setup>
@@ -29,6 +31,21 @@ const emit = defineEmits(['confirm']);
 
 
 <style scoped>
+.know_btn {
+    width: 100%;
+    height: 40px;
+    color: #ffffff;
+    background-color: #CEB96E;
+    border: none;
+    outline: none;
+    border-radius: 0;
+}
+
+.know_btn:hover {
+    color: #CEB96E;
+    background-color: #ffffff;
+    border: 1px solid #CEB96E;
+}
 .msg {
     color: #038800;
 }
