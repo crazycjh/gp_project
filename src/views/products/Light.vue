@@ -286,7 +286,7 @@
     justify-content: space-around;
     padding-bottom: 18px;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     width: 892px;
     height: 475px;
     background-image: url('../../assets/products/light/light_cover.png');

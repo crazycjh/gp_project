@@ -48,6 +48,7 @@ export default {
         '80px':'80px',
         '14rem':'14rem',
         '100px':'100px',
+        '108px':'108px',
         '120px':'120px',
         '350px':'350px',
       },
