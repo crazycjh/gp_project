@@ -99,6 +99,11 @@ const routes = [
     component: () => import("@/views/member/Index.vue"),
     meta: { requiresAuth: true }
   },
+  {
+    path: "/resetPassword/:memberID/:expiration_time",
+    name: "ResetPassword",
+    component: () => import("@/views/member/ResetPassword.vue")
+  },
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

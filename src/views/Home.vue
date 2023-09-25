@@ -5,11 +5,14 @@
     <Events />
     <Recommand />
     <div class="relative">
-        <div class="w-full h-260px bg-red-800 z-[-1] -mt-14rem" ></div>
+        <div class="w-full h-260px bg-red-800 -mt-14rem" ></div>
     </div>
     <MainGod />
     <Service />
     <Todo />
+    <div class="relative cover">
+        <div class="w-full h-260px hidden lg:block"></div>
+    </div>
     <Product />
 </template>
 <script setup >
@@ -24,6 +27,8 @@ import Service from '@/components/index/Service.vue'
 import Product from '@/components/index/Product.vue'
 import Todo from '../components/index/Todo.vue'
 </script>
-<style>
-
+<style scoper>
+.cover{
+    background-color: #F4F1E4;
+}
 </style>

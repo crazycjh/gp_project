@@ -100,7 +100,7 @@
 本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。
         </textarea>
         <div class="flex items-start mb-20px">
-            <input v-model="accept" type="checkbox" class="mr-5px mt-5px">
+            <input v-model="accept" type="checkbox" class="mr-5px mt-5px" @keyup.enter="sendRegister">
             <p>勾選即表示您已閱讀並同意我們的 隱私權政策及 會員服務條款</p>
         </div>
         <button class="register_btn" @click="sendRegister">註冊</button>

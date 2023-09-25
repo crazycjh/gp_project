@@ -79,12 +79,16 @@ const activeTab = ref('index')
 
 
 .index_btn {
+    color:#000000;
     width: 175px;
     height: 40px;
     background-color: #ffffff;
     border: 2px solid #EEEEEE;
     outline: none;
     border-radius: 0;
+}
+.index_btn:hover{
+    background-color: #eeeeee;
 }
 @media(width < 768px){
     .index_btn{

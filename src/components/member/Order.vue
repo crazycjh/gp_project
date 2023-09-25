@@ -123,6 +123,7 @@ const emit = defineEmits(['set-order-list']);
 .order_button:hover{
     color:#CEB96E;
     background-color: #ffffff;
+    border:1px solid #CEB96E;
 }
 .order_mobile_button{
     width: 56px;

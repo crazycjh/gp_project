@@ -6,13 +6,13 @@
         <div class="filter_section mt-70px mb-10px px-10px hidden md:block">
             <div class="city_section mb-20px">
                 <h2>找縣市</h2>
-                <button class="tag mr-10px mb-20px" :class="{active: activeCity === ''}" @click="activeCity = ''">全台縣市</button>
-                <button class="tag mr-10px mb-20px" :class="{active: activeCity === item}" v-for="item in cities" :key="item" @click="activeCity = item">{{ item }}</button>
+                <button class="tag mr-10px mb-10px" :class="{active: activeCity === ''}" @click="activeCity = ''">全台縣市</button>
+                <button class="tag mr-10px mb-10px" :class="{active: activeCity === item}" v-for="item in cities" :key="item" @click="activeCity = item">{{ item }}</button>
             </div>
             <div class="god_section mb-20px">
                 <h2>找主神</h2>
-                <button class="tag mr-10px mb-20px" :class="{active: activeGod === ''}" @click="activeGod = ''">所有主神</button>
-                <button class="tag mr-10px mb-20px" :class="{active: activeGod === item}" v-for="item in godsStore.originGodArray" :key="item" @click="activeGod = item">{{ item }}</button>
+                <button class="tag mr-10px mb-10px" :class="{active: activeGod === ''}" @click="activeGod = ''">所有主神</button>
+                <button class="tag mr-10px mb-10px" :class="{active: activeGod === item}" v-for="item in godsStore.originGodArray" :key="item" @click="activeGod = item">{{ item }}</button>
             </div>
         </div>
         <div class="filter_section mt-70px mb-50px px-10px flex md:hidden">
@@ -192,11 +192,12 @@ watch(activeGod,(newValue) => {
     background-color: #CEB96E !important;
 }
 .tag{
+    line-height: 1.5px;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 500;
     text-align: center;
     color:#9B9B9B;
-    width: 110px;
+    width: 108px;
     height: 35px;
     background-color: #EEEEEE;
     border-radius: 0;

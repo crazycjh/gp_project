@@ -44,7 +44,7 @@
                 <div class="light_right :ml-20px w-50% relative z-10 max-md:w-full">
                     <img class="w-full" :src="`${backend}wp-content/uploads/2023/09/service_img01.jpg`" alt="">
                 </div>
-                <img class="tree_right" src="../assets/index/tree_right.svg" alt="">
+                <!-- <img class="tree_right" src="../assets/index/tree_right.svg" alt=""> -->
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
     </div>
     <div class="max-w-1200px mx-auto mt-120px relative ">
         <div class="flex flex-col-reverse md:flex-row taisui gap-60px">
-            <div>
+            <div class="relatvie z-10">
                 <img class="w-full" :src="`${backend}wp-content/uploads/2023/09/service_img03.jpg`" alt="">
             </div>
             <div class="flex flex-col justify-center w-full md:w-60% px-10px">
@@ -65,10 +65,10 @@
                 <p>太歲星君俗稱太歲或歲君，是為掌管人們吉凶禍福的神衹。搭配著十二地支與十二生肖運行，每個流年都有著不同的吉凶運勢，「犯太歲」指的是與太歲一樣的生肖，即冒犯了太歲星，為了避免沖犯到太歲而影響整年運勢，在新春過年盛時，祭拜太歲神以祈福消災，祈求一整年平安順遂。。</p>
             </div>
         </div>
-        <img class="tree_left" src="../assets/index/tree_left.svg" alt="">
+        <!-- <img class="tree_left" src="../assets/index/tree_left.svg" alt=""> -->
     </div>
     <div class="flex justify-end mt-120px shuwen_wrapper">
-        <div class="flex flex-col md:flex-row shuwen max-w-1550px ">
+        <div class="flex flex-col lg:flex-row shuwen max-w-1550px ">
             <div class="shuwen_left flex flex-col mb-40px px-10px">
                 <h3 class="service_tag mb-20px mt-40px ">
                     －疏文
@@ -79,7 +79,7 @@
                 <h4 class="sub_tag mb-5px">調解文疏</h4>
                 <p class="">人神契約、陰陽調解、請求赦罪… 等</p>
             </div>
-            <div class="shuwen_right w-full md:w-60%">
+            <div class="shuwen_right w-full">
                 <img class="w-full" :src="`${backend}wp-content/uploads/2023/09/service_img04.jpg`" alt="">
             </div>
         </div>
@@ -92,13 +92,24 @@ import TopCover from '@/components/widget/TopCover.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <style scoped>
+
+@media(width > 1024px){
+    .shuwen{
+    max-height:400px;
+    }
+}
+.shuwen_right img{
+    height: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
 .light_left{
     min-width: 360px;
 }
 .tree_left{
    position: absolute;
    top:30%;
-   left:0;
+   left:-30%;
 }
 @media(width <768px){
     .tree_left,.tree_right{

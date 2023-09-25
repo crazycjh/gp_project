@@ -1,44 +1,64 @@
 <template>
-    <div class="flex lg:flex max-lg:flex-col-reverse  mx-auto max-w-1200px md:px-50px">
-        <img class="" src="../../assets/index/temple_bg02.svg" alt="">
-        <div class="py-40px px-20px w-full">
-            <h4 class="title mb-20px">| 代辦事項 |</h4>
-            <div class="flex max-md:flex-col max-sm:gap-20px sm:justify-between w-full sm:items-center">
-                <p class="md:max-w-400px max-md:max-w-570px">內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
-                <div class="flex max-md:justify-center">
-                    <InnerLinkBtn text="了解更多" link="/latest/all" />
-                </div>
+    <div class="flex mx-auto max-w-1200px md:px-50px relative">
+        <div class="todo z-10">
+            <div class="todo_left w-full h-full">
+                <img class="w-full h-full" :src="`${backend}wp-content/uploads/2023/09/home_agent_img.jpg`" alt="">
             </div>
+            <div class="todo_right w-full">
+                <Title class="btn" title="代辦事項"/>
+                <p>內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
+                <InnerLinkBtn  text="了解更多" link="/latest/all"/>
+            </div>
+
         </div>
     </div>
  </template>
  <script setup >
  //自製元件
 import InnerLinkBtn from '../widget/InnerLinkBtn.vue';
+import Title from '../widget/Title.vue';
+const backend = import.meta.env.VITE_BACKEND_PATH
  </script>
  <style scoped>
- h5{
-    max-width:333px;
-    color: #FFF;
-    text-align: center;
-    font-family: Noto Serif TC;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
- }
- .title{
-    color:#920000;
-    font-family: Noto Serif TC;
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 29px;
-    letter-spacing: 0.2em;
-    text-align: left;
- }
- @media(max-width:1024px){
-    .title{
-        text-align: center;
+.todo{
+    width: 100%;
+    min-height: 338px;
+    display: flex;
+    margin-bottom: -150px;
+    object-fit: cover;
+}
+@media(width < 1024px){
+    .todo{
+        flex-direction: column;
+        margin-bottom: 0px;
+        min-height: auto;
     }
- }
+    .todo_right{
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+}
+@media(width <768px){
+    .todo_right{
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+.todo_right{
+    background-color: #ffffff;
+    border:1px solid #CEB96E;
+    padding-left: 80px;
+    padding-right: 80px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn{
+    margin-top: -70px;
+    margin-bottom: 0;
+}
+
  </style>

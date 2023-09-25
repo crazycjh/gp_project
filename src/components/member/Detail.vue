@@ -48,21 +48,21 @@
         <div class="mb-20px">
             <h6 class="mb-10px">新密碼(不需變更請留空)</h6>
             <div class="relative">
-                <input v-model="newPsw1" class="detail_input"  :type="isPswViewed ? 'text' : 'password'">
-                <img v-show="!isPswViewed" class="eye" src="../../assets/modal/eyes_icon_2.svg" alt=""
-                        @click="isPswViewed = !isPswViewed">
-                <img v-show="isPswViewed" class="eye" src="../../assets/modal/eyes_icon.svg" alt=""
-                    @click="isPswViewed = !isPswViewed">
+                <input v-model="newPsw1" class="detail_input"  :type="isPswViewed2 ? 'text' : 'password'">
+                <img v-show="!isPswViewed2" class="eye" src="../../assets/modal/eyes_icon_2.svg" alt=""
+                        @click="isPswViewed2 = !isPswViewed2">
+                <img v-show="isPswViewed2" class="eye" src="../../assets/modal/eyes_icon.svg" alt=""
+                    @click="isPswViewed2 = !isPswViewed2">
             </div>
         </div>
         <div class="mb-20px">
             <h6 class="mb-10px">確認新密碼</h6>
             <div class="relative">
-                <input v-model="newPsw2" class="detail_input" :type="isPswViewed ? 'text' : 'password'">
-                <img v-show="!isPswViewed" class="eye" src="../../assets/modal/eyes_icon_2.svg" alt=""
-                        @click="isPswViewed = !isPswViewed">
-                <img v-show="isPswViewed" class="eye" src="../../assets/modal/eyes_icon.svg" alt=""
-                    @click="isPswViewed = !isPswViewed">
+                <input v-model="newPsw2" class="detail_input" :type="isPswViewed3 ? 'text' : 'password'">
+                <img v-show="!isPswViewed3" class="eye" src="../../assets/modal/eyes_icon_2.svg" alt=""
+                        @click="isPswViewed3 = !isPswViewed3">
+                <img v-show="isPswViewed3" class="eye" src="../../assets/modal/eyes_icon.svg" alt=""
+                    @click="isPswViewed3 = !isPswViewed3">
             </div>
         </div>
         <h4 v-if="errorMessage" class="error">{{ errorMessage }}</h4>
@@ -216,7 +216,8 @@ const updateProfile = async () => {
 
 //密碼眼睛開合
 const isPswViewed = ref(false)
-
+const isPswViewed2 = ref(false)
+const isPswViewed3 = ref(false)
 //顯示選擇器
 
 const areas = ref([]);

@@ -1,7 +1,22 @@
 <template>
     <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
-   <div class="banner" :style="{
-    'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_post_banner1.jpg)`,
+   <div v-if="temple.live_iframe" class="banner" :style="{
+    'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_bannner_bg55.jpg)`,
+    'background-position': 'center center',
+    }">
+        <div class="temple-banner container relative">
+            <div v-if="temple.live_iframe">
+                <div class="flex flex-col items-center mb-5">
+                    <img class="wind" src="../../assets/widget/wind.svg" alt="">
+                    <h3>廟宇直播</h3>
+                </div>
+            </div>
+            <div v-if="temple.live_iframe" class="video-wrapper z-10 " v-html="temple.live_iframe">
+            </div>
+        </div>
+    </div>
+    <div v-if="!temple.live_iframe" class="banner" :style="{
+    'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_post_banner32-01.jpg)`,
     'background-position': 'center center',
     }">
         <div class="temple-banner container relative">
@@ -160,7 +175,7 @@ onMounted(async () => {
     border-bottom: 1px solid #EEEEEE;
 }
 .banner {
-    min-height: 400px;
+    min-height: 500px;
     display: flex;
     margin: 0;
     padding: 0;

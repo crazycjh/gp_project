@@ -42,7 +42,7 @@
         }"
         class="h-350px swiper-container"
       >
-        <swiper-slide v-for="item in bottom_post" :key="item.id">
+        <swiper-slide v-for="item in right_post" :key="item.id">
           <router-link :to="`/latest/inner/${item.id}`">
             <div
               class="w-full bg-cover bg-center image"
@@ -101,6 +101,7 @@ onMounted(() => {
 //取得頁面資訊
 const post = ref([]);
 const bottom_post = ref([]);
+const right_post = ref([])
 const isLoading = ref(false);
 const fullPage = ref(true);
 onMounted(async () => {
@@ -111,6 +112,7 @@ onMounted(async () => {
     );
     post.value = response.data.latest;
     bottom_post.value = response.data.relate;
+    right_post.value = response.data.new
   } catch (error) {
     console.error("API 請求失敗:", error);
   } finally {
