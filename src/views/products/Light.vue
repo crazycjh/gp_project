@@ -1,11 +1,11 @@
 <template>
     <div class="cover py-80px relative">
        <div class="left">
-            <img class="mb-10px" src="../../assets/products/light/light_list_arrow_left.svg" alt="">
+            <div class="mb-10px left_icon"></div>
             <p class="previous">上一位</p>
         </div>
        <div class="right">
-            <img class="mb-10px" src="../../assets/products/light/light_list_arrow_right_hover.svg" alt="">
+            <div class="mb-10px right_icon"></div>
             <p class="next">下一位</p>
         </div>
        <div class="top">
@@ -183,6 +183,26 @@
     </div>
 </template>
 <style scoped>
+.left_icon{
+    width: 50px;
+    height: 50px;
+    background-image: url('../../assets/products/light/light_list_arrow_left.svg');
+}
+.left_icon:hover{
+    background-image: url('../../assets/products/light/light_list_arrow_left_hover.svg');
+}
+.right_icon{
+    width: 50px;
+    height: 50px;
+    background-image: url('../../assets/products/light/light_list_arrow_right.svg');
+}
+.right_icon:hover{
+    background-image: url('../../assets/products/light/light_list_arrow_right_hover.svg');
+}
+
+input{
+    background-color: #ffffff;
+}
 .left{
     width: 50px;
     position: absolute;
@@ -227,6 +247,9 @@
     outline: none;
     border-bottom: 1px solid #CEB96E;
 }
+.add:hover{
+    color: #CEB96E;
+}
 .save_btn{
     margin-right: 10px;
     width: 63px;
@@ -237,6 +260,12 @@
     background-color:#CEB96E;
     color:#ffffff;
 }
+.save_btn:hover{
+    border:#CEB96E 1px solid;
+    background-color:#ffffff;
+    color: #CEB96E;
+}
+
 .cancel_btn{
     width: 63px;
     height: 33px;
@@ -245,6 +274,9 @@
     outline: none;
     background-color:#9B9B9B;
     color:#ffffff;
+}
+.cancel_btn:hover{
+    background-color:#333333;
 }
 .translate{
     border-bottom: 1px solid #CEB96E;

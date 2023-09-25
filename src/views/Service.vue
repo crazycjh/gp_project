@@ -73,7 +73,7 @@
         </div>
         <!-- <img class="tree_left" src="../assets/index/tree_left.svg" alt=""> -->
     </div>
-    <div class="flex justify-end mt-120px shuwen_wrapper">
+    <div class="flex justify-end md:mt-120px shuwen_wrapper">
         <div class="flex flex-col lg:flex-row shuwen max-w-1550px ">
             <div class="shuwen_left flex flex-col mb-40px px-10px">
                 <h3 class="service_tag mb-20px mt-40px ">
