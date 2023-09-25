@@ -12,32 +12,38 @@
     <div class="max-w-1200px mx-auto">
         <div class="light mt-80px">
             <div class="flex flex-col md:flex-row relative">
-                <div class="light_left w-full md:w-45%  px-10px ">
+                <div class="light_left w-full md:w-45%  px-10px max-md:mb-40px">
                     <h3 class="service_tag mb-30px">－線上點燈</h3>
-                    <div class="flex flex-wrap">
-                        <div class="mr-30px md:mr-60px mb-30px">
-                            <h4 class="sub_tag">太歲燈</h4>
-                            <p>祈求流年平安、諸事順遂</p>
+                    <div class="flex flex-col gap-30px">
+                        <div class="flex">
+                            <div class="w-50%">
+                                <h4 class="sub_tag">太歲燈</h4>
+                                <p>祈求流年平安、諸事順遂</p>
+                            </div>
+                            <div class="w-50%">
+                                <h4 class="sub_tag">平安燈</h4>
+                                <p>祈求身體健康、病體健康</p>
+                            </div>
                         </div>
-                        <div class="mr-30px md:mr-60px mb-30px">
-                            <h4 class="sub_tag">太歲燈</h4>
-                            <p>祈求身體健康、病體健康</p>
+                        <div class="flex">
+                            <div class="w-50%">
+                                <h4 class="sub_tag">光明燈</h4>
+                                <p>祈求元辰光彩、平安順遂</p>
+                            </div>
+                            <div class="w-50%">
+                                <h4 class="sub_tag">財神燈</h4>
+                                <p>祈求事業營運順利、財運亨通</p>
+                            </div>
                         </div>
-                        <div class="mr-30px md:mr-60px mb-30px">
-                            <h4 class="sub_tag">光明燈</h4>
-                            <p>祈求元辰光彩、平安順遂</p>
-                        </div>
-                        <div class="mr-30px md:mr-60px mb-30px">
-                            <h4 class="sub_tag">財神燈</h4>
-                            <p>祈求事業營運順利、財運亨通</p>
-                        </div>
-                        <div class="mr-30px md:mr-60px mb-30px">
-                            <h4 class="sub_tag">文昌燈</h4>
-                            <p>金祈求榜題名、仕途升遷</p>
-                        </div>
-                        <div class="mr-30px md:mr-60px mb-30px">
-                            <h4 class="sub_tag">平安燈</h4>
-                            <p>主保鎮宅光明、闔家保康寧</p>
+                        <div class="flex">
+                            <div class="w-50%">
+                                <h4 class="sub_tag">文昌燈</h4>
+                                <p>金祈求榜題名、仕途升遷</p>
+                            </div>
+                            <div class="w-50%">
+                                <h4 class="sub_tag">平安燈</h4>
+                                <p>主保鎮宅光明、闔家保康寧</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,11 +54,11 @@
             </div>
         </div>
     </div>
-    <div class="puja max-md:mt-108px mt-80px relative">
+    <div class="puja max-md:mt-106px mt-80px relative">
         <img class="hidden md:block" :src="`${backend}wp-content/uploads/2023/09/service_img02.jpg`" alt="">
-        <div class="puja_box  px-20px py-40px">
+        <div class="puja_box  px-20px md:py-40px pt-10px pb-20px">
             <h4 class="mb-20px">－法會</h4>
-            <p>法會又稱為佛事、法事，指的是各種說法或供佛、供僧及布施等活動的集會，其根本精神是「以法相會，如法修行」。包括誦經、念佛、供奉佛像、捐助僧侶、布施財物等。這些活動旨在培養參與者的慈悲、智慧和忍辱，以促進個人的精神成長。</p>
+            <p class="pb-20px">法會又稱為佛事、法事，指的是各種說法或供佛、供僧及布施等活動的集會，其根本精神是「以法相會，如法修行」。包括誦經、念佛、供奉佛像、捐助僧侶、布施財物等。這些活動旨在培養參與者的慈悲、智慧和忍辱，以促進個人的精神成長。</p>
         </div>
     </div>
     <div class="max-w-1200px mx-auto mt-120px relative ">

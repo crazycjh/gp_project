@@ -1,5 +1,13 @@
 <template>
-    <div class="cover py-80px">
+    <div class="cover py-80px relative">
+       <div class="left">
+            <img class="mb-10px" src="../../assets/products/light/light_list_arrow_left.svg" alt="">
+            <p class="previous">上一位</p>
+        </div>
+       <div class="right">
+            <img class="mb-10px" src="../../assets/products/light/light_list_arrow_right_hover.svg" alt="">
+            <p class="next">下一位</p>
+        </div>
        <div class="top">
             <div>
                 <h5 class="mb-10px">點選人數<span class="required">*</span></h5>
@@ -175,6 +183,28 @@
     </div>
 </template>
 <style scoped>
+.left{
+    width: 50px;
+    position: absolute;
+    top: 35%;
+    left: 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.previous,.next{
+    width: 22px;
+    height: 69px;
+}
+.right{
+    width: 50px;
+    position: absolute;
+    top: 35%;
+    right: 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .term{
     color:#920000;
 }
