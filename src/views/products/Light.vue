@@ -1,13 +1,13 @@
 <template>
     <div class="cover py-80px relative">
-       <div class="left">
+       <!-- <div class="left">
             <div class="mb-10px left_icon"></div>
             <p class="previous">上一位</p>
         </div>
        <div class="right">
             <div class="mb-10px right_icon"></div>
             <p class="next">下一位</p>
-        </div>
+        </div> -->
        <div class="top">
             <div>
                 <h5 class="mb-10px">點選人數<span class="required">*</span></h5>
@@ -42,7 +42,15 @@
                 </div>
             </div>   
        </div>
-       <div class="body2">
+       <div class="body2 relative">
+            <div class="left">
+                <div class="mb-10px left_icon"></div>
+                <p class="previous">上一位</p>
+            </div>
+            <div class="right">
+                <div class="mb-10px right_icon"></div>
+                <p class="next">下一位</p>
+            </div>
             <div class="container">
                 <div class="flex gap-20px mb-10px">
                     <div>
@@ -207,7 +215,7 @@ input{
     width: 50px;
     position: absolute;
     top: 35%;
-    left: 22%;
+    left: -7%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -220,7 +228,7 @@ input{
     width: 50px;
     position: absolute;
     top: 35%;
-    right: 22%;
+    right: -7%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -229,6 +237,7 @@ input{
     color:#920000;
 }
 .custom_textarea{
+    background-color: #ffffff;
     width: 100%;
     height: 174px;
 }
@@ -350,9 +359,10 @@ input{
     display: flex;
     align-items: flex-end;
     width: 892px;
-    height: 475px;
-    background-image: url('../../assets/products/light/light_cover.png');
+    height: 474px;
+    background-image: url('../../assets/products/light/light_bg_2.svg');
     border-bottom: 1px ;
+    background-repeat: no-repeat;
 }
 .body{
     padding-left: 80px;
@@ -379,5 +389,10 @@ input{
     height: 340px;
     background-image: url('../../assets/products/light/light_bg_4.svg');
     background-size: cover;
+}
+@media(width< 1024px){
+    .top,.body,.body2,.bottom{
+        width: 80%;
+    }
 }
 </style>
