@@ -6,7 +6,7 @@
             </div>
             <div class="todo_right w-full">
                 <Title class="btn" title="代辦事項"/>
-                <p>內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
+                <p class="text-center">內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
                 <InnerLinkBtn  text="了解更多" link="/latest/all"/>
             </div>
 
@@ -42,13 +42,15 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     .todo_right{
         padding-top: 80px;
         padding-bottom: 80px;
+        padding-left: 60px;
+        padding-right: 60px;
     }
 }
 .todo_right{
     background-color: #ffffff;
     border:1px solid #CEB96E;
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 120px;
+    padding-right: 120px;
     display: flex;
     flex-direction: column;
     gap:20px;
