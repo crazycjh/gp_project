@@ -52,8 +52,9 @@
                             <h5 class="mb-10px">農曆生日<span class="required">*</span></h5>
                             <div class="relative select_wrapper">
                                 <select
-                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                                    <option selected>請選擇年份</option>
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="yValue">
+                                    <option selected disabled>請選擇年份</option>
+                                    <option v-for="(year, index) in yearsValue" :key="index" :value="year">{{ year }}{{ years[index] }}</option>
                                 </select>
                                 <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                                     src="../../assets/index/arrow_down.svg" alt="">
@@ -64,8 +65,9 @@
                                 <h5 class="mb-10px">吉月<span class="required">*</span></h5>
                                 <div class="relative small_wrapper">
                                     <select
-                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                                        <option selected>吉月</option>
+                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="mValue">
+                                        <option selected disabled>吉月</option>
+                                        <option v-for="item in months" :key="item">{{ item }}</option>
                                     </select>
                                     <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                                         src="../../assets/index/arrow_down.svg" alt="">
@@ -75,8 +77,9 @@
                                 <h5 class="mb-10px">吉日<span class="required">*</span></h5>
                                 <div class="relative small_wrapper">
                                     <select
-                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                                        <option selected>吉日</option>
+                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="dValue">
+                                        <option selected disabled>吉日</option>
+                                        <option v-for="item in days" :key="item"> {{ item }} </option>
                                     </select>
                                     <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                                         src="../../assets/index/arrow_down.svg" alt="">
@@ -85,14 +88,16 @@
                         </div>
                     </div>
                     <div class="flex flex-col md:flex-row mb-20px">
-                        <button class="translate">轉農曆</button>
+                        <button v-show="!calendar" class="translate" @click="changeCalendar(true)">轉農曆</button>
+                        <button v-show="calendar" class="translate" @click="changeCalendar(false)">轉國曆</button>
                         <p class="hint">請選擇農曆日期，若不曉得農曆日期，請先選擇國曆日期後按下「轉農曆」進行轉換。</p>
                     </div>
                     <div class="mb-20px">
                         <h5 class="mb-10px">出生時辰<span class="required">*</span></h5>
                         <div class="relative select_wrapper">
                             <select  class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                                <option selected>吉時</option>
+                                <option selected disabled>吉時</option>
+                                <option v-for="(time,index) in ctime" key="ctime" :value="time">{{ time }}{{ wtime[index] }}</option>
                             </select>
                             <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
                         </div>
@@ -153,15 +158,31 @@
                 <div class="container top_border py-20px">
                     <h5 class="mount mb-20px">共 <span class="count">2</span> 位</h5>
                     <h5 class="mount">總計:</h5>
-                    <h5 class="mount">NT$1000</h5>
-                    <p class="mb-5px">備註:</p>
-                    <textarea class="custom_textarea"></textarea>
-                    <div class="flex">
-                        <input class="mr-10px" type="checkbox">
-                        <p>我已閱讀並同意網站的<span class="term">條款與條件</span></p>
+                    <h5 class="mount mb-10px">NT$1000</h5>
+                    <p class="mb-10px">備註:</p>
+                    <textarea class="custom_textarea mb-10px"></textarea>
+                    <div class="flex mb-10px" >
+                        <span class="mr-5px">綠界科技</span><img src="../../assets/products/light/ecpay_icon.png" alt="">
                     </div>
+                    <h5>付款方式</h5>
+                    <div class="relative w-full mb-10px">
+                        <select
+                            class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
+                            <option selected>請選擇付款方式</option>
+                            <option>ATM虛擬帳戶匯款</option>
+                            <option>線上刷卡</option>
+                            <option>超商代碼繳費</option>
+                        </select>
+                        <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
+                            src="../../assets/index/arrow_down.svg" alt="">
+                    </div>
+                    <div class="flex top_border pt-10px">
+                        <input class="mr-10px " type="checkbox">
+                        <p>我已閱讀並同意網站的<router-link to="/terms" class="term">條款與條件</router-link></p>
+                    </div>
+                    
                     <div class="container">
-                        <button class="visa">使用信用卡或簽帳金融卡付款</button>
+                        <button class="visa">確認訂單</button>
                         <p class="mt-20px">您的個人數據將用於處理您的訂單，支持您在整個網站的體驗，以及我們的<span class="term">隱私權政策</span>中描述的其他目的。</p>
                     </div>
                 </div>
@@ -180,11 +201,59 @@
                 </div>
             </div>
         </div>
-        
     </div>
 </template>
 <script setup>
-import { ref,watch } from 'vue';
+//官方套件
+import { ref, onMounted } from 'vue';
+
+//其他套件
+import lunarFun from 'lunar-fun';
+
+onMounted(()=>{
+    console.log(lunarFun.lunalToGregorian(1906, 4, 30));
+})
+
+//國農曆互轉定義資料
+const years = ref([]);
+const yearsValue = ref([])
+const days = ref([])
+onMounted(()=>{
+    for (let i = 1900; i <= 2023; i++) {
+      years.value.push(`(民國:${i - 1911})`);
+      yearsValue.value.push(i);
+    }
+    for(let i = 1; i <= 31; i++){
+      days.value.push(i)
+    }
+})
+const months = ref([
+    '01','02','03','04','05','06','07','08','09','10','11','12',
+    '閏01','閏02','閏03','閏04','閏05','閏06','閏07','閏08','閏09','閏10','閏11','閏12'
+])
+const ctime = ref([
+    '子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'
+])
+const wtime =ref([
+    '(23:00-1:00)','(1:00-3:00)','(3:00-5:00)','(5:00-7:00)','(7:00-9:00)','(9:00-11:00)','(11:00-13:00)','(13:00-15:00)',
+    '(15:00-17:00)','(17:00-19:00)','(19:00-21:00)','(21:00-23:00)'
+])
+const calendar =ref(false)
+
+//轉換國農曆操作
+const yValue = ref('')
+const mValue = ref('')
+const dValue = ref('')
+const changeCalendar = (type) =>{
+    if(type){
+        calendar.value = true
+        const [yValue, mValue, dValue] = lunarFun.gregorianToLunal(yValue, mValue, dValue)
+    }else{
+        calendar.value = false
+    }
+}
+
+
 //縣市選擇器
 const areas = ref([]);
 const selectedCity = ref('請選擇縣市');
@@ -423,7 +492,7 @@ input {
 
 .visa {
     margin-top: 20px;
-    width: 260px;
+    width: 114px;
     height: 43px;
     border: none;
     outline: none;
