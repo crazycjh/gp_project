@@ -4,8 +4,8 @@
             <img class="check mr-5px" src="../../assets/modal/check_mark_icon.svg" alt="">
             <p class="msg">{{ props.content }}</p>
         </div>
-        <button v-show="!close" class="know_btn" @click="redirectLogin">我知道了</button>
-        <button v-show="close" class="know_btn" @click="closeModal">回頁面</button>
+        <button v-show="!close" class="know_btn" @click="emit('redirect-login')">我知道了</button>
+        <button v-show="close" class="know_btn" @click="emit('close-modal')">回頁面</button>
     </div>
 </template>
 <script setup>
@@ -15,12 +15,6 @@ const props = defineProps({
 });
 const emit = defineEmits(['redirect-login','close-modal']);
 
-const redirectLogin = () => {
-    emit('redirect-login');
-}
-const closeModal = () => {
-    emit('close-modal');
-}
 </script>
 <style scoped>
 .check {

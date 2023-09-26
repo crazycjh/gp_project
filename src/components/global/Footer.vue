@@ -7,7 +7,7 @@
                         <router-link to="/about/" class="text-white whitespace-nowrap">關於我們 |</router-link>
                     </li>
                     <li>
-                        <router-link to="/details/" class="text-white whitespace-nowrap">條款與細節 |</router-link>
+                        <router-link to="/terms/" class="text-white whitespace-nowrap">會員服務條款 |</router-link>
                     </li>
                     <li>
                         <router-link to="/process/" class="text-white whitespace-nowrap">點燈流程 |</router-link>

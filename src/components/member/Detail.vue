@@ -218,8 +218,8 @@ const updateProfile = async () => {
 const isPswViewed = ref(false)
 const isPswViewed2 = ref(false)
 const isPswViewed3 = ref(false)
-//顯示選擇器
 
+//縣市選擇器
 const areas = ref([]);
 const updateAreas = () => {
 //   selectedArea.value = ''; 

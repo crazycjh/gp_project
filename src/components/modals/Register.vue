@@ -6,11 +6,11 @@
                 <h5 class="error">{{ errorMessage }}</h5>
             </div>
             <div>
-                <h5 class="mb-5px sub_title">電子郵件</h5>
+                <h5 class="mb-5px sub_title">電子郵件<span class="required">*</span></h5>
                 <input v-model="email" class="member_input" type="text" placeholder="請輸入電子郵件">
             </div>
             <div>
-                <h5 class="mb-5px sub_title">密碼</h5>
+                <h5 class="mb-5px sub_title">密碼<span class="required">*</span></h5>
                 <div class="relative">
                     <input v-model="password" class="member_input" :type="isPswViewed ? 'text' : 'password'"
                         placeholder="請輸入密碼">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <textarea class="w-full mb-10px" cols="30" rows="5" readonly>
+        <textarea class="w-full mb-10px custom_textarea" cols="30" rows="5" readonly>
 會員服務條款
 第 1 條 定義 服務條款 
 一、認知及同意條款
@@ -100,8 +100,9 @@
 本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。
         </textarea>
         <div class="flex items-start mb-20px">
-            <input v-model="accept" type="checkbox" class="mr-5px mt-5px" @keyup.enter="sendRegister">
-            <p>勾選即表示您已閱讀並同意我們的 隱私權政策及 會員服務條款</p>
+            <input v-model="accept" type="checkbox" class="mt-5px" @keyup.enter="sendRegister">
+            <span class="required">*</span>
+            <p>勾選即表示您已閱讀並同意我們的 <router-link to="/privacy" @click="emit('close-modal')">隱私權政策</router-link>及 <router-link to="/terms" @click="emit('close-modal')">會員服務條款</router-link></p>
         </div>
         <button class="register_btn" @click="sendRegister">註冊</button>
     </div>
@@ -113,6 +114,7 @@ import axios from "axios";
 
 //自製元件
 import {useAuth} from '@/store/auth.js'
+
 
 //格式驗證
 const validateEmail = (email) => {
@@ -129,7 +131,7 @@ const email = ref('');
 const password = ref('');
 const accept = ref(false)
 const errorMessage = ref('');
-const emit = defineEmits(['redirect-register-success']);
+const emit = defineEmits(['redirect-register-success','close-modal']);
 const sendRegister = async () => {
     if (!validateEmail(email.value)) {
         errorMessage.value = '請輸入有效電子郵件';
@@ -143,6 +145,7 @@ const sendRegister = async () => {
 
     if(accept.value === false){
         errorMessage.value = '請先勾選同意條款'
+        return;
     }
 
     try {
@@ -172,8 +175,22 @@ const sendRegister = async () => {
 const isPswViewed = ref(false)
 </script>
 <style scoped>
+.custom_textarea{
+    font-size: 14px;
+    background-color: #ffffff;
+}
+a{
+    color:#920000;
+}
+a:hover{
+    color:#CEB96E;
+}
 .error{
     color:red;
+}
+.required{
+    color:red;
+    margin-left: 3px;
 }
 .sub_title {
     font-size: 16px;

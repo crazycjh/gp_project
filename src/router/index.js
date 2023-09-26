@@ -94,6 +94,11 @@ const routes = [
     component: () => import("@/views/Todo.vue")
   },
   {
+    path: "/terms",
+    name: "Terms",
+    component: () => import("@/views/Terms.vue")
+  },
+  {
     path: "/member/:memberID",
     name: "Member",
     component: () => import("@/views/member/Index.vue"),

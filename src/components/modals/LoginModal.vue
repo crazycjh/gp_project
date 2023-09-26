@@ -34,7 +34,7 @@
                     <button  class="link_btn"  @click="activePage = 'register'">註冊會員</button>
                 </div>
             </div>
-            <Register v-show="activePage === 'register'" @redirect-register-success="activePage = 'registerSuccess'" />
+            <Register v-show="activePage === 'register'" @redirect-register-success="activePage = 'registerSuccess'"  @close-modal="emit('confirm')"/>
             <Forget v-show="activePage === 'forget'" @reset-password="handleForget" />
             <AfterSuccess :content="`${resetEmail}請到信箱取件重設密碼`" v-show="activePage === 'afterSuccess'"
                 @redirect-login="activePage = 'login'" />
