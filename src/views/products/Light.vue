@@ -5,9 +5,9 @@
                 <div class="md:w-40%">
                     <h5 class="mb-10px">點選人數<span class="required">*</span></h5>
                     <div class="relative select_wrapper">
-                        <select
-                            class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                            <option selected>請選擇</option>
+                        <select :disabled="setCount"
+                            class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="peopleCount" @change="initialCount">
+                            <option v-for="number in 20" :key="number">{{ number }}</option>
                         </select>
                         <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                             src="../../assets/index/arrow_down.svg" alt="">
@@ -15,30 +15,30 @@
                 </div>
                 <img src="../../assets/products/light/light_list_img.png" alt="">
             </div>
-            <div class="body relative">
-                <div class="left">
+            <div class="body relative" v-for="(item, index) in formItems" :key="index" v-show="index + 1 === activeForm">
+                <div class="left" v-show="isPreviosShown" @click="activeForm = activeForm -1">
                     <div class="mb-10px left_icon"></div>
                     <p class="previous">上一位</p>
                 </div>
-                <div class="right">
+                <div class="right" v-show="isNextShown" @click="activeForm = activeForm +1">
                     <div class="mb-10px right_icon"></div>
                     <p class="next">下一位</p>
                 </div>
                 <div class="container border">
-                    <button class="believers mb-20px">第一位信眾資料</button>
+                    <button class="believers mb-20px">第{{activeForm}}位信眾資料</button>
                     <div class="flex flex-col md:flex-row gap-20px mb-20px">
                         <div class="md:w-50%">
                             <h5 class="mb-10px">姓名<span class="required">*</span></h5>
                             <div class="relative select_wrapper">
-                                <input class="body_input" type="text" placeholder="請輸入姓名">
+                                <input class="body_input" type="text" placeholder="請輸入姓名" v-model="item.name">
                             </div>
                         </div>
                         <div class="md:w-50%">
                             <h5 class="mb-10px">性別<span class="required">*</span></h5>
                             <div class="relative select_wrapper">
                                 <select
-                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                                    <option selected>請選擇</option>
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select " v-model="item.gender">
+                                    <option value="" disabled>請選擇</option>
                                     <option>男</option>
                                     <option>女</option>
                                 </select>
@@ -52,8 +52,8 @@
                             <h5 class="mb-10px">農曆生日<span class="required">*</span></h5>
                             <div class="relative select_wrapper">
                                 <select
-                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="yValue">
-                                    <option selected disabled>請選擇年份</option>
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.yValue">
+                                    <option value=""  disabled>請選擇年份</option>
                                     <option v-for="(year, index) in yearsValue" :key="index" :value="year">{{ year }}{{ years[index] }}</option>
                                 </select>
                                 <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
@@ -65,8 +65,8 @@
                                 <h5 class="mb-10px">吉月<span class="required">*</span></h5>
                                 <div class="relative small_wrapper">
                                     <select
-                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="mValue">
-                                        <option selected disabled>吉月</option>
+                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.mValue">
+                                        <option value=""  disabled>吉月</option>
                                         <option v-for="item in months" :key="item">{{ item }}</option>
                                     </select>
                                     <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
@@ -77,8 +77,8 @@
                                 <h5 class="mb-10px">吉日<span class="required">*</span></h5>
                                 <div class="relative small_wrapper">
                                     <select
-                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="dValue">
-                                        <option selected disabled>吉日</option>
+                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.dValue">
+                                        <option value=""  disabled>吉日</option>
                                         <option v-for="item in days" :key="item"> {{ item }} </option>
                                     </select>
                                     <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
@@ -88,15 +88,15 @@
                         </div>
                     </div>
                     <div class="flex flex-col md:flex-row mb-20px">
-                        <button v-show="!calendar" class="translate" @click="changeCalendar(true)">轉農曆</button>
-                        <button v-show="calendar" class="translate" @click="changeCalendar(false)">轉國曆</button>
+                        <button v-show="!item.calendar" class="translate" @click="changeCalendar(true,index)">轉農曆</button>
+                        <button v-show="item.calendar" class="translate" @click="changeCalendar(false,index)">轉國曆</button>
                         <p class="hint">請選擇農曆日期，若不曉得農曆日期，請先選擇國曆日期後按下「轉農曆」進行轉換。</p>
                     </div>
                     <div class="mb-20px">
                         <h5 class="mb-10px">出生時辰<span class="required">*</span></h5>
                         <div class="relative select_wrapper">
-                            <select  class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                                <option selected disabled>吉時</option>
+                            <select  class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.tValue">
+                                <option value="" disabled>吉時</option>
                                 <option v-for="(time,index) in ctime" key="ctime" :value="time">{{ time }}{{ wtime[index] }}</option>
                             </select>
                             <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
@@ -107,8 +107,8 @@
                             <h5 class="mb-10px">縣市<span class="required">*</span></h5>
                             <div class="relative select_wrapper">
                                 <select
-                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select " v-model="selectedCity" @change="updateAreas">
-                                    <option selected>請選擇縣市</option>
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select " v-model="item.selectedCity" @change="updateAreas(index)">
+                                    <option  value="" disabled>請選擇縣市</option>
                                     <option v-for="item in cities" :key="item">{{ item }}</option>
                                 </select>
                                 <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
@@ -119,9 +119,9 @@
                             <h5 class="mb-10px">鄉鎮區<span class="required">*</span></h5>
                             <div class="relative select_wrapper">
                                 <select
-                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="selectedArea">
-                                    <option selected>請選擇鄉鎮區</option>
-                                    <option v-for="area in areas" :key="area">{{ area }}</option>
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.selectedArea">
+                                    <option selected value="" disabled>請選擇鄉鎮區</option>
+                                    <option v-if="item.areas" v-for="area in item.areas" :key="area">{{ area }}</option>
                                 </select>
                                 <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                                     src="../../assets/index/arrow_down.svg" alt="">
@@ -131,32 +131,32 @@
                     <div class="mb-20px">
                         <h5 class="mb-10px">詳細地址<span class="required">*</span></h5>
                         <div class="relative w-full">
-                            <input class="body_input" type="text" placeholder="請輸入詳細地址">
+                            <input class="body_input" type="text" placeholder="請輸入詳細地址" v-model="item.address">
                         </div>
                     </div>
                     <div class="mb-20px">
                         <h5 class="mb-10px">聯絡電話<span class="required">*</span></h5>
                         <div class="relative w-full">
-                            <input class="body_input" type="text" placeholder="請輸入電話號碼">
+                            <input class="body_input" type="text" placeholder="請輸入電話號碼" v-model="item.phone">
                         </div>
                     </div>
                     <div class="mb-20px">
                         <h5 class="mb-10px">電子信箱<span class="required">*</span></h5>
                         <div class="relative w-full">
-                            <input class="body_input" type="text" placeholder="請輸入電子信箱">
+                            <input class="body_input" type="text" placeholder="請輸入電子信箱" v-model="item.email">
                         </div>
                     </div>
                     <div class="flex justify-between mb-20px">
                         <div>
-                            <button class="cancel_btn">取消</button>
+                            <button class="cancel_btn" @click="deleteForm(index)">取消</button>
                         </div>
-                        <button class="add">加一位被祈福者</button>
+                        <button class="add" @click="addCount ">加一位被祈福者</button>
                     </div>
                 </div>
             </div>
             <div class="body">
                 <div class="container top_border py-20px">
-                    <h5 class="mount mb-20px">共 <span class="count">2</span> 位</h5>
+                    <h5 class="mount mb-20px">共 <span class="count">{{ peopleCount }}</span> 位</h5>
                     <h5 class="mount">總計:</h5>
                     <h5 class="mount mb-10px">NT$1000</h5>
                     <p class="mb-10px">備註:</p>
@@ -182,7 +182,7 @@
                     </div>
                     
                     <div class="container">
-                        <button class="visa">確認訂單</button>
+                        <button class="visa" @click="checkOrder">確認訂單</button>
                         <p class="mt-20px">您的個人數據將用於處理您的訂單，支持您在整個網站的體驗，以及我們的<span class="term">隱私權政策</span>中描述的其他目的。</p>
                     </div>
                 </div>
@@ -190,12 +190,12 @@
             <div class="relative w-full">
                 <img  class="bottom_img" src="../../assets/products/light/light_bg_4_3.svg" alt="">
             </div>
-            <div class="flex justify-between w-full">
-                <div class="bottom_left">
+            <div class="flex relative w-full pb-80px">
+                <div class="bottom_left" v-show="isPreviosShown" @click="activeForm = activeForm-1">
                     <div class="mb-10px left_icon"></div>
                     <p class="previous">上一位</p>
                 </div>
-                <div class="bottom_right">
+                <div class="bottom_right" v-show="isNextShown" @click="activeForm = activeForm+1">
                     <div class="mb-10px right_icon"></div>
                     <p class="next">下一位</p>
                 </div>
@@ -205,14 +205,65 @@
 </template>
 <script setup>
 //官方套件
-import { ref, onMounted } from 'vue';
+import { ref, onMounted ,computed,getCurrentInstance} from 'vue';
+const instance = getCurrentInstance()
 
 //其他套件
 import lunarFun from 'lunar-fun';
 
-onMounted(()=>{
-    console.log(lunarFun.lunalToGregorian(1906, 4, 30));
+//定義資料組
+const setCount = ref(false)
+const peopleCount = ref(1)
+const activeForm = ref(1)
+
+const createFormItem = () => ({
+  name: '',
+  gender: '',
+  yValue: '',
+  mValue: '',
+  dValue: '',
+  tValue: '',
+  selectedCity: '',
+  selectedArea: '',
+  address: '',
+  phone: '',
+  email: '',
+  calendar: false,
+  areas: [],
+});
+
+const formItems = ref([createFormItem()]);
+
+const initialCount = () => {
+  activeForm.value = 1;
+  setCount.value = true;
+  const itemsToAdd = peopleCount.value - formItems.value.length;
+  for (let i = 0; i < itemsToAdd; i++) {
+    formItems.value.push(createFormItem());
+  }
+};
+
+const addCount = () => {
+  peopleCount.value = Number(peopleCount.value)
+  peopleCount.value += 1;
+  formItems.value.push(createFormItem());
+};
+
+const deleteForm = (index) => {
+    activeForm.value = 1
+    peopleCount.value = Number(peopleCount.value)
+    peopleCount.value -= 1;
+    formItems.value.splice(index,1)
+}
+
+//控制上下一步收合
+const isPreviosShown = computed(()=>{
+    return peopleCount.value > 1 && activeForm.value !== 1
 })
+const isNextShown = computed(()=>{
+    return peopleCount.value > 1 && peopleCount.value - activeForm.value >= 1
+})
+
 
 //國農曆互轉定義資料
 const years = ref([]);
@@ -228,8 +279,8 @@ onMounted(()=>{
     }
 })
 const months = ref([
-    '01','02','03','04','05','06','07','08','09','10','11','12',
-    '閏01','閏02','閏03','閏04','閏05','閏06','閏07','閏08','閏09','閏10','閏11','閏12'
+    '1','2','3','4','5','6','7','8','9','10','11','12',
+    '閏1','閏2','閏3','閏4','閏5','閏6','閏7','閏8','閏9','閏10','閏11','閏12'
 ])
 const ctime = ref([
     '子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'
@@ -238,30 +289,35 @@ const wtime =ref([
     '(23:00-1:00)','(1:00-3:00)','(3:00-5:00)','(5:00-7:00)','(7:00-9:00)','(9:00-11:00)','(11:00-13:00)','(13:00-15:00)',
     '(15:00-17:00)','(17:00-19:00)','(19:00-21:00)','(21:00-23:00)'
 ])
-const calendar =ref(false)
 
 //轉換國農曆操作
-const yValue = ref('')
-const mValue = ref('')
-const dValue = ref('')
-const changeCalendar = (type) =>{
+const changeCalendar = (type,index) =>{
     if(type){
-        calendar.value = true
-        const [yValue, mValue, dValue] = lunarFun.gregorianToLunal(yValue, mValue, dValue)
+        formItems.value[index].calendar = true
+        const [lunarYear, lunarMonth, lunarDay, run] = lunarFun.gregorianToLunal(formItems.value[index].yValue, formItems.value[index].mValue, formItems.value[index].dValue)
+        formItems.value[index].yValue = lunarYear
+        formItems.value[index].mValue = run ? '潤' + lunarMonth : lunarMonth;
+        formItems.value[index].dValue = lunarDay
     }else{
-        calendar.value = false
+        formItems.value[index].calendar = false
+        const [gYear,gMonth,gDay,run] = lunarFun.lunalToGregorian(formItems.value[index].yValue, formItems.value[index].mValue, formItems.value[index].dValue)
+        formItems.value[index].yValue = gYear
+        formItems.value[index].mValue = run ? '潤' + gMonth : gMonth;
+        formItems.value[index].dValue = gDay
     }
+    instance.proxy.$forceUpdate()
 }
 
+//查看訂單
+const checkOrder = () =>{
+}
 
 //縣市選擇器
-const areas = ref([]);
-const selectedCity = ref('請選擇縣市');
-const selectedArea = ref('請選擇鄉鎮區');
-const updateAreas = () => {
-//   selectedArea.value = ''; 
-  const selectedCityAreas = areasByCity.value[selectedCity.value];
-  areas.value = selectedCityAreas || [];
+const updateAreas = (index) => {
+  const selectedCity = formItems.value[index].selectedCity;
+  const selectCityAreas = areasByCity.value[selectedCity];
+  formItems.value[index].areas = selectCityAreas;
+  instance.proxy.$forceUpdate()
 };
 
 const cities = ref([
@@ -301,6 +357,14 @@ const areasByCity = ref({
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.bottom_left{
+    position: absolute;
+    left:0px;
+}
+.bottom_right{
+    position: absolute;
+    right:0px;
 }
 @media(width > 512px){
     .bottom_left,.bottom_right{
@@ -629,7 +693,4 @@ input {
         margin-top: 10px;
     }
 }
-
-@media(width < 512px) {
-    .bottom {}
-}</style>
+</style>
