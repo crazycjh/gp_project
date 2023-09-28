@@ -22,7 +22,6 @@ import { VueFinalModal } from 'vue-final-modal'
 import axios from "axios";
 
 //自製元件
-
 const props = defineProps({
   content: String,
 });

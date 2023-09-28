@@ -2,17 +2,7 @@
     <div class="cover py-80px relative">
         <div class="wrapper">
             <div class="top">
-                <div class="md:w-40%">
-                    <h5 class="mb-10px">點選人數<span class="required">*</span></h5>
-                    <div class="relative select_wrapper">
-                        <select :disabled="setCount"
-                            class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="peopleCount" @change="initialCount">
-                            <option v-for="number in 20" :key="number">{{ number }}</option>
-                        </select>
-                        <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
-                            src="../../assets/index/arrow_down.svg" alt="">
-                    </div>
-                </div>
+                <img class="light_top_left" src="../../assets/products/light/light_text2.svg" alt="">
                 <img src="../../assets/products/light/light_list_img.png" alt="">
             </div>
             <div class="body relative" v-for="(item, index) in formItems" :key="index" v-show="index + 1 === activeForm">
@@ -25,6 +15,27 @@
                     <p class="next">下一位</p>
                 </div>
                 <div class="container border">
+                    <Customer 
+                        v-model:name="customerData.name"
+                        v-model:phone="customerData.phone"
+                        v-model:email="customerData.email"
+                        v-model:zipCode="customerData.zipCode"
+                        v-model:selectedCity="customerData.selectedCity"
+                        v-model:selectedArea="customerData.selectedArea"
+                        v-model:address="customerData.address"
+                        @set-zipCode="setZipcode"
+                    />
+                    <div class="mt-10px mb-10px">
+                        <h5 class="mb-10px">點選人數<span class="required">*</span></h5>
+                        <div class="relative w-full">
+                            <select :disabled="setCount"
+                                class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="peopleCount" @change="initialCount">
+                                <option v-for="number in 20" :key="number">{{ number }}</option>
+                            </select>
+                            <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
+                                src="../../assets/index/arrow_down.svg" alt="">
+                        </div>
+                    </div>
                     <button class="believers mb-20px">第{{activeForm}}位信眾資料</button>
                     <div class="flex flex-col md:flex-row gap-20px mb-20px">
                         <div class="md:w-50%">
@@ -48,19 +59,19 @@
                         </div>
                     </div>
                     <div class="flex flex-col md:flex-row gap-20px mb-10px">
-                        <div class="md:w-50%">
-                            <h5 class="mb-10px">農曆生日<span class="required">*</span></h5>
-                            <div class="relative select_wrapper">
-                                <select
-                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.yValue">
-                                    <option value=""  disabled>請選擇年份</option>
-                                    <option v-for="(year, index) in yearsValue" :key="index" :value="year">{{ year }}{{ years[index] }}</option>
-                                </select>
-                                <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
-                                    src="../../assets/index/arrow_down.svg" alt="">
+                        <div class="flex flex-col md:flex-row gap-20px md:w-50%">
+                            <div class="w-full">
+                                <h5 class="mb-10px">農曆生日<span class="required">*</span></h5>
+                                <div class="relative small_wrapper">
+                                    <select
+                                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.yValue">
+                                        <option value=""  disabled>請選擇年份</option>
+                                        <option v-for="(year, index) in yearsValue" :key="index" :value="year">{{ year }}{{ years[index] }}</option>
+                                    </select>
+                                    <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
+                                        src="../../assets/index/arrow_down.svg" alt="">
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex gap-20px md:w-50%">
                             <div class="w-full">
                                 <h5 class="mb-10px">吉月<span class="required">*</span></h5>
                                 <div class="relative small_wrapper">
@@ -73,6 +84,8 @@
                                         src="../../assets/index/arrow_down.svg" alt="">
                                 </div>
                             </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row gap-20px md:w-50%">
                             <div class="w-full">
                                 <h5 class="mb-10px">吉日<span class="required">*</span></h5>
                                 <div class="relative small_wrapper">
@@ -85,27 +98,33 @@
                                         src="../../assets/index/arrow_down.svg" alt="">
                                 </div>
                             </div>
+                            <div class="w-full">
+                                <h5 class="mb-10px">出生時辰<span class="required">*</span></h5>
+                                <div class="relative small_wrapper">
+                                    <select  class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.tValue">
+                                        <option value="" disabled>吉時</option>
+                                        <option v-for="(time,index) in ctime" key="ctime" :value="time">{{ time }}{{ wtime[index] }}</option>
+                                    </select>
+                                    <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="flex flex-col md:flex-row mb-20px">
-                        <button v-show="!item.calendar" class="translate" @click="changeCalendar(true,index)">轉農曆</button>
-                        <button v-show="item.calendar" class="translate" @click="changeCalendar(false,index)">轉國曆</button>
+                        <button v-show="item.calendar === 1" class="translate" @click="changeCalendar(1,index)">轉農曆</button>
+                        <button v-show="item.calendar ===2" class="translate" @click="changeCalendar(2,index)">轉國曆</button>
                         <p class="hint">請選擇農曆日期，若不曉得農曆日期，請先選擇國曆日期後按下「轉農曆」進行轉換。</p>
                     </div>
-                    <div class="mb-20px">
-                        <h5 class="mb-10px">出生時辰<span class="required">*</span></h5>
-                        <div class="relative select_wrapper">
-                            <select  class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.tValue">
-                                <option value="" disabled>吉時</option>
-                                <option v-for="(time,index) in ctime" key="ctime" :value="time">{{ time }}{{ wtime[index] }}</option>
-                            </select>
-                            <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none" src="../../assets/index/arrow_down.svg" alt="">
+                    <div class="flex flex-col md:flex-row gap-20px mb-20px">
+                        <div class="w-full">
+                            <h5 class="mb-10px">郵遞區號<span class="required">*</span></h5>
+                            <div class="w-full">
+                                <input class="body_input" type="text" placeholder="請輸入郵遞區號" v-model="item.zipCode" readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex gap-20px mb-20px">
-                        <div class="w-50%">
+                        <div class="w-full">
                             <h5 class="mb-10px">縣市<span class="required">*</span></h5>
-                            <div class="relative select_wrapper">
+                            <div class="relative">
                                 <select
                                     class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select " v-model="item.selectedCity" @change="updateAreas(index)">
                                     <option  value="" disabled>請選擇縣市</option>
@@ -115,11 +134,11 @@
                                     src="../../assets/index/arrow_down.svg" alt="">
                             </div>
                         </div>
-                        <div class="w-50%">
+                        <div class="w-full">
                             <h5 class="mb-10px">鄉鎮區<span class="required">*</span></h5>
-                            <div class="relative select_wrapper">
+                            <div class="relative">
                                 <select
-                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.selectedArea">
+                                    class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.selectedArea" @change="updateZipCode(index)">
                                     <option selected value="" disabled>請選擇鄉鎮區</option>
                                     <option v-if="item.areas" v-for="area in item.areas" :key="area">{{ area }}</option>
                                 </select>
@@ -158,18 +177,18 @@
                 <div class="container top_border py-20px">
                     <h5 class="mount mb-20px">共 <span class="count">{{ peopleCount }}</span> 位</h5>
                     <h5 class="mount">總計:</h5>
-                    <h5 class="mount mb-10px">NT$1000</h5>
+                    <h5 class="mount mb-10px">NT${{ total }}</h5>
                     <p class="mb-10px">備註:</p>
-                    <textarea class="custom_textarea mb-10px"></textarea>
+                    <textarea v-model="remark" class="custom_textarea mb-10px"></textarea>
                     <div class="flex mb-10px" >
                         <span class="mr-5px">綠界科技</span><img src="../../assets/products/light/ecpay_icon.png" alt="">
                     </div>
                     <h5>付款方式</h5>
                     <div class="relative w-full mb-10px">
                         <select
-                            class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                            <option selected>請選擇付款方式</option>
-                            <option>ATM虛擬帳戶匯款</option>
+                            class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="payment">
+                            <option value="" selected>請選擇付款方式</option>
+                            <option >ATM虛擬帳戶匯款</option>
                             <option>線上刷卡</option>
                             <option>超商代碼繳費</option>
                         </select>
@@ -177,11 +196,12 @@
                             src="../../assets/index/arrow_down.svg" alt="">
                     </div>
                     <div class="flex top_border pt-10px">
-                        <input class="mr-10px " type="checkbox">
+                        <input v-model="agree" class="mr-10px " type="checkbox">
                         <p>我已閱讀並同意網站的<router-link to="/terms" class="term">條款與條件</router-link></p>
                     </div>
                     
                     <div class="container">
+                        <h4 class="error">{{ errorMessage }}</h4>
                         <button class="visa" @click="checkOrder">確認訂單</button>
                         <p class="mt-20px">您的個人數據將用於處理您的訂單，支持您在整個網站的體驗，以及我們的<span class="term">隱私權政策</span>中描述的其他目的。</p>
                     </div>
@@ -207,14 +227,69 @@
 //官方套件
 import { ref, onMounted ,computed,getCurrentInstance} from 'vue';
 const instance = getCurrentInstance()
+import { useRoute,useRouter } from 'vue-router';
+import axios from "axios";
+import { useModal } from 'vue-final-modal'
 
 //其他套件
 import lunarFun from 'lunar-fun';
+import DetailModal from '@/components/modals/DetailModal.vue'
+
+//自製套件
+const backend = import.meta.env.VITE_BACKEND_PATH
+import Customer from '@/components/products/Customer.vue'
+import {cities,areasByCity,zipCodesByArea} from '@/store/city.js'
+
+
 
 //定義資料組
 const setCount = ref(false)
 const peopleCount = ref(1)
 const activeForm = ref(1)
+const agree = ref(false)
+const payment = ref('')
+const remark = ref('')
+
+//取id,價格
+const productID = ref('')
+const price = ref('')
+const name = ref('')
+onMounted(() => {
+    const route = useRoute();
+    productID.value = Number(route.params.productID);
+});
+onMounted(async () => {
+    try {
+        const response = await axios.get(
+            `${backend}/api/gc/product/${productID.value}`
+        );
+        price.value = response.data.price
+        name.value = response.data.name
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    } finally {
+  }
+});
+
+const total = computed(()=>{
+    return peopleCount.value * price.value
+})
+
+
+const customerData = ref({
+    name:'',
+    phone:'',
+    email:'',
+    zipCode:'',
+    selectedCity:'',
+    selectedArea:'',
+    address:'',
+})
+
+const setZipcode = (code) =>{
+    customerData.value.zipCode = code
+}
+
 
 const createFormItem = () => ({
   name: '',
@@ -226,9 +301,10 @@ const createFormItem = () => ({
   selectedCity: '',
   selectedArea: '',
   address: '',
+  zipCode:'',
   phone: '',
   email: '',
-  calendar: false,
+  calendar: 1,
   areas: [],
 });
 
@@ -292,14 +368,14 @@ const wtime =ref([
 
 //轉換國農曆操作
 const changeCalendar = (type,index) =>{
-    if(type){
-        formItems.value[index].calendar = true
+    if(type === 1){
+        formItems.value[index].calendar = 2
         const [lunarYear, lunarMonth, lunarDay, run] = lunarFun.gregorianToLunal(formItems.value[index].yValue, formItems.value[index].mValue, formItems.value[index].dValue)
         formItems.value[index].yValue = lunarYear
         formItems.value[index].mValue = run ? '潤' + lunarMonth : lunarMonth;
         formItems.value[index].dValue = lunarDay
     }else{
-        formItems.value[index].calendar = false
+        formItems.value[index].calendar = 1
         const [gYear,gMonth,gDay,run] = lunarFun.lunalToGregorian(formItems.value[index].yValue, formItems.value[index].mValue, formItems.value[index].dValue)
         formItems.value[index].yValue = gYear
         formItems.value[index].mValue = run ? '潤' + gMonth : gMonth;
@@ -308,8 +384,34 @@ const changeCalendar = (type,index) =>{
     instance.proxy.$forceUpdate()
 }
 
+const errorMessage = ref('');
 //查看訂單
 const checkOrder = () =>{
+    // for (const key in customerData.value) {
+    //     if (!customerData.value[key]) {
+    //         errorMessage.value = '訂購者資料不完整';
+    //         return; 
+    //     }
+    // }
+    // for (let i = 0; i < formItems.value.length; i++) {
+    // const item = formItems.value[i];
+    //     for (const key in item) {
+    //     if (!item[key]) {
+    //             errorMessage.value = `第 ${i + 1} 位被祈福者資料不完整`;
+    //             return;
+    //         }
+    //     }
+    // }
+    // if(agree.value === false){
+    //     errorMessage.value = '請勾選同意網站的條款與條件'
+    //     return
+    // }
+    // if(payment.value === false){
+    //     errorMessage.value = '請選擇付款方式'
+    //     return
+    // }
+    // errorMessage.value = ''
+    open()
 }
 
 //縣市選擇器
@@ -320,38 +422,48 @@ const updateAreas = (index) => {
   instance.proxy.$forceUpdate()
 };
 
-const cities = ref([
-    "基隆市", "台北市", "新北市", "桃園市", "新竹市", "新竹縣", "苗栗縣",
-    "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市",
-    "高雄市", "屏東縣", "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣",
-    "連江縣"
-]);
-const areasByCity = ref({
-    "基隆市": ["中正區", "七堵區", "暖暖區", "仁愛區", "安樂區", "信義區"],
-    "台北市": ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
-    "新北市": ["板橋區", "三重區", "中和區", "永和區", "新莊區", "新店區", "樹林區", "鶯歌區", "三峽區", "淡水區", "汐止區", "瑞芳區", "土城區", "蘆洲區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區"],
-    "桃園市": ["桃園區", "中壢區", "平鎮區", "八德區", "楊梅區", "大溪區", "蘆竹區", "龜山區", "龍潭區", "新屋區", "觀音區", "復興區"],
-    "新竹市": ["東區", "北區", "香山區"],
-    "新竹縣": ["竹北市", "湖口鄉", "新豐鄉", "新埔鎮", "關西鎮", "芎林鄉", "寶山鄉", "竹東鎮", "五峰鄉", "橫山鄉", "尖石鄉", "北埔鄉", "峨眉鄉"],
-    "苗栗縣": ["苗栗市", "頭份市", "竹南鎮", "後龍鎮", "通霄鎮", "苑裡鎮", "卓蘭鎮", "造橋鄉", "西湖鄉", "頭屋鄉", "公館鄉", "銅鑼鄉", "三義鄉", "大湖鄉", "獅潭鄉", "泰安鄉"],
-    "台中市": ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "豐原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
-    "彰化縣": ["彰化市", "員林市", "和美鎮", "鹿港鎮", "溪湖鎮", "二林鎮", "田中鎮", "北斗鎮", "花壇鄉", "芬園鄉", "大村鄉", "永靖鄉", "伸港鄉", "線西鄉", "福興鄉", "秀水鄉", "埔心鄉", "埔鹽鄉", "大城鄉", "芳苑鄉", "竹塘鄉", "社頭鄉", "二水鄉", "田尾鄉", "埤頭鄉", "溪州鄉"],
-    "南投縣": ["南投市", "埔里鎮", "草屯鎮", "竹山鎮", "集集鎮", "名間鄉", "鹿谷鄉", "中寮鄉", "魚池鄉", "國姓鄉", "水里鄉", "信義鄉", "仁愛鄉"],
-    "雲林縣": ["斗六市", "斗南鎮", "虎尾鎮", "西螺鎮", "土庫鎮", "北港鎮", "莿桐鄉", "林內鄉", "古坑鄉", "大埤鄉", "崙背鄉", "二崙鄉", "麥寮鄉", "台西鄉", "東勢鄉", "元長鄉", "四湖鄉", "口湖鄉", "水林鄉"],
-    "嘉義市": ["東區", "西區"],
-    "嘉義縣": ["太保市", "朴子市", "布袋鎮", "大林鎮", "民雄鄉", "溪口鄉", "新港鄉", "六腳鄉", "東石鄉", "義竹鄉", "鹿草鄉", "水上鄉", "中埔鄉", "竹崎鄉", "梅山鄉", "番路鄉", "大埔鄉", "阿里山鄉"],
-    "台南市": ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
-    "高雄市": ["楠梓區", "左營區", "鼓山區", "三民區", "鹽埕區", "前金區", "新興區", "苓雅區", "前鎮區", "旗津區", "小港區", "鳳山區", "大寮區", "鳥松區", "林園區", "仁武區", "大樹區", "大社區", "岡山區", "路竹區", "橋頭區", "梓官區", "彌陀區", "永安區", "燕巢區", "田寮區", "阿蓮區", "茄萣區", "湖內區", "旗山區", "美濃區", "內門區", "杉林區", "甲仙區", "六龜區", "茂林區", "桃源區", "那瑪夏區"],
-    "屏東縣": ["屏東市", "潮州鎮", "東港鎮", "恆春鎮", "萬丹鄉", "長治鄉", "麟洛鄉", "九如鄉", "里港鄉", "鹽埔鄉", "高樹鄉", "萬巒鄉", "內埔鄉", "竹田鄉", "新埤鄉", "枋寮鄉", "新園鄉", "崁頂鄉", "林邊鄉", "南州鄉", "佳冬鄉", "琉球鄉", "車城鄉", "滿州鄉", "枋山鄉", "霧台鄉", "瑪家鄉", "泰武鄉", "來義鄉", "春日鄉", "獅子鄉", "牡丹鄉", "三地門鄉"],
-    "宜蘭縣": ["宜蘭市", "頭城鎮", "礁溪鄉", "壯圍鄉", "員山鄉", "羅東鎮", "三星鄉", "大同鄉", "五結鄉", "冬山鄉", "蘇澳鎮", "南澳鄉", "釣魚台列嶼"],
-    "花蓮縣": ["花蓮市", "鳳林鎮", "玉里鎮", "新城鄉", "吉安鄉", "壽豐鄉", "光復鄉", "豐濱鄉", "瑞穗鄉", "富里鄉", "秀林鄉", "卓溪鄉"],
-    "台東縣": ["台東市", "成功鎮", "關山鎮", "長濱鄉", "海端鄉", "池上鄉", "東河鄉", "鹿野鄉", "延平鄉", "卑南鄉", "金峰鄉", "大武鄉", "達仁鄉", "綠島鄉", "蘭嶼鄉", "太麻里鄉"],
-    "澎湖縣": ["馬公市", "湖西鄉", "白沙鄉", "西嶼鄉", "望安鄉", "七美鄉"],
-    "金門縣": ["金沙鎮", "金湖鎮", "金寧鄉", "金城鎮", "烈嶼鄉", "烏坵鄉"],
-    "連江縣": ["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
-});
+//郵遞區號選擇器
+const updateZipCode = (index) => {
+    const zipCode = zipCodesByArea[formItems.value[index].selectedArea]
+    formItems.value[index].zipCode = zipCode
+    instance.proxy.$forceUpdate()
+} 
+
+//控制modal
+const { open, close } = useModal({
+  component: DetailModal,
+  attrs: {
+    productName:name,
+    productPrice:price,
+    customer:customerData,
+    prayer:formItems,
+    remark:remark,
+    payment:payment,
+    count:peopleCount,
+    productID:productID,
+    onConfirm() {
+        close()
+    },
+  },
+})
+
+
 </script>
 <style scoped>
+.error{
+    color:red;
+    margin-bottom: -20px;
+    margin-top: 10px;
+}
+.light_top_left{
+    width: 298px;
+    height: 75px;
+}
+@media(width<768px){
+    .light_top_left{
+        display: none;
+    }
+}
 .bottom_left,.bottom_right{
     padding-top: 20px;
     display: flex;

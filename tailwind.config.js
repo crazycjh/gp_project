@@ -94,6 +94,7 @@ export default {
         '290px':'290px',
         '360px':'360px',
         '400px':'400px',
+        '1200px':'1200px'
       },
       maxWidth: {
         '180px':'180px',
