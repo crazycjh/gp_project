@@ -76,7 +76,7 @@
             </div>
             <div class="flex gap-20px">
                 <button class="send_btn">確認送出</button>
-                <button class="back_btn">修正資料</button>
+                <button class="back_btn" @click="emit('confirm')">修正資料</button>
             </div>
         </div>
     </VueFinalModal>
