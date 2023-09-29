@@ -6,80 +6,47 @@
                     <tr>
                         <th class="pr-60px">訂單</th>
                         <th class="pr-120px">發佈日期</th>
-                        <th class="pr-50px">狀態</th>
+                        <th class="pr-80px">狀態</th>
                         <th class="pr-180px">總計</th>
                         <th>動作</th>
                     </tr>
-                    <tr>
-                        <td><span class="notice">#4299</span></td>
-                        <td>2023 年 9 月 20 日</td>
-                        <td>失敗</td>
-                        <td>NT$5,349 (共 8 件商品)</td>
+                    <tr v-for="item in orders" :key="item.order_id">
+                        <td><span class="notice">#{{ item.order_id }}</span></td>
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.status }}</td>
+                        <td>NT${{ item.total }} (共 {{ item.count }} 件商品)</td>
                         <td>
                             <button class="order_button">付款</button>
-                            <button class="order_button" @click="activeTab = emit('set-order-list')">查看</button>
+                            <button class="order_button" @click="emit('set-order-list',item)">查看</button>
                             <button class="order_button">取消</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="notice">#4297</span></td>
-                        <td>2023 年 9 月 18 日</td>
-                        <td>處理中</td>
-                        <td>NT$5,349 (共 8 件商品)</td>
-                        <td>
-                            <button class="order_button" @click="activeTab = 'order_list'">查看</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="mobile_order_list block md:hidden">
-                <div class="mobile_order">
+                <div v-for="item in orders" :key="item.order_id" class="mobile_order">
                     <div class="line">
                         <h5>訂單</h5>
-                        <h5><span class="notice">#4299</span></h5>
+                        <h5><span class="notice">#{{ item.order_id }}</span></h5>
                     </div>
                     <div class="line">
                         <h5>發佈日期</h5>
-                        <h5>2023 年 9 月 18 日</h5>
+                        <h5>{{ item.date }}</h5>
                     </div>
                     <div class="line">
                         <h5>狀態</h5>
-                        <h5>失敗</h5>
+                        <h5>{{ item.status }}</h5>
                     </div>
                     <div class="line">
                         <h5>總計</h5>
-                        <h5>NT$5,349 (共 8 件商品)</h5>
+                        <h5>NT${{ item.total }} (共 {{ item.count }} 件商品)</h5>
                     </div>
                     <div class="line">
                         <h5>動作</h5>
                         <div class="flex gap-20px">
                             <button class="order_mobile_button">付款</button>
-                            <button class="order_mobile_button" @click="activeTab = 'order_list'">查看</button>
+                            <button class="order_mobile_button" @click="emit('set-order-list',item)">查看</button>
                             <button class="order_mobile_button">取消</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="mobile_order">
-                    <div class="line">
-                        <h5>訂單</h5>
-                        <h5><span class="notice">#4299</span></h5>
-                    </div>
-                    <div class="line">
-                        <h5>發佈日期</h5>
-                        <h5>2023 年 9 月 18 日</h5>
-                    </div>
-                    <div class="line">
-                        <h5>狀態</h5>
-                        <h5>處理中</h5>
-                    </div>
-                    <div class="line">
-                        <h5>總計</h5>
-                        <h5>NT$5,349 (共 8 件商品)</h5>
-                    </div>
-                    <div class="line">
-                        <h5>動作</h5>
-                        <div class="flex gap-20px">
-                            <button class="order_mobile_button" @click="activeTab = 'order_list'">查看</button>
                         </div>
                     </div>
                 </div>
@@ -88,6 +55,32 @@
     </div>
 </template>
 <script setup>
+//官方套件
+import { ref,onMounted } from 'vue';
+import axios from "axios";
+
+//自製套件
+import { useAuth } from '@/store/auth.js'
+const auth = useAuth(); 
+
+//取得訂單
+const orders = ref([])
+onMounted(async () => {
+  const params = {
+        user_id:auth.member.user_id
+  };
+  try {
+    const response = await axios.get(
+     
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/light`,
+      {params:params,}
+    );
+    orders.value = response.data;
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
+
 const emit = defineEmits(['set-order-list']);
 </script>
 <style scoped>

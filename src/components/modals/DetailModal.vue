@@ -5,9 +5,14 @@
       content-class="absolute inset-0"
       @update:model-value="(val) => emit('update:modelValue', val)"
     >   
-        <div class="max-w-1200px mx-auto px-10px pt-60px pb-30px absolute inset-0 h-full overflow-auto">
+        <div class="container max-w-1200px mx-auto px-10px pt-60px pb-30px absolute inset-0 h-full overflow-auto">
             <div class="flex justify-end">
                 <img class="close" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
+            </div>
+            <div v-if="successMessage">
+                <h4 class="success">{{ successMessage }}</h4>
+                <p>已收到您的訂單，請您檢視訂單，確認付款狀態。</p>
+                <router-link :to="`/member/${auth.member.user_id}`" ><button class="prayer_btn">前往會員中心</button></router-link>
             </div>
             <div class="w-full">
                 <button class="customer_btn">聯絡人資料</button>
@@ -74,7 +79,7 @@
                     <span>{{ remark }}</span>
                 </div>
             </div>
-            <div class="flex gap-20px">
+            <div v-show="!successMessage" class="flex gap-20px">
                 <button class="send_btn" @click="sendOrder">確認送出</button>
                 <button class="back_btn" @click="emit('confirm')">修正資料</button>
             </div>
@@ -101,12 +106,10 @@ const props = defineProps({
   productID:String,
 });
 
-onMounted(()=>{
-    console.log(auth.member.user_id);
-})
 
 const emit = defineEmits(['confirm']);
-
+const successMessage = ref('')
+const errorMessage = ref('')
 //送出訂單
 const sendOrder = async() =>{
     const detail = ref({
@@ -128,7 +131,10 @@ const sendOrder = async() =>{
         );
         if (response.data.success === false) {
             errorMessage.value = response.data.data
-        } 
+        }else if( response.data.success === true){
+            successMessage.value = response.data.data
+            window.scrollTo(0, 0);
+        }
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
@@ -137,6 +143,10 @@ const sendOrder = async() =>{
 
 
 <style scoped>
+.success{
+    color:#920000;
+    font-size: 28px;
+}
 .mark{
     padding:10px 0;
 }
@@ -177,9 +187,7 @@ const sendOrder = async() =>{
     margin-bottom: 20px;
 }
 .container{
-    height: 100%;
-    overflow: scroll;
-    width: 1200px;
+    background-color: #ffffff;
 }
 .line{
     display: flex;
@@ -214,4 +222,5 @@ const sendOrder = async() =>{
     width: 18px;
     height: 18px;
 }
+
 </style>

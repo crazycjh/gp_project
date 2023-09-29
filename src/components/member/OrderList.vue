@@ -1,98 +1,90 @@
 <template>
     <div class="py-40px md:px-50px">
-        <h4 class="mb-20px">訂單編號 <span class="notice">#4299</span> 於<span class="notice">2023 年 9 月 20 日</span> 下單，目前狀態為
-            <span class="notice">處理中</span>。</h4>
-        <div class="w-full list">
+        <h4 class="mb-20px">訂單編號 <span class="notice">#{{ order.order_id }}</span> 於<span class="notice">{{ order.date }}</span> 下單，目前狀態為
+            <span class="notice">{{ order.status }}</span>。</h4>
+        <div v-for="item in prayers" :key="item.name" class="w-full list">
             <button class="order_list_btn hidden md:block">第一位信眾</button>
             <div class="line">
                 <h5>信眾姓名:</h5>
-                <h5>林君豪</h5>
+                <h5>{{ item.name }}</h5>
             </div>
             <div class="line">
                 <h5>性別:</h5>
-                <h5>男</h5>
+                <h5>{{ item.gender }}</h5>
             </div>
             <div class="line">
                 <h5>農曆生日:</h5>
-                <h5>1992 年(民國81 年) 2 月 3 日 10~12 時</h5>
+                <h5>{{ item.yValue }} 年 {{ item.mValue }} 月 {{ item.dValue }} 日 {{ item.tValue }} 時</h5>
             </div>
             <div class="line">
                 <h5>地址:</h5>
-                <h5>330桃園市，桃園區</h5>
+                <h5>{{ item.zipCode }}{{ item.selectedCity }}，{{ item.selectedArea }}</h5>
             </div>
             <div class="line">
                 <h5>詳細地址:</h5>
-                <h5>經國路246號</h5>
+                <h5>{{ item.address }}</h5>
             </div>
             <div class="line">
                 <h5>聯絡電話:</h5>
-                <h5>0912345678</h5>
+                <h5>{{ item.phone }}</h5>
             </div>
             <div class="line">
                 <h5>電子郵件:</h5>
-                <h5>lia9021102@gmail.com</h5>
-            </div>
-        </div>
-        <div class="w-full list">
-            <button class="order_list_btn hidden md:block">第二位信眾</button>
-            <div class="line">
-                <h5>信眾姓名:</h5>
-                <h5>王曉明</h5>
-            </div>
-            <div class="line">
-                <h5>性別:</h5>
-                <h5>男</h5>
-            </div>
-            <div class="line">
-                <h5>農曆生日:</h5>
-                <h5>1992 年(民國81 年) 2 月 3 日 10~12 時</h5>
-            </div>
-            <div class="line">
-                <h5>地址:</h5>
-                <h5>330桃園市，桃園區</h5>
-            </div>
-            <div class="line">
-                <h5>詳細地址:</h5>
-                <h5>經國路246號</h5>
-            </div>
-            <div class="line">
-                <h5>聯絡電話:</h5>
-                <h5>0912345678</h5>
-            </div>
-            <div class="line">
-                <h5>電子郵件:</h5>
-                <h5>lia9021102@gmail.com</h5>
+                <h5>{{ item.email }}</h5>
             </div>
         </div>
         <div>
             <h4 class="payment">付款資訊</h4>
             <div class="line">
                 <h5>燈別:</h5>
-                <h5><span class="notice">光明燈</span></h5>
+                <h5><span class="notice">{{ order.name }}</span></h5>
             </div>
             <div class="line">
                 <h5>總計:</h5>
-                <h5>NT$1,000</h5>
+                <h5>NT${{ order.total }}</h5>
             </div>
             <div class="line">
                 <h5>付款方式:</h5>
-                <h5>信用卡</h5>
+                <h5>{{ order.payment }}</h5>
             </div>
             <div class="line">
                 <h5>付款狀態:</h5>
-                <h5>已付款</h5>
+                <h5 v-show="order.status === '等待付款中'">未付款</h5>
+                <h5 v-show="order.status !== '等待付款中'">已付款</h5>
             </div>
             <div class="mt-10px">
                 <h6 class="mb-10px">備註:</h6>
-                <p>內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內
-                </p>
+                <p>{{ order.note }}</p>
             </div>
         </div>
     </div>
 </template>
 <script setup>
 //官方套件
-import { ref } from 'vue';
+import { ref,onMounted } from 'vue';
+import axios from "axios";
+
+const props = defineProps({
+    order:Object
+})
+const prayers = ref([])
+onMounted(async () => {
+  const params = {
+       order_id:props.order.order_id,
+       count:props.order.count
+  };
+  try {
+    const response = await axios.get(
+     
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/light/detail`,
+      {params:params,}
+    );
+    prayers.value = response.data;
+    console.log(prayers.value);
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
 
 
 //自製組件

@@ -11,7 +11,9 @@
             <div class="tabs">
                 <span class="tab" :class="{ active: activeTab === 'index' }" @click="activeTab = 'index'">控制台</span>
                 <span class="tab" :class="{ active: activeTab === 'order' || activeTab === 'order_list' }"
-                    @click="activeTab = 'order'">訂單</span>
+                    @click="activeTab = 'order'">點燈訂單</span>
+                    <span class="tab" :class="{ active: activeTab === 'order2' || activeTab === 'order_list2' }"
+                    @click="activeTab = 'order2'">文創商品訂單</span>
                 <span class="tab" :class="{ active: activeTab === 'detail' }" @click="activeTab = 'detail'">帳戶詳細資料</span>
                 <span class="tab" :class="{ active: activeTab === 'logout' }" @click="logout">登出</span>
             </div>
@@ -27,8 +29,8 @@
                     </div>
                 </div>
             </div>
-            <Order v-show="activeTab === 'order'" @set-order-list="activeTab = 'orderList'"/>
-            <OrderList v-show="activeTab === 'orderList'" />
+            <Order v-show="activeTab === 'order'" @set-order-list="openOrderList"/>
+            <OrderList :order="order" v-if="activeTab === 'orderList'" />
             <Detail v-show="activeTab === 'detail'" />
         </div>
     </div>
@@ -49,8 +51,18 @@ const logout = () => {
    auth.logout()
    router.push('/')
 }
-
+// const order_id = ref('')
+// const order_date = ref('')
+// const order_status = ref('')
+const order = ref([])
 const activeTab = ref('index')
+const openOrderList = (item) =>{
+    // order_id.value = id
+    // order_date.value = date
+    // order_status.value = status
+    order.value = item
+    activeTab.value = 'orderList'
+}
 </script>
 <style scoped>
 

@@ -384,33 +384,47 @@ const changeCalendar = (type,index) =>{
     instance.proxy.$forceUpdate()
 }
 
+//驗證格式
 const errorMessage = ref('');
+const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
 //查看訂單
 const checkOrder = () =>{
-    // for (const key in customerData.value) {
-    //     if (!customerData.value[key]) {
-    //         errorMessage.value = '訂購者資料不完整';
-    //         return; 
-    //     }
-    // }
-    // for (let i = 0; i < formItems.value.length; i++) {
-    // const item = formItems.value[i];
-    //     for (const key in item) {
-    //     if (!item[key]) {
-    //             errorMessage.value = `第 ${i + 1} 位被祈福者資料不完整`;
-    //             return;
-    //         }
-    //     }
-    // }
-    // if(agree.value === false){
-    //     errorMessage.value = '請勾選同意網站的條款與條件'
-    //     return
-    // }
-    // if(payment.value === false){
-    //     errorMessage.value = '請選擇付款方式'
-    //     return
-    // }
-    // errorMessage.value = ''
+    for (const key in customerData.value) {
+        if (!customerData.value[key]) {
+            errorMessage.value = '訂購者資料不完整';
+            return; 
+        }
+    }
+    if(!validateEmail(customerData.value.email)){
+        errorMessage.value = '訂購者信箱格式不正確'
+        return
+    }
+    for (let i = 0; i < formItems.value.length; i++) {
+    const item = formItems.value[i];
+        for (const key in item) {
+            if (!item[key]) {
+                    errorMessage.value = `第 ${i + 1} 位被祈福者資料不完整`;
+                    return;
+            }
+            if(key === 'email' && !validateEmail(item[key])){
+                    errorMessage.value = `第 ${i + 1} 位被祈福者信箱格式不正確`;
+                    return;
+            }
+        }
+    }
+    if(agree.value === false){
+        errorMessage.value = '請勾選同意網站的條款與條件'
+        return
+    }
+    if(payment.value === false){
+        errorMessage.value = '請選擇付款方式'
+        return
+    }
+    errorMessage.value = ''
     open()
 }
 
