@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="flex gap-20px">
-                <button class="send_btn">確認送出</button>
+                <button class="send_btn" @click="sendOrder">確認送出</button>
                 <button class="back_btn" @click="emit('confirm')">修正資料</button>
             </div>
         </div>
@@ -83,12 +83,14 @@
   </template>
 <script setup>
 //官方套件
-import { ref,computed } from 'vue';
+import { ref,computed,onMounted } from 'vue';
 import { VueFinalModal } from 'vue-final-modal'
 import axios from "axios";
 
 //自製元件
-defineProps({
+import { useAuth } from '@/store/auth.js'
+const auth = useAuth();
+const props = defineProps({
   productName: String,
   productPrice:String,
   customer:Object,
@@ -98,9 +100,39 @@ defineProps({
   count:Number,
   productID:String,
 });
+
+onMounted(()=>{
+    console.log(auth.member.user_id);
+})
+
 const emit = defineEmits(['confirm']);
 
-
+//送出訂單
+const sendOrder = async() =>{
+    const detail = ref({
+        user_id:auth.member.user_id,
+        productID:props.productID,
+        count:props.count,
+        payment:props.payment,
+        remark:props.remark
+    })
+    try {
+        const requestData = {
+            customer: props.customer,
+            prayer: props.prayer,
+            detail:detail.value
+        };
+        const response = await axios.post(
+            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/light/order`,
+            requestData
+        );
+        if (response.data.success === false) {
+            errorMessage.value = response.data.data
+        } 
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    }
+}
 </script>
 
 
