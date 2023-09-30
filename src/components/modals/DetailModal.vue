@@ -106,10 +106,23 @@ const props = defineProps({
   productID:String,
 });
 
+const merchant_id = ref('');
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/ecpay`
+    );
+    merchant_id.value = response.data.ecpay_merchant_id
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
+
 
 const emit = defineEmits(['confirm']);
 const successMessage = ref('')
 const errorMessage = ref('')
+const order_id = ref('')
 //送出訂單
 const sendOrder = async() =>{
     const detail = ref({
@@ -129,16 +142,66 @@ const sendOrder = async() =>{
             `${import.meta.env.VITE_BACKEND_PATH}/api/gc/light/order`,
             requestData
         );
+        console.log(response);
         if (response.data.success === false) {
             errorMessage.value = response.data.data
         }else if( response.data.success === true){
-            successMessage.value = response.data.data
-            window.scrollTo(0, 0);
+           
+            order_id.value = response.data.data
+            successMessage.value = '感謝您的訂購'
+            // window.scrollTo(0, 0);
+            // redirectEcpay()
         }
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
 }
+
+const getCurrentDateTime = () =>{
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    const formattedDateTime = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+    return formattedDateTime;
+}
+
+const total = () => {
+    return props.productPrice * props.count
+}
+
+//跳轉綠界
+const redirectEcpay = async () => {
+  try {
+    const requestData = new URLSearchParams({
+      MerchantID: merchant_id.value,
+      MerchantTradeNo: order_id.value,
+      MerchantTradeDate: getCurrentDateTime(),
+      PaymentType: 'aio',
+      TotalAmount: total(),
+      TradeDesc: 'michael_test',
+      ItemName: props.productName,
+      ReturnURL: 'https://demo2.gcreate.com.tw/gc_godpray_frontend/'
+    });
+
+    const response = await axios.post(
+      'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5',
+      requestData.toString(), // 轉換成 URL 編碼的字符串
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }
+    );
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+}
+
 </script>
 
 
