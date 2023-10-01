@@ -28,7 +28,7 @@
             <div class="w-full">
                 <h5 class="mb-10px">郵遞區號<span class="required">*</span></h5>
                 <div class="w-full">
-                    <input class="body_input" type="text" placeholder="請輸入郵遞區號" :value="zipCode"
+                    <input class="body_input" type="text" placeholder="自動帶入勿填" :value="zipCode"
                     readonly>
                 </div>
             </div>

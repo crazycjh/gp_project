@@ -3,7 +3,7 @@
         <div class="wrapper">
             <div class="top">
                 <img class="light_top_left" src="../../assets/products/light/light_text2.svg" alt="">
-                <img src="../../assets/products/light/light_list_img.png" alt="">
+                <img class="candle" src="../../assets/products/light/light_list_img.png" alt="">
             </div>
             <div class="body relative" v-for="(item, index) in formItems" :key="index" v-show="index + 1 === activeForm">
                 <div class="left" v-show="isPreviosShown" @click="activeForm = activeForm -1">
@@ -26,7 +26,7 @@
                         @set-zipCode="setZipcode"
                     />
                     <div class="mt-10px mb-10px">
-                        <h5 class="mb-10px">點選人數<span class="required">*</span></h5>
+                        <h5 class="mb-10px">點選人數<span class="required">*只能初始化選擇一次</span></h5>
                         <div class="relative w-full">
                             <select :disabled="setCount"
                                 class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="peopleCount" @change="initialCount">
@@ -119,7 +119,7 @@
                         <div class="w-full">
                             <h5 class="mb-10px">郵遞區號<span class="required">*</span></h5>
                             <div class="w-full">
-                                <input class="body_input" type="text" placeholder="請輸入郵遞區號" v-model="item.zipCode" readonly>
+                                <input class="body_input" type="text" placeholder="自動帶入勿填"  v-model="item.zipCode" readonly>
                             </div>
                         </div>
                         <div class="w-full">
@@ -153,7 +153,7 @@
                             <input class="body_input" type="text" placeholder="請輸入詳細地址" v-model="item.address">
                         </div>
                     </div>
-                    <div class="mb-20px">
+                    <!-- <div class="mb-20px">
                         <h5 class="mb-10px">聯絡電話<span class="required">*</span></h5>
                         <div class="relative w-full">
                             <input class="body_input" type="text" placeholder="請輸入電話號碼" v-model="item.phone">
@@ -164,10 +164,10 @@
                         <div class="relative w-full">
                             <input class="body_input" type="text" placeholder="請輸入電子信箱" v-model="item.email">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="flex justify-between mb-20px">
                         <div>
-                            <button class="cancel_btn" @click="deleteForm(index)">取消</button>
+                            <button class="cancel_btn" @click="deleteForm(index)">刪除</button>
                         </div>
                         <button class="add" @click="addCount ">加一位被祈福者</button>
                     </div>
@@ -203,7 +203,7 @@
                     <div class="container">
                         <h4 class="error">{{ errorMessage }}</h4>
                         <button class="visa" @click="checkOrder">確認訂單</button>
-                        <p class="mt-20px">您的個人數據將用於處理您的訂單，支持您在整個網站的體驗，以及我們的<span class="term">隱私權政策</span>中描述的其他目的。</p>
+                        <p class="mt-20px">您的個人數據將用於處理您的訂單，支持您在整個網站的體驗，以及我們的<router-link to="/privacy" class="term">隱私權政策</router-link>中描述的其他目的。</p>
                     </div>
                 </div>
             </div>
@@ -286,11 +286,12 @@ const customerData = ref({
     address:'',
 })
 
+//郵遞區號不能由下層組件修改上層的值，改用emit傳到上層再修改
 const setZipcode = (code) =>{
     customerData.value.zipCode = code
 }
 
-
+//信眾資料用function寫，避免被汙染
 const createFormItem = () => ({
   name: '',
   gender: '',
@@ -302,14 +303,15 @@ const createFormItem = () => ({
   selectedArea: '',
   address: '',
   zipCode:'',
-  phone: '',
-  email: '',
+//   phone: '',
+//   email: '',
   calendar: 1,
   areas: [],
 });
 
 const formItems = ref([createFormItem()]);
 
+//初始選人數
 const initialCount = () => {
   activeForm.value = 1;
   setCount.value = true;
@@ -319,12 +321,15 @@ const initialCount = () => {
   }
 };
 
+//加一位 並最新增加的那頁為active
 const addCount = () => {
   peopleCount.value = Number(peopleCount.value)
   peopleCount.value += 1;
+  activeForm.value = peopleCount.value
   formItems.value.push(createFormItem());
 };
 
+//刪除當前的信眾
 const deleteForm = (index) => {
     activeForm.value = 1
     peopleCount.value = Number(peopleCount.value)
@@ -464,6 +469,7 @@ const { open, close } = useModal({
 
 </script>
 <style scoped>
+
 .error{
     color:red;
     margin-bottom: -20px;
@@ -476,6 +482,12 @@ const { open, close } = useModal({
 @media(width<768px){
     .light_top_left{
         display: none;
+    }
+    .candle{
+        width: 70px;
+    }
+    .top{
+        padding-bottom: 0;
     }
 }
 .bottom_left,.bottom_right{

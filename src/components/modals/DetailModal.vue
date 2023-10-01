@@ -150,7 +150,7 @@ const sendOrder = async() =>{
             order_id.value = response.data.data
             successMessage.value = '感謝您的訂購'
             // window.scrollTo(0, 0);
-            // redirectEcpay()
+            redirectEcpay()
         }
     } catch (error) {
         console.error("API 請求失敗:", error);
