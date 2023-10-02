@@ -105,7 +105,7 @@ const updateZipCode = (area) => {
 
 </script>
 <style scoped>
-input{
+input,select{
     background-color: #ffffff;
 }
 .border_bottom{
