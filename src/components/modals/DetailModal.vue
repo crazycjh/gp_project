@@ -5,9 +5,9 @@
       content-class="absolute inset-0"
       @update:model-value="(val) => emit('update:modelValue', val)"
     >   
-        <div class="container max-w-1200px mx-auto px-10px pt-60px pb-30px absolute inset-0 h-full overflow-auto">
+        <div class="container max-w-1200px  px-10px pt-60px pb-30px absolute inset-0 overflow-auto">
             <div class="flex justify-end">
-                <img class="close" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
+                <img class="close pr-20px" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
             </div>
             <div v-if="successMessage">
                 <h4 class="success">{{ successMessage }}</h4>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="line">
                     <span>付款方式:</span>
-                    <span>{{ payment }}</span>
+                    <span>{{ cPayment }}</span>
                 </div>
                 <div class="mark">
                     <h4 class="mb-10px">備註:</h4>
@@ -83,12 +83,13 @@
                 <button class="send_btn" @click="sendOrder">確認送出</button>
                 <button class="back_btn" @click="emit('confirm')">修正資料</button>
             </div>
+            <div ref="contentRef" v-html="html" class="hidden"></div>
         </div>
     </VueFinalModal>
   </template>
 <script setup>
 //官方套件
-import { ref,computed,onMounted } from 'vue';
+import { ref,computed,onMounted,watch } from 'vue';
 import { VueFinalModal } from 'vue-final-modal'
 import axios from "axios";
 
@@ -104,33 +105,40 @@ const props = defineProps({
   remark:String,
   count:Number,
   productID:String,
+  total:Number,
 });
 
-const merchant_id = ref('');
-onMounted(async () => {
-  try {
-    const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/ecpay`
-    );
-    merchant_id.value = response.data.ecpay_merchant_id
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-});
+const html = ref('')
 
+
+const cPayment = computed(()=>{
+    switch (props.payment) {
+        case 'CVS':
+            return '超商代碼繳費'
+        case 'WebATM':
+            return 'ATM虛擬帳戶匯款'
+        case 'Credit':
+            return '線上刷卡'
+        default:
+            break;
+    }
+})
 
 const emit = defineEmits(['confirm']);
 const successMessage = ref('')
 const errorMessage = ref('')
 const order_id = ref('')
+const contentRef = ref(null);
 //送出訂單
 const sendOrder = async() =>{
+    console.log(props.total);
     const detail = ref({
         user_id:auth.member.user_id,
         productID:props.productID,
         count:props.count,
         payment:props.payment,
-        remark:props.remark
+        remark:props.remark,
+        total:props.total
     })
     try {
         const requestData = {
@@ -139,23 +147,27 @@ const sendOrder = async() =>{
             detail:detail.value
         };
         const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/light/order`,
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/light/order`,
             requestData
         );
-        console.log(response);
-        if (response.data.success === false) {
-            errorMessage.value = response.data.data
-        }else if( response.data.success === true){
-           
-            order_id.value = response.data.data
-            successMessage.value = '感謝您的訂購'
-            // window.scrollTo(0, 0);
-            redirectEcpay()
-        }
+        html.value = response.data
+        setTimeout(()=>{
+            const contentElement = contentRef.value;
+            const script = document.createElement('script')
+            contentRef.value.append(script)
+            script.innerHTML = 'document.getElementById("__ecpayForm").submit();'
+        },3000)
+        
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
 }
+
+// watch(html,(newValue)=>{
+//     if(newValue){
+//         document.getElementById("__ecpayForm").submit();
+//     }
+// })
 
 const getCurrentDateTime = () =>{
     const now = new Date();
@@ -175,32 +187,42 @@ const total = () => {
 }
 
 //跳轉綠界
-const redirectEcpay = async () => {
-  try {
-    const requestData = new URLSearchParams({
-      MerchantID: merchant_id.value,
-      MerchantTradeNo: order_id.value,
-      MerchantTradeDate: getCurrentDateTime(),
-      PaymentType: 'aio',
-      TotalAmount: total(),
-      TradeDesc: 'michael_test',
-      ItemName: props.productName,
-      ReturnURL: 'https://demo2.gcreate.com.tw/gc_godpray_frontend/'
-    });
+// const redirectEcpay = async () => {
+//     try {
+//     const response = await axios.get(
+//       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/ecpay`
+//     );
+//     console.log(response);
+//   } catch (error) {
+//     console.error("API 請求失敗:", error);
+//   }
+// }
+// const redirectEcpay = async () => {
+//   try {
+//     const requestData = new URLSearchParams({
+//       MerchantID: merchant_id.value,
+//       MerchantTradeNo: order_id.value,
+//       MerchantTradeDate: getCurrentDateTime(),
+//       PaymentType: 'aio',
+//       TotalAmount: total(),
+//       TradeDesc: 'michael_test',
+//       ItemName: props.productName,
+//       ReturnURL: 'https://demo2.gcreate.com.tw/gc_godpray_frontend/'
+//     });
 
-    const response = await axios.post(
-      'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5',
-      requestData.toString(), // 轉換成 URL 編碼的字符串
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }
-    );
-  } catch (error) {
-    console.error("API 請求失敗:", error);
-  }
-}
+//     const response = await axios.post(
+//       'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5',
+//       requestData.toString(), // 轉換成 URL 編碼的字符串
+//       {
+//         headers: {
+//           'Content-Type': 'application/x-www-form-urlencoded'
+//         }
+//       }
+//     );
+//   } catch (error) {
+//     console.error("API 請求失敗:", error);
+//   }
+// }
 
 </script>
 
@@ -251,6 +273,9 @@ const redirectEcpay = async () => {
 }
 .container{
     background-color: #ffffff;
+    margin:auto;
+    height: 80%;
+    border-radius:1%;
 }
 .line{
     display: flex;

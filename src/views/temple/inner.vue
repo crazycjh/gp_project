@@ -68,9 +68,12 @@
             <h6 class="service mb-10px px-10px">|點燈|</h6>
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
                 <p class="md:w-60%">{{ temple.light_content }}</p>
-                <button class="btn btn6">
-                    <a href="#">光明燈詳細介紹</a>
-                </button>
+                <router-link to="/service">
+                    <button class="btn btn6">
+                        廟宇服務介紹
+                    </button>
+                </router-link>
+           
             </div>
             <div class="flex flex-wrap gap-10px  max-md:justify-between">
                 <div v-for="item in light" :key="item.id" class="flex flex-col lg:w-15% md:w-18% max-md:w-45% ">
@@ -85,7 +88,7 @@
             <div class="flex max-md:flex-col flex-row justify-between mb-25px px-10px">
                 <p class="md:w-60%">{{ temple.shuwen_content }}</p>
                 <button class="btn btn6">
-                    <a href="#">疏文詳細介紹</a>
+                    廟宇服務介紹
                 </button>
             </div>
             <div class="flex flex-wrap gap-10px max-md:justify-between">
@@ -241,12 +244,12 @@ h6 {
     bottom: 9px;
 }
 
-.btn6 a {
+.btn6 {
     text-decoration: none;
     color: black;
 }
 
-.btn6:hover a {
+.btn6:hover  {
     color: #CEB96E;
 }
 

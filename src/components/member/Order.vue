@@ -16,7 +16,7 @@
                         <td>{{ item.status }}</td>
                         <td>NT${{ item.total }} (共 {{ item.count }} 件商品)</td>
                         <td>
-                            <button class="order_button">付款</button>
+                            <button v-show="item.status === '等待付款中'" class="order_button" @click="checkout(item.order_id)">付款</button>
                             <button class="order_button" @click="emit('set-order-list',item)">查看</button>
                             <button class="order_button">取消</button>
                         </td>
@@ -50,9 +50,11 @@
                         </div>
                     </div>
                 </div>
+                <div ref="contentRef" v-html="html" class="hidden"></div>
             </div>
         </div>
     </div>
+    
 </template>
 <script setup>
 //官方套件
@@ -80,6 +82,31 @@ onMounted(async () => {
     console.error("API 請求失敗:", error);
   }
 });
+
+const html = ref('')
+const contentRef = ref(null);
+const checkout = async(order_id) =>{
+    try {
+        const requestData = {
+           order_id:order_id
+        };
+
+        const response = await axios.post(
+            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/light/checkout`,
+            requestData
+        );
+        html.value = response.data
+        setTimeout(()=>{
+            // const contentElement = contentRef.value;
+            const script = document.createElement('script')
+            contentRef.value.append(script)
+            script.innerHTML = 'document.getElementById("__ecpayForm").submit();'
+        },3000)
+        
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    }
+}
 
 const emit = defineEmits(['set-order-list']);
 </script>

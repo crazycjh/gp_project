@@ -24,14 +24,14 @@
                 <h5>詳細地址:</h5>
                 <h5>{{ item.address }}</h5>
             </div>
-            <div class="line">
+            <!-- <div class="line">
                 <h5>聯絡電話:</h5>
                 <h5>{{ item.phone }}</h5>
             </div>
             <div class="line">
                 <h5>電子郵件:</h5>
                 <h5>{{ item.email }}</h5>
-            </div>
+            </div> -->
         </div>
         <div>
             <h4 class="payment">付款資訊</h4>
@@ -69,6 +69,7 @@ const props = defineProps({
 })
 const prayers = ref([])
 onMounted(async () => {
+  console.log(props.order);
   const params = {
        order_id:props.order.order_id,
        count:props.order.count
@@ -80,7 +81,6 @@ onMounted(async () => {
       {params:params,}
     );
     prayers.value = response.data;
-    console.log(prayers.value);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }

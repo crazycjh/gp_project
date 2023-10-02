@@ -132,7 +132,7 @@ const updateZipCode = (area) => {
     width: 356px;
 }
 
-@media(width<1024px) {
+@media(width <1024px) {
     .select_wrapper {
         width: 100%;
     }

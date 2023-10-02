@@ -188,9 +188,9 @@
                         <select
                             class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="payment">
                             <option value="" selected>請選擇付款方式</option>
-                            <option >ATM虛擬帳戶匯款</option>
-                            <option>線上刷卡</option>
-                            <option>超商代碼繳費</option>
+                            <option value="WebATM">ATM虛擬帳戶匯款</option>
+                            <option value="Credit">線上刷卡</option>
+                            <option value="CVS">超商代碼繳費</option>
                         </select>
                         <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                             src="../../assets/index/arrow_down.svg" alt="">
@@ -274,7 +274,6 @@ onMounted(async () => {
 const total = computed(()=>{
     return peopleCount.value * price.value
 })
-
 
 const customerData = ref({
     name:'',
@@ -448,6 +447,8 @@ const updateZipCode = (index) => {
     instance.proxy.$forceUpdate()
 } 
 
+
+
 //控制modal
 const { open, close } = useModal({
   component: DetailModal,
@@ -460,6 +461,7 @@ const { open, close } = useModal({
     payment:payment,
     count:peopleCount,
     productID:productID,
+    total:total,
     onConfirm() {
         close()
     },
