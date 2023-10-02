@@ -26,13 +26,6 @@
         </div>
         <div class="flex flex-col md:flex-row gap-20px mb-20px">
             <div class="w-full">
-                <h5 class="mb-10px">郵遞區號<span class="required">*</span></h5>
-                <div class="w-full">
-                    <input class="body_input" type="text" placeholder="自動帶入勿填" :value="zipCode"
-                    readonly>
-                </div>
-            </div>
-            <div class="w-full">
                 <h5 class="mb-10px">縣市<span class="required">*</span></h5>
                 <div class="relative">
                     <select  ref="citySelect"
@@ -56,6 +49,13 @@
                     </select>
                     <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                         src="../../assets/index/arrow_down.svg" alt="">
+                </div>
+            </div>
+            <div class="w-full">
+                <h5 class="mb-10px">郵遞區號<span class="required">*</span></h5>
+                <div class="w-full">
+                    <input class="body_input" type="text" placeholder="自動帶入勿填" :value="zipCode"
+                    readonly>
                 </div>
             </div>
         </div>
@@ -105,6 +105,9 @@ const updateZipCode = (area) => {
 
 </script>
 <style scoped>
+input{
+    background-color: #ffffff;
+}
 .border_bottom{
     border-bottom:1px dashed #AAAAAA;
 }

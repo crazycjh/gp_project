@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto max-w-1200px md:mt-80px">
+    <div class="mx-auto max-w-1200px md:mt-80px wrapper">
         <h4 class="success">已完成付款</h4>
         <p>已收到您的訂單，請您檢視訂單。</p>
         <div class="flex">
@@ -13,6 +13,9 @@ import { useAuth } from '@/store/auth.js'
 const auth = useAuth();
 </script>
 <style scoped>
+.wrapper{
+    min-height: 66vh;
+}
 .success{
     color:#920000;
     font-size: 28px;

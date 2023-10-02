@@ -1,5 +1,10 @@
 <template>
     <div class="cover py-80px relative">
+        <div class="flex mb-40px">
+            <h3 class="breadcrumb active">點燈表單</h3>
+            <h3 class="breadcrumb">>結帳資訊</h3>
+            <h3 class="breadcrumb">>訂單完成</h3>
+        </div>
         <div class="wrapper">
             <div class="top">
                 <img class="light_top_left" src="../../assets/products/light/light_text2.svg" alt="">
@@ -116,12 +121,7 @@
                         <p class="hint">請選擇農曆日期，若不曉得農曆日期，請先選擇國曆日期後按下「轉農曆」進行轉換。</p>
                     </div>
                     <div class="flex flex-col md:flex-row gap-20px mb-20px">
-                        <div class="w-full">
-                            <h5 class="mb-10px">郵遞區號<span class="required">*</span></h5>
-                            <div class="w-full">
-                                <input class="body_input" type="text" placeholder="自動帶入勿填"  v-model="item.zipCode" readonly>
-                            </div>
-                        </div>
+                      
                         <div class="w-full">
                             <h5 class="mb-10px">縣市<span class="required">*</span></h5>
                             <div class="relative">
@@ -146,7 +146,14 @@
                                     src="../../assets/index/arrow_down.svg" alt="">
                             </div>
                         </div>
+                        <div class="w-full">
+                            <h5 class="mb-10px">郵遞區號<span class="required">*</span></h5>
+                            <div class="w-full">
+                                <input class="body_input" type="text" placeholder="自動帶入勿填"  v-model="item.zipCode" readonly>
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="mb-20px">
                         <h5 class="mb-10px">詳細地址<span class="required">*</span></h5>
                         <div class="relative w-full">
@@ -471,6 +478,18 @@ const { open, close } = useModal({
 
 </script>
 <style scoped>
+.breadcrumb{
+    font-family: Noto Serif TC;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    color:#888888;
+}
+.breadcrumb.active{
+    color:#000000;
+}
 
 .error{
     color:red;
