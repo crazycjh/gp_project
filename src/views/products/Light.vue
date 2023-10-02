@@ -203,7 +203,7 @@
                             src="../../assets/index/arrow_down.svg" alt="">
                     </div>
                     <div class="flex top_border pt-10px">
-                        <input v-model="agree" class="mr-10px " type="checkbox">
+                        <input v-model="agree" class="mr-10px checkbox" type="checkbox">
                         <p>我已閱讀並同意網站的<router-link to="/terms" class="term">條款與條件</router-link></p>
                     </div>
                     
@@ -478,6 +478,9 @@ const { open, close } = useModal({
 
 </script>
 <style scoped>
+.checkbox{
+    background-color: #ffffff;
+}
 .breadcrumb{
     font-family: Noto Serif TC;
     font-size: 24px;

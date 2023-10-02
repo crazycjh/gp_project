@@ -69,7 +69,6 @@ const props = defineProps({
 })
 const prayers = ref([])
 onMounted(async () => {
-  console.log(props.order);
   const params = {
        order_id:props.order.order_id,
        count:props.order.count
