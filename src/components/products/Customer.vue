@@ -1,6 +1,7 @@
 <template>
     <div class="border_bottom">
         <button class="customer_btn">聯絡人資料</button>
+        <button class="customer_btn member" @click="emit('auto-info')">帶入會員資料</button>
         <div class="flex flex-col md:flex-row gap-20px mb-20px">
             <div class="w-full">
                 <h5 class="mb-10px">姓名<span class="required">*</span></h5>
@@ -70,14 +71,14 @@
 </template>
 <script setup>
 //官方套件
-import { ref,getCurrentInstance } from 'vue';
+import { ref,getCurrentInstance,watch } from 'vue';
 const instance = getCurrentInstance()
 
 //自製元件
 import {cities,areasByCity,zipCodesByArea} from '@/store/city.js'
 
 //定義資料結構
-defineProps({
+const props = defineProps({
   name: String,
   phone:String,
   email:String,
@@ -86,7 +87,7 @@ defineProps({
   selectedArea:String,
   address:String
 })
-const emit = defineEmits(['update:name','update:phone','update:email','update:selectedCity','update:selectedArea','update:address','set-zipCode'])
+const emit = defineEmits(['update:name','update:phone','update:email','update:selectedCity','update:selectedArea','update:address','set-zipCode','auto-info'])
 
 
 const areas = ref([])
@@ -96,6 +97,13 @@ const updateAreas = (city) => {
     const selectCityAreas = areasByCity.value[city];
     areas.value = selectCityAreas;
 };
+
+//watch function return 才能成功監聽props內的值
+watch(() =>props.selectedCity,(newValue)=>{
+    if(newValue){
+        updateAreas(newValue)
+    }
+})
 
 //郵遞區號選擇器
 const updateZipCode = (area) => {
@@ -130,6 +138,11 @@ input,select{
     border: none;
     outline: none;
     border-radius: 0;
+}
+.member{
+    margin-left: 20px;
+    background-color: #CEB96E;
+    color:#ffffff;
 }
 .select_wrapper {
     width: 356px;

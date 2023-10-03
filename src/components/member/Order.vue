@@ -1,5 +1,6 @@
 <template>
     <div>
+        <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
         <div class="py-40px md:px-50px">
             <table class="order_table hidden md:block">
                 <tbody>
@@ -18,7 +19,7 @@
                         <td>
                             <button v-show="item.status === '等待付款中'" class="order_button" @click="checkout(item.order_id)">付款</button>
                             <button class="order_button" @click="emit('set-order-list',item)">查看</button>
-                            <button class="order_button">取消</button>
+                            <button v-show="item.status !== '取消'" class="order_button" @click="checkCancel(item.order_id)">取消</button>
                         </td>
                     </tr>
                 </tbody>
@@ -60,14 +61,63 @@
 //官方套件
 import { ref,onMounted } from 'vue';
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
+import { useModal } from 'vue-final-modal'
 
 //自製套件
+import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 import { useAuth } from '@/store/auth.js'
 const auth = useAuth(); 
+
+
+//控制modal
+const active_order_id = ref('')
+const { open, close } = useModal({
+  component: ConfirmModal,
+  attrs: {
+    onConfirm() {
+        close()
+    },
+    onDelete(){
+        close()
+        goCancel()
+    }
+  },
+})
+
+//打開modal
+const checkCancel = (order_id) => {
+    active_order_id.value = order_id
+    open()
+}
+
+const goCancel = async() => {
+    try {
+        const requestData = {
+          order_id:active_order_id.value
+        };
+
+        const response = await axios.post(
+            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/cancel`,
+            requestData
+        );
+        if(response.data.success){
+            get_orders()
+        }
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    }
+}
+
 
 //取得訂單
 const orders = ref([])
 onMounted(async () => {
+    get_orders()
+});
+
+const get_orders = async() =>{
   const params = {
         user_id:auth.member.user_id
   };
@@ -81,11 +131,14 @@ onMounted(async () => {
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
-});
+}
 
 const html = ref('')
 const contentRef = ref(null);
+const isLoading = ref(false);
+const fullPage = ref(true);
 const checkout = async(order_id) =>{
+    isLoading.value = true;
     try {
         const requestData = {
            order_id:order_id
@@ -97,11 +150,11 @@ const checkout = async(order_id) =>{
         );
         html.value = response.data
         setTimeout(()=>{
-            // const contentElement = contentRef.value;
             const script = document.createElement('script')
             contentRef.value.append(script)
             script.innerHTML = 'document.getElementById("__ecpayForm").submit();'
-        },3000)
+            isLoading.value = false; 
+        },2000)
         
     } catch (error) {
         console.error("API 請求失敗:", error);

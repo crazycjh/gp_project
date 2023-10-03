@@ -6,6 +6,7 @@
       @update:model-value="(val) => emit('update:modelValue', val)"
     >   
         <div class="container max-w-1200px  px-10px pt-60px pb-30px absolute inset-0 overflow-auto">
+            <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
             <div class="flex justify-end">
                 <img class="close pr-20px" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
             </div>
@@ -92,6 +93,8 @@
 import { ref,computed,onMounted,watch } from 'vue';
 import { VueFinalModal } from 'vue-final-modal'
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 //自製元件
 import { useAuth } from '@/store/auth.js'
@@ -125,13 +128,14 @@ const cPayment = computed(()=>{
 })
 
 const emit = defineEmits(['confirm']);
+const isLoading = ref(false);
+const fullPage = ref(true);
 const successMessage = ref('')
 const errorMessage = ref('')
 const order_id = ref('')
 const contentRef = ref(null);
 //送出訂單
 const sendOrder = async() =>{
-    console.log(props.total);
     const detail = ref({
         user_id:auth.member.user_id,
         productID:props.productID,
@@ -140,6 +144,7 @@ const sendOrder = async() =>{
         remark:props.remark,
         total:props.total
     })
+    isLoading.value = true;
     try {
         const requestData = {
             customer: props.customer,
@@ -156,7 +161,9 @@ const sendOrder = async() =>{
             const script = document.createElement('script')
             contentRef.value.append(script)
             script.innerHTML = 'document.getElementById("__ecpayForm").submit();'
-        },3000)
+            isLoading.value = false; 
+        },2000)
+       
         
     } catch (error) {
         console.error("API 請求失敗:", error);

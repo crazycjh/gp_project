@@ -24,7 +24,8 @@
                     <p class="mb-5px">您好 (不是 {{ auth.member.email }} 嗎？ <span class="notice cursor-pointer" @click="logout">請登出</span>)</p>
                     <p>在您的帳號控制台裡，您可以檢視 <span class="notice cursor-pointer" @click="activeTab = 'order'">近期的訂單</span>，管理您的 <span class="notice cursor-pointer" @click="activeTab = 'detail'">收貨地址</span> 和 <span class="notice cursor-pointer" @click="activeTab = 'detail'">更改密碼或修改帳號資料</span>。</p>
                     <div class="flex flex-col md:flex-row mt-15px gap-10px">
-                        <button class="index_btn" @click="activeTab = 'order'">訂單</button>
+                        <button class="index_btn" @click="activeTab = 'order'">點燈訂單</button>
+                        <button class="index_btn" @click="activeTab = 'order2'">文創商品訂單</button>
                         <button class="index_btn" @click="activeTab = 'detail'">帳戶詳細資料</button>
                     </div>
                 </div>

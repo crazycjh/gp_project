@@ -29,6 +29,7 @@
                         v-model:selectedArea="customerData.selectedArea"
                         v-model:address="customerData.address"
                         @set-zipCode="setZipcode"
+                        @auto-info="autoInfo"
                     />
                     <div class="mt-10px mb-10px">
                         <h5 class="mb-10px">點選人數<span class="required">*只能初始化選擇一次</span></h5>
@@ -232,7 +233,7 @@
 </template>
 <script setup>
 //官方套件
-import { ref, onMounted ,computed,getCurrentInstance} from 'vue';
+import { ref, onMounted ,computed,getCurrentInstance,watch} from 'vue';
 const instance = getCurrentInstance()
 import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
@@ -246,6 +247,9 @@ import DetailModal from '@/components/modals/DetailModal.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Customer from '@/components/products/Customer.vue'
 import {cities,areasByCity,zipCodesByArea} from '@/store/city.js'
+import { useAuth } from '@/store/auth.js'
+const auth = useAuth()
+
 
 
 
@@ -475,6 +479,23 @@ const { open, close } = useModal({
   },
 })
 
+//帶入會員資料
+const autoInfo = () =>{
+    customerData.value.name = auth.member.name
+    customerData.value.email = auth.member.email
+    customerData.value.selectedCity = auth.member.city
+    customerData.value.selectedArea = auth.member.area
+    customerData.value.zipCode = auth.member.zipCode
+    customerData.value.address = auth.member.address
+    customerData.value.phone = auth.member.phone
+}
+
+// watch(customerData.value.selectedCity,(newValue)=>{
+//     if(newValue){
+//         console.log(123);
+//     }
+// })
+
 
 </script>
 <style scoped>
@@ -573,9 +594,9 @@ input {
 
 .left {
     width: 50px;
-    position: absolute;
-    top: 35%;
-    left: -7%;
+    position: fixed;
+    top: 52%;
+    left: 23%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -589,9 +610,9 @@ input {
 
 .right {
     width: 50px;
-    position: absolute;
-    top: 35%;
-    right: -7%;
+    position: fixed;
+    top: 52%;
+    right: 22%;
     display: flex;
     flex-direction: column;
     align-items: center;

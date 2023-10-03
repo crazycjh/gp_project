@@ -164,7 +164,7 @@ const sendRegister = async () => {
             const jwt = response.data.data.jwt
             const auth = useAuth()
             auth.setJWT(jwt)
-            auth.setMember(response.data.data.user_id,response.data.data.email)
+            auth.setMember(response.data.data)
             emit('redirect-register-success')
         }
     } catch (error) {

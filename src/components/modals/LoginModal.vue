@@ -103,10 +103,11 @@ const sendLogin = async () => {
         if (response.data.success === false) {
             errorMessage.value = response.data.data
         } else {
+            console.log(response.data.data);
             const jwt = response.data.data.jwt
             const auth = useAuth()
             auth.setJWT(jwt)
-            auth.setMember(response.data.data.user_id, response.data.data.email)
+            auth.setMember(response.data.data)
             activePage.value = 'loginSuccess'
         }
     } catch (error) {

@@ -5,8 +5,12 @@
             <input v-model="name" class="detail_input" type="text">
         </div>
         <div class="mb-20px">
+            <h6 class="mb-10px">聯絡電話<span>*</span></h6>
+            <input v-model="phone" class="detail_input" type="text">
+        </div>
+        <div class="mb-20px">
             <h6 class="mb-10px">電子郵件<span>*</span></h6>
-            <input v-model="email" class="detail_input" type="text">
+            <input v-model="email" class="detail_input" type="text" readonly>
         </div>
         <div class="mb-20px flex gap-20px">
             <div class="w-full">
@@ -85,7 +89,8 @@ import { useModal } from 'vue-final-modal'
 //自製組件
 import AlertModal from '../modals/AlertModal.vue';
 import {cities,areasByCity,zipCodesByArea} from '@/store/city.js'
-
+import { useAuth } from '@/store/auth.js'
+const auth = useAuth()
 
 //控制modal
 const { open, close } = useModal({
@@ -95,6 +100,7 @@ const { open, close } = useModal({
     onConfirm() {
         close()
     },
+   
   },
 })
 
@@ -105,6 +111,7 @@ const user_id = ref('')
 const selectedCity = ref('');
 const selectedArea = ref('');
 const zipCode = ref('')
+const phone = ref('')
 onMounted(() => {
     user_id.value = route.params.memberID;
     fetchData(user_id.value)
@@ -127,7 +134,7 @@ const fetchData = async (id) => {
         selectedCity.value = response.data.data.city
         selectedArea.value = response.data.data.area
         zipCode.value = response.data.data.zipCode
-        console.log(zipCode.value);
+        phone.value = response.data.data.phone
     }
   } catch (error) {
     console.error("API 請求失敗:", error);
@@ -191,7 +198,8 @@ const updateProfile = async () => {
         city:selectedCity.value,
         area:selectedArea.value,
         address:address.value,
-        zipCode:zipCode.value
+        zipCode:zipCode.value,
+        phone:phone.value
     };
 
     if(oldPsw.value !== ''){
@@ -224,6 +232,7 @@ const updateProfile = async () => {
             errorMessage.value = response.data.data
 
         }else{
+            auth.setMember(requestData)
             open()  
         }
     } catch (error) {
