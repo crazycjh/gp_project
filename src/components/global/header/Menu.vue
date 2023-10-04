@@ -25,7 +25,7 @@
                     <router-link to="/todo/" class="nav-link">代辦事項</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/product/" class="nav-link">文創商品</router-link>
+                    <router-link to="/product/all" class="nav-link">文創商品</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/qa/" class="nav-link">Q&A</router-link>
@@ -62,7 +62,7 @@
                     <router-link to="/todo/" class="nav-link-mobile" @click="isOpen = !isOpen">代辦事項</router-link>
                 </li>
                 <li class="nav-item-mobile">
-                    <router-link to="/product/" class="nav-link-mobile" @click="isOpen = !isOpen">文創商品</router-link>
+                    <router-link to="/product/all" class="nav-link-mobile" @click="isOpen = !isOpen">文創商品</router-link>
                 </li>
                 <li class="nav-item-mobile">
                     <router-link to="/qa/" class="nav-link-mobile">Q&A</router-link>
@@ -129,9 +129,6 @@ watch(isOpen,(newValue)=>{
     height: 100vh;
     width:65vw;
 }
-/* .nav-item a{
-    font-family: "Noto Sans TC", sans-serif;
-} */
 .nav-link{
     color:#FFFFFF;
 }
@@ -152,7 +149,8 @@ watch(isOpen,(newValue)=>{
     padding-bottom: 7px;
     padding-left: 22px;
     border-bottom: 1px solid #EEEEEE;
-}@media(max-width:512px){
+}
+@media(max-width:512px){
     .logo{
         width: 66%;
     }

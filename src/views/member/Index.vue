@@ -31,7 +31,9 @@
                 </div>
             </div>
             <Order v-show="activeTab === 'order'" @set-order-list="openOrderList"/>
+            <Order2 v-show="activeTab === 'order2'" @set-order2-list="openOrder2List"/>
             <OrderList :order="order" v-if="activeTab === 'orderList'" />
+            <OrderList2 :order="order2" v-if="activeTab === 'orderList2'" />
             <Detail v-show="activeTab === 'detail'" />
         </div>
     </div>
@@ -42,7 +44,9 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 //自製套件
 import Order from '../../components/member/Order.vue';
+import Order2 from '../../components/member/Order2.vue';
 import OrderList from '../../components/member/OrderList.vue'
+import OrderList2 from '../../components/member/OrderList2.vue'
 import Detail from '../../components/member/Detail.vue'
 import { useAuth } from '@/store/auth.js'
 const auth = useAuth(); 
@@ -56,13 +60,15 @@ const logout = () => {
 // const order_date = ref('')
 // const order_status = ref('')
 const order = ref([])
+const order2 = ref([])
 const activeTab = ref('index')
 const openOrderList = (item) =>{
-    // order_id.value = id
-    // order_date.value = date
-    // order_status.value = status
     order.value = item
     activeTab.value = 'orderList'
+}
+const openOrder2List = (item) =>{
+    order2.value = item
+    activeTab.value = 'orderList2'
 }
 </script>
 <style scoped>

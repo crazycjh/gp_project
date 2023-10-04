@@ -8,7 +8,7 @@
             <div v-if="temple.live_iframe">
                 <div class="flex flex-col items-center mb-5">
                     <img class="wind" src="../../assets/widget/wind.svg" alt="">
-                    <h3>廟宇直播</h3>
+                    <h3>{{temple.name}}</h3>
                 </div>
             </div>
             <div v-if="temple.live_iframe" class="video-wrapper z-10 " v-html="temple.live_iframe">
@@ -128,6 +128,7 @@ const shuwen = ref([]);
 
 //取id
 onMounted(() => {
+    scroll(0,0)
     const route = useRoute();
     templeID.value = Number(route.params.templeID);
 });

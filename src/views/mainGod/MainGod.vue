@@ -21,7 +21,7 @@
                     <h4>{{ item.name }}</h4>
                     <p>主神：{{ item.main_god }}</p>
                     <p>地址：{{item.location}}{{ item.address }}</p>
-                <p class="more">了解更多</p>
+                    <p class="more">了解更多</p>
                 </router-link>
             </div>
         </div>

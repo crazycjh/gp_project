@@ -69,10 +69,12 @@ export default {
         '560px':'560px',
       },
       gap:{
+        '5px':'5px',
         '10px':'10px',
         '20px':'20px',
         '30px':'30px',
         '40px':'40px',
+        '50px':'50px',
         '60px':'60px',
         '80px':'80px',
         '120px':'120px',
