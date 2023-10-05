@@ -1,5 +1,5 @@
 <template>
-    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+    <loading :active="isLoading" :is-full-page="fullPage" ></loading>
    <div v-if="temple.live_iframe" class="banner" :style="{
     'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_bannner_bg55.jpg)`,
     'background-position': 'center center',

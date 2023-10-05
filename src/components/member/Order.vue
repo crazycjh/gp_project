@@ -1,6 +1,6 @@
 <template>
     <div>
-        <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+        <loading :active="isLoading" :is-full-page="fullPage"></loading>
         <div class="py-40px md:px-50px">
             <table class="order_table hidden md:block">
                 <tbody>

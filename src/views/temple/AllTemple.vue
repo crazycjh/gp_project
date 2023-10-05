@@ -1,5 +1,5 @@
 <template>
-    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+    <loading :active="isLoading" :is-full-page="fullPage"></loading>
     <TopCover :image="`${backend}wp-content/uploads/2023/08/temple_banner.jpg`" title="全台廟宇" />
     <Breadcrumb title="首頁/全台廟宇" />
     <div class="mx-auto max-w-1200px">

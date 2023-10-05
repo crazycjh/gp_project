@@ -1,12 +1,12 @@
 <template>
-    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+    <loading :active="isLoading" :is-full-page="fullPage"></loading>
     <TopCover :image="`${backend}wp-content/uploads/2023/10/faq_banner.jpg`" title="常見問題" />
     <Breadcrumb title="首頁/常見問題" />
     <div class="my-80px max-w-1200px mx-auto px-10px w-full">
         <div class="wrapper" v-for="(item,index) in question" :key="item.id">
             <div class="flex justify-between tab px-20px">
                 <span class="text-white">{{ item.title }} - {{ item.question }}</span>
-                <img v-show="activeQuestion === index + 1" src="../assets/QA/reduce_icon 1.png" alt="" @click="activeQuestion = 0" >
+                <img v-show="activeQuestion === index + 1" src="../assets/QA/reduce_icon_1.png" alt="" @click="activeQuestion = 0" >
                 <img v-show="activeQuestion !== index + 1" src="../assets/QA/show.png" alt="" @click="activeQuestion = index + 1">
             </div>
             <div v-show="activeQuestion === index + 1" class="inner">

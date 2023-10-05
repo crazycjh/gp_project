@@ -1,11 +1,11 @@
 <template>
-    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+    <loading :active="isLoading" :is-full-page="fullPage" ></loading>
     <TopCover :image="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" title="最新活動" />
     <Breadcrumb title="首頁/最新活動" />
     <div class="tags flex justify-center max-md:px-100px gap-10px my-50px flex-wrap">
         <div class="flex gap-10px max-md:gap-20px max-md:max-w-570px max-w-1200px flex-wrap justify-center">
-            <button class="btn rounded-none" :class="{ active: currentActive === 'all' }" @click="fetchData('all')">全部</button>
-            <button v-for="item in latest.types" :key="item.term_id" class="btn rounded-none" :class="{ active: currentActive === item.slug }" @click="fetchData(item.slug)">{{ item.name }}</button>
+            <button class="btn rounded-none" :class="{ active: currentActive === 'all' }" @click="router.push('all')">全部</button>
+            <button v-for="item in latest.types" :key="item.term_id" class="btn rounded-none" :class="{ active: currentActive === item.slug }" @click="router.push(`${item.slug}`)">{{ item.name }}</button>
         </div>
     </div>
     <div class="mx-auto max-w-1200px">
@@ -69,7 +69,7 @@ const fetchData = async (type) => {
   }
   //換類別頁
   router.push(`${type}`)
-  currentActive.value = type;
+//   currentActive.value = type;
   const params = {
         limit:itemsPerPage.value, 
         page:currentPage.value,

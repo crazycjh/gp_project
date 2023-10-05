@@ -6,7 +6,7 @@
       @update:model-value="(val) => emit('update:modelValue', val)"
     >   
         <div class="container max-w-1200px  px-10px pt-60px pb-30px absolute inset-0 overflow-auto">
-            <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+            <loading :active="isLoading" :is-full-page="fullPage"></loading>
             <div class="flex justify-end">
                 <img class="close pr-20px" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
             </div>

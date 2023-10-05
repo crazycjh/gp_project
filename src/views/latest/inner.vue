@@ -1,5 +1,5 @@
 <template>
-  <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+  <loading :active="isLoading" :is-full-page="fullPage"></loading>
   <Breadcrumb v-if="post.title" :title="`首頁/${post.title}`" />
   <div class="max-lg:px-10px flex justify-center mt-20px lg:mt-40px mb:30px lg:mb-80px">
     <div class="max-w-915px pr-10px w-full">

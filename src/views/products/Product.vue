@@ -1,5 +1,5 @@
 <template>
-    <loading :active="isLoading" :is-full-page="fullPage" @cancel="onCancel"></loading>
+    <loading :active="isLoading" :is-full-page="fullPage"></loading>
     <div class="max-w-1200px mx-auto max-xl:px-10px w-full">
         <div class="mt-50px mb-30px flex flex-col md:flex-row max-md:items-center justify-between max-md:gap-20px">
             <span>首頁/文創商品</span>
@@ -26,17 +26,17 @@
                 <h4 class="type">商品分類</h4>
                 <div class="mt-40px">
                     <div class="tab">
-                        <span class="tag" @click="fetchData('all')" :class="{active:activePage === 'all'}">全部</span>
+                        <span class="tag" @click="router.push('all')" :class="{active:activePage === 'all'}">全部</span>
                     </div>
                     <div v-for="item in types" :key="item.id">
                         <div class="flex justify-between tab">
-                            <span class="tag" @click="fetchData(item.slug)" :class="{active:activePage === item.slug}">{{ item.name }}</span>
+                            <span class="tag" @click="router.push(`${item.slug}`)" :class="{active:activePage === item.slug}">{{ item.name }}</span>
                             <img v-show="item.children.length > 0 && activePage !== item.slug" src="../../assets/products/culture/down_arrow_icon.svg" alt="">
                             <img v-show="item.children.length > 0 && activePage === item.slug" src="../../assets/products/culture/up_arrow_icon.svg" alt="">
                         </div>
                         <div v-show="item.children.length > 0" class="inner">
                             <div v-show="activePage === child.slug || activePage === item.slug"  v-for="child in item.children" :key="child.id" class="child">
-                                <span class="tag" @click="fetchData(child.slug)" :class="{active:activePage === child.slug}">{{ child.name }}</span>
+                                <span class="tag" @click="router.push(`${child.slug}`)" :class="{active:activePage === child.slug}">{{ child.name }}</span>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,6 @@ onMounted(async () => {
 
 //取資料
 const fetchData = async(type) =>{
-    console.log(type);
     isLoading.value = true;
     if(type !== activePage.value ){
     //切換類別回第一頁
@@ -122,7 +121,7 @@ const fetchData = async(type) =>{
     }
     //換類別頁
     router.push(`${type}`)
-    activePage.value = type;
+    // activePage.value = type;
     const params = {
         order:order.value,
         limit:itemsPerPage.value, 
@@ -140,6 +139,7 @@ const fetchData = async(type) =>{
         count.value = response.data.count
         types.value = response.data.type
         isLoading.value = false;
+        console.log(response.data);
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
