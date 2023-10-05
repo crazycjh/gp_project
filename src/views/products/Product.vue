@@ -4,10 +4,13 @@
         <div class="mt-50px mb-30px flex flex-col md:flex-row max-md:items-center justify-between max-md:gap-20px">
             <span>首頁/文創商品</span>
             <div class="flex items-center result">
-                <span class="whitespace-nowrap">顯示所有 21 個結果</span>
+                <span class="whitespace-nowrap">顯示所有 {{ count }} 個結果</span>
                 <div class="relative w-full">
-                    <select class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
-                        <option selected>預設選項</option>
+                    <select v-model="order" class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ">
+                        <option value="default">預設選項</option>
+                        <option value="priceDESC">價格由高到低</option>
+                        <option value="priceASC">價格由低到高</option>
+                        <option value="lastet">發布日期</option>
                     </select>
                     <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
                         src="../../assets/index/arrow_down.svg" alt="">
@@ -23,44 +26,31 @@
                 <h4 class="type">商品分類</h4>
                 <div class="mt-40px">
                     <div class="tab">
-                        <span class="tag" :class="{active:activePage === 'all'}">全部</span>
+                        <span class="tag" @click="fetchData('all')" :class="{active:activePage === 'all'}">全部</span>
                     </div>
                     <div v-for="item in types" :key="item.id">
                         <div class="flex justify-between tab">
-                            <span class="tag" @click="activePage = item.slug" :class="{active:activePage === item.slug}">{{ item.name }}</span>
+                            <span class="tag" @click="fetchData(item.slug)" :class="{active:activePage === item.slug}">{{ item.name }}</span>
                             <img v-show="item.children.length > 0 && activePage !== item.slug" src="../../assets/products/culture/down_arrow_icon.svg" alt="">
                             <img v-show="item.children.length > 0 && activePage === item.slug" src="../../assets/products/culture/up_arrow_icon.svg" alt="">
                         </div>
-                        <div v-show="item.children.length > 0 && activePage === item.slug" class="inner">
-                            <div v-for="child in item.children" :key="child.id" class="child">
-                                <span >{{ child.name }}</span>
+                        <div v-show="item.children.length > 0" class="inner">
+                            <div v-show="activePage === child.slug || activePage === item.slug"  v-for="child in item.children" :key="child.id" class="child">
+                                <span class="tag" @click="fetchData(child.slug)" :class="{active:activePage === child.slug}">{{ child.name }}</span>
                             </div>
                         </div>
                     </div>
-                    <!-- <div>
-                        <div class="flex justify-between tab">
-                            <span>香品祭祀</span>
-                            <img src="../../assets/products/culture/down_arrow_icon.svg" alt="">
-                        </div>
-                        <div class="inner">
-
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between tab">
-                            <span>過爐開運</span>
-                            <img src="../../assets/products/culture/down_arrow_icon.svg" alt="">
-                        </div>
-                        <div class="inner">
-                            <span>開運吊飾</span>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="ml-30px mt-20px flex flex-wrap gap-10px w-full ">
                 <div class="flex flex-col gap-5px mb-40px" v-for="item in products" :key="item.id">
                     <img class="photo" :src="item.image" alt="">
-                    <span class="category">商品分類1</span>
+                    <div class="flex">
+                        <span class="category" v-for="(category, index) in item.categories" :key="category">
+                            {{ category }}
+                            <span v-if="index < item.categories.length - 1">,</span>
+                        </span>
+                    </div>
                     <span class="name">{{ item.name }}</span>
                     <span class="price">NT${{ item.price }}</span>
                     <button class="cart_btn">加入購物車</button>
@@ -97,45 +87,63 @@ import { onMounted, ref, reactive,watch,computed } from "vue";
 import axios from "axios";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
-import { useRoute } from "vue-router";
-const route = useRoute()
+import { useRoute,useRouter } from "vue-router";
+
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Pagination from '@/components/widget/Pagination.vue'
 
-//取得問題
+//資料定義
+const order = ref('default')
 const activePage = ref('all')
-const products = reactive([]);
-const types = reactive([])
+const products = ref([]);
+const types = ref([])
 const count = ref(0);
-const activeQuestion = ref(1);
 const isLoading = ref(false);
 const fullPage = ref(true);
+const router = useRouter()
+const route = useRoute()
+
+//取得現在類別
 onMounted(async () => {
-activePage.value = route.params.type
-   fetchData()
+   activePage.value = route.params.type
+   fetchData(activePage.value)
 });
-const fetchData = async() =>{
+
+
+
+//取資料
+const fetchData = async(type) =>{
+    console.log(type);
     isLoading.value = true;
+    if(type !== activePage.value ){
+    //切換類別回第一頁
+        currentPage.value = 1
+    }
+    //換類別頁
+    router.push(`${type}`)
+    activePage.value = type;
+    const params = {
+        order:order.value,
+        limit:itemsPerPage.value, 
+        page:currentPage.value,
+    };
+    let apiUrl = `${backend}api/gc/culture`;
+    
+    if (type !== 'all') {
+        apiUrl += `?type=${type}`;
+    }
     try {
-        const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}api/gc/culture`
+        const response = await axios.get(apiUrl,{params:params}
         );
-        products.push(...response.data.products)
+        products.value = response.data.products
         count.value = response.data.count
-        types.push(...response.data.type)
-        console.log(types);
+        types.value = response.data.type
         isLoading.value = false;
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
 }
-
-//控制手機板選單
-const isOpen = ref(false)
-watch(isOpen,(newValue)=>{
-    newValue ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
-})
 
 //分頁系統
 const currentPage = ref(1)
@@ -149,7 +157,15 @@ const totalPages = computed(() => {
 });
 
 
-watch(currentPage,(newValue) => newValue && fetchData())
+watch(currentPage,(newValue) => newValue && fetchData(activePage.value))
+watch(order,(newValue) => newValue && fetchData(activePage.value))
+//控制手機板選單
+const isOpen = ref(false)
+watch(isOpen,(newValue)=>{
+    newValue ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
+})
+
+
 
 
 </script>

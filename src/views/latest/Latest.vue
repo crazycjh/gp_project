@@ -57,7 +57,6 @@ onMounted(() => {
 //取資料和種類
 onMounted(async () => {
     fetchData(currentActive.value)
-    // fetchType()
 });
 
 //根據種類取資料
@@ -65,8 +64,10 @@ const isLoading = ref(false);
 const fullPage = ref(true);
 const fetchData = async (type) => {
   if(type !== currentActive.value ){
+    //切換類別回第一頁
     currentPage.value = 1
   }
+  //換類別頁
   router.push(`${type}`)
   currentActive.value = type;
   const params = {
@@ -92,16 +93,6 @@ const fetchData = async (type) => {
   }
 };
 
-//取得種類
-// const fetchType = async () => {
-//   let apiUrl = `${backend}api/gc/latest/type`;
-//   try {
-//     const response = await axios.get(apiUrl);
-//     type.value = response.data.type
-//   } catch (error) {
-//     console.error("API 請求失敗:", error);
-//   }
-// };
 
 //分頁系統
 const currentPage = ref(1)
