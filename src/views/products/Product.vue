@@ -44,13 +44,8 @@
             </div>
             <div class="ml-30px mt-20px flex flex-wrap gap-10px w-full ">
                 <div class="flex flex-col gap-5px mb-40px" v-for="item in products" :key="item.id">
-                    <img class="photo" :src="item.image" alt="">
-                    <div class="flex">
-                        <span class="category" v-for="(category, index) in item.categories" :key="category">
-                            {{ category }}
-                            <span v-if="index < item.categories.length - 1">,</span>
-                        </span>
-                    </div>
+                    <router-link :to="`/product/culture/${item.id}`"><img class="photo" :src="item.image" alt=""></router-link>
+                    <span class="category">{{ item.category }}</span>
                     <span class="name">{{ item.name }}</span>
                     <span class="price">NT${{ item.price }}</span>
                     <button class="cart_btn">加入購物車</button>
@@ -63,14 +58,15 @@
             <h4 class="type mt-50px ml-10px">商品分類</h4>
             <ul class="mobileUl">
                 <li class="nav-item-mobile">
-                    <router-link to="/allTemple/" class="nav-link-mobile" @click="isOpen = !isOpen">文創設計</router-link>
+                    <span   @click="router.push('all')" :class="{active:activePage === 'all'}">全部</span>
                 </li>
-                <li class="nav-item-mobile">
-                    <router-link to="/mainGod/" class="nav-link-mobile" @click="isOpen = !isOpen">香品祭祀</router-link>
-                </li>
-                <li class="nav-item-mobile">
-                    <router-link to="/latest/all" class="nav-link-mobile" @click="isOpen = !isOpen">過爐開運</router-link>
-                    <div class="child"><router-link to="/latest/all" class="nav-link-mobile" @click="isOpen = !isOpen">開運吊飾</router-link></div>
+                <li v-for="item in types" :key="item.id" class="nav-item-mobile">
+                    <span  @click="router.push(`${item.slug}`)" :class="{active:activePage === item.slug}">{{ item.name }}</span>
+                    <div v-show="item.children.length > 0" class="inner">
+                        <div v-for="child in item.children" :key="child.id" class="child">
+                            <span class="tag" @click="router.push(`${child.slug}`)" :class="{active:activePage === child.slug}">{{ child.name }}</span>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -139,7 +135,6 @@ const fetchData = async(type) =>{
         count.value = response.data.count
         types.value = response.data.type
         isLoading.value = false;
-        console.log(response.data);
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
@@ -322,15 +317,7 @@ watch(isOpen,(newValue)=>{
 .left_tabs {
    min-width: 272px;
 }
-/* .result {
-    min-width: 350px;
-    gap: 20px;
-}
-@media (width < 768px){
-    .result{
-        min-width: auto;
-    }
-} */
+
 
 .custom_select {
     margin-left: 10px;
