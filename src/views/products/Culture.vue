@@ -1,8 +1,8 @@
 <template>
     <loading :active="isLoading" :is-full-page="fullPage"></loading>
-    <div class="max-w-1200px mx-auto max-xl:px-10px w-full mt-80px">
+    <div class="max-w-1200px mx-auto max-xl:px-10px w-full mt-30px md:mt-80px">
         <div class="flex">
-            <div class="left_tabs hidden md:block">
+            <div class="left_tabs hidden xl:block">
                 <h4 class="type">商品分類</h4>
                 <div class="mt-40px">
                     <div class="tab">
@@ -26,9 +26,9 @@
                     </div>
                 </div>
             </div>
-            <div class="ml-30px mt-20px flex flex-col gap-10px w-full max-w-890px">
+            <div class="md:ml-30px mt-20px flex flex-col gap-10px w-full max-w-890px">
                 <div class="top_section pb-60px flex flex-col md:flex-row gap-20px relative">
-                    <div class="flex items-center gap-10px md:hidden">
+                    <div class="flex justify-center items-center gap-10px md:hidden">
                         <img class="filter" src="../../assets/products/culture/filter_icon.svg" alt="">
                         <span class="whitespace-nowrap" @click="isOpen = !isOpen">篩選</span>
                     </div>
@@ -95,7 +95,7 @@
                             slidesPerView: 4,
                         },
                         }"
-                        :slides-per-view="4"
+                        :slides-per-view="2"
                         :spaceBetween="10"
                         :loop="true"
                         :modules="modules"
@@ -255,6 +255,16 @@ watch(isOpen,(newValue)=>{
     width: 216px;
     height: 216px;
 }
+@media( width < 768px){
+    .relative_img{
+        width: 100%;
+        height: auto;
+    }
+    .relative_swiper{
+        width: 50% !important;
+        
+    }
+}
 .relative_title{
     font-family: Noto Serif TC;
     font-size: 24px;
@@ -299,6 +309,11 @@ watch(isOpen,(newValue)=>{
     margin-top: 30px;
     margin-bottom: 30px;
     max-width: 460px;
+}
+@media(width < 768px){
+    .excerpt{
+        max-width: 100%;
+    }
 }
 
 .prodcut_price {
@@ -346,6 +361,17 @@ watch(isOpen,(newValue)=>{
     height: 96px;
     cursor: pointer;
 }
+@media (width < 768px)
+{
+    .main_img{
+        width: 100%;
+        object-fit: cover;
+    }
+    .small_img{
+        object-fit: cover;
+    }
+}
+
 
 .tag {
     cursor: pointer;
@@ -546,4 +572,5 @@ watch(isOpen,(newValue)=>{
     flex-shrink: 0;
     background: #EEE;
     color: #333333;
-}</style>
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
     <loading :active="isLoading" :is-full-page="fullPage"></loading>
     <div class="max-w-1200px mx-auto max-xl:px-10px w-full">
-        <div class="mt-50px mb-30px flex flex-col md:flex-row max-md:items-center justify-between max-md:gap-20px">
+        <div class="mt-50px mb-30px flex flex-col xl:flex-row max-xl:items-center justify-between max-xl:gap-20px">
             <span>首頁/文創商品</span>
             <div class="flex items-center result">
                 <span class="whitespace-nowrap">顯示所有 {{ count }} 個結果</span>
@@ -16,13 +16,13 @@
                         src="../../assets/index/arrow_down.svg" alt="">
                 </div>
             </div>
-            <div class="flex items-center gap-10px md:hidden">
+            <div class="flex items-center gap-10px xl:hidden">
                 <img class="filter" src="../../assets/products/culture/filter_icon.svg" alt="">
                 <span class="whitespace-nowrap" @click="isOpen = !isOpen">篩選</span>
             </div>
         </div>
         <div class="flex">
-            <div class="left_tabs hidden md:block">
+            <div class="left_tabs hidden xl:block">
                 <h4 class="type">商品分類</h4>
                 <div class="mt-40px">
                     <div class="tab">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="ml-30px mt-20px flex flex-wrap gap-10px w-full ">
-                <div class="flex flex-col gap-5px mb-40px" v-for="item in products" :key="item.id">
+                <div class="flex flex-col gap-5px mb-40px product" v-for="item in products" :key="item.id">
                     <router-link :to="`/product/culture/${item.id}`"><img class="photo" :src="item.image" alt=""></router-link>
                     <span class="category">{{ item.category }}</span>
                     <span class="name">{{ item.name }}</span>
@@ -278,17 +278,20 @@ watch(isOpen,(newValue)=>{
     height: 290px;
 }
 @media(width < 1024px){
+    .product{
+        width: 30%;
+    }
     .photo{
-        width: 200px;
-        height: 200px;
+        width: 100%;
+        height: auto;
     }
 }
-@media(width <512px){
-    .photo{
-        width: 160px;
-        height: 160px;
+@media(width < 768px){
+    .product{
+        width: 46%;
     }
 }
+
 .tab{
     padding:10px 0;
     border-bottom: 1px solid #EEEEEE;
