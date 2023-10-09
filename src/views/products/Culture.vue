@@ -67,7 +67,7 @@
                         <p class="excerpt">{{ product.excerpt }}</p>
                         <div class="flex gap-10px">
                             <input class="product_count" type="number" value="1">
-                            <button class="cart_btn">加入購物車</button>
+                            <button class="cart_btn" @click="addToCart(product.id)">加入購物車</button>
                         </div>
                         <div class="share">
                             <p>分享至:</p>
@@ -109,7 +109,7 @@
                             <h3 class="category my-10px" >{{ item.category_name }}</h3>
                             <h5>{{ item.title }}</h5>
                             <h5 class="prodcut_price mb-10px">$NT{{ item.price }}</h5>
-                            <button class="add_btn">加入購物車</button>
+                            <button class="add_btn" @click="addToCart(item.id)">加入購物車</button>
                         </div>
                         </swiper-slide> 
                     </swiper> 
@@ -148,6 +148,7 @@ import { useRoute, useRouter } from "vue-router";
 const route = useRoute()
 const router = useRouter()
 import { useModal } from 'vue-final-modal'
+import { useAuth } from '@/store/auth.js'
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -162,6 +163,8 @@ const modules = [Autoplay, Pagination, Navigation]
 //自制組件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import ImageModal from '@/components/modals/ImageModal.vue'
+import LoginModal from '@/components/modals/LoginModal.vue';
+import CartModal from '@/components/modals/CartModal.vue'
 
 
 //取的id
@@ -228,6 +231,54 @@ const { open, close } = useModal({
     },
   },
 })
+
+//登入modal
+const auth = useAuth();
+const login = useModal({
+  component: LoginModal,
+  attrs: {
+    onConfirm() {
+        login.close()
+    },
+  },
+})
+
+//購物車modal 第二個modal所以不能用解構來處理
+const cart = useModal({
+  component: CartModal,
+  attrs: {
+    onConfirm() {
+      cart.close();
+    },
+  },
+});
+
+//加入購物車流程
+const addToCart = (id) =>{
+    if(auth.isLogin){
+       //addWCsession(id)
+       cart.open()
+    }else{
+      open()
+    }
+}
+
+//加入wcSession
+const addWCsession = async(id) =>{
+    isLoading.value = true;
+    const requestData = {
+        id:id,
+    };
+    try {
+        const response = await axios.post(`${backend}api/gc/add/cart`,requestData
+        );
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    } finally{
+        isLoading.value = false;
+    }
+}
+
 
 //控制手機板選單
 const isOpen = ref(false)

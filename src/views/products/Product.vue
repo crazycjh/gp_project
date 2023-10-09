@@ -48,7 +48,7 @@
                     <span class="category">{{ item.category }}</span>
                     <span class="name">{{ item.name }}</span>
                     <span class="price">NT${{ item.price }}</span>
-                    <button class="cart_btn">加入購物車</button>
+                    <button class="cart_btn" @click="addToCart(item.id)">加入購物車</button>
                 </div>
             </div>
         </div>
@@ -84,10 +84,14 @@ import axios from "axios";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import { useRoute,useRouter } from "vue-router";
+import { useModal } from 'vue-final-modal'
+import { useAuth } from '@/store/auth.js'
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Pagination from '@/components/widget/Pagination.vue'
+import LoginModal from '@/components/modals/LoginModal.vue';
+import CartModal from '@/components/modals/CartModal.vue'
 
 //資料定義
 const order = ref('default')
@@ -106,6 +110,53 @@ onMounted(async () => {
    fetchData(activePage.value)
 });
 
+//登入modal
+const auth = useAuth();
+const { open, close } = useModal({
+  component: LoginModal,
+  attrs: {
+    onConfirm() {
+        close()
+    },
+  },
+})
+
+//購物車modal 第二個modal所以不能用解構來處理
+const cart = useModal({
+  component: CartModal,
+  attrs: {
+    onConfirm() {
+      cart.close();
+    },
+  },
+});
+
+//加入購物車流程
+const addToCart = (id) =>{
+    if(auth.isLogin){
+       addWCsession(id)
+       cart.open()
+    }else{
+      open()
+    }
+}
+
+//加入wcSession
+const addWCsession = async(id) =>{
+    isLoading.value = true;
+    const requestData = {
+        product_id:id,
+        user_id:auth.member.user_id
+    };
+    try {
+        const response = await axios.post(`${backend}api/gc/add/cart`,requestData
+        );
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    } finally{
+        isLoading.value = false;
+    }
+}
 
 
 //取資料
@@ -117,7 +168,6 @@ const fetchData = async(type) =>{
     }
     //換類別頁
     router.push(`${type}`)
-    // activePage.value = type;
     const params = {
         order:order.value,
         limit:itemsPerPage.value, 
@@ -134,9 +184,11 @@ const fetchData = async(type) =>{
         products.value = response.data.products
         count.value = response.data.count
         types.value = response.data.type
-        isLoading.value = false;
+       
     } catch (error) {
         console.error("API 請求失敗:", error);
+    } finally {
+        isLoading.value = false;
     }
 }
 

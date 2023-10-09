@@ -86,3 +86,21 @@ button:focus-visible {
 .vfm__content{
   
 }
+.custom_position{
+  margin-top: 80px;
+  margin-right: 150px;
+  display: flex;
+  justify-content: flex-end;
+  height: max-content;
+  position: fixed;
+  right:0;
+}
+.custom_position::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 125px;
+  border-width: 0px 8px 20px 8px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
+}
