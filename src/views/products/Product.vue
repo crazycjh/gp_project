@@ -85,13 +85,14 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import { useRoute,useRouter } from "vue-router";
 import { useModal } from 'vue-final-modal'
-import { useAuth } from '@/store/auth.js'
+
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import Pagination from '@/components/widget/Pagination.vue'
 import LoginModal from '@/components/modals/LoginModal.vue';
 import CartModal from '@/components/modals/CartModal.vue'
+import { useAuth } from '@/store/auth.js'
 
 //資料定義
 const order = ref('default')
@@ -126,8 +127,16 @@ const cart = useModal({
   component: CartModal,
   attrs: {
     onConfirm() {
+      router.push(`/cart/${auth.member.user_id}`)  
       cart.close();
     },
+    onClose() {
+      cart.close();
+    },
+    onInfo(){
+      cart.close()
+      router.push(`/info/${auth.member.user_id}`)
+    }
   },
 });
 
@@ -135,6 +144,8 @@ const cart = useModal({
 const addToCart = (id) =>{
     if(auth.isLogin){
        addWCsession(id)
+       //避免購物車已打開未觸發
+       cart.close()
        cart.open()
     }else{
       open()

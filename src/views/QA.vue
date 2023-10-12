@@ -10,7 +10,7 @@
                 <img v-show="activeQuestion !== index + 1" src="../assets/QA/show.png" alt="" @click="activeQuestion = index + 1">
             </div>
             <div v-show="activeQuestion === index + 1" class="inner">
-                <p>{{ item.answer }}</p>
+                <div class="flex flex-col gap-20px" v-html="item.answer"></div>
             </div>
         </div>
     </div>

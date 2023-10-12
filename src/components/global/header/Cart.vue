@@ -4,12 +4,14 @@
 <script setup>
 //官方套件
 import { useModal } from 'vue-final-modal'
-import { useAuth } from '@/store/auth.js'
+import { useRouter } from "vue-router";
+const router = useRouter()
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
 import LoginModal from '@/components/modals/LoginModal.vue';
 import CartModal from '@/components/modals/CartModal.vue'
+import { useAuth } from '@/store/auth.js'
 
 //登入modal
 const auth = useAuth();
@@ -27,8 +29,16 @@ const cart = useModal({
   component: CartModal,
   attrs: {
     onConfirm() {
+      router.push(`/cart/${auth.member.user_id}`)
       cart.close();
     },
+    onClose() {
+      cart.close();
+    },
+    onInfo(){
+      cart.close()
+      router.push(`/info/${auth.member.user_id}`)
+    }
   },
 });
 

@@ -99,8 +99,16 @@ button:focus-visible {
   content: "";
   position: absolute;
   top: -20px;
-  right: 125px;
+  right: 128px;
   border-width: 0px 8px 20px 8px;
   border-style: solid;
   border-color: transparent transparent #ffffff transparent;
+}
+@media(width<1600px){
+  .custom_position::before{
+    display: none;
+  }
+  .custom_position{
+    margin-right: 10px;
+  }
 }

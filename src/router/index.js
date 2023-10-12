@@ -119,6 +119,19 @@ const routes = [
     name: "ResetPassword",
     component: () => import("@/views/member/ResetPassword.vue")
   },
+  {
+    path: "/cart/:memberID",
+    name: "Cart",
+    component: () => import("@/views/cart/Inner.vue"),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: "/info/:memberID",
+    name: "Info",
+    component: () => import("@/views/cart/Info.vue"),
+    meta: { requiresAuth: true }
+  },
+
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

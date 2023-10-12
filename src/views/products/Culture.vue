@@ -66,8 +66,8 @@
                         <span class="prodcut_price">NT${{ product.price }}</span>
                         <p class="excerpt">{{ product.excerpt }}</p>
                         <div class="flex gap-10px">
-                            <input class="product_count" type="number" value="1">
-                            <button class="cart_btn" @click="addToCart(product.id)">加入購物車</button>
+                            <input v-model="count" class="product_count" type="number">
+                            <button class="cart_btn" @click="addToCartMain(product.id)">加入購物車</button>
                         </div>
                         <div class="share">
                             <p>分享至:</p>
@@ -167,6 +167,7 @@ import LoginModal from '@/components/modals/LoginModal.vue';
 import CartModal from '@/components/modals/CartModal.vue'
 
 
+
 //取的id
 const productID = ref();
 const currentUrl = ref('')
@@ -197,6 +198,7 @@ const openWindow = (shareUrl) =>{
 
 
 //取資料
+const count = ref(1);
 const product = ref([])
 const types = ref([])
 const activeType = ref('')
@@ -222,6 +224,7 @@ onMounted(async () => {
 });
 
 //控制modal
+const auth = useAuth();
 const { open, close } = useModal({
   component: ImageModal,
   attrs: {
@@ -229,11 +232,11 @@ const { open, close } = useModal({
     onConfirm() {
         close()
     },
+ 
   },
 })
 
 //登入modal
-const auth = useAuth();
 const login = useModal({
   component: LoginModal,
   attrs: {
@@ -248,18 +251,59 @@ const cart = useModal({
   component: CartModal,
   attrs: {
     onConfirm() {
+      router.push(`/cart/${auth.member.user_id}`)
       cart.close();
     },
+    onClose() {
+      cart.close();
+    },
+    onInfo(){
+      cart.close()
+      router.push(`/info/${auth.member.user_id}`)
+    }
   },
 });
 
-//加入購物車流程
+//相關商品加入購物車流程
 const addToCart = (id) =>{
     if(auth.isLogin){
-       //addWCsession(id)
+       addWCsession(id)
+       //避免購物車已打開未觸發
+       cart.close()
        cart.open()
     }else{
       open()
+    }
+}
+
+//主商品加入購物車流程
+const addToCartMain = (id) =>{
+    if(auth.isLogin){
+       addWCsessionMain(id)
+       //避免購物車已打開未觸發
+       cart.close()
+       cart.open()
+    }else{
+      open()
+    }
+}
+
+//主商品加入wcSession
+const addWCsessionMain = async(id) =>{
+    isLoading.value = true;
+    const requestData = {
+        product_id:id,
+        user_id:auth.member.user_id,
+        quantity:count.value
+    };
+    console.log(requestData);
+    try {
+        const response = await axios.post(`${backend}api/gc/add/cart`,requestData
+        );
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    } finally{
+        isLoading.value = false;
     }
 }
 
@@ -267,7 +311,8 @@ const addToCart = (id) =>{
 const addWCsession = async(id) =>{
     isLoading.value = true;
     const requestData = {
-        id:id,
+        product_id:id,
+        user_id:auth.member.user_id
     };
     try {
         const response = await axios.post(`${backend}api/gc/add/cart`,requestData

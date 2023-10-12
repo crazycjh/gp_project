@@ -1,20 +1,36 @@
 <template>
-    <VueFinalModal hide-overlay="false"
+    <VueFinalModal hide-overlay="false" :lock-scroll="false"
       class="custom_position"
       content-class="flex flex-col p-4 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800 "
     >   
         <loading :active="isLoading" :is-full-page="fullPage"></loading>
         <div class="flex justify-end">
-          <img class="close" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
+          <img class="close" src="../../assets/modal/close.png" alt="" @click="emit('close')">
         </div>
-        <div class="w-240px px-10px pt-30px">
-            <div class="flex mb-30px">
-               
+        <div v-if="products.length !== 0" class="w-240px px-10px pt-10px">
+            <div class="flex flex-col mb-30px">
+               <div class="flex block" v-for="item in products" :key="item.product_id">
+                    <img class="mini_img" :src="item.image_url" alt="">
+                    <div class="flex flex-col justify-center">
+                        <h6 class="name">{{ item.product_name }}</h6>
+                        <h6 class="price">{{ item.quantity }} X NT${{ item.price }}</h6>
+                        
+                    </div>
+                    <div class="flex justify-end">
+                        <img class="cancel" @click="deleteItem(item.product_id)" src="../../assets/cart/cancel_icon1.svg" alt="">
+                    </div>
+               </div>
+               <div class="block flex justify-center">
+                    <h6>小計:{{ total }}</h6>
+               </div>
             </div>
-            <div class="flex-col gap-20px">
-                <button class="know_btn" @click="emit('confirm')">回頁面</button>
-                <button class="know_btn delete" @click="emit('delete')">結帳</button>
+            <div class="flex flex-col gap-10px">
+                <button class="know_btn delete" @click="emit('confirm')">查看購物車</button>
+                <button class="know_btn" @click="emit('info')">結帳</button>
             </div>
+        </div>
+        <div v-if="products.length === 0" class="w-240px px-10px pt-10px">
+            <h4>您的購物車還沒有任何商品</h4>
         </div>
     </VueFinalModal>
   </template>
@@ -35,6 +51,8 @@ onMounted(() =>{
 })
 
 const isLoading = ref(false);
+const products = ref([])
+const total = ref()
 const getCart = async(id) =>{
     isLoading.value = true;
     const requestData = {
@@ -43,7 +61,9 @@ const getCart = async(id) =>{
     try {
         const response = await axios.post(`${backend}api/gc/get/cart`,requestData
         );
-        console.log(response);
+       products.value = response.data.product_info
+       total.value = response.data.total
+       console.log(products.value);
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally{
@@ -51,11 +71,50 @@ const getCart = async(id) =>{
     }
 }
 
-const emit = defineEmits(['confirm','delete']);
+const emit = defineEmits(['confirm','delete','close']);
+
+//刪除商品
+const deleteItem = async(id) =>{
+    isLoading.value = true;
+    const requestData = {
+        user_id:auth.member.user_id,
+        product_id:id
+    };
+    try {
+        const response = await axios.post(`${backend}api/gc/cart/delete`,requestData
+        );
+        getCart()
+    } catch (error) {
+        console.error("API 請求失敗:", error);
+    } finally{
+        isLoading.value = false;
+    }
+}
 </script>
 
 
 <style scoped>
+.price{
+    font-size: 14px;
+}
+.cancel{
+    width: 16px;
+    height: 16px;
+}
+.block{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #F5F5F5;
+}
+.name{
+    color:#543118;
+}
+.mini_img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+}
 
 .know_btn {
     width: 100%;
