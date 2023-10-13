@@ -163,8 +163,6 @@ const sendOrder = async() =>{
             script.innerHTML = 'document.getElementById("__ecpayForm").submit();'
             isLoading.value = false; 
         },2000)
-       
-        
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
