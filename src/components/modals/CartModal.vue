@@ -1,5 +1,5 @@
 <template>
-    <VueFinalModal hide-overlay="false" :lock-scroll="false"
+    <VueFinalModal hide-overlay="false" :lock-scroll="false" click-to-close="true"
       class="custom_position"
       content-class="flex flex-col p-4 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800 "
     >   
@@ -29,7 +29,7 @@
                 <button class="know_btn" @click="emit('info')">結帳</button>
             </div>
         </div>
-        <div v-if="products.length === 0" class="w-240px px-10px pt-10px">
+        <div v-if="products.length === 0 && isLoading === false" class="w-240px px-10px pt-10px">
             <h4>您的購物車還沒有任何商品</h4>
         </div>
     </VueFinalModal>

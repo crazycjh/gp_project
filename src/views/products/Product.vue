@@ -145,8 +145,6 @@ const addToCart = (id) =>{
     if(auth.isLogin){
        addWCsession(id)
        //避免購物車已打開未觸發
-       cart.close()
-       cart.open()
     }else{
       open()
     }
@@ -166,6 +164,8 @@ const addWCsession = async(id) =>{
         console.error("API 請求失敗:", error);
     } finally{
         isLoading.value = false;
+        cart.close()
+        cart.open()
     }
 }
 
@@ -217,15 +217,12 @@ const totalPages = computed(() => {
 
 watch(currentPage,(newValue) => newValue && fetchData(activePage.value))
 watch(order,(newValue) => newValue && fetchData(activePage.value))
+
 //控制手機板選單
 const isOpen = ref(false)
 watch(isOpen,(newValue)=>{
     newValue ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
 })
-
-
-
-
 </script>
 <style scoped>
 .tag{

@@ -6,10 +6,10 @@
             <h3 class="breadcrumb active">>結帳資訊</h3>
             <h3 class="breadcrumb">>訂單完成</h3>
         </div>
-        <div class="flex gap-40px">
+        <div class="flex flex-col md:flex-row gap-40px">
             <div class="max-w-690px w-full">
                 <h4 class="title border_bottom">帳單資訊</h4>
-                <div class="flex gap-20px">
+                <div class="flex flex-col md:flex-row  gap-20px">
                     <div class="mt-20px w-full">
                         <h4>姓名<span class="required">*</span></h4>
                         <input class="custom_input" v-model="billData.name" type="text" placeholder="請輸入姓名">
@@ -19,7 +19,7 @@
                         <input class="custom_input" v-model="billData.company" type="text" placeholder="請輸入公司名稱">
                     </div>
                 </div>
-                <div class="flex gap-20px">
+                <div class="flex flex-col md:flex-row gap-20px">
                     <div class="mt-20px w-full">
                         <h4>聯絡電話<span class="required">*</span></h4>
                         <input class="custom_input" v-model="billData.phone" type="text" placeholder="請輸入電話號碼">
@@ -29,7 +29,7 @@
                         <input class="custom_input" v-model="billData.email" type="text" placeholder="請輸email">
                     </div>
                 </div>
-                <div class="flex gap-20px">
+                <div class="flex flex-col md:flex-row gap-20px">
                     <div class="mt-20px w-full">
                         <h4>縣市<span class="required">*</span></h4>
                         <div class="relative">
@@ -51,7 +51,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="flex gap-20px">
+                <div class="flex flex-col md:flex-row gap-20px">
                     <div class="mt-20px w-full">
                         <h4>郵遞區號<span  class="required">*</span></h4>
                         <input v-model="billData.zipCode" class="custom_input" type="text" readonly>
@@ -67,7 +67,7 @@
                 </div>
                 <input class="my-20px mr-5px" v-model="differentAddress" type="checkbox"><span>運送到不同的地址?</span>
                 <div v-if="differentAddress">
-                    <div class="flex gap-20px">
+                    <div class="flex flex-col md:flex-row gap-20px">
                         <div class="mt-20px w-full">
                             <h4>姓名<span class="required">*</span></h4>
                             <input class="custom_input" v-model="shippingData.name" type="text" placeholder="請輸入姓名">
@@ -83,7 +83,7 @@
                             <input class="custom_input" v-model="shippingData.phone" type="text" placeholder="請輸入電話號碼">
                         </div>
                     </div>
-                    <div class="flex gap-20px">
+                    <div class="flex flex-col md:flex-row gap-20px">
                         <div class="mt-20px w-full">
                             <h4>縣市<span class="required">*</span></h4>
                             <div class="relative">
@@ -105,7 +105,7 @@
                         </div>
                         </div>
                     </div>
-                    <div class="flex gap-20px">
+                    <div class="flex flex-col md:flex-row gap-20px">
                         <div class="mt-20px w-full">
                             <h4>郵遞區號<span  class="required">*</span></h4>
                             <input v-model="shippingData.zipCode" class="custom_input" type="text" readonly>

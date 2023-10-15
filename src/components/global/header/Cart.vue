@@ -1,11 +1,13 @@
 <template>
-    <div class="icon" @click="openCart()"></div>
+    <div v-show="cartDisabled" class="icon" @click="openCart()"></div>
 </template>
 <script setup>
 //官方套件
+import { computed } from 'vue'
 import { useModal } from 'vue-final-modal'
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
 const router = useRouter()
+const route = useRoute()
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
@@ -40,6 +42,11 @@ const cart = useModal({
       router.push(`/info/${auth.member.user_id}`)
     }
   },
+});
+
+//購物車內頁及結帳頁購物車不能被打開
+const cartDisabled = computed(() => {
+  return !(route.path.includes('/cart') || route.path.includes('/info'));
 });
 
 //打開購物車流程
