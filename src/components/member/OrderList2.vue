@@ -7,17 +7,17 @@
                 <h5>商品</h5>
                 <h5>總計</h5>
             </div>
-            <div class="line">
-                <h5><span class="focus">大富大貴黃金檀手珠</span> × 5</h5>
-                <h5>NT$5,000</h5>
+            <div class="line" v-for="item in order.item" :key="item.name">
+                <h5><span class="focus">{{ item.name }}</span> × {{ item.count }}</h5>
+                <h5>NT${{ item.price * item.count }}</h5>
             </div>
-            <div class="line">
+            <!-- <div class="line">
                 <h5><span class="focus">【鎮瀾宮】宮徽香灰球吊飾｜擋煞｜保平安｜隨身庇佑｜過爐</span> × 1</h5>
                 <h5>NT$239</h5>
-            </div>
+            </div> -->
             <div class="line">
                 <h5>小計:</h5>
-                <h5>NT$239</h5>
+                <h5>NT${{ productTotal }}</h5>
             </div>
             <div class="line">
                 <h5>折扣:</h5>
@@ -25,36 +25,36 @@
             </div>
             <div class="line">
                 <h5>運送方式:</h5>
-                <h5>NT$80</h5>
+                <h5>NT$1,000</h5>
             </div>
             <div class="line">
                 <h5>付款方式:</h5>
-                <h5>信用卡付款</h5>
+                <h5>{{ order.payment }}</h5>
             </div>
             <div class=" line">
                 <h6 class="">總計:</h6>
-                <p>NT$5,219</p>
+                <p>NT${{ (productTotal + 900).toLocaleString()}}</p>
             </div>
         </div>
         <div class="flex flex-col md:flex-row gap-20px md:gap-50px">
             <div>
                 <h4 class="title">帳單地址</h4>
                 <div class="flex flex-col gap-5px">
-                    <p>姓名 : 林君豪</p>
-                    <p>地址 : 330桃園市,桃園區</p>
-                    <p>詳細地址 : 經國路246號</p>
-                    <p>聯絡電話 : 0912345678</p>
-                    <p>Emai:lia9021102@gmail.com</p>
+                    <p>姓名 :{{ billing.first_name }}</p>
+                    <p>地址 : {{ billing.postcode }}{{ billing.address_1}},{{ billing.address_2 }}</p>
+                    <p>詳細地址 :{{ billing.city }}</p>
+                    <p>聯絡電話 : {{ billing.phone }}</p>
+                    <p>{{ billing.email }}</p>
                 </div>
             </div>
             <div>
                 <h4 class="title">運送地址</h4>
                 <div class="flex flex-col gap-5px">
-                    <p>姓名 : 林君豪</p>
-                    <p>地址 : 330桃園市,桃園區</p>
-                    <p>詳細地址 : 經國路246號</p>
-                    <p>聯絡電話 : 0912345678</p>
-                    <p>收件人手機：0912345678</p>
+                    <p>姓名 : {{ shipping.first_name }}</p>
+                    <p>地址 : {{ shipping.postcode }}{{ shipping.address_1}},{{ shipping.address_2 }}</p>
+                    <p>詳細地址 : {{ shipping.city }}</p>
+                    <p>聯絡電話 : {{ shipping.phone }}</p>
+                    <p>收件人手機：{{ shipping.phone }}</p>
                 </div>
             </div>
         </div>
@@ -62,14 +62,16 @@
 </template>
 <script setup>
 //官方套件
-import { ref,onMounted } from 'vue';
+import { ref,onMounted,computed } from 'vue';
 import axios from "axios";
 
 const props = defineProps({
     order:Object
 })
-const prayers = ref([])
+const billing = ref([])
+const shipping = ref([])
 onMounted(async () => {
+  console.log(props.order);
   const params = {
        order_id:props.order.order_id,
        count:props.order.count
@@ -77,14 +79,20 @@ onMounted(async () => {
   try {
     const response = await axios.get(
      
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/light/detail`,
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/culture/detail`,
       {params:params,}
     );
-    prayers.value = response.data;
+    billing.value = response.data.billing_address
+    shipping.value = response.data.shipping_address
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
 });
+
+//小計
+const productTotal = computed (()=>{
+    return props.order.item.reduce((total,item) =>  total + (item.price * item.count), 0)
+})
 
 
 //自製組件

@@ -140,8 +140,10 @@ const cart = useModal({
   },
 });
 
+
 //加入購物車流程
 const addToCart = (id) =>{
+    cart.close();
     if(auth.isLogin){
        addWCsession(id)
        //避免購物車已打開未觸發
@@ -151,6 +153,7 @@ const addToCart = (id) =>{
 }
 
 //加入wcSession
+const isAddFinished = ref(false)
 const addWCsession = async(id) =>{
     isLoading.value = true;
     const requestData = {
@@ -168,6 +171,7 @@ const addWCsession = async(id) =>{
         cart.open()
     }
 }
+
 
 
 //取資料

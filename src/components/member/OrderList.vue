@@ -50,7 +50,7 @@
             <div class="line">
                 <h5>付款狀態:</h5>
                 <h5 v-show="order.status === '等待付款中' || order.status === '取消'">未付款</h5>
-                <h5 v-show="order.status === '等待付款中' || order.status === '處理中' || order.status === '已完成'">已付款</h5>
+                <h5 v-show=" order.status === '處理中' || order.status === '已完成'">已付款</h5>
             </div>
             <div class="mt-10px">
                 <h6 class="mb-10px">備註:</h6>

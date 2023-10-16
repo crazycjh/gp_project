@@ -266,10 +266,10 @@ const cart = useModal({
 
 //相關商品加入購物車流程
 const addToCart = (id) =>{
+    cart.close();
     if(auth.isLogin){
        addWCsession(id)
        //避免購物車已打開未觸發
-       cart.close()
        cart.open()
     }else{
       open()
@@ -278,10 +278,10 @@ const addToCart = (id) =>{
 
 //主商品加入購物車流程
 const addToCartMain = (id) =>{
+    cart.close();
     if(auth.isLogin){
        addWCsessionMain(id)
        //避免購物車已打開未觸發
-       cart.close()
        cart.open()
     }else{
       open()
@@ -332,6 +332,9 @@ watch(isOpen,(newValue)=>{
 })
 </script>
 <style scoped>
+.gallery_swiper{
+    width:90px !important;
+}
 .route{
     color:#AAAAAA;
 }
@@ -447,6 +450,7 @@ watch(isOpen,(newValue)=>{
 }
 
 .main_img {
+    aspect-ratio: 1 / 1;
     width: 415px;
     height: 415px;
     cursor: pointer;
@@ -461,6 +465,7 @@ watch(isOpen,(newValue)=>{
 {
     .main_img{
         width: 100%;
+        height:100%;
         object-fit: cover;
     }
     .small_img{
