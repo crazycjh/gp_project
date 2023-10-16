@@ -341,7 +341,7 @@ const addCount = () => {
 
 //刪除當前的信眾
 const deleteForm = (index) => {
-    activeForm.value = 1
+    activeForm.value = index
     peopleCount.value = Number(peopleCount.value)
     peopleCount.value -= 1;
     formItems.value.splice(index,1)

@@ -31,8 +31,10 @@
                     <div v-for="item in types" :key="item.id">
                         <div class="flex justify-between tab">
                             <span class="tag" @click="router.push(`${item.slug}`)" :class="{active:activePage === item.slug}">{{ item.name }}</span>
-                            <img v-show="item.children.length > 0 && activePage !== item.slug" src="../../assets/products/culture/down_arrow_icon.svg" alt="">
-                            <img v-show="item.children.length > 0 && activePage === item.slug" src="../../assets/products/culture/up_arrow_icon.svg" alt="">
+                            <img v-show="item.children.length > 0 && activePage !== item.slug" src="../../assets/products/culture/down_arrow_icon.svg" alt=""
+                            @click="activePage = item.slug">
+                            <img v-show="item.children.length > 0 && activePage === item.slug" src="../../assets/products/culture/up_arrow_icon.svg" alt="" 
+                            @click="activePage = 'all'">
                         </div>
                         <div v-show="item.children.length > 0" class="inner">
                             <div v-show="activePage === child.slug || activePage === item.slug"  v-for="child in item.children" :key="child.id" class="child">

@@ -37,7 +37,7 @@
                             <img class="main_img mb-10px" :src="main_img" alt="">
                             <img class="enlarge" src="../../assets/products/culture/enlarge_red.svg" alt="" @click="open">
                         </div>
-                        <swiper
+                        <swiper class="swiper_section"
                             :style="{
                             '--swiper-navigation-color': '#fff',    
                             '--swiper-pagination-color': '#CEB96E',
@@ -66,7 +66,12 @@
                         <span class="prodcut_price">NT${{ product.price }}</span>
                         <p class="excerpt">{{ product.excerpt }}</p>
                         <div class="flex gap-10px">
-                            <input v-model="count" class="product_count" type="number">
+                            <div class="count_container">
+                                <span class="count_left" @click="decrease">-</span>
+                                <input v-model="count" class="product_count" min="1">
+                                <span class="count_right" @click="count +=1">+</span>
+                            </div>
+                            
                             <button class="cart_btn" @click="addToCartMain(product.id)">加入購物車</button>
                         </div>
                         <div class="share">
@@ -78,7 +83,7 @@
                     </div>
                 </div>
                 <div class="mb-40px">
-                    <h4 class="my-10px">商品資訊</h4>
+                    <h4 class="pt-0 pb-20px">商品資訊</h4>
                     <div class="flex flex-col gap-20px" v-html="product.content"></div>
                 </div>
                 <div class="relative mb-60px w-full">
@@ -330,11 +335,54 @@ const isOpen = ref(false)
 watch(isOpen,(newValue)=>{
     newValue ? document.body.style.overflowY = 'hidden' : document.body.style.overflowY = 'auto';
 })
+
+//控制減數字
+const decrease = () =>{
+    if(count.value >=2){
+        count.value--
+    }
+}
 </script>
 <style scoped>
-.gallery_swiper{
-    width:90px !important;
+.count_container{
+    position: relative;
 }
+.product_count {
+    margin-bottom: 30px;
+    width: 57px;
+    height: 30px;
+    text-align: center;
+    outline: none;
+}
+
+.count_left{
+    top:0;
+    left:0;
+    height: 30px;
+    width: 15px;
+    background-color:#eeeeee;
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.count_right{
+    top:0;
+    right:0;
+    height: 30px;
+    width: 15px;
+    background-color:#eeeeee;
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.swiper_section{
+    max-width: 415px;
+}
+
 .route{
     color:#AAAAAA;
 }
@@ -396,13 +444,6 @@ watch(isOpen,(newValue)=>{
     margin-bottom: 10px;
 }
 
-.product_count {
-    margin-bottom: 30px;
-    width: 57px;
-    height: 30px;
-    border: 1px solid #000000;
-    padding-left: 10px;
-}
 
 .excerpt {
     margin-top: 30px;
@@ -469,8 +510,12 @@ watch(isOpen,(newValue)=>{
         object-fit: cover;
     }
     .small_img{
+        /* width: 100%; */
         object-fit: cover;
     }
+}
+.gallery_swiper{
+    width: 96px !important;
 }
 
 
@@ -588,11 +633,11 @@ watch(isOpen,(newValue)=>{
     height: 30px;
     color: #ffffff;
     padding: 5px 10px;
-    border: 1px solid #CEB96E;
+    border: 1px solid #920000;
     outline: none;
     border-radius: 0;
     font-size: 14px;
-    background-color: #CEB96E;
+    background-color: #920000;
 }
 .add_btn{
     width: 96px;

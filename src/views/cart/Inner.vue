@@ -31,7 +31,13 @@
                         <td class="hidden md:table-cell">
                             <span>NT${{ item.price }}</span>
                         </td>
-                        <td><input class="product_count" v-model="item.quantity" type="number" min="1" @input="updateCart(item.product_id,item.quantity)"></td>
+                        <td>
+                            <div class="count_container">
+                                <span class="count_left" @click="updateCart(item.product_id,item.quantity,'-')">-</span>
+                                <input class="product_count" v-model="item.quantity" @input="updateCart(item.product_id,item.quantity,'none')">
+                                <span class="count_right" @click="updateCart(item.product_id,item.quantity,'+')">+</span>
+                            </div>
+                        </td>
                         <td class="text-right hidden md:table-cell">NT${{ item.price*item.quantity }}</td>
                     </tr>
                 </tbody>
@@ -87,7 +93,6 @@ const getCart = async(id) =>{
         );
        products.value = response.data.product_info
        total.value = response.data.total
-       console.log(products.value);
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally{
@@ -96,7 +101,15 @@ const getCart = async(id) =>{
 }
 
 //更新商品數量
-const updateCart = async(id,count) =>{
+const updateCart = async(id,count,operator) =>{
+    if(operator === '-' && count ===1){
+        return
+    }
+    if(operator === '+'){
+        count++
+    }else if(operator === '-'){
+        count --
+    }
     isLoading.value = true;
     const requestData = {
         user_id:auth.member.user_id,
@@ -135,6 +148,41 @@ const deleteItem = async(id) =>{
 
 </script>
 <style scoped>
+.count_container{
+    position: relative;
+    width: 57px;
+}
+.product_count {
+    width: 57px;
+    height: 30px;
+    outline: none;
+    text-align: center;
+}
+
+.count_left{
+    top:0;
+    left:0;
+    height: 30px;
+    width: 15px;
+    background-color:#eeeeee;
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.count_right{
+    top:0;
+    right:0;
+    height: 30px;
+    width: 15px;
+    background-color:#eeeeee;
+    position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 .btn{
     width: 100px;
     height: 30px;
@@ -161,12 +209,7 @@ strong{
     font-size: 20px;
     color:#920000;
 }
-.product_count {
-    width: 57px;
-    height: 30px;
-    border: 1px solid #000000;
-    padding-left: 10px;
-}
+
 th,td{ 
     padding:  10px 0;
     border-bottom: 1px solid #EEEEEE;

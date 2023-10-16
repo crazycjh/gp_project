@@ -128,13 +128,13 @@ const deleteItem = async(id) =>{
     border-radius: 0;
 }
 .delete{
-    background-color: #920000 !important;
+    background-color: #920000;
 }
 
 .know_btn:hover {
-    color: #CEB96E;
+    color: #920000;
     background-color: #ffffff;
-    border: 1px solid #CEB96E;
+    border: 1px solid #920000;
 }
 .msg {
     color: #920000;
