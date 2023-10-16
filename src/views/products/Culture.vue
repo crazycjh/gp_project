@@ -91,6 +91,7 @@
                     <swiper
                         :style="{
                         '--swiper-navigation-color': '#fff',
+                        '--swiper-navigation-top-offset':'160px',
                         '--swiper-pagination-color': '#CEB96E',
                         '--swiper-pagination-bottom': '6px',
                         '--swiper-pagination-bullet-inactive-color': '#333333',
