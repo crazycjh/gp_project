@@ -1,5 +1,10 @@
 <template>
   <div class="cover">
+    <metainfo>
+      <template v-slot:title="{ content }">{{ content ? `${content} | 神界祈福平台` : `神界祈福平台` }}</template>
+      <template v-slot:name="{ content }">{{ content ? `${content} | 神界祈福平台` : `神界祈福平台` }}</template>
+      <template v-slot:description="{ content }">{{ content ? `${content} | 神界祈福平台` : `神界祈福平台` }}</template>
+    </metainfo>
      <Header />
        <router-view  :key="$route.path"/>
        <ModalsContainer />
@@ -10,6 +15,7 @@
 <script setup>
 //官方套件
 import { ModalsContainer } from 'vue-final-modal'
+import { useMeta } from 'vue-meta'
 
 //自製元件
 import Header from "@/components/global/header/Header.vue"
@@ -20,6 +26,13 @@ import { uselatest } from '@/store/latest.js'
 const latest = uselatest(); 
 import { useGods } from '@/store/gods.js'
 const godsStore = useGods(); 
+
+useMeta({
+    title: '',
+    htmlAttrs: { lang: 'zh-tw' },
+    name:'',
+    description:'',
+  })
 </script>
 
 

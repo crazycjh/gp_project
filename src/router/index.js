@@ -104,9 +104,9 @@ const routes = [
     component: () => import("@/views/Terms.vue")
   },
   {
-    path: "/thanks",
+    path: "/thanks/:order_id",
     name: "Thanks",
-    component: () => import("@/views/Thanks.vue")
+    component: () => import("@/views/cart/Thanks.vue")
   },
   {
     path: "/member/:memberID",

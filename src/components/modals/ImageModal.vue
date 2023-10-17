@@ -1,13 +1,13 @@
 <template>
     <VueFinalModal
       class="flex justify-center items-center"
-      content-class="flex flex-col p-4 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800 "
-    >   <div class="flex justify-end">
-          <img class="close" src="../../assets/modal/close.png" alt="" @click="emit('confirm')">
-        </div>
-        <div class=" px-10px ">
-            <div class="flex mb-30px">
-                <img class="check mr-5px" :src="image" alt="">
+      content-class="flex flex-col  bg-white dark:bg-black rounded-lg border-gray-100 dark:border-gray-800 "
+    >   
+        <div>
+            <div class="relative img_container">
+              <img class="left_arrow" src="../../assets/products/culture/product_arrow_left_icon.svg" @click="emit('previous-swiper')">
+              <img class="focus_img" :src="image" alt="">
+              <img class="right_arrow" src="../../assets/products/culture/product_arrow_right_icon.svg" @click="emit('next-swiper')">
             </div>
         </div>
     </VueFinalModal>
@@ -22,13 +22,41 @@ import axios from "axios";
 const props = defineProps({
   image: String,
 });
-const emit = defineEmits(['confirm']);
+const emit = defineEmits(['confirm','previous-swiper','next-swiper']);
 </script>
 
 
 <style scoped>
-.check {
-    width: 800px;
-    height: 800px;
+
+.left_arrow{
+  position:absolute;
+  top:50%;
+  left:-10%;
+  cursor:pointer;
 }
+.right_arrow{
+  position:absolute;
+  top:50%;
+  right:-10%;
+  cursor:pointer;
+}
+@media (width < 1024px){
+  .left_arrow{
+    left:5%;
+  }
+  .right_arrow{
+    right:5%;
+  }
+}
+.focus_img{
+  width:800px;
+  height:800px;
+}
+@media(width < 768px){
+  .focus_img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 </style>

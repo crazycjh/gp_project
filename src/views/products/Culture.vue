@@ -34,7 +34,7 @@
                     </div>
                     <div class="images">
                         <div class="relative">
-                            <img class="main_img mb-10px" :src="main_img" alt="">
+                            <img class="main_img mb-10px" :src="main_img" alt=""  @click="open">
                             <img class="enlarge" src="../../assets/products/culture/enlarge_red.svg" alt="" @click="open">
                         </div>
                         <swiper class="swiper_section"
@@ -55,8 +55,8 @@
                             :modules="modules"
                             :navigation="true"
                         >
-                            <swiper-slide class="gallery_swiper"  v-for="img in product.gallery" :key="img">
-                                <img class="small_img" :src="img" alt="" @click="main_img = img">
+                            <swiper-slide class="gallery_swiper"  v-for="(img,index) in product.gallery" :key="img">
+                                <img class="small_img" :src="img" alt="" @click="setMainImg(index)">
                             </swiper-slide> 
                         </swiper> 
                     </div>
@@ -88,10 +88,10 @@
                 </div>
                 <div class="relative mb-60px w-full">
                     <h5 class="relative_title mb-10px">相關商品</h5>
-                    <swiper
+                    <swiper class="relative_swiper"
                         :style="{
                         '--swiper-navigation-color': '#fff',
-                        '--swiper-navigation-top-offset':'160px',
+                        '--swiper-navigation-top-offset':'40%',
                         '--swiper-pagination-color': '#CEB96E',
                         '--swiper-pagination-bottom': '6px',
                         '--swiper-pagination-bullet-inactive-color': '#333333',
@@ -107,7 +107,7 @@
                         :modules="modules"
                         :navigation="true"
                     >
-                        <swiper-slide class="relative_swiper" v-for="item in relative" :key="item.id">
+                        <swiper-slide class="relative_slide" v-for="item in relative" :key="item.id">
                         <router-link :to="`/product/culture/${item.id}`">
                             <img class="relative_img" :src="item.image" alt="">
                         </router-link>
@@ -155,7 +155,9 @@ const route = useRoute()
 const router = useRouter()
 import { useModal } from 'vue-final-modal'
 import { useAuth } from '@/store/auth.js'
+// import { useMeta } from 'vue-meta'
 
+// useMeta({ title: '文創商品2',description:'文創des2' })
 //swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -227,7 +229,15 @@ onMounted(async () => {
     } finally{
         isLoading.value = false;
     }
+    console.log(product.value.gallery);
 });
+
+//點小圖換大突
+const activeGallery = ref(0)
+const setMainImg = (index) =>{
+   activeGallery.value = index
+   main_img.value = product.value.gallery[index]
+}
 
 //控制modal
 const auth = useAuth();
@@ -238,7 +248,25 @@ const { open, close } = useModal({
     onConfirm() {
         close()
     },
- 
+    //手動製造迴圈使activeGallery的索引不超出其長度
+    onPreviousSwiper(){
+        const length = product.value.gallery.length
+        if( activeGallery.value === 0){
+            activeGallery.value = length - 1
+        }else{
+            activeGallery.value -= 1
+        }
+        setMainImg(activeGallery.value)
+    },
+    onNextSwiper(){
+        const length = product.value.gallery.length
+        if(activeGallery.value === length -1){
+            activeGallery.value = 0
+        }else{
+            activeGallery.value += 1
+        }
+        setMainImg(activeGallery.value)
+    }
   },
 })
 
@@ -339,7 +367,7 @@ watch(isOpen,(newValue)=>{
 
 //控制減數字
 const decrease = () =>{
-    if(count.value >=2){
+    if(count.value >= 2){
         count.value--
     }
 }
@@ -381,6 +409,7 @@ const decrease = () =>{
     cursor: pointer;
 }
 .swiper_section{
+    margin-left:0;
     max-width: 415px;
 }
 
@@ -396,20 +425,22 @@ const decrease = () =>{
     cursor: pointer;
     z-index: 10;
 }
-.relative_swiper{
-    width: 216px !important;
-}
+
+
 .relative_img{
     width: 216px;
     height: 216px;
 }
-@media( width < 768px){
+.relative_swiper{
+    max-width:890px;
+}
+@media( width < 1024px){
     .relative_img{
         width: 100%;
         height: auto;
     }
-    .relative_swiper{
-        width: 50% !important;
+    .relative_slide{
+        width: 49% !important;
         
     }
 }

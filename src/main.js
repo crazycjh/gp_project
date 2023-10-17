@@ -8,7 +8,11 @@ import App from './App.vue'
 import "./style/index.css";
 import './assets/main.css';
 import 'vue-final-modal/style.css'
+import { createMetaManager } from 'vue-meta'
+
 const app = createApp(App)
+const metaManager = createMetaManager()
+app.use(metaManager)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 app.use(pinia)

@@ -24,14 +24,6 @@
                 <h5>詳細地址:</h5>
                 <h5>{{ item.address }}</h5>
             </div>
-            <!-- <div class="line">
-                <h5>聯絡電話:</h5>
-                <h5>{{ item.phone }}</h5>
-            </div>
-            <div class="line">
-                <h5>電子郵件:</h5>
-                <h5>{{ item.email }}</h5>
-            </div> -->
         </div>
         <div>
             <h4 class="payment">付款資訊</h4>
