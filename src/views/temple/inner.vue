@@ -100,6 +100,55 @@
             </div>
         </div>
     </div>
+    <div class="cover"></div>
+    <div class="relative todo_section">
+        <div class="todo max-w-1200px mx-auto px-10px reative z-10">
+            <h4 class="todo_title">代辦項目</h4>
+            <div class="todo_container">
+                <img class="todo_img" :src="`${backend}wp-content/uploads/2023/10/list_post_img.jpg`">
+                <div class="mb-30px">
+                    <h5 class="event_title">七夕月線上祈福點燈</h5>
+                    <p>內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
+                </div>
+                <div class="flex max-md:flex-col flex-wrap">
+                    <div class="flex w-100% md:w-50% mb-30px">
+                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
+                        <div class="flex flex-col justify-center">
+                            <h5 class="service_active">姻緣燈</h5>
+                            <span class="service_price">NT.500</span>
+                            <span>內文內文內文內文內文內文內文內文</span>
+                        </div>
+                    </div>    
+                    <div class="flex w-100% md:w-50% mb-30px">
+                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
+                        <div class="flex flex-col justify-center">
+                            <h5 class="service_active">姻緣燈</h5>
+                            <span class="service_price">NT.500</span>
+                            <span>內文內文內文內文內文內文內文內文</span>
+                        </div>
+                    </div>    
+                    <div class="flex w-100% md:w-50% mb-30px">
+                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
+                        <div class="flex flex-col justify-center">
+                            <h5 class="service_active">姻緣燈</h5>
+                            <span class="service_price">NT.500</span>
+                            <span>內文內文內文內文內文內文內文內文</span>
+                        </div>
+                    </div>    
+                    <div class="flex w-100% md:w-50% mb-30px">
+                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
+                        <div class="flex flex-col justify-center">
+                            <h5 class="service_active">姻緣燈</h5>
+                            <span class="service_price">NT.500</span>
+                            <span>內文內文內文內文內文內文內文內文</span>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+        <img class="tree_right hidden xl:block" src="../../assets/index/tree_right.svg" alt="">
+        <img class="tree_left hidden xl:block" src="../../assets/index/tree_left.svg" alt="">    
+    </div>
 </template>
 <script setup >
 //官方套件
@@ -175,6 +224,61 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.tree_right{
+    position:absolute;
+    top:280px;
+    right:-100px;
+}
+.tree_left{
+    position:absolute;
+    top:480px;
+    left:0;
+}
+.todo_section{
+    margin-bottom:-180px;
+}
+.todo_product{
+    width:145px;
+    height:145px;
+}
+.event_title{
+    font-size:28px;
+    font-weight:700;
+}
+.todo_container{
+    border:1px solid #CEB96E;
+    padding:20px;
+    background-color:#ffffff;
+}
+.todo_img{
+    width:100%;
+    height:650px;
+    object-fit:cover;
+    margin-bottom:30px;
+}
+@media (width < 1024px){
+    .todo_img{
+        height:auto;
+    }
+}
+.todo{
+   position:relative;
+   top:-360px;
+}
+.todo_title{
+    font-weight:700;
+    font-size:24px;
+    color:#ffffff;
+    padding-bottom:20px;
+    border-bottom:1px solid #CEB96E;
+    margin-bottom:20px;
+}
+.cover{
+    width:100%;
+    height:452px;
+    background-color:#920000;
+    position:relative;
+}
 .service_border{
     border-bottom: 1px solid #EEEEEE;
 }

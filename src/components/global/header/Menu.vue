@@ -22,7 +22,7 @@
                     <router-link to="/service/" class="nav-link">服務</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/todo/" class="nav-link">代辦事項</router-link>
+                    <router-link to="/todo/" class="nav-link">代辦項目</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/product/all" class="nav-link">文創商品</router-link>

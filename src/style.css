@@ -113,3 +113,6 @@ button:focus-visible {
 input{
   background-color: #ffffff;
 }
+.swiper-wrapper{
+  align-items:center !important;
+}
