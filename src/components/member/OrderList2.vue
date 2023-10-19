@@ -78,7 +78,6 @@ onMounted(async () => {
   };
   try {
     const response = await axios.get(
-     
       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/culture/detail`,
       {params:params,}
     );

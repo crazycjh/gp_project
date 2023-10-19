@@ -100,55 +100,58 @@
             </div>
         </div>
     </div>
-    <div class="cover"></div>
-    <div class="relative todo_section">
-        <div class="todo max-w-1200px mx-auto px-10px reative z-10">
-            <h4 class="todo_title">代辦項目</h4>
-            <div class="todo_container">
-                <img class="todo_img" :src="`${backend}wp-content/uploads/2023/10/list_post_img.jpg`">
-                <div class="mb-30px">
-                    <h5 class="event_title">七夕月線上祈福點燈</h5>
-                    <p>內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文內文</p>
-                </div>
-                <div class="flex max-md:flex-col flex-wrap">
-                    <div class="flex w-100% md:w-50% mb-30px">
-                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
-                        <div class="flex flex-col justify-center">
-                            <h5 class="service_active">姻緣燈</h5>
-                            <span class="service_price">NT.500</span>
-                            <span>內文內文內文內文內文內文內文內文</span>
-                        </div>
-                    </div>    
-                    <div class="flex w-100% md:w-50% mb-30px">
-                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
-                        <div class="flex flex-col justify-center">
-                            <h5 class="service_active">姻緣燈</h5>
-                            <span class="service_price">NT.500</span>
-                            <span>內文內文內文內文內文內文內文內文</span>
-                        </div>
-                    </div>    
-                    <div class="flex w-100% md:w-50% mb-30px">
-                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
-                        <div class="flex flex-col justify-center">
-                            <h5 class="service_active">姻緣燈</h5>
-                            <span class="service_price">NT.500</span>
-                            <span>內文內文內文內文內文內文內文內文</span>
-                        </div>
-                    </div>    
-                    <div class="flex w-100% md:w-50% mb-30px">
-                        <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
-                        <div class="flex flex-col justify-center">
-                            <h5 class="service_active">姻緣燈</h5>
-                            <span class="service_price">NT.500</span>
-                            <span>內文內文內文內文內文內文內文內文</span>
-                        </div>
-                    </div>    
+    <div v-if="temple.todo_title && temple.todo_content && temple.todo_image">
+        <div class="cover"></div>
+        <div class="relative todo_section">
+            <div class="todo max-w-1200px mx-auto px-10px reative z-10">
+                <h4 class="todo_title">代辦項目</h4>
+                <div class="todo_container">
+                    <img class="todo_img" :src="temple.todo_image">
+                    <div class="mb-30px">
+                        <h5 class="event_title">{{ temple.todo_title }}</h5>
+                        <p>{{ temple.todo_content }}</p>
+                    </div>
+                    <div class="flex max-md:flex-col flex-wrap">
+                        <div v-for="item in todo" :key="item.id" class="flex w-100% md:w-50% mb-30px">
+                            <img class="todo_product" :src="item.image_url">
+                            <div class="flex flex-col justify-center">
+                                <h5 class="service_active">{{ item.name }}</h5>
+                                <span class="service_price">NT.{{ item.price }}</span>
+                                <span>{{ item.content }}</span>
+                            </div>
+                        </div>    
+                        <!-- <div class="flex w-100% md:w-50% mb-30px">
+                            <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
+                            <div class="flex flex-col justify-center">
+                                <h5 class="service_active">姻緣燈</h5>
+                                <span class="service_price">NT.500</span>
+                                <span>內文內文內文內文內文內文內文內文</span>
+                            </div>
+                        </div>    
+                        <div class="flex w-100% md:w-50% mb-30px">
+                            <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
+                            <div class="flex flex-col justify-center">
+                                <h5 class="service_active">姻緣燈</h5>
+                                <span class="service_price">NT.500</span>
+                                <span>內文內文內文內文內文內文內文內文</span>
+                            </div>
+                        </div>    
+                        <div class="flex w-100% md:w-50% mb-30px">
+                            <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
+                            <div class="flex flex-col justify-center">
+                                <h5 class="service_active">姻緣燈</h5>
+                                <span class="service_price">NT.500</span>
+                                <span>內文內文內文內文內文內文內文內文</span>
+                            </div>
+                        </div>     -->
+                    </div>
                 </div>
             </div>
+            <img class="tree_right hidden xl:block" src="../../assets/index/tree_right.svg" alt="">
+            <img class="tree_left hidden xl:block" src="../../assets/index/tree_left.svg" alt="">    
         </div>
-        <img class="tree_right hidden xl:block" src="../../assets/index/tree_right.svg" alt="">
-        <img class="tree_left hidden xl:block" src="../../assets/index/tree_left.svg" alt="">    
     </div>
+  
 </template>
 <script setup >
 //官方套件
@@ -174,6 +177,7 @@ const main_god = ref();
 const temple = ref([]);
 const light = ref([]);
 const shuwen = ref([]);
+const todo = ref([])
 
 //取id
 onMounted(() => {
@@ -211,9 +215,9 @@ onMounted(async () => {
             `${backend}/api/gc/temple/${templeID.value}`
         );
         temple.value = response.data.data;
-        console.log(temple.value);
         light.value = response.data.light;
         shuwen.value = response.data.shuwen;
+        todo.value = response.data.todo;
         main_god.value = temple.value.main_god.split(',').join('、')
     } catch (error) {
         console.error("API 請求失敗:", error);

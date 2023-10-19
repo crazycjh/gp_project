@@ -47,7 +47,7 @@
                 </swiper-slide>
             </swiper>
             <div class="flex justify-center w-full mt-10px">
-                <InnerLinkBtn  text="了解更多" link="/latest/all"/>
+                <InnerLinkBtn  text="了解更多" link="/todo"/>
             </div>    
         </div>
     </div>
@@ -64,13 +64,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 const activeSlide = ref()
-const sliders = ref([
-    { id:1,image:'https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/10/list_img1.jpg',title:'代辦項目3-標題標題標題標題標題標題標題標'},
-    { id:2,image:'https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/10/list_img2.jpg',title:'代辦項目3-標題標題標題標題標題標題標題標'},
-    { id:3,image:'https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/10/list_img3.jpg',title:'代辦項目3-標題標題標題標題標題標題標題標'},
-    { id:4,image:'https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/10/list_img1.jpg',title:'代辦項目3-標題標題標題標題標題標題標題標'},
-    { id:5,image:'https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/10/list_img2.jpg',title:'代辦項目3-標題標題標題標題標題標題標題標'},
-]);
+const sliders = ref([]);
 const modules = [Autoplay, Pagination, Navigation,EffectCreative];
 
  //自製元件
@@ -78,9 +72,17 @@ import InnerLinkBtn from '../widget/InnerLinkBtn.vue';
 import Title from '../widget/Title.vue';
 const backend = import.meta.env.VITE_BACKEND_PATH
 
-const translate = (swiper) =>{
-    swiper.setTranslate([300,0,0])
-}
+//輪播取得資料
+onMounted(async () => {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/todo/index`
+    );
+    sliders.value = response.data.todo;
+  } catch (error) {
+    console.error("API 請求失敗:", error);
+  }
+});
 
  </script>
  <style scoped>
@@ -95,7 +97,7 @@ const translate = (swiper) =>{
  .custom_swiper{
     display:flex;
     align-items:center;
-    min-height:230px;
+    min-height:300px;
  }
 .todo{
     width: 100%;
@@ -109,29 +111,6 @@ const translate = (swiper) =>{
         margin-bottom: 0px;
         min-height: auto;
     }
-    .todo_right{
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
-}
-@media(width <768px){
-    .todo_right{
-        padding-top: 80px;
-        padding-bottom: 80px;
-        padding-left: 60px;
-        padding-right: 60px;
-    }
-}
-.todo_right{
-    background-color: #ffffff;
-    border:1px solid #CEB96E;
-    padding-left: 120px;
-    padding-right: 120px;
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-    align-items: center;
-    justify-content: center;
 }
 .btn{
     margin-top: -70px;

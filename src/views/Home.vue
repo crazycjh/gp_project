@@ -10,8 +10,8 @@
     <MainGod />
     <Service />
     <Todo />
-    <div class="relative cover">
-        <div class="w-full h-260px hidden lg:block"></div>
+    <div class="relative cover top">
+        <div class="w-full h-260px hidden lg:block top"></div>
     </div>
     <Product />
 </template>
@@ -30,5 +30,8 @@ import Todo from '../components/index/Todo.vue'
 <style scoper>
 .cover{
     background-color: #F4F1E4;
+}
+.top{
+    transform: translateY(-50px);
 }
 </style>
