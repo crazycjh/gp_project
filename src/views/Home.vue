@@ -32,6 +32,6 @@ import Todo from '../components/index/Todo.vue'
     background-color: #F4F1E4;
 }
 .top{
-    transform: translateY(-50px);
+    transform: translateY(-80px);
 }
 </style>

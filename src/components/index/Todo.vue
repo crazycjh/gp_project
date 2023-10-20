@@ -1,25 +1,23 @@
 <template>
-    <div class="mx-auto max-w-1200px w-full relative">
+    <div class="mx-auto max-w-1200px w-full relative px-10px">
         <div class="todo">
             <div class="flex justify-center w-full mb-30px">
                 <Title class="btn " title="代辦項目"/>
             </div>
             <swiper 
-                @init="translate"
-                :centeredSlides = "true"
-                :centeredSlidesBounds = "true"
-                :slides-per-view="2"
+                :slides-per-view="1"
                 :style="{
                     '--swiper-pagination-color': '#CEB96E',
                     '--swiper-pagination-bottom':'-6px',
-                    '--swiper-pagination-bullet-inactive-color':'#ffffff'
+                    '--swiper-pagination-bullet-inactive-color':'#920000'
                 }"
                 :breakpoints="{
-                '768': {
-                    slidesPerView: 3,
+                    '768': {
+                        slidesPerView: 2,
                     },
                     '1024': {
-                    slidesPerView: 3,
+                        slidesPerView: 3,
+                        
                     },
                 }"
                 :autoplay="{
@@ -34,7 +32,7 @@
                 }"
                 class="custom_swiper swiper-container w-full"
                 >
-                <swiper-slide class="w-full" v-for="(item, index) in sliders" :key="item.id">
+                <swiper-slide class="w-full custom_slide" v-for="(item, index) in sliders" :key="item.id">
                     <router-link :to="`/temple/${item.id}`">
                         <div
                             class="swiper_img w-full bg-cover bg-center"
@@ -59,13 +57,13 @@ import axios from "axios";
 
 //swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Autoplay, Pagination, Navigation,EffectCreative } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 const activeSlide = ref()
 const sliders = ref([]);
-const modules = [Autoplay, Pagination, Navigation,EffectCreative];
+const modules = [Autoplay, Pagination, Navigation];
 
  //自製元件
 import InnerLinkBtn from '../widget/InnerLinkBtn.vue';
@@ -86,18 +84,49 @@ onMounted(async () => {
 
  </script>
  <style scoped>
+ @media (width > 1280px){
+    .swiper-slide{
+    transform:scale(0.8,0.8);
+    text-align:right;
+ }
+ .swiper-slide-active{
+    text-align: left;
+ }
+
+ .swiper-slide-next{
+    text-align:center;
+    position: relative;
+    transform:scale(1.55,1.55);
+    z-index: 10;
+ }
+
+ }
+
  .swiper-wrapper{
     align-items:center !important;
  }
 
+
  .swiper_img{
-    width:380px;
-    height:213px;
+    width: 100%;
+    height: 213px;
+    object-fit: cover;
+ }
+ @media (width <768px){
+    .swiper_slide,.swiper_img{
+        width: 100%;
+        height: 400px;
+    }
+ }
+ @media(width < 1024px){
+    .swiper_img{
+        height: 300px;
+    }
  }
  .custom_swiper{
     display:flex;
     align-items:center;
-    min-height:300px;
+    min-height:430px;
  }
 .todo{
     width: 100%;

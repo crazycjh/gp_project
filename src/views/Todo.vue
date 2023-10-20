@@ -48,10 +48,15 @@ const isLoading = ref(false);
 const fullPage = ref(true);
 const fetchData = async (type) => {
   isLoading.value = true;
+  const params = {
+        limit:itemsPerPage.value, 
+        page:currentPage.value,
+  };
   try {
-    const response = await axios.get(`${backend}api/gc/todo/list`);
+    const response = await axios.get(`${backend}api/gc/todo/list`,{params:params});
     posts.value = response.data.data
     total.value = response.data.count
+
   } catch (error) {
     console.error("API 請求失敗:", error);
   } finally {
