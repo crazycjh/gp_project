@@ -190,49 +190,11 @@ const getCurrentDateTime = () =>{
 const total = () => {
     return props.productPrice * props.count
 }
-
-//跳轉綠界
-// const redirectEcpay = async () => {
-//     try {
-//     const response = await axios.get(
-//       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/ecpay`
-//     );
-//     console.log(response);
-//   } catch (error) {
-//     console.error("API 請求失敗:", error);
-//   }
-// }
-// const redirectEcpay = async () => {
-//   try {
-//     const requestData = new URLSearchParams({
-//       MerchantID: merchant_id.value,
-//       MerchantTradeNo: order_id.value,
-//       MerchantTradeDate: getCurrentDateTime(),
-//       PaymentType: 'aio',
-//       TotalAmount: total(),
-//       TradeDesc: 'michael_test',
-//       ItemName: props.productName,
-//       ReturnURL: 'https://demo2.gcreate.com.tw/gc_godpray_frontend/'
-//     });
-
-//     const response = await axios.post(
-//       'https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5',
-//       requestData.toString(), // 轉換成 URL 編碼的字符串
-//       {
-//         headers: {
-//           'Content-Type': 'application/x-www-form-urlencoded'
-//         }
-//       }
-//     );
-//   } catch (error) {
-//     console.error("API 請求失敗:", error);
-//   }
-// }
-
 </script>
 
 
 <style scoped>
+
 .success{
     color:#920000;
     font-size: 28px;

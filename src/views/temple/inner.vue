@@ -113,37 +113,13 @@
                     </div>
                     <div class="flex max-md:flex-col flex-wrap">
                         <div v-for="item in todo" :key="item.id" class="flex w-100% md:w-50% mb-30px">
-                            <img class="todo_product" :src="item.image_url">
+                            <img class="todo_product" :src="item.image_url" @click="goTodo(item.id)">
                             <div class="flex flex-col justify-center">
                                 <h5 class="service_active">{{ item.name }}</h5>
                                 <span class="service_price">NT.{{ item.price }}</span>
                                 <span>{{ item.content }}</span>
                             </div>
                         </div>    
-                        <!-- <div class="flex w-100% md:w-50% mb-30px">
-                            <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
-                            <div class="flex flex-col justify-center">
-                                <h5 class="service_active">姻緣燈</h5>
-                                <span class="service_price">NT.500</span>
-                                <span>內文內文內文內文內文內文內文內文</span>
-                            </div>
-                        </div>    
-                        <div class="flex w-100% md:w-50% mb-30px">
-                            <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
-                            <div class="flex flex-col justify-center">
-                                <h5 class="service_active">姻緣燈</h5>
-                                <span class="service_price">NT.500</span>
-                                <span>內文內文內文內文內文內文內文內文</span>
-                            </div>
-                        </div>    
-                        <div class="flex w-100% md:w-50% mb-30px">
-                            <img class="todo_product" :src="`${backend}wp-content/uploads/2023/08/light_img2.png`">
-                            <div class="flex flex-col justify-center">
-                                <h5 class="service_active">姻緣燈</h5>
-                                <span class="service_price">NT.500</span>
-                                <span>內文內文內文內文內文內文內文內文</span>
-                            </div>
-                        </div>     -->
                     </div>
                 </div>
             </div>
@@ -205,6 +181,14 @@ const shopping = (id) =>{
     }
 }
 
+const goTodo = (id) =>{
+    if(auth.isLogin){
+        router.push(`/product/todo/${id}`)
+    }else{
+        open()
+    }
+}
+
 //取個別資料
 const isLoading = ref(false);
 const fullPage = ref(true);
@@ -242,10 +226,13 @@ onMounted(async () => {
     margin-bottom:-180px;
 }
 .todo_product{
+    cursor:pointer;
     width:145px;
     height:145px;
 }
 .event_title{
+    letter-spacing:3px;
+    line-height: 1.5em;
     font-size:28px;
     font-weight:700;
 }

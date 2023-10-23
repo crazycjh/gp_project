@@ -1,25 +1,22 @@
 <template>
     <div class="cover py-80px relative">
-        <div class="flex mb-40px">
-            <h3 class="breadcrumb active">點燈表單</h3>
+        <div class="flex breadcrumb_section">
+            <h3 class="breadcrumb active">代辦項目</h3>
             <h3 class="breadcrumb">>結帳資訊</h3>
             <h3 class="breadcrumb">>訂單完成</h3>
         </div>
+        <img class="temple_top" src="../../assets/products/todo/list_form_temple.svg" alt="">
         <div class="wrapper">
-            <div class="top">
-                <img class="light_top_left" src="../../assets/products/light/light_text2.svg" alt="">
-                <img class="candle" src="../../assets/products/light/light_list_img.png" alt="">
-            </div>
-            <div class="left" v-show="isPreviosShown" @click="activeForm = activeForm -1">
-                <div class="mb-10px left_icon"></div>
+            <div class="body relative" v-for="(item, index) in formItems" :key="index" v-show="index + 1 === activeForm">
+                <div class="left" v-show="isPreviosShown" @click="activeForm = activeForm -1">
+                    <div class="mb-10px left_icon"></div>
                     <p class="previous">上一位</p>
                 </div>
-            <div class="right" v-show="isNextShown" @click="activeForm = activeForm +1">
-                <div class="mb-10px right_icon"></div>
-                <p class="next">下一位</p>
-            </div>
-            <div class="body relative" v-for="(item, index) in formItems" :key="index" v-show="index + 1 === activeForm">
-                <div class="container border">
+                <div class="right" v-show="isNextShown" @click="activeForm = activeForm +1">
+                    <div class="mb-10px right_icon"></div>
+                    <p class="next">下一位</p>
+                </div>
+                <div class="container border pt-20px md:pt-80px">
                     <Customer 
                         v-model:name="customerData.name"
                         v-model:phone="customerData.phone"
@@ -241,7 +238,7 @@ import { useModal } from 'vue-final-modal'
 
 //其他套件
 import lunarFun from 'lunar-fun';
-import DetailModal from '@/components/modals/DetailModal.vue'
+import DetailModal2 from '@/components/modals/DetailModal2.vue'
 
 //自製套件
 const backend = import.meta.env.VITE_BACKEND_PATH
@@ -268,6 +265,7 @@ const name = ref('')
 onMounted(() => {
     const route = useRoute();
     productID.value = Number(route.params.productID);
+    console.log(productID.value);
 });
 onMounted(async () => {
     try {
@@ -462,7 +460,7 @@ const updateZipCode = (index) => {
 
 //控制modal
 const { open, close } = useModal({
-  component: DetailModal,
+  component: DetailModal2,
   attrs: {
     productName:name,
     productPrice:price,
@@ -499,6 +497,32 @@ const autoInfo = () =>{
 
 </script>
 <style scoped>
+.breadcrumb_section{
+    margin-bottom:250px;
+}
+
+.temple_top {
+   position: absolute;
+   top: 7%;
+   left: 50%;
+   transform: translateX(-50%);
+   z-index:100;
+}
+@media (width < 1024px){
+    .temple_top{
+        width:800px;
+        top: 10%;
+    }
+}
+@media (width < 768px){
+    .temple_top{
+        width:429px;
+        top: 6%;
+    }
+    .breadcrumb_section{
+        margin-bottom:150px;
+    }
+}
 
 .checkbox{
     background-color: #ffffff;
@@ -560,7 +584,6 @@ const autoInfo = () =>{
     margin-top: -1px;
 }
 .wrapper {
-    position:relative;
     max-width: 892px;
 }
 
@@ -597,8 +620,8 @@ input {
 .left {
     width: 50px;
     position: fixed;
-    top: 52%;
-    left: 15%;
+    top: 80%;
+    left: 23%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -613,12 +636,23 @@ input {
 .right {
     width: 50px;
     position: fixed;
-    top: 52%;
-    right: 15%;
+    top: 80%;
+    right: 22%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+@media(width <1024px) {
+    .left {
+        left: -9%;
+    }
+
+    .right {
+        right: -9%;
+    }
+}
+
 @media(width <1400px) {
     .left {
         left: 2%;
@@ -791,32 +825,6 @@ input {
     background-size: cover;
 }
 
-.top {
-    margin-bottom: -1px;
-    justify-content: space-around;
-    padding-bottom: 18px;
-    display: flex;
-    align-items: flex-end;
-    width: 100%;
-    height: 474px;
-    background-image: url('../../assets/products/light/light_bg_2.svg');
-    border-bottom: 1px;
-    background-repeat: no-repeat;
-}
-
-@media(width < 1024px) {
-    .top {
-        height: 340px;
-    }
-}
-
-@media(width < 768px) {
-    .top {
-        height: 176px;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-}
 
 .body {
     padding-left: 80px;

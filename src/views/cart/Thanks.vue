@@ -1,7 +1,9 @@
 <template>
     <div class="mx-auto max-w-1200px md:mt-80px wrapper">
         <div class="flex mb-40px justify-center">
-            <h3 class="breadcrumb">購物車</h3>
+            <h3 v-show="order_type === 'culture'" class="breadcrumb">購物車</h3>
+            <h3 v-show="order_type === 'todo'" class="breadcrumb">代辦項目</h3>
+            <h3 v-show="order_type === 'light'" class="breadcrumb">點燈表單</h3>
             <h3 class="breadcrumb">>結帳資訊</h3>
             <h3 class="breadcrumb active">>訂單完成</h3>
         </div>
@@ -61,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="order_type === 'light'" class="py-40px md:px-50px">
+        <div v-if="order_type === 'light' || order_type === 'todo'" class="py-40px md:px-50px">
             <h4 class="mb-20px">訂單編號 <span class="notice">#{{ data.order_id }}</span> 於<span class="notice">{{ data.date }}</span> 下單，目前狀態為
                 <span class="notice">{{ data.status }}</span>。</h4>
             <div v-for="item in prayers" :key="item.name" class="w-full list">
@@ -155,7 +157,7 @@ const getOrderType = async() =>{
             data.value = response.data.data[0]
             info.value = response.data.info.billing_address
             info2.value = response.data.info.shipping_address
-       }else if(order_type.value === 'light'){
+       }else if(order_type.value === 'light' || order_type === 'todo'){
             prayers.value = response.data.info
             order.value = response.data.data[0]
        }

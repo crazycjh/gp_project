@@ -1,6 +1,6 @@
 <script setup>
 //官方套件
-import { onMounted,onUnmounted,ref } from "vue";
+import { onMounted,onUnmounted,ref,watch } from "vue";
 import axios from "axios";
 
 //swiper
@@ -19,20 +19,22 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 
 
 //js控制navigators rwd
-const navigationSidesOffsetDesktop = ref('70px');
-const adjustNavigationSidesOffset = () => {
-  if (window.innerWidth <= 640) {
-    navigationSidesOffsetDesktop.value = '20px';
-  } else {
-    navigationSidesOffsetDesktop.value = '70px';
+const slidesPerView = ref(2);
+const adjustSlides = () => {
+  if (window.innerWidth >= 768 && window.innerWidth < 1024 ) {
+    slidesPerView.value = 3;
+  } else if(window.innerWidth >=1024 ){
+    slidesPerView.value = 4;
+  } else if(window.innerWidth <768){
+    slidesPerView.value = 2;
   }
 };
 onMounted(() => {
-  adjustNavigationSidesOffset();
-  window.addEventListener('resize', adjustNavigationSidesOffset);
+  adjustSlides();
+  window.addEventListener('resize', adjustSlides);
 });
 onUnmounted(() => {
-  window.removeEventListener('resize', adjustNavigationSidesOffset);
+  window.removeEventListener('resize', adjustSlides);
 });
 //輪播取得資料
 onMounted(async () => {
@@ -41,6 +43,9 @@ onMounted(async () => {
       `${import.meta.env.VITE_BACKEND_PATH}/api/gc/recommand`
     );
     sliders.value = response.data.recommand;
+    //修復swiper 輪播loop問題
+    if(slidesPerView.value * 2 > sliders.value.length) sliders.value = sliders.value.concat(sliders.value)
+    console.log(sliders);
   } catch (error) {
     console.error("API 請求失敗:", error);
   }
@@ -50,20 +55,13 @@ onMounted(async () => {
   <div class="px-10px mx-auto max-w-1200px">
    <Title title="推薦廟宇" />
     <swiper
-      :slides-per-view="2"
+      :slides-per-view="slidesPerView"
       :style="{
         '--swiper-pagination-color': '#CEB96E',
         '--swiper-pagination-bottom':'-6px',
         '--swiper-pagination-bullet-inactive-color':'#ffffff'
       }"
-       :breakpoints="{
-       '768': {
-          slidesPerView: 3,
-        },
-        '1024': {
-          slidesPerView: 4,
-        },
-      }"
+    
       :autoplay="{
         delay: 2500,
         disableOnInteraction: false,

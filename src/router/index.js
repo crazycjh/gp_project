@@ -49,6 +49,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: "/product/todo/:productID",
+    name: "TodoInner",
+    component: () => import("@/views/products/Todo.vue"),
+    meta: { requiresAuth: true }
+  },
+  {
     path: "/qa",
     name: "QA",
     component: () => import("@/views/QA.vue")
@@ -106,7 +112,8 @@ const routes = [
   {
     path: "/thanks/:order_id",
     name: "Thanks",
-    component: () => import("@/views/cart/Thanks.vue")
+    component: () => import("@/views/cart/Thanks.vue"),
+    meta: { requiresAuth: true }
   },
   {
     path: "/member/:memberID",
@@ -114,11 +121,11 @@ const routes = [
     component: () => import("@/views/member/Index.vue"),
     meta: { requiresAuth: true }
   },
-  {
-    path: "/resetPassword/:memberID/:expiration_time",
-    name: "ResetPassword",
-    component: () => import("@/views/member/ResetPassword.vue")
-  },
+  // {
+  //   path: "/resetPassword/:memberID/:expiration_time",
+  //   name: "ResetPassword",
+  //   component: () => import("@/views/member/ResetPassword.vue")
+  // },
   {
     path: "/cart/:memberID",
     name: "Cart",
