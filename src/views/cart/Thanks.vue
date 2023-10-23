@@ -157,7 +157,8 @@ const getOrderType = async() =>{
             data.value = response.data.data[0]
             info.value = response.data.info.billing_address
             info2.value = response.data.info.shipping_address
-       }else if(order_type.value === 'light' || order_type === 'todo'){
+       }else if(order_type.value === 'light' || order_type.value === 'todo'){
+            data.value = response.data.data[0]
             prayers.value = response.data.info
             order.value = response.data.data[0]
        }
