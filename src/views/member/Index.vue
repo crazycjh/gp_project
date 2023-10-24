@@ -10,10 +10,12 @@
             </div>
             <div class="tabs">
                 <span class="tab" :class="{ active: activeTab === 'index' }" @click="activeTab = 'index'">控制台</span>
-                <span class="tab" :class="{ active: activeTab === 'order' || activeTab === 'order_list' }"
-                    @click="activeTab = 'order'">點燈訂單</span>
-                    <span class="tab" :class="{ active: activeTab === 'order2' || activeTab === 'order_list2' }"
-                    @click="activeTab = 'order2'">文創商品訂單</span>
+                <span class="tab" :class="{ active: activeTab === 'orderLight' || activeTab === 'orderLightList' }"
+                    @click="activeTab = 'orderLight'">點燈訂單</span>
+                <span class="tab" :class="{ active: activeTab === 'orderCulture' || activeTab === 'orderCultureList' }"
+                    @click="activeTab = 'orderCulture'">文創商品訂單</span>
+                <span class="tab" :class="{ active: activeTab === 'orderTodo' || activeTab === 'orderTodoList' }"
+                    @click="activeTab = 'orderTodo'">代辦項目訂單</span>
                 <span class="tab" :class="{ active: activeTab === 'detail' }" @click="activeTab = 'detail'">帳戶詳細資料</span>
                 <span class="tab" :class="{ active: activeTab === 'logout' }" @click="logout">登出</span>
             </div>
@@ -24,16 +26,19 @@
                     <p class="mb-5px">您好 (不是 {{ auth.member.email }} 嗎？ <span class="notice cursor-pointer" @click="logout">請登出</span>)</p>
                     <p>在您的帳號控制台裡，您可以檢視 <span class="notice cursor-pointer" @click="activeTab = 'order'">近期的訂單</span>，管理您的 <span class="notice cursor-pointer" @click="activeTab = 'detail'">收貨地址</span> 和 <span class="notice cursor-pointer" @click="activeTab = 'detail'">更改密碼或修改帳號資料</span>。</p>
                     <div class="flex flex-col md:flex-row mt-15px gap-10px">
-                        <button class="index_btn" @click="activeTab = 'order'">點燈訂單</button>
-                        <button class="index_btn" @click="activeTab = 'order2'">文創商品訂單</button>
+                        <button class="index_btn" @click="activeTab = 'orderLight'">點燈訂單</button>
+                        <button class="index_btn" @click="activeTab = 'orderCulture'">文創商品訂單</button>
+                        <button class="index_btn" @click="activeTab = 'orderTodo'">代辦項目訂單</button>
                         <button class="index_btn" @click="activeTab = 'detail'">帳戶詳細資料</button>
                     </div>
                 </div>
             </div>
-            <Order v-show="activeTab === 'order'" @set-order-list="openOrderList"/>
-            <Order2 v-show="activeTab === 'order2'" @set-order2-list="openOrder2List"/>
-            <OrderList :order="order" v-if="activeTab === 'orderList'" />
-            <OrderList2 :order="order2" v-if="activeTab === 'orderList2'" />
+            <OrderLight v-show="activeTab === 'orderLight'" @set-order-list="openOrderList"/>
+            <OrderCulture v-show="activeTab === 'orderCulture'" @set-order2-list="openOrder2List"/>
+            <OrderTodo v-show="activeTab === 'orderTodo'" @set-order3-list="openOrder3List"/>
+            <OrderLightList :order="order" v-if="activeTab === 'orderLightList'" />
+            <OrderCultureList :order="order2" v-if="activeTab === 'orderCultureList'" />
+            <OrderTodoList :order="order3" v-if="activeTab === 'orderTodoList'" />
             <Detail v-show="activeTab === 'detail'" />
         </div>
     </div>
@@ -43,10 +48,12 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 //自製套件
-import Order from '../../components/member/Order.vue';
-import Order2 from '../../components/member/Order2.vue';
-import OrderList from '../../components/member/OrderList.vue'
-import OrderList2 from '../../components/member/OrderList2.vue'
+import OrderLight from '../../components/member/OrderLight.vue';
+import OrderCulture from '../../components/member/OrderCulture.vue';
+import OrderTodo from '../../components/member/OrderTodo.vue';
+import OrderLightList from '../../components/member/OrderLightList.vue'
+import OrderCultureList from '../../components/member/OrderCultureList.vue'
+import OrderTodoList from '../../components/member/OrderTodoList.vue'
 import Detail from '../../components/member/Detail.vue'
 import { useAuth } from '@/store/auth.js'
 const auth = useAuth(); 
@@ -61,14 +68,19 @@ const logout = () => {
 // const order_status = ref('')
 const order = ref([])
 const order2 = ref([])
+const order3 = ref([])
 const activeTab = ref('index')
 const openOrderList = (item) =>{
     order.value = item
-    activeTab.value = 'orderList'
+    activeTab.value = 'orderLightList'
 }
 const openOrder2List = (item) =>{
     order2.value = item
-    activeTab.value = 'orderList2'
+    activeTab.value = 'orderCultureList'
+}
+const openOrder3List = (item) =>{
+    order3.value = item
+    activeTab.value = 'orderTodoList'
 }
 </script>
 <style scoped>

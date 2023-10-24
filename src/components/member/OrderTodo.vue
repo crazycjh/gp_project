@@ -18,7 +18,7 @@
                         <td>NT${{ item.total }} (共 {{ item.count }} 件商品)</td>
                         <td>
                             <button v-show="item.status === '等待付款中'" class="order_button" @click="checkout(item.order_id)">付款</button>
-                            <button class="order_button" @click="emit('set-order-list',item)">查看</button>
+                            <button class="order_button" @click="emit('set-order3-list',item)">查看</button>
                             <button v-show="item.status !== '取消'" class="order_button" @click="checkCancel(item.order_id)">取消</button>
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
                         <h5>動作</h5>
                         <div class="flex gap-20px">
                             <button class="order_mobile_button">付款</button>
-                            <button class="order_mobile_button" @click="emit('set-order-list',item)">查看</button>
+                            <button class="order_mobile_button" @click="emit('set-order3-list',item)">查看</button>
                             <button class="order_mobile_button">取消</button>
                         </div>
                     </div>
@@ -123,8 +123,7 @@ const get_orders = async() =>{
   };
   try {
     const response = await axios.get(
-     
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/light`,
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/todo`,
       {params:params,}
     );
     orders.value = response.data;
@@ -145,7 +144,7 @@ const checkout = async(order_id) =>{
         };
 
         const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/light/checkout`,
+            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/checkout`,
             requestData
         );
         html.value = response.data
@@ -161,7 +160,7 @@ const checkout = async(order_id) =>{
     }
 }
 
-const emit = defineEmits(['set-order-list']);
+const emit = defineEmits(['set-order3-list']);
 </script>
 <style scoped>
 .line{

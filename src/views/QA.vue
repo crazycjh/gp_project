@@ -4,10 +4,10 @@
     <Breadcrumb title="首頁/常見問題" />
     <div class="my-80px max-w-1200px mx-auto px-10px w-full">
         <div class="wrapper" v-for="(item,index) in question" :key="item.id">
-            <div class="flex justify-between tab px-20px">
+            <div class="flex justify-between tab px-20px relative" @click="activeQuestion = index + 1">
                 <span class="text-white">{{ item.title }} - {{ item.question }}</span>
-                <img v-show="activeQuestion === index + 1" src="../assets/QA/reduce_icon_1.png" alt="" @click="activeQuestion = 0" >
-                <img v-show="activeQuestion !== index + 1" src="../assets/QA/show.png" alt="" @click="activeQuestion = index + 1">
+                <img class="reduce"  v-show="activeQuestion === index + 1" src="../assets/QA/reduce_icon_1.png" alt="" @click.stop="resetQA" >
+                <img v-show="activeQuestion !== index + 1" src="../assets/QA/show.png" alt="" >
             </div>
             <div v-show="activeQuestion === index + 1" class="inner">
                 <div class="flex flex-col gap-20px" v-html="item.answer"></div>
@@ -44,8 +44,14 @@ onMounted(async () => {
     console.error("API 請求失敗:", error);
   }
 });
+const resetQA = () =>{
+  activeQuestion.value = 0
+}
 </script>
 <style scoped>
+.reduce{
+  z-index:100;
+}
 .inner{
     width: 100%;
     padding: 15px 20px;

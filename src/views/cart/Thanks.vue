@@ -1,6 +1,9 @@
 <template>
     <div class="mx-auto max-w-1200px md:mt-80px wrapper">
-        <div class="flex mb-40px justify-center">
+        <div class="flex mb-40px justify-center" v-if="errorMessage">
+            <p class="error">{{ errorMessage }}</p>
+        </div>
+        <div v-if="errorMessage === ''" class="flex mb-40px justify-center">
             <h3 v-show="order_type === 'culture'" class="breadcrumb">購物車</h3>
             <h3 v-show="order_type === 'todo'" class="breadcrumb">代辦項目</h3>
             <h3 v-show="order_type === 'light'" class="breadcrumb">點燈表單</h3>
@@ -137,7 +140,7 @@ const info = ref([])
 const info2 = ref([])
 const prayers = ref([])
 const order = ref([])
-
+const errorMessage = ref('')
 const isLoading = ref(false)
 onMounted(() => {
     order_id.value = route.params.order_id;
@@ -147,7 +150,8 @@ onMounted(() => {
 const getOrderType = async() =>{
     isLoading.value = true;
     const requestData = {
-        order_id:order_id.value
+        order_id:order_id.value,
+        user_id:auth.member.user_id
     };
     try {
         const response = await axios.post(`${backend}api/gc/thanks/info`,requestData
@@ -162,6 +166,9 @@ const getOrderType = async() =>{
             prayers.value = response.data.info
             order.value = response.data.data[0]
        }
+       if(response.data.success === false){
+            errorMessage.value = response.data.data
+       }
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally{
@@ -175,6 +182,10 @@ const productTotal = computed (()=>{
 
 </script>
 <style scoped>
+.error{
+    color:#920000;
+    font-size:24px;
+}
 .wrapper{
     min-height: 66vh;
 }

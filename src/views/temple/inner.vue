@@ -206,8 +206,8 @@ onMounted(async () => {
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally {
-    isLoading.value = false; 
-  }
+        isLoading.value = false; 
+    }
 });
 </script>
 

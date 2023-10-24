@@ -18,7 +18,7 @@
                         <td>NT${{ item.total }} (共 {{ item.count }} 件商品)</td>
                         <td>
                             <button v-show="item.status === '等待付款中'" class="order_button" @click="checkout(item.order_id)">付款</button>
-                            <button class="order_button" @click="emit('set-order2-list',item)">查看</button>
+                            <button class="order_button" @click="emit('set-order-list',item)">查看</button>
                             <button v-show="item.status !== '取消'" class="order_button" @click="checkCancel(item.order_id)">取消</button>
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
                         <h5>動作</h5>
                         <div class="flex gap-20px">
                             <button class="order_mobile_button">付款</button>
-                            <button class="order_mobile_button" @click="emit('set-order2-list',item)">查看</button>
+                            <button class="order_mobile_button" @click="emit('set-order-list',item)">查看</button>
                             <button class="order_mobile_button">取消</button>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ import { useModal } from 'vue-final-modal'
 import ConfirmModal from '@/components/modals/ConfirmModal.vue'
 import { useAuth } from '@/store/auth.js'
 const auth = useAuth(); 
-
+const token = auth.jwt
 
 //控制modal
 const active_order_id = ref('')
@@ -100,7 +100,8 @@ const goCancel = async() => {
 
         const response = await axios.post(
             `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/cancel`,
-            requestData
+            requestData,
+           
         );
         if(response.data.success){
             get_orders()
@@ -124,8 +125,9 @@ const get_orders = async() =>{
   try {
     const response = await axios.get(
      
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/culture`,
-      {params:params,}
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/light`,
+      {params:params}
+      
     );
     orders.value = response.data;
   } catch (error) {
@@ -145,7 +147,7 @@ const checkout = async(order_id) =>{
         };
 
         const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/light/checkout`,
+            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/checkout`,
             requestData
         );
         html.value = response.data
@@ -160,7 +162,6 @@ const checkout = async(order_id) =>{
         console.error("API 請求失敗:", error);
     }
 }
-
 const emit = defineEmits(['set-order-list']);
 </script>
 <style scoped>

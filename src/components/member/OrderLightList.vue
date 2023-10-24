@@ -1,4 +1,5 @@
 <template>
+    <loading :active="isLoading" :is-full-page="fullPage" ></loading>
     <div class="py-40px md:px-50px">
         <h4 class="mb-20px">訂單編號 <span class="notice">#{{ order.order_id }}</span> 於<span class="notice">{{ order.date }}</span> 下單，目前狀態為
             <span class="notice">{{ order.status }}</span>。</h4>
@@ -55,10 +56,15 @@
 //官方套件
 import { ref,onMounted } from 'vue';
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 const props = defineProps({
     order:Object
 })
+
+const isLoading = ref(false);
+const fullPage = ref(true);
 const prayers = ref([])
 onMounted(async () => {
   const params = {
@@ -66,14 +72,17 @@ onMounted(async () => {
        count:props.order.count
   };
   try {
+    isLoading.value = true;
     const response = await axios.get(
      
-      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/light/detail`,
+      `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/prayer/detail`,
       {params:params,}
     );
     prayers.value = response.data;
   } catch (error) {
     console.error("API 請求失敗:", error);
+  } finally {
+    isLoading.value = false; 
   }
 });
 
