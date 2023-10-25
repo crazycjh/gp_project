@@ -2,7 +2,7 @@
     <div class="bg-red-800">
         <div class="px-11px py-30px flex flex-col gap-10px items-center">
             <div>
-                <ul class="flex gap-1">
+                <ul class="flex max-md:gap-3 gap-1 flex-wrap justify-center">
                     <li>
                         <router-link to="/about/" class="text-white whitespace-nowrap">關於我們 |</router-link>
                     </li>

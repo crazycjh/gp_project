@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import axios from 'axios'
 import { useAuth } from '@/store/auth.js'
+
+const backend = import.meta.env.VITE_BACKEND_PATH
+
 const routes = [
   {
     path: "/",
@@ -40,7 +43,7 @@ const routes = [
   {
     path: "/product/culture/:productID",
     name: "Culture",
-    component: () => import("@/views/products/Culture.vue")
+    component: () => import("@/views/products/Culture.vue"),
   },
   {
     path: "/product/light/:productID",
@@ -147,17 +150,19 @@ const router = createRouter({
 
 // 添加路由守衛
 router.beforeEach((to, from, next) => {
+  //登入卡控
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    const auth = useAuth(); 
+    const auth = useAuth();
     const isLoggedIn = auth.isLogin
     if (!isLoggedIn) {
-      next('/'); 
+      next('/');
     } else {
       next();
     }
   } else {
     next();
   }
+
 });
 
 export default router

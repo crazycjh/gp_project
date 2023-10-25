@@ -36,10 +36,13 @@
                     <router-link :to="`/temple/${item.id}`">
                         <div
                             class="swiper_img w-full bg-cover bg-center"
-                            :style="{ 'background-image': `url(${item.image})` }">
+                            :style="{ 'background-image': `url(${item.image})`,
+                             filter: 'brightness(50%)',
+                            'background-position': 'center center',
+                            'background-size':'cover' }">
                         </div>
                     </router-link>
-                    <div class="max-md:px-10px">
+                    <div class="max-md:px-10px text-center">
                         <h5 class="title mt-10px">{{ item.title }}</h5>
                     </div>
                 </swiper-slide>
@@ -84,21 +87,37 @@ onMounted(async () => {
 
  </script>
  <style scoped>
- @media (width > 1280px){
+ @media(width < 1024px){
+    .swiper_img{
+        filter:brightness(100%) !important;
+    }
+ }
+ @media (width > 1024px){
+    .title{
+        padding-left:120px;
+        max-width:260px;
+    }
+    .swiper-slide-next .title{
+        padding-left:0px;
+        max-width:none;
+    }
+    .swiper-slide-next .swiper_img{
+        filter:brightness(100%) !important;
+    }
     .swiper-slide{
-    transform:scale(0.8,0.8);
-    text-align:right;
- }
- .swiper-slide-active{
-    text-align: left;
- }
+        transform:scale(0.8,0.8);
+        text-align:center;
+    }
+    .swiper-slide-active{
+        text-align: center;
+    }
 
- .swiper-slide-next{
-    text-align:center;
-    position: relative;
-    transform:scale(1.55,1.55);
-    z-index: 10;
- }
+    .swiper-slide-next{
+        text-align:center;
+        position: relative;
+        transform:scale(1.55,1.55);
+        z-index: 10;
+    }
 
  }
 

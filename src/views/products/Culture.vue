@@ -1,5 +1,5 @@
 <template>
-    <loading :active="isLoading" :is-full-page="fullPage"></loading>
+    <loading :active="isLoading"></loading>
     <div class="max-w-1200px mx-auto max-xl:px-10px w-full mt-30px md:mt-80px">
         <div class="flex">
             <div class="left_tabs hidden xl:block">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <div class="md:ml-30px mt-20px flex flex-col gap-10px w-full max-w-890px">
+            <div class="lg:ml-30px mt-20px flex flex-col gap-10px w-full max-w-890px">
                 <div class="top_section pb-60px flex flex-col md:flex-row gap-20px relative">
                     <div class="flex justify-center items-center gap-10px md:hidden">
                         <img class="filter" src="../../assets/products/culture/filter_icon.svg" alt="">
@@ -146,7 +146,7 @@
 </template>
 <script setup>
 //官方套件
-import { onMounted, ref, reactive, watch, computed } from "vue";
+import { onMounted, ref, reactive, watch, computed,onBeforeMount } from "vue";
 import axios from "axios";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
@@ -155,9 +155,10 @@ const route = useRoute()
 const router = useRouter()
 import { useModal } from 'vue-final-modal'
 import { useAuth } from '@/store/auth.js'
-// import { useMeta } from 'vue-meta'
 
-// useMeta({ title: '文創商品2',description:'文創des2' })
+import { useMeta } from 'vue-meta'
+
+
 //swiper
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -173,8 +174,6 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 import ImageModal from '@/components/modals/ImageModal.vue'
 import LoginModal from '@/components/modals/LoginModal.vue';
 import CartModal from '@/components/modals/CartModal.vue'
-
-
 
 //取的id
 const productID = ref();
@@ -229,7 +228,6 @@ onMounted(async () => {
     } finally{
         isLoading.value = false;
     }
-    console.log(product.value.gallery);
 });
 
 //點小圖換大突
@@ -330,7 +328,6 @@ const addWCsessionMain = async(id) =>{
         user_id:auth.member.user_id,
         quantity:count.value
     };
-    console.log(requestData);
     try {
         const response = await axios.post(`${backend}api/gc/add/cart`,requestData
         );

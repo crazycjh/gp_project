@@ -31,7 +31,7 @@
         </div>
     </div>
     <Breadcrumb v-if="temple.name" :title="`首頁/${temple.name}`" />
-    <div class="px-10px mx-auto max-w-1200px mt-40px mb-100px">
+    <div class="px-10px mx-auto max-w-1200px mt-40px mb-50px md:mb-100px">
         <div class="mt-50px py-1">
             <h4 class="border_title custom_border">廟宇介紹</h4>
         </div>
@@ -214,16 +214,16 @@ onMounted(async () => {
 <style scoped>
 .tree_right{
     position:absolute;
-    top:280px;
-    right:-100px;
+    top:400px;
+    right:0;
 }
 .tree_left{
     position:absolute;
-    top:480px;
+    top:600px;
     left:0;
 }
 .todo_section{
-    margin-bottom:-180px;
+    margin-bottom:60px;
 }
 .todo_product{
     cursor:pointer;
@@ -253,8 +253,9 @@ onMounted(async () => {
     }
 }
 .todo{
-   position:relative;
-   top:-360px;
+    position:relative;
+   /* top:-360px; */
+   margin-top:-360px;
 }
 .todo_title{
     font-weight:700;

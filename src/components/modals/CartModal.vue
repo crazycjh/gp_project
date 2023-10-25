@@ -65,7 +65,6 @@ const getCart = async(id) =>{
         );
        products.value = response.data.product_info
        total.value = response.data.total
-       console.log(products.value);
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally{
