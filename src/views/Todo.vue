@@ -4,7 +4,7 @@
     <Breadcrumb title="首頁/代辦項目" />
     <div class="mx-auto max-w-1200px">
         <div class="w-full flex flex-col md:flex-row gap-20px flex-wrap mt-40px">
-            <div v-for="item in posts" :key="item.term_id" class="w-full  flex flex-col  w-full  lg:w-48%   max-lg:px-10px mt-40px">
+            <div v-for="item in posts" :key="item.term_id" class="w-full  flex flex-col  w-full lg:w-48% max-lg:px-10px mt-40px">
                 <router-link class="flex flex-col  w-full" :to="`/temple/${item.term_id}`">
                     <img class="photo" :src="item.image" alt="">
                     <p class="title">{{item.title}}</p>

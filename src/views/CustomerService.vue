@@ -89,6 +89,12 @@ const checkData = () => {
     sendData()
 }
 
+const clearData = () => {
+    for (const key in data.value) {
+       data.value[key] = ''
+    }
+}
+
 const sendData = async() =>{
     isLoading.value = true;
     try {
@@ -101,6 +107,7 @@ const sendData = async() =>{
         );
         if(response.data.success){
             errorMessage.value = ''
+            clearData()
             open()
         }
     } catch (error) {

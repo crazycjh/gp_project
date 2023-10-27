@@ -19,7 +19,7 @@
                     <router-link to="/latest/all" class="nav-link">最新活動</router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/service/" class="nav-link">服務</router-link>
+                    <router-link to="/service/" class="nav-link">信眾服務</router-link>
                 </li>
                 <li class="nav-item">
                     <router-link to="/todo/" class="nav-link">代辦項目</router-link>

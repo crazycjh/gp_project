@@ -4,9 +4,9 @@
     <Breadcrumb title="首頁/常見問題" />
     <div class="my-80px max-w-1200px mx-auto px-10px w-full">
         <div class="wrapper" v-for="(item,index) in question" :key="item.id">
-            <div class="flex justify-between tab px-20px relative" @click="activeQuestion = index + 1">
+            <div class="flex justify-between tab px-20px relative" @click="handleQA(index)">
                 <span class="text-white">{{ item.title }} - {{ item.question }}</span>
-                <img class="reduce"  v-show="activeQuestion === index + 1" src="../assets/QA/reduce_icon_1.png" alt="" @click.stop="resetQA" >
+                <img class="reduce"  v-show="activeQuestion === index + 1" src="../assets/QA/reduce_icon_1.png" alt="" @click.stop="activeQuestion = 0" >
                 <img v-show="activeQuestion !== index + 1" src="../assets/QA/show.png" alt="" >
             </div>
             <div v-show="activeQuestion === index + 1" class="inner">
@@ -44,8 +44,13 @@ onMounted(async () => {
     console.error("API 請求失敗:", error);
   }
 });
-const resetQA = () =>{
-  activeQuestion.value = 0
+
+const handleQA = (index) =>{
+  if(activeQuestion.value === index + 1){
+    activeQuestion.value = 0
+  }else{
+    activeQuestion.value = index + 1
+  }
 }
 </script>
 <style scoped>

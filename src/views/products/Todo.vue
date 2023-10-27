@@ -523,6 +523,12 @@ const autoInfo = () =>{
         margin-bottom:150px;
     }
 }
+@media (width <412px){
+    .temple_top{
+        width:100%;
+        top: 7%;
+    }
+}
 
 .checkbox{
     background-color: #ffffff;

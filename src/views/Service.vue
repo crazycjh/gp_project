@@ -1,6 +1,6 @@
 <template>
-    <TopCover :image="`${backend}wp-content/uploads/2023/09/service_banner.jpg`" title="廟宇服務" />
-    <Breadcrumb title="首頁/廟宇服務" />
+    <TopCover :image="`${backend}wp-content/uploads/2023/09/service_banner.jpg`" title="信眾服務" />
+    <Breadcrumb title="首頁/信眾服務" />
     <!-- <div class="tags flex justify-center max-md:px-100px gap-10px my-50px flex-wrap">
         <div class="flex gap-10px max-md:gap-20px max-md:max-w-570px max-w-1200px flex-wrap justify-center">
            <button class="btn active">線上點等</button>
@@ -11,7 +11,7 @@
     </div> -->
     <div class="max-w-1200px mx-auto">
         <div class="light mt-80px">
-            <div class="flex flex-col md:flex-row relative">
+            <div class="flex flex-col md:flex-row">
                 <div class="light_left w-full md:w-45%  px-10px max-md:mb-40px">
                     <h3 class="service_tag mb-30px">－線上點燈</h3>
                     <div class="flex flex-col gap-30px">
@@ -45,11 +45,15 @@
                                 <p>主保鎮宅光明、闔家保康寧</p>
                             </div>
                         </div>
+                        <div>
+                            <router-link to="/allTemple"><button class="btn">搜廟宇點燈<img src="../assets/service/right_arrow.svg" alt=""></button></router-link>
+                        </div>
                     </div>
                 </div>
                 <div class="light_right :ml-20px w-50% relative z-10 max-md:w-full">
                     <img class="w-full" src="../assets/service/service_img01_2.jpg" alt="">
                 </div>
+                <img class="tree_right" src="../assets/index/tree_right.svg" alt="">
             </div>
         </div>
     </div>
@@ -70,7 +74,7 @@
                 <p>太歲星君俗稱太歲或歲君，是為掌管人們吉凶禍福的神衹。搭配著十二地支與十二生肖運行，每個流年都有著不同的吉凶運勢，「犯太歲」指的是與太歲一樣的生肖，即冒犯了太歲星，為了避免沖犯到太歲而影響整年運勢，在新春過年盛時，祭拜太歲神以祈福消災，祈求一整年平安順遂。。</p>
             </div>
         </div>
-        <!-- <img class="tree_left" src="../assets/index/tree_left.svg" alt=""> -->
+        <img class="tree_left" src="../assets/index/tree_left.svg" alt="">
     </div>
     <div class="flex justify-end md:mt-120px shuwen_wrapper">
         <div class="flex flex-col lg:flex-row shuwen max-w-1550px ">
@@ -97,6 +101,26 @@ import TopCover from '@/components/widget/TopCover.vue'
 const backend = import.meta.env.VITE_BACKEND_PATH
 </script>
 <style scoped>
+.btn{
+    width: 178px;
+    height: 49px;
+    display: flex;
+    background-color: #CEB96E;
+    color:#ffffff;
+    border:none;
+    border-radius: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+.btn:hover{
+    background-color: #ffffff;
+    color:#CEB96E;
+    border:1px solid #CEB96E;
+}
+.btn img{
+    margin-left: 5px;
+}
 
 @media(width > 1024px){
     .shuwen{
@@ -116,7 +140,12 @@ const backend = import.meta.env.VITE_BACKEND_PATH
    top:30%;
    left:-30%;
 }
-@media(width <768px){
+.tree_right{
+    position: absolute;
+    top: 49%;
+    right: 0;
+}
+@media(width <1280px){
     .tree_left,.tree_right{
         display: none;
     }
@@ -158,11 +187,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     height: 450px;
     object-fit: cover;
 }
-.tree_right{
-    position: absolute;
-    top: -5%;
-    right: -30%;
-}
+
 .service_tag{
     font-family: Noto Serif TC;
     font-size: 28px;
@@ -181,7 +206,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     text-align: left;
     color:#543118;
 }
-.btn{
+/* .btn{
     width:132px;
     height:50px;
     padding: 10px 20px 10px 20px;
@@ -194,5 +219,5 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     background-color: #CEB96E;
     color:#ffffff;
     border:none;
-}
+} */
 </style>

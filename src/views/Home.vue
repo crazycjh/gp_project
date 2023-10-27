@@ -11,7 +11,7 @@
     <Service />
     <Todo />
     <div class="relative cover top">
-        <div class="w-full h-260px hidden lg:block top"></div>
+        <div class="w-full h-300px hidden lg:block top"></div>
     </div>
     <Product />
 </template>
@@ -32,6 +32,6 @@ import Todo from '../components/index/Todo.vue'
     background-color: #F4F1E4;
 }
 .top{
-    transform: translateY(-80px);
+    transform: translateY(-180px);
 }
 </style>

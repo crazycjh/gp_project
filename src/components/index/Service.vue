@@ -1,6 +1,6 @@
 <template>
    <div class="relative">
-      <Title title="服務項目" />
+      <Title title="信眾服務" />
       <div class="flex gap-40px justify-center mt-20px mb-20px max-lg:mb-50px lg:mt-80px lg:mb-100px flex-wrap mx-auto max-w-1200px max-lg:max-w-570px ">
          <div class="lg:transform lg:-translate-y-10 z-10">
             <img class="service_img" src="../../assets/index/service_img1_2.png" alt="">
