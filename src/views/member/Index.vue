@@ -16,7 +16,7 @@
                     @click="activeTab = 'orderCulture'">文創商品訂單</span>
                 <span class="tab" :class="{ active: activeTab === 'orderTodo' || activeTab === 'orderTodoList' }"
                     @click="activeTab = 'orderTodo'">代辦項目訂單</span>
-                <span class="tab" :class="{ active: activeTab === 'detail' }" @click="activeTab = 'detail'">帳戶詳細資料</span>
+                <span class="tab account" :class="{ active: activeTab === 'detail' }" @click="activeTab = 'detail'">帳戶詳細資料</span>
                 <span class="tab" :class="{ active: activeTab === 'logout' }" @click="logout">登出</span>
             </div>
         </div>
@@ -84,6 +84,9 @@ const openOrder3List = (item) =>{
 }
 </script>
 <style scoped>
+.account:hover{
+    border:1px solid #CEB96E;
+}
 
 .payment{
     margin-top: 30px;

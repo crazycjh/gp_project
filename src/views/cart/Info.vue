@@ -273,11 +273,10 @@ const checkOrder = () =>{
         errorMessage.value = '請勾選同意網站的條款與條件'
         return
     }
-    if(payment.value === false){
+    if(payment.value === ''){
         errorMessage.value = '請選擇付款方式'
         return
     }
-    errorMessage.value = ''
     sendOrder()
 }
 

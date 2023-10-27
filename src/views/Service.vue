@@ -48,14 +48,13 @@
                     </div>
                 </div>
                 <div class="light_right :ml-20px w-50% relative z-10 max-md:w-full">
-                    <img class="w-full" :src="`${backend}wp-content/uploads/2023/09/service_img01.jpg`" alt="">
+                    <img class="w-full" src="../assets/service/service_img01_2.jpg" alt="">
                 </div>
-                <!-- <img class="tree_right" src="../assets/index/tree_right.svg" alt=""> -->
             </div>
         </div>
     </div>
     <div class="puja max-md:mt-106px mt-80px relative">
-        <img class="hidden md:block" :src="`${backend}wp-content/uploads/2023/09/service_img02.jpg`" alt="">
+        <img class="hidden md:block" src="../assets/service/service_img02_2.jpg" alt="">
         <div class="puja_box  px-20px md:py-40px pt-10px pb-20px">
             <h4 class="mb-20px">－法會</h4>
             <p class="pb-20px">法會又稱為佛事、法事，指的是各種說法或供佛、供僧及布施等活動的集會，其根本精神是「以法相會，如法修行」。包括誦經、念佛、供奉佛像、捐助僧侶、布施財物等。這些活動旨在培養參與者的慈悲、智慧和忍辱，以促進個人的精神成長。</p>
@@ -64,7 +63,7 @@
     <div class="max-w-1200px mx-auto mt-120px relative ">
         <div class="flex flex-col-reverse md:flex-row taisui gap-60px">
             <div class="relatvie z-10">
-                <img class="w-full" :src="`${backend}wp-content/uploads/2023/09/service_img03.jpg`" alt="">
+                <img class="w-full" src="../assets/service/service_img03_2.jpg" alt="">
             </div>
             <div class="flex flex-col justify-center w-full md:w-60% px-10px">
                 <h3 class="service_tag max-md:mt-20px mb-20px">－安太歲</h3>
@@ -86,7 +85,7 @@
                 <p class="">人神契約、陰陽調解、請求赦罪… 等</p>
             </div>
             <div class="shuwen_right w-full">
-                <img class="w-full" :src="`${backend}wp-content/uploads/2023/09/service_img04.jpg`" alt="">
+                <img class="w-full" src="../assets/service/service_img04_2.jpg" alt="">
             </div>
         </div>
     </div>

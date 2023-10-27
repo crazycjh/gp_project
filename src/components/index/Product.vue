@@ -8,7 +8,7 @@
                <InnerLinkBtn class="mb-20px" text="更多商品" link="/product" />
             </div>
             <div>
-               <img class="bg-repeat max-lg:w-full lg:h-340px"  :src="`${backend}wp-content/uploads/2023/08/home_product_img.jpg`" alt="">
+               <img class="bg-repeat max-lg:w-full lg:h-340px"  src="../../assets/index/home_product_img.jpg" alt="">
             </div>
          </div>
       </div>

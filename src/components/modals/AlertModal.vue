@@ -12,7 +12,6 @@
             </div>
             <button class="know_btn" @click="emit('confirm')">回頁面</button>
         </div>
-        
     </VueFinalModal>
   </template>
 <script setup>

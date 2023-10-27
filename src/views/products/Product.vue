@@ -87,7 +87,8 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import { useRoute,useRouter } from "vue-router";
 import { useModal } from 'vue-final-modal'
-// import { useMeta } from 'vue-meta'
+import { useMeta } from 'vue-meta'
+useMeta({ title: '文創商品',description:'文創des' })
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
@@ -96,7 +97,7 @@ import LoginModal from '@/components/modals/LoginModal.vue';
 import CartModal from '@/components/modals/CartModal.vue'
 import { useAuth } from '@/store/auth.js'
 
-// useMeta({ title: '文創商品',description:'文創des' })
+ 
 
 //資料定義
 const order = ref('default')

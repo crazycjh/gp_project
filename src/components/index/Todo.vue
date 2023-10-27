@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto max-w-1200px w-full relative px-10px">
+    <div class="mx-auto max-w-1200px w-full relative px-10px mb-50px">
         <div class="todo">
             <div class="flex justify-center w-full mb-30px">
                 <Title class="btn " title="代辦項目"/>

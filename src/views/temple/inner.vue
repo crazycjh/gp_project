@@ -437,7 +437,6 @@ h6 {
     height: 230px;
 }
 
-.wind {}
 
 h3 {
     color: #000000;

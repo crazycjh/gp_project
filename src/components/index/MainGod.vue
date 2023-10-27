@@ -17,7 +17,7 @@
                 @mouseout="handleImageHover(99)" @click="goSearch(index)" /> -->
         </div>
         <img class="left" src="../../assets/index/god_bg1.svg" alt="">
-        <img class="right" src="../../assets/index/god_bg2.svg" alt="">
+        <img class="right" src="../../assets/index/god_bg2_3.svg" alt="">
     </div>
 </template>
 <script setup>
@@ -83,6 +83,8 @@ const goSearch = ((index) => {
 }
 
 .right {
+    width: 350px;
+    height: 400px;
     position: absolute;
     top: 0;
     right: 0;

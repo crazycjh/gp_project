@@ -1,6 +1,6 @@
 <template>
     <loading :active="isLoading" :is-full-page="fullPage" ></loading>
-    <TopCover :image="`${backend}wp-content/uploads/2023/09/blog_banner2.jpg`" title="代辦項目" />
+    <TopCover :image="`${backend}wp-content/uploads/2023/10/list_banner.jpg`" title="代辦項目" />
     <Breadcrumb title="首頁/代辦項目" />
     <div class="mx-auto max-w-1200px">
         <div class="w-full flex flex-col md:flex-row gap-20px flex-wrap mt-40px">
