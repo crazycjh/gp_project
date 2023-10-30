@@ -240,7 +240,7 @@ watch(isOpen,(newValue)=>{
 </script>
 <style scoped>
 .sale{
-    color:#888888;
+    color:#888888 !important;
     text-decoration: line-through;
 }
 .tag{
