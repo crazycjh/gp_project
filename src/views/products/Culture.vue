@@ -195,10 +195,10 @@ const currentUrl = ref('')
 onMounted(() => {
     productID.value = route.params.productID;
     currentUrl.value = window.location.href
-    // console.log(route.meta);
-    // if(route.meta){
-    //     useMeta({ title: route.meta.title,description:route.meta.content })
-    // }
+    console.log(route.meta);
+    if(route.meta){
+        useMeta({ title: route.meta.productData.title,description:route.meta.productData.content })
+    }
 });
 
 
