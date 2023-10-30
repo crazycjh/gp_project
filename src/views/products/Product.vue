@@ -49,7 +49,7 @@
                     <router-link :to="`/product/culture/${item.id}`"><img class="photo" :src="item.image" alt=""></router-link>
                     <span class="category">{{ item.category }}</span>
                     <span class="name">{{ item.name }}</span>
-                    <span class="price">NT${{ item.price }}</span>
+                    <span class="price">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</span>
                     <button class="cart_btn" @click="addToCart(item.id)">加入購物車</button>
                 </div>
             </div>

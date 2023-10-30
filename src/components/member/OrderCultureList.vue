@@ -18,7 +18,7 @@
             </div> -->
             <div class="line">
                 <h5>小計:</h5>
-                <h5>NT${{ productTotal }}</h5>
+                <h5>NT${{ productTotal.toLocaleString() }}</h5>
             </div>
             <div class="line">
                 <h5>折扣:</h5>

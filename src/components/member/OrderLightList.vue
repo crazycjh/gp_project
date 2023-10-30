@@ -34,7 +34,7 @@
             </div>
             <div class="line">
                 <h5>總計:</h5>
-                <h5>NT${{ order.total }}</h5>
+                <h5>NT${{ order.total.toLocaleString() }}</h5>
             </div>
             <div class="line">
                 <h5>付款方式:</h5>

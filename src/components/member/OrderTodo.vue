@@ -15,7 +15,7 @@
                         <td><span class="notice">#{{ item.order_id }}</span></td>
                         <td>{{ item.date }}</td>
                         <td>{{ item.status }}</td>
-                        <td>NT${{ item.total }} (共 {{ item.count }} 件商品)</td>
+                        <td>NT${{ item.total.toLocaleString() }} (共 {{ item.count }} 件商品)</td>
                         <td>
                             <button v-show="item.status === '等待付款中'" class="order_button" @click="checkout(item.order_id)">付款</button>
                             <button class="order_button" @click="emit('set-order3-list',item)">查看</button>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="line">
                         <h5>總計</h5>
-                        <h5>NT${{ item.total }} (共 {{ item.count }} 件商品)</h5>
+                        <h5>NT${{ item.total.toLocaleString() }} (共 {{ item.count }} 件商品)</h5>
                     </div>
                     <div class="line">
                         <h5>動作</h5>

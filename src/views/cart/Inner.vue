@@ -24,12 +24,12 @@
                                 <img class="product_img" :src="item.image_url" alt="">
                                 <div class="flex flex-col">
                                     <span>{{ item.product_name }}</span>
-                                    <span class="block md:hidden">{{ item.quantity }} X {{ item.price }}</span>
+                                    <span class="block md:hidden">{{ item.quantity }} X {{ item.price.toLocaleString() }}</span>
                                 </div>
                             </div>
                         </td>
                         <td class="hidden md:table-cell">
-                            <span>NT${{ item.price }}</span>
+                            <span>NT${{ parseInt(item.price).toLocaleString() }}</span>
                         </td>
                         <td>
                             <div class="count_container">
@@ -38,14 +38,14 @@
                                 <span class="count_right" @click="updateCart(item.product_id,item.quantity,'+')">+</span>
                             </div>
                         </td>
-                        <td class="text-right hidden md:table-cell">NT${{ item.price*item.quantity }}</td>
+                        <td class="text-right hidden md:table-cell">NT${{ (item.price*item.quantity).toLocaleString() }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="flex justify-between w-full py-15px">
             <span class="title">購物車總計</span>
-            <span>共 <strong>{{totalQuantity}}</strong> 件 NT$ <strong>{{totalPrice}}</strong></span>
+            <span>共 <strong>{{totalQuantity}}</strong> 件 NT$ <strong>{{totalPrice.toLocaleString()}}</strong></span>
         </div>
         <div class="flex gap-10px">
             <router-link to="/product/all"><button class="btn">←繼續購物</button></router-link>

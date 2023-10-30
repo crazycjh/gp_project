@@ -63,7 +63,7 @@
                     <div class="info flex flex-col">
                         <h4><span class="route">首頁/文創商品/</span>{{ product.category_name }}</h4>
                         <h3 class="product_title">{{ product.title }}</h3>
-                        <span class="prodcut_price">NT${{ product.price }}</span>
+                        <span class="prodcut_price">NT${{ product.price ? parseFloat(product.price).toLocaleString() : '' }}</span>
                         <p class="excerpt">{{ product.excerpt }}</p>
                         <div class="flex gap-10px">
                             <div class="count_container">
@@ -114,7 +114,7 @@
                         <div class="max-md:px-10px">
                             <h3 class="category my-10px" >{{ item.category_name }}</h3>
                             <h5>{{ item.title }}</h5>
-                            <h5 class="prodcut_price mb-10px">$NT{{ item.price }}</h5>
+                            <h5 class="prodcut_price mb-10px">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</h5>
                             <button class="add_btn" @click="addToCart(item.id)">加入購物車</button>
                         </div>
                         </swiper-slide> 
@@ -223,6 +223,7 @@ onMounted(async () => {
         activeType.value = response.data.data.category_slug
         relative.value = response.data.relative
         main_img.value = response.data.data.image
+        console.log(product.value.price.toLocaleString());
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally{

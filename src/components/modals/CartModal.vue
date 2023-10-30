@@ -13,7 +13,7 @@
                     <img class="mini_img" :src="item.image_url" alt="">
                     <div class="flex flex-col justify-center">
                         <h6 class="name">{{ item.product_name }}</h6>
-                        <h6 class="price">{{ item.quantity }} X NT${{ item.price }}</h6>
+                        <h6 class="price">{{ item.quantity }} X NT${{ item.price.toLocaleString() }}</h6>
                         
                     </div>
                     <div class="flex justify-end">
@@ -21,7 +21,7 @@
                     </div>
                </div>
                <div class="block flex justify-center">
-                    <h6>小計:{{ total }}</h6>
+                    <h6>小計: NT${{ total.toLocaleString() }}</h6>
                </div>
             </div>
             <div class="flex flex-col gap-10px">

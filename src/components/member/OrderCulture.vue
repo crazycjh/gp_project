@@ -40,7 +40,7 @@
                     </div>
                     <div class="line">
                         <h5>總計</h5>
-                        <h5>NT${{ item.total }} (共 {{ item.count }} 件商品)</h5>
+                        <h5>NT${{ item.total.toLocaleString() }} (共 {{ item.count }} 件商品)</h5>
                     </div>
                     <div class="line">
                         <h5>動作</h5>

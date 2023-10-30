@@ -125,19 +125,19 @@
                 </div>
                 <div v-for="item in products" :key="item.product_id" class="line">
                     <span>{{ item.product_name }}X {{ item.quantity }}</span>
-                    <span>NT${{ item.price * item.quantity }}</span>
+                    <span>NT${{ (item.price * item.quantity).toLocaleString() }}</span>
                 </div>
                 <div class="line">
                     <span>小計</span>
-                    <span>NT${{ totalPrice }}</span>
+                    <span>NT${{ totalPrice.toLocaleString() }}</span>
                 </div>
                 <div class="line">
                     <span>運送方式</span>
-                    <span>宅配:NT$1000</span>
+                    <span>宅配:NT$1,000</span>
                 </div>
                 <div class="line">
                     <span>總計</span>
-                    <span>NT${{ totalPrice + 1000 }}</span>
+                    <span>NT${{ (totalPrice + 1000).toLocaleString() }}</span>
                 </div>
                 <div class="flex my-10px" >
                         <span class="mr-5px">綠界科技</span><img src="../../assets/products/light/ecpay_icon.png" alt="">
