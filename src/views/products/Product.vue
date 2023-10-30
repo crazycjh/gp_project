@@ -49,7 +49,12 @@
                     <router-link :to="`/product/culture/${item.id}`"><img class="photo" :src="item.image" alt=""></router-link>
                     <span class="category">{{ item.category }}</span>
                     <span class="name">{{ item.name }}</span>
-                    <span class="price">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</span>
+                    <div class="flex gap-10px">
+                        <span v-if="!item.sale" class="price">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</span>
+                        <span v-if="item.sale" class="price sale">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</span>
+                        <span v-if="item.sale" class="price">NT${{item.sale ? parseInt(item.sale).toLocaleString() : ''}}</span>
+                    </div>
+                    
                     <button class="cart_btn" @click="addToCart(item.id)">加入購物車</button>
                 </div>
             </div>
@@ -88,7 +93,7 @@ import 'vue-loading-overlay/dist/css/index.css';
 import { useRoute,useRouter } from "vue-router";
 import { useModal } from 'vue-final-modal'
 import { useMeta } from 'vue-meta'
-useMeta({ title: '文創商品',description:'文創des' })
+// useMeta({ title: '文創商品',description:'文創des' })
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH
@@ -234,6 +239,10 @@ watch(isOpen,(newValue)=>{
 })
 </script>
 <style scoped>
+.sale{
+    color:#888888;
+    text-decoration: line-through;
+}
 .tag{
     cursor: pointer;
 }

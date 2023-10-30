@@ -63,7 +63,11 @@
                     <div class="info flex flex-col">
                         <h4><span class="route">首頁/文創商品/</span>{{ product.category_name }}</h4>
                         <h3 class="product_title">{{ product.title }}</h3>
-                        <span class="prodcut_price">NT${{ product.price ? parseFloat(product.price).toLocaleString() : '' }}</span>
+                        <div class="flex gap-10px">
+                            <span v-if="!product.sale" class="product_price">NT${{ product.price? parseInt(product.price).toLocaleString() : '' }}</span>
+                            <span v-if="product.sale" class="product_price sale">NT${{ product.price? parseInt(product.price).toLocaleString() : '' }}</span>
+                            <span v-if="product.sale" class="product_price">NT${{product.sale ? parseInt(product.sale).toLocaleString() : ''}}</span>
+                        </div>
                         <p class="excerpt">{{ product.excerpt }}</p>
                         <div class="flex gap-10px">
                             <div class="count_container">
@@ -114,7 +118,11 @@
                         <div class="max-md:px-10px">
                             <h3 class="category my-10px" >{{ item.category_name }}</h3>
                             <h5>{{ item.title }}</h5>
-                            <h5 class="prodcut_price mb-10px">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</h5>
+                            <div class="flex gap-10px mb-10px">
+                                <span v-if="!item.sale" class="product_price">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</span>
+                                <span v-if="item.sale" class="product_price sale">NT${{ item.price? parseInt(item.price).toLocaleString() : '' }}</span>
+                                <span v-if="item.sale" class="product_price">NT${{item.sale ? parseInt(item.sale).toLocaleString() : ''}}</span>
+                            </div>
                             <button class="add_btn" @click="addToCart(item.id)">加入購物車</button>
                         </div>
                         </swiper-slide> 
@@ -153,6 +161,9 @@ import 'vue-loading-overlay/dist/css/index.css';
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute()
 const router = useRouter()
+
+
+
 import { useModal } from 'vue-final-modal'
 import { useAuth } from '@/store/auth.js'
 
@@ -175,14 +186,22 @@ import ImageModal from '@/components/modals/ImageModal.vue'
 import LoginModal from '@/components/modals/LoginModal.vue';
 import CartModal from '@/components/modals/CartModal.vue'
 
+
+
+
 //取的id
 const productID = ref();
 const currentUrl = ref('')
 onMounted(() => {
-    const route = useRoute();
     productID.value = route.params.productID;
     currentUrl.value = window.location.href
+    // console.log(route.meta);
+    // if(route.meta){
+    //     useMeta({ title: route.meta.title,description:route.meta.content })
+    // }
 });
+
+
 
 //line.fb分享
 const lineShare = () =>{
@@ -223,7 +242,6 @@ onMounted(async () => {
         activeType.value = response.data.data.category_slug
         relative.value = response.data.relative
         main_img.value = response.data.data.image
-        console.log(product.value.price.toLocaleString());
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally{
@@ -371,6 +389,10 @@ const decrease = () =>{
 }
 </script>
 <style scoped>
+.sale{
+    color:#888888;
+    text-decoration: line-through;
+}
 .count_container{
     position: relative;
 }

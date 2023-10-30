@@ -39,11 +39,35 @@ const routes = [
     path: "/product/:type",
     name: "Product",
     component: () => import("@/views/products/Product.vue")
+
   },
   {
     path: "/product/culture/:productID",
     name: "Culture",
     component: () => import("@/views/products/Culture.vue"),
+    meta: {
+      productData: {
+        title: '',
+      }
+    },
+    async beforeEnter(to, from, next) {
+      try {
+        const productID = to.params.productID;
+
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/culture/${productID}`
+          );
+          to.meta.productData.title = response.data.data;
+        } catch (error) {
+          console.error("API 請求失敗:", error);
+        }
+        next();
+      } catch (error) {
+        console.error("API 请求失败:", error);
+        next("/");
+      }
+    },
   },
   {
     path: "/product/light/:productID",
