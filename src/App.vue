@@ -4,6 +4,9 @@
       <template v-slot:title="{ content }">{{ content ? `${content} | 神界祈福平台` : `神界祈福平台` }}</template>
       <template v-slot:name="{ content }">{{ content ? `${content} | 神界祈福平台` : `神界祈福平台` }}</template>
       <template v-slot:description="{ content }">{{ content ? `${content} | 神界祈福平台` : `神界祈福平台` }}</template>
+      <!-- <template v-slot:og:title="{ content }">{{ content ? `${content} ` : `神界祈福平台` }}</template>
+      <template v-slot:og:description="{ content }">{{ content ? `${content} ` : `神界祈福平台` }}</template>
+      <template v-slot:og:image="{ content }">{{ content ? `${content}` : `神界祈福平台` }}</template> -->
     </metainfo>
      <Header />
        <router-view  :key="$route.path"/>
@@ -28,11 +31,15 @@ import { useGods } from '@/store/gods.js'
 const godsStore = useGods(); 
 
 useMeta({
+    // 'og:title': '',
+    // 'og:description':'',
+    // 'og:image':'',
     title: '',
     htmlAttrs: { lang: 'zh-tw' },
     name:'',
     description:'',
-  })
+  },
+)
 </script>
 
 

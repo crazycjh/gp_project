@@ -1,22 +1,22 @@
 <template>
     <loading :active="isLoading" :is-full-page="fullPage" ></loading>
-   <div v-if="temple.live_iframe" class="banner" :style="{
+   <div v-if="temple.live_iframe" class="banner flex-col" :style="{
     'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_bannner_bg55.jpg)`,
     'background-position': 'center center',
-    }">
-        <div class="temple-banner container relative">
-            <div v-if="temple.live_iframe">
-                <div class="flex flex-col items-center mb-5">
-                    <img class="wind" src="../../assets/widget/wind.svg" alt="">
-                    <h3>{{temple.name}}</h3>
-                </div>
+    }"> 
+        <div v-if="temple.live_iframe">
+            <div class="flex flex-col items-center relative">
+                <img class="custom_banner" :src="`${backend}wp-content/uploads/2023/10/temple_post_top_bg.svg`" alt="">
+                <h3 class="temple_name">{{temple.name}}</h3>
             </div>
+        </div>
+        <div class="temple-banner container relative">
             <div v-if="temple.live_iframe" class="video-wrapper z-10 " v-html="temple.live_iframe">
             </div>
         </div>
     </div>
     <div v-if="!temple.live_iframe" class="banner" :style="{
-    'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/09/temple_post_banner32-01.jpg)`,
+    'background-image': temple.cover ? `url(${temple.cover})` : `url(${backend}wp-content/uploads/2023/10/temple_post_banner_l01.jpg)`,
     'background-position': 'center center',
     }">
         <div class="temple-banner container relative">
@@ -26,7 +26,7 @@
                     <h3>廟宇直播</h3>
                 </div>
             </div>
-            <div v-if="temple.live_iframe" class="video-wrapper z-10 " v-html="temple.live_iframe">
+            <div v-if="temple.live_iframe" class="video-wrapper z-10" v-html="temple.live_iframe">
             </div>
         </div>
     </div>
@@ -212,6 +212,21 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.custom_banner{
+    width:1366px;
+    height:247px;
+}
+.temple_name{
+    position:absolute;
+    bottom:20px;
+    color:#ffffff;
+}
+@media(width < 1366px){
+    .custom_banner{
+        width:100%;
+        height:auto;
+    }
+}
 .tree_right{
     position:absolute;
     top:400px;
@@ -275,7 +290,8 @@ onMounted(async () => {
     border-bottom: 1px solid #EEEEEE;
 }
 .banner {
-    min-height: 500px;
+    width:100%;
+    min-height: 600px;
     display: flex;
     margin: 0;
     padding: 0;
@@ -298,10 +314,10 @@ h2 {
 }
 
 @media screen and (max-width: 768px) {
-
-    /* .banner {
-   background-image: url('https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/temple_post_banner1.jpg');
-} */
+    .banner {
+        min-height:260px;
+        background-image: url('https://demo2.gcreate.com.tw/gc_godpray/wp-content/uploads/2023/09/temple_post_banner1.jpg');
+    }
     .temple-banner.container {
         padding: 30px;
     }
@@ -453,11 +469,11 @@ h3 {
 }
 
 .temple-banner.container {
-    padding: 20px 0 80px 0;
+    padding: 0 0 80px 0;
 }
 
 @media(max-width:768px) {
     .temple-banner.container {
-        padding: 20px 30px 70px 30px;
+        padding:0 30px 70px 30px;
     }
 }</style>

@@ -47,28 +47,28 @@ const routes = [
     component: () => import("@/views/products/Culture.vue"),
     meta: {
       productData: {
-       
+
       }
     },
-    async beforeEnter(to, from, next) {
-      try {
-        const productID = to.params.productID;
-        try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/culture/${productID}`
-          );
-          to.meta.productData.title = response.data.data.title;
-          to.meta.productData.content = response.data.data.content
-        } catch (error) {
-          console.error("API 請求失敗:", error);
-        } finally{
-          next();
-        }
-      } catch (error) {
-        console.error("API 请求失败:", error);
-        next("/");
-      }
-    },
+    // async beforeEnter(to, from, next) {
+    //   try {
+    //     const productID = to.params.productID;
+    //     try {
+    //       const response = await axios.get(
+    //         `${import.meta.env.VITE_BACKEND_PATH}/api/gc/culture/${productID}`
+    //       );
+    //       to.meta.productData.title = response.data.data.title;
+    //       to.meta.productData.content = response.data.data.content
+    //     } catch (error) {
+    //       console.error("API 請求失敗:", error);
+    //     } finally {
+    //       next();
+    //     }
+    //   } catch (error) {
+    //     console.error("API 請求失敗:", error);
+    //     next("/");
+    //   }
+    // },
   },
   {
     path: "/product/light/:productID",
@@ -188,6 +188,25 @@ router.beforeEach((to, from, next) => {
     next();
   }
 
+});
+
+router.beforeEach(async (to, from, next) => {
+  if (to.name === 'Culture') {
+    const productID = to.params.productID;
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_PATH}/api/gc/culture/${productID}`
+      );
+      to.meta.productData.title = response.data.data.title
+      to.meta.productData.content = response.data.data.content
+      to.meta.productData.image = response.data.data.image
+    } catch (error) {
+      console.error("API 請求失敗:", error);
+    } finally {
+      next();
+    }
+  }
+  next();
 });
 
 export default router

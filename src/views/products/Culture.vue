@@ -197,7 +197,13 @@ onMounted(() => {
     currentUrl.value = window.location.href
     console.log(route.meta);
     if(route.meta){
-        useMeta({ title: route.meta.productData.title,description:route.meta.productData.content })
+        useMeta({ 
+            title: route.meta.productData.title,
+            description:route.meta.productData.content,
+            // 'og:title':route.meta.productData.title,
+            // 'og:description':route.meta.productData.content,
+            // 'og:image':route.meta.productData.image,
+        })
     }
 });
 

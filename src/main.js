@@ -11,7 +11,26 @@ import 'vue-final-modal/style.css'
 import { createMetaManager } from 'vue-meta'
 
 const app = createApp(App)
-const metaManager = createMetaManager()
+const metaManager = createMetaManager(
+    // !!import.meta.env.SSR,
+    // {
+    //     'og:title': {
+    //         tag: 'meta',
+    //         keyAttribute: 'property',
+    //         valueAttribute: 'content'
+    //     },
+    //     'og:description': {
+    //         tag: 'meta',
+    //         keyAttribute: 'property',
+    //         valueAttribute: 'content'
+    //     },
+    //     'og:image': {
+    //         tag: 'meta',
+    //         keyAttribute: 'property',
+    //         valueAttribute: 'content'
+    //     },
+    // }
+)
 app.use(metaManager)
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
