@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="mt-50px py-1px">
+        <div v-if="temple.light_content && light.length !== 0" class="mt-50px py-1px">
             <h4 class="border_title custom_border">廟宇服務</h4>
         </div>
         <div v-if="temple.light_content && light.length !== 0" class="py-20px service_border">
