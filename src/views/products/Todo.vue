@@ -506,7 +506,7 @@ const autoInfo = () =>{
    top: 7%;
    left: 50%;
    transform: translateX(-50%);
-   z-index:100;
+   z-index:10;
 }
 @media (width < 1024px){
     .temple_top{
