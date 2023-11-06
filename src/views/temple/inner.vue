@@ -230,9 +230,9 @@ import { useModal } from "vue-final-modal";
 
 //自製元件
 const backend = import.meta.env.VITE_BACKEND_PATH;
-import Breadcrumb from "../../components/widget/Breadcrumb.vue";
-import Title from "../../components/widget/Title.vue";
-import TopCover from "../../components/widget/TopCover.vue";
+import Breadcrumb from "@/components/widget/Breadcrumb.vue";
+import Title from "@/components/widget/Title.vue";
+import TopCover from "@/components/widget/TopCover.vue";
 import { useAuth } from "@/store/auth.js";
 import LoginModal from "@/components/modals/LoginModal.vue";
 
@@ -285,7 +285,7 @@ onMounted(async () => {
     isLoading.value = true;
     try {
         const response = await axios.get(
-            `${backend}/api/gc/temple/${templeID.value}`
+            `${backend}api/gc/temple/${templeID.value}`
         );
         temple.value = response.data.data;
         light.value = response.data.light;

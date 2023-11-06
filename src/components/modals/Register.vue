@@ -6,22 +6,50 @@
                 <h5 class="error">{{ errorMessage }}</h5>
             </div>
             <div>
-                <h5 class="mb-5px sub_title">電子郵件<span class="required">*</span></h5>
-                <input v-model="email" class="member_input" type="text" placeholder="請輸入電子郵件">
+                <h5 class="mb-5px sub_title">
+                    電子郵件<span class="required">*</span>
+                </h5>
+                <input
+                    v-model="email"
+                    class="member_input"
+                    type="text"
+                    placeholder="請輸入電子郵件"
+                />
             </div>
             <div>
-                <h5 class="mb-5px sub_title">密碼<span class="required">*</span></h5>
+                <h5 class="mb-5px sub_title">
+                    密碼<span class="required">*</span>
+                </h5>
                 <div class="relative">
-                    <input v-model="password" class="member_input" :type="isPswViewed ? 'text' : 'password'"
-                        placeholder="請輸入密碼">
-                    <img v-show="!isPswViewed" class="eye" src="../../assets/modal/eyes_icon_2.svg" alt=""
-                        @click="isPswViewed = !isPswViewed">
-                    <img v-show="isPswViewed" class="eye" src="../../assets/modal/eyes_icon.svg" alt=""
-                        @click="isPswViewed = !isPswViewed">
+                    <input
+                        v-model="password"
+                        class="member_input"
+                        :type="isPswViewed ? 'text' : 'password'"
+                        placeholder="請輸入密碼"
+                    />
+                    <img
+                        v-show="!isPswViewed"
+                        class="eye"
+                        src="../../assets/modal/eyes_icon_2.svg"
+                        alt=""
+                        @click="isPswViewed = !isPswViewed"
+                    />
+                    <img
+                        v-show="isPswViewed"
+                        class="eye"
+                        src="../../assets/modal/eyes_icon.svg"
+                        alt=""
+                        @click="isPswViewed = !isPswViewed"
+                    />
                 </div>
             </div>
         </div>
-        <textarea class="w-full mb-10px custom_textarea" cols="30" rows="5" readonly>
+        <textarea
+            class="w-full mb-10px custom_textarea"
+            cols="30"
+            rows="5"
+            readonly
+        >
 會員服務條款
 第 1 條 定義 服務條款 
 一、認知及同意條款
@@ -100,21 +128,33 @@
 本網站隱私權保護政策將因應需求隨時進行修正，修正後的條款將刊登於網站上。
         </textarea>
         <div class="flex items-start mb-20px">
-            <input v-model="accept" type="checkbox" class="mt-5px" @keyup.enter="sendRegister">
+            <input
+                v-model="accept"
+                type="checkbox"
+                class="mt-5px"
+                @keyup.enter="sendRegister"
+            />
             <span class="required">*</span>
-            <p>勾選即表示您已閱讀並同意我們的 <router-link to="/privacy" @click="emit('close-modal')">隱私權政策</router-link>及 <router-link to="/terms" @click="emit('close-modal')">會員服務條款</router-link></p>
+            <p>
+                勾選即表示您已閱讀並同意我們的
+                <router-link to="/privacy" @click="emit('close-modal')"
+                    >隱私權政策</router-link
+                >及
+                <router-link to="/terms" @click="emit('close-modal')"
+                    >會員服務條款</router-link
+                >
+            </p>
         </div>
         <button class="register_btn" @click="sendRegister">註冊</button>
     </div>
 </template>
 <script setup>
 //官方套件
-import { ref } from 'vue';
+import { ref } from "vue";
 import axios from "axios";
 
 //自製元件
-import {useAuth} from '@/store/auth.js'
-
+import { useAuth } from "@/store/auth.js";
 
 //格式驗證
 const validateEmail = (email) => {
@@ -127,69 +167,69 @@ const validatePassword = (password) => {
 };
 
 //執行註冊
-const email = ref('');
-const password = ref('');
-const accept = ref(false)
-const errorMessage = ref('');
-const emit = defineEmits(['redirect-register-success','close-modal']);
+const email = ref("");
+const password = ref("");
+const accept = ref(false);
+const errorMessage = ref("");
+const emit = defineEmits(["redirect-register-success", "close-modal"]);
 const sendRegister = async () => {
     if (!validateEmail(email.value)) {
-        errorMessage.value = '請輸入有效電子郵件';
+        errorMessage.value = "請輸入有效電子郵件";
         return;
     }
 
     if (!validatePassword(password.value)) {
-        errorMessage.value = '密碼至長度至少八位';
+        errorMessage.value = "密碼至長度至少八位";
         return;
     }
 
-    if(accept.value === false){
-        errorMessage.value = '請先勾選同意條款'
+    if (accept.value === false) {
+        errorMessage.value = "請先勾選同意條款";
         return;
     }
 
     try {
         const requestData = {
             email: email.value,
-            password: password.value
+            password: password.value,
         };
 
         const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/register`,
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/register`,
             requestData
         );
-        if(response.data.success === false){
-            errorMessage.value = response.data.data
-        }else{
-            const jwt = response.data.data.jwt
-            const auth = useAuth()
-            auth.setJWT(jwt)
-            auth.setMember(response.data.data)
-            emit('redirect-register-success')
+        if (response.data.success === false) {
+            errorMessage.value = response.data.data;
+        } else {
+            const jwt = response.data.data.jwt;
+            const auth = useAuth();
+            auth.setJWT(jwt);
+            auth.setMember(response.data.data);
+            emit("redirect-register-success");
         }
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
-}
+};
 
-const isPswViewed = ref(false)
+const isPswViewed = ref(false);
 </script>
 <style scoped>
-.custom_textarea{
+.custom_textarea {
     font-size: 14px;
     background-color: #ffffff;
 }
-a{
-    color:#920000;
+a {
+    color: #920000;
 }
-a:hover{
-    color:#CEB96E;
+a:hover {
+    color: #ceb96e;
 }
-.error{
-    color:red;
+.error {
+    color: red;
 }
-.required{
-    color:red;
+.required {
+    color: red;
     margin-left: 3px;
 }
 .sub_title {
@@ -208,16 +248,16 @@ a:hover{
     width: 100%;
     height: 40px;
     color: #ffffff;
-    background-color: #CEB96E;
+    background-color: #ceb96e;
     border: none;
     outline: none;
     border-radius: 0;
 }
 
 .register_btn:hover {
-    color: #CEB96E;
+    color: #ceb96e;
     background-color: #ffffff;
-    border: 1px solid #CEB96E;
+    border: 1px solid #ceb96e;
 }
 
 .close {
@@ -226,7 +266,7 @@ a:hover{
 }
 
 .input_section {
-    border-bottom: 1px solid #D9D9D9;
+    border-bottom: 1px solid #d9d9d9;
     padding-bottom: 20px;
 }
 
@@ -234,7 +274,7 @@ a:hover{
     padding: 0 10px;
     height: 30px;
     width: 100%;
-    background-color: #EEEEEE;
+    background-color: #eeeeee;
 }
 
 .title {
@@ -245,6 +285,7 @@ a:hover{
     letter-spacing: 0.2em;
     text-align: center;
     color: #000000;
-    border-bottom: 1px solid #D9D9D9;
+    border-bottom: 1px solid #d9d9d9;
     padding-bottom: 10px;
-}</style>
+}
+</style>

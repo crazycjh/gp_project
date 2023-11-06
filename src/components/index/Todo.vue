@@ -8,7 +8,7 @@
                 :slides-per-view="1"
                 :style="{
                     '--swiper-pagination-color': '#CEB96E',
-                    '--swiper-pagination-bottom': '-8px',
+                    '--swiper-pagination-bottom': '0',
                     '--swiper-pagination-bullet-inactive-color': '#920000',
                 }"
                 :breakpoints="{
@@ -74,15 +74,15 @@ const sliders = ref([]);
 const modules = [Autoplay, Pagination, Navigation];
 
 //自製元件
-import InnerLinkBtn from "../widget/InnerLinkBtn.vue";
-import Title from "../widget/Title.vue";
+import InnerLinkBtn from "@/components/widget/InnerLinkBtn.vue";
+import Title from "@/components/widget/Title.vue";
 const backend = import.meta.env.VITE_BACKEND_PATH;
 
 //輪播取得資料
 onMounted(async () => {
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/todo/index`
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/todo/index`
         );
         sliders.value = response.data.todo;
     } catch (error) {
@@ -146,11 +146,16 @@ onMounted(async () => {
     }
 }
 .custom_swiper {
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     min-height: 430px;
 }
-
+@media (width < 1024px) {
+    .custom_swiper {
+        min-height: 400px;
+    }
+}
 .todo {
     width: 100%;
     min-height: 338px;
@@ -158,9 +163,6 @@ onMounted(async () => {
     object-fit: cover;
 }
 @media (width < 1024px) {
-    .custom_swiper {
-        min-height: auto;
-    }
     .todo {
         flex-direction: column;
         margin-bottom: 0px;
