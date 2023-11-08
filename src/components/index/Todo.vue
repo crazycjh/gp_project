@@ -84,6 +84,7 @@ onMounted(async () => {
             `${import.meta.env.VITE_BACKEND_PATH}api/gc/todo/index`
         );
         sliders.value = response.data.todo;
+        console.log(sliders.value);
     } catch (error) {
         console.error("API 請求失敗:", error);
     }

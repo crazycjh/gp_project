@@ -173,7 +173,7 @@
             </div>
         </div>
     </div>
-    <div v-if="temple.todo_title && temple.todo_content && temple.todo_image">
+    <!-- <div v-if="temple.todo_title && temple.todo_content && temple.todo_image">
         <div class="cover"></div>
         <div class="relative todo_section">
             <div class="todo max-w-1200px mx-auto px-10px reative z-10">
@@ -217,7 +217,7 @@
                 alt=""
             />
         </div>
-    </div>
+    </div> -->
 </template>
 <script setup>
 //官方套件
@@ -270,13 +270,13 @@ const shopping = (id) => {
     }
 };
 
-const goTodo = (id) => {
-    if (auth.isLogin) {
-        router.push(`/product/todo/${id}`);
-    } else {
-        open();
-    }
-};
+// const goTodo = (id) => {
+//     if (auth.isLogin) {
+//         router.push(`/product/todo/${id}`);
+//     } else {
+//         open();
+//     }
+// };
 
 //取個別資料
 const isLoading = ref(false);
@@ -290,7 +290,7 @@ onMounted(async () => {
         temple.value = response.data.data;
         light.value = response.data.light;
         shuwen.value = response.data.shuwen;
-        todo.value = response.data.todo;
+        // todo.value = response.data.todo;
         main_god.value = temple.value.main_god.split(",").join("、");
     } catch (error) {
         console.error("API 請求失敗:", error);
