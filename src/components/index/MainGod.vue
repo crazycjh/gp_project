@@ -2,7 +2,7 @@
     <div class="main pb-80px relative">
         <Title title="主祀神" />
         <div class="flex gap-10px flex-wrap justify-center mx-auto md:px-80px lg:px-160px xl:px-0px max-w-1250px relative z-10">
-            <div v-for="(god, index) in godsStore.godArray" :key="index" class="relative god_container" @mouseenter="handleImageHover(index)" @mouseleave="handleImageHover(99)" @click="goSearch(index)">
+            <div v-for="(god, index) in godsStore.godArray" :key="index" :name="index+1" class="relative god_container" @mouseenter="handleImageHover(index)" @mouseleave="handleImageHover(99)" @click="goSearch(index)">
                 <h5 class="god_name cursor-pointer" :style="{ color: isHovered(index) ? 'white' : 'black' }">{{ god }}</h5>
                 <div class="god_image cursor-pointer" 
                      :style="{
