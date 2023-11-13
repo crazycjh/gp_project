@@ -471,9 +471,9 @@ const productID = ref("");
 const price = ref("");
 const name = ref("");
 onMounted(() => {
+    console.log(123);
     const route = useRoute();
     productID.value = Number(route.params.productID);
-    console.log(productID.value);
 });
 onMounted(async () => {
     try {

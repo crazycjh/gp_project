@@ -1,7 +1,7 @@
 <template>
     <div class="mx-auto max-w-1200px w-full relative px-10px mb-50px pt-30px">
         <div class="todo">
-            <div class="flex justify-center w-full max-md:mb-10px mb-20px">
+            <div class="flex justify-center w-full">
                 <Title class="btn" title="代辦項目" />
             </div>
             <swiper
@@ -81,9 +81,9 @@ const backend = import.meta.env.VITE_BACKEND_PATH;
 onMounted(async () => {
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}api/gc/todo/index`
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/todo/list`
         );
-        sliders.value = response.data.todo;
+        sliders.value = response.data.data;
         console.log(sliders.value);
     } catch (error) {
         console.error("API 請求失敗:", error);
@@ -122,5 +122,12 @@ onMounted(async () => {
 }
 .btn {
     margin-bottom: 0;
+}
+.title {
+    max-width: 380px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 20px;
 }
 </style>

@@ -11,17 +11,19 @@
         >
             <div
                 v-for="item in posts"
-                :key="item.term_id"
+                :key="item.post_id"
                 class="w-full flex flex-col w-full lg:w-48% max-lg:px-10px mt-40px"
             >
                 <router-link
                     class="flex flex-col w-full"
-                    :to="`/temple/${item.term_id}`"
+                    :to="`/todo/${item.post_id}`"
                 >
-                    <img class="photo" :src="item.image" alt="" />
-                    <p class="title">{{ item.title }}</p>
-                    <p class="mb-10px">{{ item.start }}~{{ item.end }}</p>
-                    <p class="mb-10px">{{ item.content }}</p>
+                    <img class="photo mb-10px" :src="item.image" alt="" />
+                    <p class="title mb-10px">{{ item.title }}</p>
+                    <p class="mb-10px date">{{ item.start }}~{{ item.end }}</p>
+                    <p class="mb-10px ellipsis">
+                        {{ truncateText(item.content) }}
+                    </p>
                     <p class="more">了解更多...</p>
                 </router-link>
             </div>
@@ -59,6 +61,8 @@ onMounted(async () => {
 });
 
 //根據種類取資料
+const currentPage = ref(1);
+const itemsPerPage = ref(8);
 const isLoading = ref(false);
 const fullPage = ref(true);
 const fetchData = async (type) => {
@@ -73,6 +77,7 @@ const fetchData = async (type) => {
         });
         posts.value = response.data.data;
         total.value = response.data.count;
+        console.log(posts.value);
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally {
@@ -80,9 +85,13 @@ const fetchData = async (type) => {
     }
 };
 
+const truncateText = (text) => {
+    const maxLength = 33;
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+};
+
 //分頁系統
-const currentPage = ref(1);
-const itemsPerPage = ref(12);
+
 const changePage = (page) => {
     currentPage.value = page;
 };
@@ -95,6 +104,14 @@ watch(currentPage, (newValue) => newValue && fetchData());
 </script>
 
 <style scoped>
+/* .ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+} */
+.date {
+    color: #ceb96e;
+}
 .active {
     background-color: #ceb96e !important;
     color: #ffffff !important;
@@ -104,7 +121,7 @@ watch(currentPage, (newValue) => newValue && fetchData());
     font-family: Noto Serif TC;
     font-size: 24px;
     font-weight: 700;
-    line-height: 52px;
+    line-height: 1.5;
     letter-spacing: 0.2em;
     text-align: left;
     color: #543118;

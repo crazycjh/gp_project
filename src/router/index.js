@@ -130,7 +130,12 @@ const routes = [
   {
     path: "/todo",
     name: "Todo",
-    component: () => import("@/views/Todo.vue")
+    component: () => import("@/views/todo/Todo.vue")
+  },
+  {
+    path: "/todo/:postID",
+    name: "TodoInner2",
+    component: () => import("@/views/todo/Inner.vue")
   },
   {
     path: "/terms",

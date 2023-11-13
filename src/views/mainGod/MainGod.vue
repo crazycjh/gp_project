@@ -56,7 +56,7 @@
                 >
                     <img class="photo" :src="item.image_url" alt="" />
                     <h4>{{ item.name }}</h4>
-                    <p>主神：{{ item.main_god }}</p>
+                    <p class="custom_margin">主神：{{ item.main_god }}</p>
                     <p>地址：{{ item.location }}{{ item.address }}</p>
                     <p class="more">了解更多</p>
                 </router-link>
@@ -179,6 +179,9 @@ watch(activeGod, (newValue) => {
 </script>
 
 <style scoped>
+.custom_margin {
+    margin-bottom: -5px;
+}
 .noData {
     font-family: Noto Serif TC;
     font-size: 24px;

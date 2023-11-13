@@ -45,7 +45,6 @@ onMounted(async () => {
         //修復swiper 輪播loop問題
         if (slidesPerView.value * 2 > sliders.value.length)
             sliders.value = sliders.value.concat(sliders.value);
-        console.log(sliders);
     } catch (error) {
         console.error("API 請求失敗:", error);
     }
