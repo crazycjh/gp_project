@@ -12,7 +12,7 @@
                     <InnerLinkBtn
                         class="mb-20px"
                         text="更多商品"
-                        link="/product"
+                        link="/product/all"
                     />
                 </div>
                 <div>

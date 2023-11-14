@@ -1,26 +1,26 @@
 <template>
     <div class="flex flex-col items-center mb-5">
-        <img class="wind" src="../../assets/widget/wind.svg" alt="">
-        <h3 :class="{'custom': props.white}">{{ props.title }}</h3>
+        <img class="wind" src="../../assets/widget/wind.svg" alt="" />
+        <h3 :class="{ custom: props.white }">{{ props.title }}</h3>
     </div>
 </template>
-<script setup >
+<script setup>
 const props = defineProps({
-  title: String,
-  white:Boolean 
+    title: String,
+    white: Boolean | String,
 });
 </script>
 <style scoped>
-.wind{
+.wind {
     margin-top: 80px;
     margin-bottom: 5px;
 }
-@media(max-width:768px) {
-    .wind{
+@media (max-width: 768px) {
+    .wind {
         margin-top: 50px;
     }
 }
-h3{ 
+h3 {
     color: #543118;
     font-family: Noto Serif TC;
     font-size: 24px;
@@ -29,7 +29,7 @@ h3{
     line-height: normal;
     letter-spacing: 4.8px;
 }
-.custom{
-    color:#ffffff;
+.custom {
+    color: #ffffff;
 }
 </style>

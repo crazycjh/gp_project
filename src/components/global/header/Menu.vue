@@ -59,7 +59,7 @@
                 </li>
                 <li class="nav-item"></li>
             </ul>
-            <ul class="flex gap-5 items-center">
+            <ul class="flex custom_gap items-center">
                 <li class="nav-item">
                     <Member />
                 </li>
@@ -155,6 +155,24 @@ watch(isOpen, (newValue) => {
 });
 </script>
 <style scoped>
+.custom_gap {
+    gap: 1.25rem;
+}
+@media (width < 512px) {
+    .custom_gap {
+        gap: 1rem;
+    }
+}
+@media (width < 400px) {
+    .custom_gap {
+        gap: 0.25rem;
+    }
+}
+@media (width < 350px) {
+    .custom_gap {
+        gap: 0rem;
+    }
+}
 .slide-fade-enter-active {
     transition: all 0.5s ease-out;
 }

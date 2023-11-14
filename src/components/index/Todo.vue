@@ -34,9 +34,9 @@
                 <swiper-slide
                     class="w-full custom_slide"
                     v-for="(item, index) in sliders"
-                    :key="item.id"
+                    :key="item.post_id"
                 >
-                    <router-link :to="`/temple/${item.id}`">
+                    <router-link :to="`/todo/${item.post_id}`">
                         <div
                             class="swiper_img w-full bg-cover bg-center"
                             :style="{
