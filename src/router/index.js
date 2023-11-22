@@ -115,12 +115,12 @@ const routes = [
   {
     path: "/temple/:templeID",
     name: "Temple",
-    component: () => import("@/views/temple/inner.vue")
+    component: () => import("@/views/temple/Inner.vue")
   },
   {
     path: "/latest/inner/:latestID",
     name: "LastestInner",
-    component: () => import("@/views/latest/inner.vue"),
+    component: () => import("@/views/latest/Inner.vue"),
   },
   {
     path: "/search/:content",

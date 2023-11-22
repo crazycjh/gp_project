@@ -173,51 +173,63 @@
             </div>
         </div>
     </div>
-    <!-- <div v-if="temple.todo_title && temple.todo_content && temple.todo_image">
-        <div class="cover"></div>
-        <div class="relative todo_section">
-            <div class="todo max-w-1200px mx-auto px-10px reative z-10">
-                <h4 class="todo_title">代辦項目</h4>
-                <div class="todo_container">
-                    <img class="todo_img" :src="temple.todo_image" />
-                    <div class="mb-30px">
-                        <h5 class="event_title">{{ temple.todo_title }}</h5>
-                        <p>{{ temple.todo_content }}</p>
-                    </div>
-                    <div class="flex max-md:flex-col flex-wrap">
-                        <div
-                            v-for="item in todo"
-                            :key="item.id"
-                            class="flex w-100% md:w-50% mb-30px"
-                        >
-                            <img
-                                class="todo_product"
-                                :src="item.image_url"
-                                @click="goTodo(item.id)"
-                            />
-                            <div class="flex flex-col justify-center">
-                                <h5 class="service_active">{{ item.name }}</h5>
-                                <span class="service_price"
-                                    >NT.{{ item.price }}</span
-                                >
-                                <span>{{ item.content }}</span>
+
+    <div v-for="(todo, index) in todos" :key="todo.order_id">
+        <div v-if="todo.title && todo.image && todo.content">
+            <div v-show="index === 0" class="cover"></div>
+            <div class="relative todo_section">
+                <div
+                    class="todo max-w-1200px mx-auto px-10px reative z-10"
+                    :class="{ reset: index !== 0 }"
+                >
+                    <h4 v-show="index === 0" class="todo_title">代辦項目</h4>
+                    <div class="todo_container">
+                        <img class="todo_img" :src="todo.image" />
+                        <div class="mb-30px">
+                            <h5 class="event_title">{{ todo.title }}</h5>
+                            <p>{{ todo.content }}</p>
+                        </div>
+                        <div class="flex max-md:flex-col flex-wrap">
+                            <div
+                                v-for="item in todo.products"
+                                :key="item.id"
+                                class="flex w-100% md:w-50% mb-30px"
+                            >
+                                <img
+                                    class="todo_product"
+                                    :src="item.thumbnail"
+                                    @click="
+                                        goTodo(item.id, todo.start, todo.end)
+                                    "
+                                />
+                                <div class="flex flex-col justify-center">
+                                    <h5 class="service_active">
+                                        {{ item.name }}
+                                    </h5>
+                                    <span class="service_price"
+                                        >NT.{{ item.price }}</span
+                                    >
+                                    <span>{{ item.content }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <img
+                    v-show="index === 0"
+                    class="tree_right hidden xl:block"
+                    src="../../assets/index/tree_right.svg"
+                    alt=""
+                />
+                <img
+                    v-show="index === 0"
+                    class="tree_left hidden xl:block"
+                    src="../../assets/index/tree_left.svg"
+                    alt=""
+                />
             </div>
-            <img
-                class="tree_right hidden xl:block"
-                src="../../assets/index/tree_right.svg"
-                alt=""
-            />
-            <img
-                class="tree_left hidden xl:block"
-                src="../../assets/index/tree_left.svg"
-                alt=""
-            />
         </div>
-    </div> -->
+    </div>
 </template>
 <script setup>
 //官方套件
@@ -235,6 +247,7 @@ import Title from "@/components/widget/Title.vue";
 import TopCover from "@/components/widget/TopCover.vue";
 import { useAuth } from "@/store/auth.js";
 import LoginModal from "@/components/modals/LoginModal.vue";
+import AlertModal from "@/components/modals/AlertModal.vue";
 
 //初始化資料
 const templeID = ref();
@@ -242,7 +255,7 @@ const main_god = ref();
 const temple = ref([]);
 const light = ref([]);
 const shuwen = ref([]);
-const todo = ref([]);
+const todos = ref({});
 
 //取id
 onMounted(() => {
@@ -270,13 +283,38 @@ const shopping = (id) => {
     }
 };
 
-// const goTodo = (id) => {
-//     if (auth.isLogin) {
-//         router.push(`/product/todo/${id}`);
-//     } else {
-//         open();
-//     }
-// };
+const alert = useModal({
+    component: AlertModal,
+    attrs: {
+        isAlert: true,
+        content: "非無活動期間無法購買",
+        onConfirm() {
+            alert.close();
+        },
+    },
+});
+
+//判斷是否為活動期間內
+const isWithinTimeRange = (startTime, endTime) => {
+    const currentTime = new Date().getTime();
+    return currentTime > startTime && currentTime < endTime;
+};
+
+//判斷活動期間內及登入與否繼續後續行為
+const goTodo = (id, start, end) => {
+    start = new Date(start).getTime();
+    end = new Date(end).getTime();
+    if (!isWithinTimeRange(start, end)) {
+        alert.open();
+        return;
+    }
+
+    if (auth.isLogin) {
+        router.push(`/product/todo/${id}`);
+    } else {
+        open();
+    }
+};
 
 //取個別資料
 const isLoading = ref(false);
@@ -290,7 +328,8 @@ onMounted(async () => {
         temple.value = response.data.data;
         light.value = response.data.light;
         shuwen.value = response.data.shuwen;
-        // todo.value = response.data.todo;
+        todos.value = response.data.todos;
+        console.log(todos.value);
         main_god.value = temple.value.main_god.split(",").join("、");
     } catch (error) {
         console.error("API 請求失敗:", error);
@@ -407,6 +446,9 @@ onMounted(async () => {
     position: relative;
     /* top:-360px; */
     margin-top: -360px;
+}
+.reset {
+    margin-top: 0px;
 }
 .todo_title {
     font-weight: 700;
