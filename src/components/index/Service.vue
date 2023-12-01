@@ -35,6 +35,11 @@ const backend = import.meta.env.VITE_BACKEND_PATH
       width: 180px;
    }
 }
+@media (max-width: 400px) {
+   img{
+      width: 130px;
+   }
+}
 
 h6{
    text-align: center;
