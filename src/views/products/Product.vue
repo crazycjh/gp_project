@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="flex">
-            <div class="left_tabs hidden xl:block">
+            <div class="mr-30px left_tabs hidden xl:block">
                 <h4 class="type">商品分類</h4>
                 <div class="mt-40px">
                     <div class="tab">
@@ -103,9 +103,9 @@
                     </div>
                 </div>
             </div>
-            <div class="ml-30px mt-20px flex flex-wrap gap-10px w-full">
+            <div class=" mt-20px flex flex-wrap gap-10px w-full">
                 <div
-                    class="flex flex-col gap-5px mb-40px product"
+                    class=" flex flex-col gap-5px mb-40px product"
                     v-for="item in products"
                     :key="item.id"
                 >
@@ -480,7 +480,7 @@ watch(isOpen, (newValue) => {
 }
 @media (width < 1024px) {
     .product {
-        width: 30%;
+        flex: 0 0 calc(33% - 5px);
     }
     .photo {
         width: 100%;
@@ -489,7 +489,8 @@ watch(isOpen, (newValue) => {
 }
 @media (width < 768px) {
     .product {
-        width: 46%;
+        /* flex:0 0 calc(50% - 22.5px); */
+        flex: 0 0 calc(50% - 5px); 
     }
 }
 
