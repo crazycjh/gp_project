@@ -6,7 +6,9 @@
             <div class="todo max-w-1200px mx-auto px-10px reative z-10">
                 <h4 class="todo_title">代辦項目</h4>
                 <div class="todo_container">
-                    <img class="todo_img" :src="todo.data.thumbnail" />
+                    <div>
+                        <img class="todo_img" :src="todo.data.thumbnail" />
+                    </div>
                     <div class="mb-30px">
                         <h5 class="event_title">{{ todo.data.title }}</h5>
                         <p>{{ todo.data.content }}</p>
@@ -29,7 +31,7 @@
                                 <span class="service_price"
                                     >NT.{{ item.price }}</span
                                 >
-                                <span class="mr-50px">{{
+                                <span class="mr-10px lg:mr-50px ssm:mr-20px">{{
                                     truncateText(item.excerpt)
                                 }}</span>
                             </div>
@@ -158,7 +160,7 @@ const goTodo = (id) => {
     width: 100%;
 }
 
-@media (width < 1280px) {
+@media (max-width: 1280px) {
     .top_bottom {
         bottom: -200px;
     }
@@ -173,34 +175,35 @@ const goTodo = (id) => {
     bottom: 50px;
     color: #ffffff;
 }
-@media (width < 1280px) {
+@media (max-width: 1280px) {
     .temple_name {
         bottom: 40px;
     }
 }
-@media (width < 1024px) {
+
+@media (max-width: 1024px) {
     .temple_name {
         bottom: 30px;
     }
 }
-@media (width < 768px) {
+@media (max-width: 768px) {
     .temple_name {
         bottom: 20px;
     }
 }
-@media (width <576px) {
+@media (max-width: 576px) {
     .temple_name {
         font-size: 20px;
         bottom: 10px;
     }
 }
-@media (width <430px) {
+@media (max-width: 430px) {
     .temple_name {
         font-size: 18px;
         bottom: 5px;
     }
 }
-@media (width < 1366px) {
+@media (max-width: 1366px) {
     .custom_banner {
         width: 100%;
         height: auto;
@@ -235,7 +238,7 @@ const goTodo = (id) => {
     padding: 20px;
     background-color: #ffffff;
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .todo_container {
         padding: 10px;
     }
@@ -247,7 +250,7 @@ const goTodo = (id) => {
     object-fit: cover;
     margin-bottom: 30px;
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .todo_img {
         height: auto;
     }
@@ -262,7 +265,7 @@ const goTodo = (id) => {
     color: #ffffff;
     margin-bottom: 60px;
 }
-@media (width <1024px) {
+@media (max-width: 1024px) {
     .todo_title {
         margin-bottom: 20px;
     }

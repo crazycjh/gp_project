@@ -119,8 +119,9 @@ export default {
       maxHeight:{
         '1036px':'1036px',
       },
-      scrrens:{
+      screens:{
         'ssm':'430px',
+        'sm': '640px',
         'md':'768px',
         'lg':'1024px',
       },

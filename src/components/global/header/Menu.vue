@@ -1,8 +1,8 @@
 <template>
-    <div class="flex justify-between h-full">
+    <div class="flex justify-between h-full ">
         <img
             @click="isOpen = !isOpen"
-            class="block lg:hidden mr-5"
+            class="block lg:hidden mr-5 cursor-pointer"
             src="../../../assets/header/Group67.svg"
             width="30"
             height="24"
