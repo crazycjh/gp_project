@@ -17,14 +17,14 @@
                         <div
                             v-for="item in todo.products"
                             :key="item.id"
-                            class="flex w-100% md:w-50% mb-30px max-md:gap-30px"
+                            class="flex w-100% md:w-50% mb-30px max-md:gap-10px"
                         >
                             <img
                                 class="todo_product"
                                 :src="item.thumbnail"
                                 @click="goTodo(item.id)"
                             />
-                            <div class="flex flex-col justify-center ml-20px">
+                            <div class="flex flex-col justify-center ml-20px max-sm:ml-0px">
                                 <h5 class="service_active">
                                     {{ item.name }}
                                 </h5>

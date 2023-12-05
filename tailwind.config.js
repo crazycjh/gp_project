@@ -33,6 +33,7 @@ export default {
       
       },
       margin:{
+        '0px':'0px',
         '5px':'5px',
         '020px':'-20px',
         '10px':'10px',
