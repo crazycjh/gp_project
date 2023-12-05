@@ -121,7 +121,7 @@ onMounted(async () => {
     isLoading.value = true;
     try {
         const response = await axios.get(
-            `${backend}/api/gc/latest/${latestID.value}`
+            `${backend}api/gc/latest/${latestID.value}`
         );
         post.value = response.data.latest;
         bottom_post.value = response.data.relate;

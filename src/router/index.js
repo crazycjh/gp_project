@@ -55,7 +55,7 @@ const routes = [
     //     const productID = to.params.productID;
     //     try {
     //       const response = await axios.get(
-    //         `${import.meta.env.VITE_BACKEND_PATH}/api/gc/culture/${productID}`
+    //         `${import.meta.env.VITE_BACKEND_PATH}api/gc/culture/${productID}`
     //       );
     //       to.meta.productData.title = response.data.data.title;
     //       to.meta.productData.content = response.data.data.content
@@ -200,7 +200,7 @@ router.beforeEach(async (to, from, next) => {
     const productID = to.params.productID;
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BACKEND_PATH}/api/gc/culture/${productID}`
+        `${import.meta.env.VITE_BACKEND_PATH}api/gc/culture/${productID}`
       );
       to.meta.productData.title = response.data.data.title
       to.meta.productData.content = response.data.data.content

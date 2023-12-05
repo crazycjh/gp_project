@@ -9,7 +9,7 @@ export const uselatest = defineStore('latest', () => {
     const latest = async () => {
      try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_PATH}/api/gc/latest/type`
+          `${import.meta.env.VITE_BACKEND_PATH}api/gc/latest/type`
         );
         types.value = response.data.type
       } catch (error) {

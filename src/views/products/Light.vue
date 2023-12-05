@@ -272,7 +272,7 @@ onMounted(() => {
 onMounted(async () => {
     try {
         const response = await axios.get(
-            `${backend}/api/gc/product/${productID.value}`
+            `${backend}api/gc/product/${productID.value}`
         );
         price.value = response.data.price
         name.value = response.data.name

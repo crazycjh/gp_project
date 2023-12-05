@@ -27,7 +27,7 @@ import Service from "@/components/index/Service.vue";
 import Product from "@/components/index/Product.vue";
 import Todo from "../components/index/Todo.vue";
 </script>
-<style scoper>
+<style scoped>
 .cover {
     background-color: #f4f1e4;
 }

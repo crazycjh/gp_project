@@ -208,7 +208,7 @@ const sendLogin = async () => {
         };
 
         const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/login`,
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/login`,
             requestData
         );
         if (response.data.success === false) {

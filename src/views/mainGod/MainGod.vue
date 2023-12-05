@@ -144,7 +144,7 @@ const fetchData = async () => {
 const fetchGod = async () => {
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/god`
         );
         godArray.value = response.data.split(",");
     } catch (error) {

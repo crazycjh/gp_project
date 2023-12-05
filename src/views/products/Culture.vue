@@ -418,7 +418,7 @@ onMounted(async () => {
     isLoading.value = true;
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/culture/${
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/culture/${
                 productID.value
             }`
         );

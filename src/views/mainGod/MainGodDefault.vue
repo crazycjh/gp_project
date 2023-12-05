@@ -204,7 +204,7 @@ const fetchData = async () => {
             god: activeGod.value,
         };
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/temple`,
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/temple`,
             {
                 params: params,
             }

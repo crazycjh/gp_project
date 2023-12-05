@@ -9,7 +9,7 @@ export const useGods = defineStore('gods', () => {
     const fetchGod = async () => {
      try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_PATH}/api/gc/god`
+          `${import.meta.env.VITE_BACKEND_PATH}api/gc/god`
         );
         originGodArray.value = response.data.split(',')
         godArray.value = response.data.split(',').slice(0, 12);

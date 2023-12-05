@@ -489,7 +489,7 @@ watch(isOpen, (newValue) => {
 }
 @media (width < 768px) {
     .product {
-        /* flex:0 0 calc(50% - 22.5px); */
+
         flex: 0 0 calc(50% - 5px); 
     }
 }

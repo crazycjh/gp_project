@@ -156,7 +156,7 @@ const get_orders = async () => {
     };
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/todo`,
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/order/todo`,
             { params: params }
         );
         orders.value = response.data;
@@ -177,7 +177,7 @@ const checkout = async (order_id) => {
         };
 
         const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/checkout`,
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/order/checkout`,
             requestData
         );
         html.value = response.data;

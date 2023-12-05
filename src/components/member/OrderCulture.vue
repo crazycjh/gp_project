@@ -155,7 +155,7 @@ const get_orders = async () => {
     };
     try {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_PATH}/api/gc/order/culture`,
+            `${import.meta.env.VITE_BACKEND_PATH}api/gc/order/culture`,
             { params: params }
         );
         orders.value = response.data;
