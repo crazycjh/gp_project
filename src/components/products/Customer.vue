@@ -148,7 +148,7 @@ input,select{
     width: 356px;
 }
 
-@media(width <1024px) {
+@media(max-width: 1024px) {
     .select_wrapper {
         width: 100%;
     }

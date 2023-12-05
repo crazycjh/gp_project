@@ -354,7 +354,7 @@ onMounted(async () => {
     width: 100%;
 }
 
-@media (width < 1280px) {
+@media (max-width: 1280px) {
     .top_bottom {
         bottom: -200px;
     }
@@ -369,34 +369,34 @@ onMounted(async () => {
     bottom: 50px;
     color: #ffffff;
 }
-@media (width < 1280px) {
+@media (max-width: 1280px) {
     .temple_name {
         bottom: 40px;
     }
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .temple_name {
         bottom: 30px;
     }
 }
-@media (width < 768px) {
+@media (max-width: 768px) {
     .temple_name {
         bottom: 20px;
     }
 }
-@media (width <576px) {
+@media (max-width:576px) {
     .temple_name {
         font-size: 20px;
         bottom: 10px;
     }
 }
-@media (width <430px) {
+@media (max-width:430px) {
     .temple_name {
         font-size: 18px;
         bottom: 5px;
     }
 }
-@media (width < 1366px) {
+@media (max-width: 1366px) {
     .custom_banner {
         width: 100%;
         height: auto;
@@ -437,7 +437,7 @@ onMounted(async () => {
     object-fit: cover;
     margin-bottom: 30px;
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .todo_img {
         height: auto;
     }

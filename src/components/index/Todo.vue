@@ -102,7 +102,7 @@ onMounted(async () => {
     align-items: center;
     min-height: 340px;
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .custom_swiper {
         min-height: 300px;
     }
@@ -113,7 +113,7 @@ onMounted(async () => {
     margin-bottom: -150px;
     object-fit: cover;
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .todo {
         flex-direction: column;
         margin-bottom: 0px;

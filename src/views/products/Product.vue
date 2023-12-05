@@ -478,7 +478,7 @@ watch(isOpen, (newValue) => {
     width: 290px;
     height: 290px;
 }
-@media (width < 1024px) {
+@media (max-width:1024px) {
     .product {
         flex: 0 0 calc(33% - 5px);
     }
@@ -487,7 +487,7 @@ watch(isOpen, (newValue) => {
         height: auto;
     }
 }
-@media (width < 768px) {
+@media (max-width:768px) {
     .product {
 
         flex: 0 0 calc(50% - 5px); 

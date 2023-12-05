@@ -564,7 +564,7 @@ const autoInfo = () =>{
     max-width: 892px;
 }
 
-@media(width < 768px) {
+@media(max-width: 768px) {
     .wrapper {
         width: 330px;
     }
@@ -619,7 +619,7 @@ input {
     flex-direction: column;
     align-items: center;
 }
-@media(width <1400px) {
+@media(max-width:1400px) {
     .left {
         left: 2%;
     }
@@ -628,7 +628,7 @@ input {
         right: 2%;
     }
 }
-@media(width < 512px){
+@media(max-width: 512px){
     .left,.right{
         display:none;
     }
@@ -804,13 +804,13 @@ input {
     background-repeat: no-repeat;
 }
 
-@media(width < 1024px) {
+@media(max-width: 1024px) {
     .top {
         height: 340px;
     }
 }
 
-@media(width < 768px) {
+@media(max-width: 768px) {
     .top {
         height: 176px;
         padding-left: 30px;
@@ -827,14 +827,14 @@ input {
     background-size: auto;
 }
 
-@media(width < 1024px) {
+@media(max-width: 1024px) {
     .body {
         padding-left: 60px;
         padding-right: 60px;
     }
 }
 
-@media(width < 768px) {
+@media(max-width: 768px) {
     .body {
         padding-left: 25px;
         padding-right: 25px;
@@ -851,13 +851,13 @@ input {
     background-size: cover;
 }
 
-@media(width <1024px) {
+@media(max-width:1024px) {
     .bottom {
         padding-bottom: 90px;
     }
 }
 
-@media(width< 768px) {
+@media(max-width: 768px) {
     .bottom {
         background-repeat: no-repeat;
         background-size: auto;

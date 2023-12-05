@@ -219,7 +219,7 @@ const openOrder3List = (item) => {
 .index_btn:hover {
     background-color: #eeeeee;
 }
-@media (width < 768px) {
+@media (max-width: 768px) {
     .index_btn {
         width: 100%;
     }
@@ -233,7 +233,7 @@ const openOrder3List = (item) => {
     min-width: 233px;
     border-right: 2px solid #eeeeee;
 }
-@media (width < 768px) {
+@media (max-width: 768px) {
     .left {
         border-right: none;
     }

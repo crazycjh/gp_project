@@ -643,7 +643,7 @@ const decrease = () => {
 .relative_swiper {
     max-width: 890px;
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .relative_img {
         width: 100%;
         height: auto;
@@ -689,7 +689,7 @@ const decrease = () => {
     margin-bottom: 30px;
     max-width: 460px;
 }
-@media (width < 768px) {
+@media (max-width: 768px) {
     .excerpt {
         max-width: 100%;
     }
@@ -741,7 +741,7 @@ const decrease = () => {
     height: 96px;
     cursor: pointer;
 }
-@media (width < 768px) {
+@media (max-width: 768px) {
     .main_img {
         width: 100%;
         height: 100%;
@@ -897,14 +897,14 @@ const decrease = () => {
     height: 290px;
 }
 
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .photo {
         width: 200px;
         height: 200px;
     }
 }
 
-@media (width <512px) {
+@media (max-width:512px) {
     .photo {
         width: 160px;
         height: 160px;

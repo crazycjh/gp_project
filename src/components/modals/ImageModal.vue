@@ -40,7 +40,7 @@ const emit = defineEmits(['confirm','previous-swiper','next-swiper']);
   right:-10%;
   cursor:pointer;
 }
-@media (width < 1024px){
+@media (max-width: 1024px){
   .left_arrow{
     left:5%;
   }
@@ -52,7 +52,7 @@ const emit = defineEmits(['confirm','previous-swiper','next-swiper']);
   width:800px;
   height:800px;
 }
-@media(width < 768px){
+@media(max-width: 768px){
   .focus_img {
     width: 100%;
     height: 100%;

@@ -122,7 +122,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     margin-left: 5px;
 }
 
-@media(width > 1024px){
+@media(min-width: none > 1024px){
     .shuwen{
     max-height:400px;
     }
@@ -145,7 +145,7 @@ const backend = import.meta.env.VITE_BACKEND_PATH
     top: 49%;
     right: 0;
 }
-@media(width <1280px){
+@media(max-width: 1280px){
     .tree_left,.tree_right{
         display: none;
     }

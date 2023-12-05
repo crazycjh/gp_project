@@ -763,13 +763,13 @@ const autoInfo = () => {
     transform: translateX(-50%);
     z-index: 10;
 }
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .temple_top {
         width: 800px;
         top: 10%;
     }
 }
-@media (width < 768px) {
+@media (max-width: 768px) {
     .temple_top {
         width: 429px;
         top: 6%;
@@ -778,7 +778,7 @@ const autoInfo = () => {
         margin-bottom: 150px;
     }
 }
-@media (width <412px) {
+@media (max-width:412px) {
     .temple_top {
         width: 100%;
         top: 7%;
@@ -850,7 +850,7 @@ const autoInfo = () => {
     max-width: 892px;
 }
 
-@media (width < 768px) {
+@media (max-width: 768px) {
     .wrapper {
         width: 330px;
     }
@@ -906,7 +906,7 @@ input {
     align-items: center;
 }
 
-@media (width <1024px) {
+@media (max-width:1024px) {
     .left {
         left: -9%;
     }
@@ -916,7 +916,7 @@ input {
     }
 }
 
-@media (width <1400px) {
+@media (max-width:1400px) {
     .left {
         left: 2%;
     }
@@ -925,7 +925,7 @@ input {
         right: 2%;
     }
 }
-@media (width < 512px) {
+@media (max-width: 512px) {
     .left,
     .right {
         display: none;
@@ -1050,7 +1050,7 @@ input {
     width: 356px;
 }
 
-@media (width<1024px) {
+@media (max-width:1024px) {
     .select_wrapper {
         width: 100%;
     }
@@ -1097,14 +1097,14 @@ input {
     background-size: auto;
 }
 
-@media (width < 1024px) {
+@media (max-width: 1024px) {
     .body {
         padding-left: 60px;
         padding-right: 60px;
     }
 }
 
-@media (width < 768px) {
+@media (max-width: 768px) {
     .body {
         padding-left: 25px;
         padding-right: 25px;
@@ -1121,13 +1121,13 @@ input {
     background-size: cover;
 }
 
-@media (width <1024px) {
+@media (max-width:1024px) {
     .bottom {
         padding-bottom: 90px;
     }
 }
 
-@media (width< 768px) {
+@media (max-width: 768px) {
     .bottom {
         background-repeat: no-repeat;
         background-size: auto;

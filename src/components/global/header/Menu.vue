@@ -158,17 +158,17 @@ watch(isOpen, (newValue) => {
 .custom_gap {
     gap: 1.25rem;
 }
-@media (width < 512px) {
+@media (max-width: 512px) {
     .custom_gap {
         gap: 1rem;
     }
 }
-@media (width < 400px) {
+@media (max-width: 400px) {
     .custom_gap {
         gap: 0.25rem;
     }
 }
-@media (width < 350px) {
+@media (max-width: 350px) {
     .custom_gap {
         gap: 0rem;
     }
