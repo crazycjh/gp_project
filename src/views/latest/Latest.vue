@@ -173,7 +173,7 @@ watch(currentPage, (newValue) => newValue && fetchData(currentActive.value));
 .photo {
     width: 100%;
 }
-@media (width > 1024px) {
+@media (min-width: 1024px) {
     .block {
         width: 280px;
     }

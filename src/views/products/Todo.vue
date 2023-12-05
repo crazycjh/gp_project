@@ -810,7 +810,7 @@ const autoInfo = () => {
     width: 298px;
     height: 75px;
 }
-@media (width<768px) {
+@media (max-width:768px) {
     .light_top_left {
         display: none;
     }
@@ -836,7 +836,7 @@ const autoInfo = () => {
     position: absolute;
     right: 0px;
 }
-@media (width > 512px) {
+@media (min-width: 512px) {
     .bottom_left,
     .bottom_right {
         display: none;

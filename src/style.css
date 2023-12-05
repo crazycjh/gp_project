@@ -105,7 +105,7 @@ button:focus-visible {
   border-style: solid;
   border-color: transparent transparent #ffffff transparent;
 }
-@media(width<1600px){
+@media(max-width: 1600px){
   .custom_position::before{
     display: none;
   }
