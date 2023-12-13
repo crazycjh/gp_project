@@ -435,7 +435,8 @@ const checkOrder = () =>{
         errorMessage.value = '請勾選同意網站的條款與條件'
         return
     }
-    if(payment.value === false){
+    console.log('payment ',payment.value);
+    if(payment.value){
         errorMessage.value = '請選擇付款方式'
         return
     }
@@ -534,6 +535,9 @@ const autoInfo = () =>{
     }
     .top{
         padding-bottom: 0;
+    }
+    .error{
+        margin-bottom: 0px;
     }
 }
 .bottom_left,.bottom_right{
