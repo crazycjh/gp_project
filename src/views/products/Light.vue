@@ -44,7 +44,7 @@
                     </div>
                     <button class="believers mb-20px">第{{activeForm}}位信眾資料</button>
                     <div class="flex gap-5px mb-5px">
-                        <input v-if="activeForm === 1" @change="AutoEnter" class="checkbox" type="checkbox" v-model="isAutoInfoChecked">
+                        <input v-if="activeForm === 1" @change="firstOneAutoEnter" class="checkbox" type="checkbox" v-model="isAutoInfoChecked">
                         <p>帶入聯絡人資料</p>
                     </div>
                     
@@ -350,7 +350,6 @@ const addCount = () => {
 // 帶入第一位資料
 const firstOneAutoEnter = () => {
     if(isAutoInfoChecked.value) {
-        console.log(formItems.value[0]);
         formItems.value[0].name = auth.member.name;
         formItems.value[0].selectedCity = auth.member.city
         formItems.value[0].selectedArea = auth.member.area
