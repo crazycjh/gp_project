@@ -18,6 +18,7 @@
         <router-view :key="$route.path" />
         <ModalsContainer />
         <Footer />
+        <BackToTop />
     </div>
 </template>
 <script setup>
@@ -28,6 +29,7 @@ import { useMeta } from "vue-meta";
 //自製元件
 import Header from "@/components/global/header/Header.vue";
 import Footer from "./components/global/Footer.vue";
+import BackToTop from "./components/BackToTop.vue"
 
 //pinia
 import { uselatest } from "@/store/latest.js";

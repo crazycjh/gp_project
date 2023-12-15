@@ -2,7 +2,7 @@
    <VueFinalModal
       content-transition="vfm-fade"
       overlay-transition="vfm-fade"
-      content-class="absolute inset-0"
+      content-class="flex justify-center "
       @update:model-value="(val) => emit('update:modelValue', val)"
     >   
         <div class="container max-w-1200px  px-10px pt-60px pb-30px absolute inset-0 overflow-auto">
@@ -107,7 +107,8 @@ const props = defineProps({
   payment:String,
   remark:String,
   count:Number,
-  productID:String,
+//   productID:String,
+  productID:Number,
   total:Number,
 });
 
@@ -243,6 +244,7 @@ const total = () => {
     margin:auto;
     height: 80%;
     border-radius:1%;
+    width: calc( 100% - 20px );
 }
 .line{
     display: flex;

@@ -1,7 +1,13 @@
 <template>
     <div class="border_bottom">
         <button class="customer_btn">聯絡人資料</button>
-        <button class="customer_btn member" @click="emit('auto-info')">帶入會員資料</button>
+        <!-- <button class="customer_btn member" @click="emit('auto-info')">帶入會員資料</button> -->
+        <div class="flex gap-5px mb-5px">
+            <input @click="emit('auto-info')" class="checkbox" type="checkbox">
+            <p>帶入會員資料</p>
+        </div>
+        
+
         <div class="flex flex-col md:flex-row gap-20px mb-20px">
             <div class="w-full">
                 <h5 class="mb-10px">姓名<span class="required">*</span></h5>

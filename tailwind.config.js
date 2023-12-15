@@ -71,6 +71,8 @@ export default {
         '560px':'560px',
       },
       gap:{
+        '0px':'0px',
+        '1px':'1px',
         '5px':'5px',
         '10px':'10px',
         '20px':'20px',
@@ -121,6 +123,7 @@ export default {
         '1036px':'1036px',
       },
       screens:{
+        'xssm' : '374px',
         'ssm':'430px',
         'sm': '640px',
         'md':'768px',

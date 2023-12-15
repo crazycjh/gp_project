@@ -43,6 +43,11 @@
                         </div>
                     </div>
                     <button class="believers mb-20px">第{{activeForm}}位信眾資料</button>
+                    <div class="flex gap-5px mb-5px">
+                        <input v-if="activeForm === 1" @change="AutoEnter" class="checkbox" type="checkbox" v-model="isAutoInfoChecked">
+                        <p>帶入聯絡人資料</p>
+                    </div>
+                    
                     <div class="flex flex-col md:flex-row gap-20px mb-20px">
                         <div class="md:w-50%">
                             <h5 class="mb-10px">姓名<span class="required">*</span></h5>
@@ -129,6 +134,7 @@
                                 <select
                                     class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select " v-model="item.selectedCity" @change="updateAreas(index)">
                                     <option  value="" disabled>請選擇縣市</option>
+                                    
                                     <option v-for="item in cities" :key="item">{{ item }}</option>
                                 </select>
                                 <img class="absolute right-0 top-0 max-md:mr-2 mt-2 mr-4 pointer-events-none"
@@ -140,6 +146,7 @@
                             <div class="relative">
                                 <select
                                     class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select" v-model="item.selectedArea" @change="updateZipCode(index)">
+                                    
                                     <option selected value="" disabled>請選擇鄉鎮區</option>
                                     <option v-if="item.areas" v-for="area in item.areas" :key="area">{{ area }}</option>
                                 </select>
@@ -260,6 +267,7 @@ const activeForm = ref(1)
 const agree = ref(false)
 const payment = ref('')
 const remark = ref('')
+const isAutoInfoChecked = ref(false);
 
 //取id,價格
 const productID = ref('')
@@ -338,6 +346,21 @@ const addCount = () => {
   activeForm.value = peopleCount.value
   formItems.value.push(createFormItem());
 };
+
+// 帶入第一位資料
+const firstOneAutoEnter = () => {
+    if(isAutoInfoChecked.value) {
+        console.log(formItems.value[0]);
+        formItems.value[0].name = auth.member.name;
+        formItems.value[0].selectedCity = auth.member.city
+        formItems.value[0].selectedArea = auth.member.area
+        formItems.value[0].address = auth.member.address
+        formItems.value[0].zipCode = auth.member.zipCode
+        updateAreas(0);
+        updateZipCode(0);
+    }
+}
+
 
 //刪除當前的信眾
 const deleteForm = (index) => {
@@ -435,8 +458,8 @@ const checkOrder = () =>{
         errorMessage.value = '請勾選同意網站的條款與條件'
         return
     }
-    console.log('payment ',payment.value);
-    if(payment.value){
+    
+    if(!payment.value){
         errorMessage.value = '請選擇付款方式'
         return
     }
@@ -490,6 +513,7 @@ const autoInfo = () =>{
     customerData.value.address = auth.member.address
     customerData.value.phone = auth.member.phone
 }
+
 
 // watch(customerData.value.selectedCity,(newValue)=>{
 //     if(newValue){
@@ -788,8 +812,8 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
     width: 100vw;
+    background-attachment: fixed;
     background-image: url('../../assets/products/light/light_list_bg.svg');
     /* background-repeat: no-repeat;  */
     background-size: cover;
