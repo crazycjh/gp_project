@@ -66,9 +66,12 @@
                 </div>
             </div>
             <div class="mt-30px">
-                <button class="btn" @click="">
-                        返回會員中心
-                </button>
+                
+                    <router-link :to="`/member/${auth.member.user_id}`" class="nav-link"
+                        ><button class="btn">返回會員中心</button></router-link
+                    >    
+                    
+                
             </div>
         </div>
         <div v-if="order_type === 'light' || order_type === 'todo'" class="py-40px md:px-50px">

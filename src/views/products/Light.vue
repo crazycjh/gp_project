@@ -813,7 +813,10 @@ input {
     align-items: center;
     width: 100vw;
     background-attachment: fixed;
+    /*
     background-image: url('../../assets/products/light/light_list_bg.svg');
+    */
+    background-image: url('../../assets/products/light/light_list_bg3.svg');
     /* background-repeat: no-repeat;  */
     background-size: cover;
 }
