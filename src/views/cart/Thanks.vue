@@ -28,7 +28,7 @@
                 </div>
                 <div class="line">
                     <h5>折扣:</h5>
-                    <h5>-NT$100</h5>
+                    <h5></h5>
                 </div>
                 <div class="line">
                     <h5>運送方式:</h5>
@@ -40,7 +40,7 @@
                 </div>
                 <div class=" line">
                     <h6 class="">總計:</h6>
-                    <p>NT${{ (productTotal + 900).toLocaleString()}}</p>
+                    <p>NT${{ (productTotal + 1000).toLocaleString()}}</p>
                 </div>
             </div>
             <div  class="flex flex-col md:flex-row gap-20px md:gap-50px">
@@ -64,6 +64,11 @@
                         <p>收件人手機：{{ info2.phone }}</p>
                     </div>
                 </div>
+            </div>
+            <div class="mt-30px">
+                <button class="btn" @click="">
+                        返回會員中心
+                </button>
             </div>
         </div>
         <div v-if="order_type === 'light' || order_type === 'todo'" class="py-40px md:px-50px">
@@ -272,4 +277,18 @@ const productTotal = computed (()=>{
     border-bottom: 2px solid #EEEEEE;
     padding:10px 0;
 }
+
+.btn {
+    padding: 5px 10px;
+    border: 1px solid #920000;
+    background-color: #920000;
+    font-size: 14px;
+    color: #ffffff;
+    outline: none;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color:#920000;
+} 
 </style>

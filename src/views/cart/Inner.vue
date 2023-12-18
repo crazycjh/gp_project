@@ -67,7 +67,9 @@ const auth = useAuth();
 
 //總價與總數
 const totalQuantity = computed(() =>{
-    return products.value.reduce((total, item) => total + item.quantity, 0);
+    return products.value.reduce((total, item) => {
+        return total + item.quantity
+    }, 0);
 })
 
 const totalPrice = computed(() =>{

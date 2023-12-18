@@ -31,7 +31,7 @@
             </div>
             <div class="line">
                 <h5>折扣:</h5>
-                <h5>-NT$100</h5>
+                <h5></h5>
             </div>
             <div class="line">
                 <h5>運送方式:</h5>
@@ -43,7 +43,7 @@
             </div>
             <div class="line">
                 <h6 class="">總計:</h6>
-                <p>NT${{ (productTotal + 900).toLocaleString() }}</p>
+                <p>NT${{ (productTotal + 1000).toLocaleString() }}</p>
             </div>
         </div>
         <div class="flex flex-col md:flex-row gap-20px md:gap-50px">
@@ -97,6 +97,7 @@ onMounted(async () => {
         order_id: props.order.order_id,
         count: props.order.count,
     };
+    console.log(props.order);
     try {
         isLoading.value = true;
         const response = await axios.get(
