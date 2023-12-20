@@ -542,7 +542,7 @@ const autoInfo = () =>{
 
 .error{
     color:red;
-    margin-bottom: -20px;
+    /*margin-bottom: -20px;*/
     margin-top: 10px;
 }
 .light_top_left{
@@ -756,7 +756,7 @@ input {
 }
 
 .visa {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     width: 114px;
     height: 43px;
     border: none;

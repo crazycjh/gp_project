@@ -107,7 +107,8 @@
    payment:String,
    remark:String,
    count:Number,
-   productID:String,
+//    productID:String,
+   productID:Number,
    total:Number,
  });
  
@@ -236,6 +237,7 @@
      margin:auto;
      height: 80%;
      border-radius:1%;
+     width: calc( 100% - 20px );
  }
  .line{
      display: flex;

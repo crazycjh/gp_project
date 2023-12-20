@@ -67,16 +67,38 @@
             </div>
             <div class="mt-30px">
                 
-                    <router-link :to="`/member/${auth.member.user_id}`" class="nav-link"
-                        ><button class="btn">返回會員中心</button></router-link
-                    >    
-                    
-                
+                <router-link :to="`/member/${auth.member.user_id}`" class="nav-link"
+                    ><button class="btn">返回會員中心</button></router-link
+                >    
             </div>
         </div>
         <div v-if="order_type === 'light' || order_type === 'todo'" class="py-40px md:px-50px">
+            
             <h4 class="mb-20px">訂單編號 <span class="notice">#{{ data.order_id }}</span> 於<span class="notice">{{ data.date }}</span> 下單，目前狀態為
                 <span class="notice">{{ data.status }}</span>。</h4>
+            <div class="w-full">
+                <button class="customer_btn">聯絡人資料</button>
+                <div class="line">
+                    <span>姓名:</span>
+                    <span>{{ auth.member.name }}</span>
+                </div>
+                <div class="line">
+                    <span>聯絡電話:</span>
+                    <span>{{ auth.member.phone }}</span>
+                </div>
+                <div class="line">
+                    <span>電子郵件:</span>
+                    <span>{{ auth.member.email }}</span>
+                </div>
+                <div class="line">
+                    <span>地址:</span>
+                    <span>{{ auth.member.zipCode }},{{ auth.member.city }}{{ auth.member.area }}</span>
+                </div>
+                <div class="line">
+                    <span>詳細地址:</span>
+                    <span>{{ auth.member.address }}</span>
+                </div>
+            </div>
             <div v-for="item in prayers" :key="item.name" class="w-full list">
                 <button class="order_list_btn hidden md:block">第一位信眾</button>
                 <div class="line">
@@ -124,7 +146,14 @@
                     <p>{{ order.note }}</p>
                 </div>
             </div>
+            <div class="mt-30px">
+                
+                <router-link :to="`/member/${auth.member.user_id}`" class="nav-link"
+                    ><button class="btn">返回會員中心</button></router-link
+                >    
+            </div>
         </div>
+        
     </div>
 </template>
 <script setup>
@@ -201,6 +230,17 @@ const productTotal = computed (()=>{
     color:#920000;
     font-size: 28px;
 }
+.customer_btn {
+     margin-top: 40px;
+     margin-bottom: 20px;
+     width: 112px;
+     height: 43px;
+     color: white;
+     background-color: #920000;
+     border: none;
+     outline: none;
+     border-radius: 0;
+ }
 .prayer_btn{
     margin-top: 40px;
     margin-bottom: 20px;

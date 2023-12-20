@@ -513,10 +513,10 @@ const addToCart = (id) => {
 };
 
 //主商品加入購物車流程
-const addToCartMain = (id) => {
+const addToCartMain = async(id) => {
     cart.close();
     if (auth.isLogin) {
-        addWCsessionMain(id);
+        await addWCsessionMain(id);
         //避免購物車已打開未觸發
         cart.open();
     } else {

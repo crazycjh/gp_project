@@ -72,6 +72,10 @@
                     <button class="believers mb-20px">
                         第{{ activeForm }}位信眾資料
                     </button>
+                    <div class="flex gap-5px mb-5px">
+                        <input v-if="activeForm === 1" @change="firstOneAutoEnter" class="checkbox" type="checkbox" v-model="isAutoInfoChecked">
+                        <p>帶入聯絡人資料</p>
+                    </div>
                     <div class="flex flex-col md:flex-row gap-20px mb-20px">
                         <div class="md:w-50%">
                             <h5 class="mb-10px">
@@ -465,13 +469,13 @@ const activeForm = ref(1);
 const agree = ref(false);
 const payment = ref("");
 const remark = ref("");
+const isAutoInfoChecked = ref(false);
 
 //取id,價格
 const productID = ref("");
 const price = ref("");
 const name = ref("");
 onMounted(() => {
-    console.log(123);
     const route = useRoute();
     productID.value = Number(route.params.productID);
 });
@@ -544,6 +548,20 @@ const addCount = () => {
     activeForm.value = peopleCount.value;
     formItems.value.push(createFormItem());
 };
+
+
+// 帶入第一位資料
+const firstOneAutoEnter = () => {
+    if(isAutoInfoChecked.value) {
+        formItems.value[0].name = auth.member.name;
+        formItems.value[0].selectedCity = auth.member.city
+        formItems.value[0].selectedArea = auth.member.area
+        formItems.value[0].address = auth.member.address
+        formItems.value[0].zipCode = auth.member.zipCode
+        updateAreas(0);
+        updateZipCode(0);
+    }
+}
 
 //刪除當前的信眾
 const deleteForm = (index) => {
@@ -692,7 +710,7 @@ const checkOrder = () => {
         errorMessage.value = "請勾選同意網站的條款與條件";
         return;
     }
-    if (payment.value === false) {
+    if (!payment.value) {
         errorMessage.value = "請選擇付款方式";
         return;
     }
@@ -803,7 +821,7 @@ const autoInfo = () => {
 
 .error {
     color: red;
-    margin-bottom: -20px;
+    /* margin-bottom: -20px; */
     margin-top: 10px;
 }
 .light_top_left {
@@ -819,6 +837,9 @@ const autoInfo = () => {
     }
     .top {
         padding-bottom: 0;
+    }
+    .error {
+        margin-bottom: 0px;
     }
 }
 .bottom_left,
@@ -1027,7 +1048,7 @@ input {
 }
 
 .visa {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     width: 114px;
     height: 43px;
     border: none;
@@ -1083,7 +1104,8 @@ input {
     align-items: center;
     height: 100%;
     width: 100vw;
-    background-image: url("../../assets/products/light/light_list_bg.svg");
+    background-attachment: fixed;
+    background-image: url("../../assets/products/light/light_list_bg3.svg");
     /* background-repeat: no-repeat;  */
     background-size: cover;
 }
