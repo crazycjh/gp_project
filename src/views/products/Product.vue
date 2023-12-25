@@ -5,14 +5,14 @@
             class="mt-50px mb-30px flex flex-col xl:flex-row max-xl:items-center justify-between max-xl:gap-20px"
         >
             <span>首頁/文創商品</span>
-            <div class="flex items-center result">
-                <span class="whitespace-nowrap"
+            <div class="flex flex-col gap-5px sm:flex-row sm:gap-0px items-center result">
+                <span class="whitespace-nowrap ml-10px sm:ml-0px"
                     >顯示所有 {{ count }} 個結果</span
                 >
                 <div class="relative w-full">
                     <select
                         v-model="order"
-                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select"
+                        class="appearance-none bg-transparent border border-transparent text-gray-700 custom_select ml-0px sm:ml-10px"
                     >
                         <option value="default">預設選項</option>
                         <option value="priceDESC">價格由高到低</option>
@@ -26,14 +26,14 @@
                     />
                 </div>
             </div>
-            <div class="flex items-center gap-10px xl:hidden">
+            <div class="flex items-center gap-10px xl:hidden cursor-pointer" @click="isOpen = !isOpen">
                 <img
                     class="filter"
                     src="../../assets/products/culture/filter_icon.svg"
                     alt=""
                 />
-                <span class="whitespace-nowrap" @click="isOpen = !isOpen"
-                    >篩選</span
+                <span class="whitespace-nowrap" 
+                    >商品分類</span
                 >
             </div>
         </div>
@@ -524,7 +524,7 @@ watch(isOpen, (newValue) => {
 }
 
 .custom_select {
-    margin-left: 10px;
+    /* margin-left: 10px; */
     display: flex;
     width: 200px;
     height: 30px;
