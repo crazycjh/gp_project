@@ -1,5 +1,5 @@
 <template>
-    <VueFinalModal hide-overlay="false" :lock-scroll="false" :click-to-close="true"
+    <VueFinalModal hide-overlay=false :lock-scroll=false :click-to-close="true"
       class="custom_position"
       content-class="flex flex-col p-4 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800 "
     >   
@@ -69,6 +69,9 @@ const getCart = async(id) =>{
         console.error("API 請求失敗:", error);
     } finally{
         isLoading.value = false;
+        if(products.value.length === 0) {
+            
+        }
     }
 }
 
