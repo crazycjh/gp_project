@@ -76,14 +76,14 @@
                     <div class="line">
                         <h5>動作</h5>
                         <div class="flex gap-20px">
-                            <button class="order_mobile_button">付款</button>
+                            <button class="order_mobile_button" @click="checkout(item.order_id)">付款</button>
                             <button
                                 class="order_mobile_button"
                                 @click="emit('set-order-list', item)"
                             >
                                 查看
                             </button>
-                            <button class="order_mobile_button">取消</button>
+                            <button class="order_mobile_button" @click="checkCancel(item.order_id)">取消</button>
                         </div>
                     </div>
                 </div>

@@ -97,7 +97,6 @@ onMounted(async () => {
         order_id: props.order.order_id,
         count: props.order.count,
     };
-    console.log(props.order);
     try {
         isLoading.value = true;
         const response = await axios.get(
@@ -115,10 +114,14 @@ onMounted(async () => {
 
 //小計
 const productTotal = computed(() => {
-    return props.order.item.reduce(
+    
+    if(props.order.item) {
+        return props.order.item.reduce(
         (total, item) => total + item.price * item.count,
         0
-    );
+     );    
+    }
+    return null;
 });
 
 //自製組件
