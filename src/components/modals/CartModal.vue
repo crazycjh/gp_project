@@ -1,7 +1,8 @@
 <template>
-    <VueFinalModal hide-overlay=false :lock-scroll=false :click-to-close="true"
-      class="custom_position"
-      content-class="flex flex-col p-4 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800 "
+    <VueFinalModal :hide-overlay="false" :lock-scroll="false" :click-to-close="true"
+      class="custom_position "
+      content-class="flex flex-col p-4 bg-white dark:bg-black rounded-lg border border-gray-100 dark:border-gray-800  "
+      
     >   
         <loading :active="isLoading" :is-full-page="fullPage"></loading>
         <div class="flex justify-end">
@@ -9,7 +10,7 @@
         </div>
         <div v-if="products.length !== 0" class="w-240px px-10px pt-10px">
             <div class="flex flex-col mb-30px">
-               <div class="flex block" v-for="item in products" :key="item.product_id">
+               <div class="flex blockContainer" v-for="item in products" :key="item.product_id">
                     <img class="mini_img" :src="item.image_url" alt="">
                     <div class="flex flex-col justify-center">
                         <h6 class="name">{{ item.product_name }}</h6>
@@ -20,7 +21,7 @@
                         <img class="cancel" @click="deleteItem(item.product_id)" src="../../assets/cart/cancel_icon1.svg" alt="">
                     </div>
                </div>
-               <div class="block flex justify-center">
+               <div class="blockContainer flex justify-center">
                     <h6>小計: NT${{ total.toLocaleString() }}</h6>
                </div>
             </div>
@@ -105,7 +106,7 @@ const deleteItem = async(id) =>{
     width: 16px;
     height: 16px;
 }
-.block{
+.blockContainer{
     padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid #F5F5F5;
