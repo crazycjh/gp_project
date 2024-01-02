@@ -132,7 +132,10 @@ export default {
       flexGrow: {
         3: '3',
         7:'7',
-      }
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
     },
   },
   plugins: [],

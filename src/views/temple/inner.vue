@@ -50,16 +50,7 @@
         }"
     >
         <div class="temple-banner container relative">
-            <div v-if="temple.live_iframe">
-                <div class="flex flex-col items-center mb-5">
-                    <img
-                        class="wind"
-                        src="../../assets/widget/wind.svg"
-                        alt=""
-                    />
-                    <h3>廟宇直播</h3>
-                </div>
-            </div>
+            
             <div
                 v-if="temple.live_iframe"
                 class="video-wrapper z-10"
@@ -67,8 +58,73 @@
             ></div>
         </div>
     </div>
+    <!-- viedo area -->
+    <div class="temple-banner container relative ">
+        <div class=" py-3">
+            <h4 class="border_title custom_border">廟宇直播</h4>
+        </div>
+        <div class="flex flex-wrap gap-2">
+            <div
+            v-if="temple.live_iframe"
+            class="video-wrapper-helf z-10"
+            v-html="temple.video_1_iframe"
+            ></div> 
+            <div
+            v-if="temple.live_iframe"
+            class="video-wrapper-helf z-10"
+            v-html="temple.video_2_iframe"
+            ></div> 
+        </div>            
+    </div>
+    <div class="temple-banner container ">
+        <div class="block gap-2 md:flex">
+            
+            <div class='w-full lg:w-[calc(100%-500px)]'>
+                <div class=" py-3">
+                    <h4 class="border_title custom_border">新聞資訊</h4>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4">
+                    <div v-for="(item, index) in temple.news" :key='index' class=" p-4 cursor-pointer"  @click="goToExtrenalUrl(item.link)">
+                        <div class="aspect-video bg-gray-900 ">
+                            
+                            <img class="object-cover w-full h-full" :src="`${temple.image_url}`" alt="" />
+                            <!-- 圖 -->
+                        </div>
+                        <div class="service_price mb-1">
+                            <!-- 日期 -->
+                            {{ item.date }}
+                        </div>
+                        <div class="">
+                            <h4 class=" font-bold mb-1 multi-line-title-truncate">{{ item.title }}</h4>
+                            <!-- title -->
+                        </div>
+                        <div class="multi-line-truncate">
+                            {{ item.summary }}
+                            <!-- 摘要 -->
+                        </div>
+                        <div class="service_price font-thin souce-fontSize">
+                            Yahoo.com
+                            <!-- 來源 -->
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- <div class="fb-page w-[500px]"  data-href="https://www.facebook.com/andyfootprint" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/andyfootprint" class="fb-xfbml-parse-ignore"><a :href="temple.facebook_page">大甲鎮瀾宮</a></blockquote></div> -->
+            <!-- {{temple.facebook_page}} -->
+            <div>
+                <div class=" py-3">
+                    <h4 class="border_title custom_border">FB 粉專</h4>
+                </div>
+                <div class="fb-page w-[500px]" data-href="https://www.facebook.com/Dajiamazu" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Dajiamazu" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Dajiamazu">大甲鎮瀾宮</a></blockquote></div>
+            </div>
+        </div>
+
+    </div>
     <!-- <Breadcrumb v-if="temple.name" :title="`首頁/${temple.name}`" /> -->
     <div class="px-10px mx-auto max-w-1200px mb-50px md:mb-100px relative z-10">
+        
+        
         <div class="py-1">
             <h4 class="border_title custom_border">廟宇介紹</h4>
         </div>
@@ -257,11 +313,18 @@ const light = ref([]);
 const shuwen = ref([]);
 const todos = ref({});
 
+const screenWidth = ref(window.innerWidth);
+
 //取id
 onMounted(() => {
     scroll(0, 0);
     const route = useRoute();
     templeID.value = Number(route.params.templeID);
+    
+    // 監聽螢幕寬度
+    window.addEventListener('resize', updateScreenWidth);
+    // 确保FB SDK解析並且渲染plugin
+
 });
 
 const auth = useAuth();
@@ -316,6 +379,28 @@ const goTodo = (id, start, end) => {
     }
 };
 
+const goToExtrenalUrl = (url)=> {
+    window.open(url, '_blank');
+}
+
+// 監聽大小
+const updateScreenWidth = () => {
+      screenWidth.value = window.innerWidth;
+    };
+
+// fb 大小調整
+const fbSize = computed(()=> {
+    console.log(screenWidth.value)
+    if (screenWidth.value > 1024){
+        window.FB.XFBML.parse();
+        return 500;
+    }else {
+        console.log('小魚1024');
+        // window.FB.XFBML.parse();
+        return 300;
+    }
+})
+
 //取個別資料
 const isLoading = ref(false);
 const fullPage = ref(true);
@@ -326,16 +411,23 @@ onMounted(async () => {
             `${backend}api/gc/temple/${templeID.value}`
         );
         temple.value = response.data.data;
+        console.log(temple.value);
         light.value = response.data.light;
         shuwen.value = response.data.shuwen;
         todos.value = response.data.todos;
         console.log(todos.value);
         main_god.value = temple.value.main_god.split(",").join("、");
+        window.FB.XFBML.parse();
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally {
         isLoading.value = false;
     }
+
+    
+});
+onMounted(() => {
+      window.addEventListener('resize', updateScreenWidth);
 });
 </script>
 
@@ -654,5 +746,23 @@ h3 {
     .temple-banner.container {
         padding: 0 30px 70px 30px;
     }
+}
+
+.multi-line-title-truncate {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.multi-line-truncate {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.souce-fontSize {
+    font-size: 12px;
 }
 </style>
