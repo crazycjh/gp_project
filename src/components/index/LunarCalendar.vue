@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="basis-1/3 flex flex-col items-center gap-1 boder--outside--x boder--mobile--y">
-        <div class=" px-2 boder--x">農曆</div>
+        <div class=" px-2 boder--x text-[#920000]">農曆</div>
         <div class=" mt-1">{{ calendarInfo.year }}({{ calendarInfo.zodiac }})年{{ calendarInfo.month }}月{{ calendarInfo.day }}日</div>
         <div class="flex items-center">
             <div>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="basis-1/3 flex flex-col items-center gap-1 boder--right">
-        <div class="px-2 boder--x">神明聖誕</div>
+        <div class="px-2 boder--x text-[#920000]">神明聖誕</div>
         <div>玉皇上帝大天尊聖壽</div> 
         <!-- 檢查該日是否有神明生日 -->
         <!-- 如果多過三個要隱藏，並且hover時顯示(怎麼做？) -->
@@ -121,7 +121,6 @@ const converZodiac = (zodiac)=> {
     border-style: dashed;
     border-right-width: 1.8px;
     border-left-width: 1.8px;
-    border-color: #920000;
     height:100px;
 }
 
@@ -131,7 +130,7 @@ const converZodiac = (zodiac)=> {
     inset:0;
     border-style: dashed;
     border-left-width: 1.8px;
-    border-color: #920000;
+
     height:100px;
 }
 
@@ -141,7 +140,6 @@ const converZodiac = (zodiac)=> {
     inset:0;
     border-style: dashed;
     border-right-width: 1.8px;
-    border-color: #920000;
     height:100px;
 }
 
@@ -163,7 +161,7 @@ const converZodiac = (zodiac)=> {
     }
 
     .boder--mobile--y::before {
-        width:35%;
+        width:45%;
         content: '';
         position:absolute;
         inset:0;
@@ -172,7 +170,6 @@ const converZodiac = (zodiac)=> {
         border-style: dashed;
         border-top-width: 1.8px;
         border-bottom-width: 1.8px;
-        border-color: #920000;
         margin:0 auto;
         height:105px;
         /* height:100px; */
