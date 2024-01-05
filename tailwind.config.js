@@ -136,6 +136,9 @@ export default {
       aspectRatio: {
         '4/3': '4 / 3',
       },
+      colors: {
+        'temple-red' :'#920000'
+      }
     },
   },
   plugins: [],
