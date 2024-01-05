@@ -1,6 +1,6 @@
 <template>
-<section class="md:flex-row md:justify-center flex max-w-[700px] mt-8 mx-auto flex-col gap-6">
-    <div class="flex flex-col items-center basis-1/3 gap-1"> 
+<section class="md:flex-row md:justify-center flex max-w-[700px] mt-20 mx-auto flex-col gap-6 ">
+    <div class="flex flex-col items-center basis-1/3 gap-1 boder--left"> 
         <!-- 做虛線左右邊框 -->
         <div class=" w-[45px]">
             <img class="w-full" src="../../assets/index/calendar_icon.png" />
@@ -9,7 +9,7 @@
             {{ date.year }}年{{ date.month }}月{{ date.day }}日({{ date.weekday }})
         </div>
     </div>
-    <div class="basis-1/3 flex flex-col items-center gap-1">
+    <div class="basis-1/3 flex flex-col items-center gap-1 boder--outside--x boder--mobile--y">
         <div class=" px-2 boder--x">農曆</div>
         <div class=" mt-1">{{ calendarInfo.year }}({{ calendarInfo.zodiac }})年{{ calendarInfo.month }}月{{ calendarInfo.day }}日</div>
         <div class="flex items-center">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="basis-1/3 flex flex-col items-center gap-1">
+    <div class="basis-1/3 flex flex-col items-center gap-1 boder--right">
         <div class="px-2 boder--x">神明聖誕</div>
         <div>玉皇上帝大天尊聖壽</div> 
         <!-- 檢查該日是否有神明生日 -->
@@ -62,7 +62,7 @@ let today = new Date();
  date.value.day = today.getDate();
  date.value.weekday =convertNumToWord(today.getDay());
 
-}
+};
 const convertCalendar = (year, month, day) =>{
     
 
@@ -73,7 +73,7 @@ const convertCalendar = (year, month, day) =>{
         calendarInfo.value.month = run ? '潤'+ convertNumToWord(lunarMonth) : convertNumToWord(lunarMonth);
         calendarInfo.value.day = convertNumToWord(lunarDay);
 
-}
+};
 
 const convertNumToWord = (lunar)=> {
     const chineseNumbers = ['零', '正', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '廿', '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十', '三十一'];
@@ -83,7 +83,7 @@ const convertNumToWord = (lunar)=> {
     } else {
         return '未知';
     }
-}
+};
 
 const converZodiac = (zodiac)=> {
     const zodiacMap = {
@@ -92,7 +92,7 @@ const converZodiac = (zodiac)=> {
         '猴': '猴', '鸡': '雞', '狗': '狗', '猪': '豬'
     };
     return zodiac.split('').map(char => zodiacMap[char] || char).join('');
-}
+};
 
 </script>
 <style>
@@ -109,4 +109,75 @@ const converZodiac = (zodiac)=> {
     border-color: #920000;
 
 }
+
+.boder--outside--x, .boder--left, .boder--right {
+    position: relative;
+}
+
+.boder--outside--x::before {
+    content: '';
+    position:absolute;
+    inset:0;
+    border-style: dashed;
+    border-right-width: 1.8px;
+    border-left-width: 1.8px;
+    border-color: #920000;
+    height:100px;
+}
+
+.boder--left::before{
+    content: '';
+    position:absolute;
+    inset:0;
+    border-style: dashed;
+    border-left-width: 1.8px;
+    border-color: #920000;
+    height:100px;
+}
+
+.boder--right::before {
+    content: '';
+    position:absolute;
+    inset:0;
+    border-style: dashed;
+    border-right-width: 1.8px;
+    border-color: #920000;
+    height:100px;
+}
+
+@media (max-width:768px) {
+    .boder--outside--x::before, .boder--left::before, .boder--right::before {
+        content:none;
+        position:static;
+        border-style:none;
+        border-right-width:0;
+        border-left-width:0;
+    }
+
+    .boder--outside--x, .boder--leftm,  .boder--right{
+        position:static;
+    }
+
+    .boder--mobile--y {
+        position: relative;
+    }
+
+    .boder--mobile--y::before {
+        width:35%;
+        content: '';
+        position:absolute;
+        inset:0;
+        padding: 10px 0;
+        top:-10px;
+        border-style: dashed;
+        border-top-width: 1.8px;
+        border-bottom-width: 1.8px;
+        border-color: #920000;
+        margin:0 auto;
+        height:105px;
+        /* height:100px; */
+    }
+
+}
+
 </style>
