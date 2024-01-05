@@ -1,6 +1,8 @@
 <template>
     <Slider />
     <Search />
+    <!-- 農民曆 lunar calendar -->
+    <LunarCalendar/>
     <Live />
     <Events />
     <Recommand />
@@ -26,6 +28,7 @@ import MainGod from "@/components/index/MainGod.vue";
 import Service from "@/components/index/Service.vue";
 import Product from "@/components/index/Product.vue";
 import Todo from "../components/index/Todo.vue";
+import LunarCalendar from "../components/index/LunarCalendar.vue";
 </script>
 <style scoped>
 .cover {
