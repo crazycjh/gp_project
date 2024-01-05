@@ -110,13 +110,14 @@
                 </div>
                 
             </div>
-            <!-- <div class="fb-page w-[500px]"  data-href="https://www.facebook.com/andyfootprint" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/andyfootprint" class="fb-xfbml-parse-ignore"><a :href="temple.facebook_page">大甲鎮瀾宮</a></blockquote></div> -->
             <!-- {{temple.facebook_page}} -->
             <div>
                 <div class=" py-3">
                     <h4 class="border_title custom_border">FB 粉專</h4>
                 </div>
-                <div class="fb-page w-[500px]" data-href="https://www.facebook.com/Dajiamazu" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Dajiamazu" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Dajiamazu">大甲鎮瀾宮</a></blockquote></div>
+                <!-- <div v-html="FbHtml"></div> -->
+                
+                <div class="fb-page w-[500px]"  :data-href="temple.facebook_page" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote :cite="temple.facebook_page" class="fb-xfbml-parse-ignore"><a :href="temple.facebook_page">大甲鎮瀾宮</a></blockquote></div>
             </div>
         </div>
 
@@ -289,7 +290,7 @@
 </template>
 <script setup>
 //官方套件
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, nextTick } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import Loading from "vue-loading-overlay";
@@ -392,10 +393,9 @@ const updateScreenWidth = () => {
 const fbSize = computed(()=> {
     console.log(screenWidth.value)
     if (screenWidth.value > 1024){
-        window.FB.XFBML.parse();
+        // window.FB.XFBML.parse();
         return 500;
     }else {
-        console.log('小魚1024');
         // window.FB.XFBML.parse();
         return 300;
     }
@@ -404,6 +404,7 @@ const fbSize = computed(()=> {
 //取個別資料
 const isLoading = ref(false);
 const fullPage = ref(true);
+const FbHtml = ref('');
 onMounted(async () => {
     isLoading.value = true;
     try {
@@ -417,17 +418,24 @@ onMounted(async () => {
         todos.value = response.data.todos;
         console.log(todos.value);
         main_god.value = temple.value.main_god.split(",").join("、");
-        window.FB.XFBML.parse();
+
+        await nextTick();
+        window.FB.XFBML.parse(); 
+
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally {
         isLoading.value = false;
     }
-
-    
+// setTimeout(()=> {
+//     window.FB.XFBML.parse(); 
+// }, 2000);
+   
 });
+
 onMounted(() => {
       window.addEventListener('resize', updateScreenWidth);
+      
 });
 </script>
 
