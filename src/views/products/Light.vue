@@ -284,6 +284,7 @@ const agree = ref(false)
 const payment = ref('')
 const remark = ref('')
 const isAutoInfoChecked = ref(false);
+const totalPrice = ref(0);
 
 
 //取temple_id, product_id, 價格
@@ -333,13 +334,13 @@ onMounted(async () => {
 });
 
 const total = computed(()=>{
-    let totalPrice = 0;
+    
     formItems.value.forEach((item)=>{
-        totalPrice = totalPrice + item.lights.reduce((sum, obj)=> {
+        totalPrice.value = totalPrice.value + item.lights.reduce((sum, obj)=> {
             return obj.isChecked ? sum + (+obj.price) : sum;
         }, 0)
     })
-    return totalPrice;
+    return totalPrice.value;
 })
 
 const customerData = ref({

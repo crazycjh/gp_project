@@ -84,7 +84,7 @@
                 </div> -->
                 <div class="line">
                     <span>總計:</span>
-                    <span>{{ productPrice*count }} </span>
+                    <span>{{ total }} </span>
                 </div>
                 <div class="line">
                     <span>付款方式:</span>
@@ -203,9 +203,9 @@ const getCurrentDateTime = () =>{
     return formattedDateTime;
 }
 
-const total = () => {
-    return props.productPrice * props.count
-}
+// const total = () => {
+//     return props.productPrice * props.count
+// }
 </script>
 
 
