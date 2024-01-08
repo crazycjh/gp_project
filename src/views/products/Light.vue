@@ -334,7 +334,7 @@ onMounted(async () => {
 });
 
 const total = computed(()=>{
-    
+    totalPrice.value = 0;
     formItems.value.forEach((item)=>{
         totalPrice.value = totalPrice.value + item.lights.reduce((sum, obj)=> {
             return obj.isChecked ? sum + (+obj.price) : sum;

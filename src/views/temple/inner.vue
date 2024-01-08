@@ -77,9 +77,8 @@
         </div>            
     </div>
     <div class="temple-banner container ">
-        <div class="block gap-2 md:flex">
-            
-            <div class='w-full lg:w-[calc(100%-500px)]'>
+        <div class="block gap-2 md:flex"> 
+            <div class='w-full lg:w-[calc(100%-500px)] md:w-[calc(100%-300px)]'>
                 <div class=" py-3">
                     <h4 class="border_title custom_border">新聞資訊</h4>
                 </div>
@@ -117,7 +116,8 @@
                 </div>
                 <!-- <div v-html="FbHtml"></div> -->
                 
-                <div class="fb-page w-[500px]"  :data-href="temple.facebook_page" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote :cite="temple.facebook_page" class="fb-xfbml-parse-ignore"><a :href="temple.facebook_page">大甲鎮瀾宮</a></blockquote></div>
+                <!-- <div class="fb-page " :class="{'w-[300px]':fbWidthClass, 'w-[500px]':!fbWidthClass}"  :data-href="temple.facebook_page" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote :cite="temple.facebook_page" class="fb-xfbml-parse-ignore"><a :href="temple.facebook_page">大甲鎮瀾宮</a></blockquote></div> -->
+                <div class="fb-page " :style="{ width: fbWidth + 'px' }"  :data-href="temple.facebook_page" data-tabs="timeline" data-width="500" data-height="660" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote :cite="temple.facebook_page" class="fb-xfbml-parse-ignore"><a :href="temple.facebook_page">大甲鎮瀾宮</a></blockquote></div>
             </div>
         </div>
 
@@ -316,6 +316,7 @@ const shuwen = ref([]);
 const todos = ref({});
 
 const screenWidth = ref(window.innerWidth);
+const fbWidth = ref(500);
 
 //取id
 onMounted(() => {
@@ -326,7 +327,7 @@ onMounted(() => {
     // 監聽螢幕寬度
     window.addEventListener('resize', updateScreenWidth);
     // 确保FB SDK解析並且渲染plugin
-
+    updateScreenWidth();
 });
 
 const auth = useAuth();
@@ -387,9 +388,22 @@ const goToExtrenalUrl = (url)=> {
     window.open(url, '_blank');
 }
 
-// 監聽大小
+// 監聽大小並設定FB大小
+let timerId = '';
 const updateScreenWidth = () => {
       screenWidth.value = window.innerWidth;
+      if( window.innerWidth < 560 ) {
+        fbWidth.value = window.innerWidth-60;
+      }else if(window.innerWidth < 1024 && window.innerWidth > 768){
+        fbWidth.value = 300;
+      }else {
+        fbWidth.value = 500;
+      } 
+      nextTick();
+        clearTimeout(timerId);
+        timerId = setTimeout(()=> {
+            window.FB.XFBML.parse();  
+        },300) 
     };
 
 // fb 大小調整
