@@ -71,7 +71,7 @@ const routes = [
     // },
   },
   {
-    path: "/product/light/:productID",
+    path: "/product/light/:templeID/:productID",
     name: "LightInner",
     component: () => import("@/views/products/Light.vue"),
     meta: { requiresAuth: true }

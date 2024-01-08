@@ -60,13 +60,28 @@
                     <span>詳細地址:</span>
                     <span>{{ item.address }}</span>
                 </div>
+                <div  class="line">
+                    <div>燈別</div>
+                    <div class="flex gap-3">
+                        <div v-for="light in item.lights" class="">
+                            <div v-if="light.isChecked">
+                                {{ light.name }}
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <!-- 放入點燈的紀錄 -->
             </div>
             <div class="w-full">
                 <h4 class="title">付款資訊</h4>
-                <div class="line">
+                <!-- 拿掉燈別 -->
+                <!-- <div class="line">
                     <span>燈別:</span>
                     <span>{{ productName }} x {{ count }}</span>
-                </div>
+                </div> -->
                 <div class="line">
                     <span>總計:</span>
                     <span>{{ productPrice*count }} </span>

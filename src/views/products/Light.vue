@@ -168,6 +168,14 @@
                             <input class="body_input" type="text" placeholder="請輸入詳細地址" v-model="item.address">
                         </div>
                     </div>
+                    <!-- 加入其他燈 -->
+                    <div class="flex flex-wrap gap-2">
+                        <div v-for="product in item.lights" class="flex gap-5px mb-5px">
+                        <input class="checkbox" type="checkbox" v-model="product.isChecked">
+                        <p>{{ product.name }}</p>
+                    </div>
+                    </div>
+                    
                     <!-- <div class="mb-20px">
                         <h5 class="mb-10px">聯絡電話<span class="required">*</span></h5>
                         <div class="relative w-full">
@@ -240,7 +248,7 @@
 </template>
 <script setup>
 //官方套件
-import { ref, onMounted ,computed,getCurrentInstance,watch} from 'vue';
+import { ref, onMounted ,computed,getCurrentInstance,watch, nextTick} from 'vue';
 const instance = getCurrentInstance()
 import { useRoute,useRouter } from 'vue-router';
 import axios from "axios";
@@ -255,7 +263,15 @@ const backend = import.meta.env.VITE_BACKEND_PATH
 import Customer from '@/components/products/Customer.vue'
 import {cities,areasByCity,zipCodesByArea} from '@/store/city.js'
 import { useAuth } from '@/store/auth.js'
+import { useLight } from '@/store/light.js'
 const auth = useAuth()
+const lightStore = useLight()
+const light = ref(lightStore.lightList);
+
+// 清空
+lightStore.cleanLightList();
+console.log('light');
+console.log(light);
 
 
 
@@ -269,21 +285,47 @@ const payment = ref('')
 const remark = ref('')
 const isAutoInfoChecked = ref(false);
 
-//取id,價格
+
+//取temple_id, product_id, 價格
+const templeID = ref('')
+const productList = ref({});
+const productsInfo = [];
 const productID = ref('')
 const price = ref('')
 const name = ref('')
+const formItems = ref([]);
+let test = ''
+let test2 = ''
 onMounted(() => {
     const route = useRoute();
     productID.value = Number(route.params.productID);
+    templeID.value = Number(route.params.templeID)
 });
 onMounted(async () => {
     try {
-        const response = await axios.get(
-            `${backend}api/gc/product/${productID.value}`
+        // 取得所有商品ID
+        let response = await axios.get(
+            `${backend}api/gc/temple/${templeID.value}`
         );
+        productList.value = response.data.light;
+        // 取得所有商品價格資料
+        for(const item of productList.value){
+            response = await axios.get(
+            `${backend}api/gc/product/${item.id}`
+            );
+            productsInfo.push(response.data);
+            productsInfo.forEach((item) => {
+                item.isChecked = false;
+            })
+            // console.log(productsInfo);
+        }
+        
         price.value = response.data.price
         name.value = response.data.name
+        // test = JSON.parse(JSON.stringify(productsInfo));
+        console.log(productsInfo);
+        formItems.value = [createFormItem()];
+        
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally {
@@ -291,7 +333,13 @@ onMounted(async () => {
 });
 
 const total = computed(()=>{
-    return peopleCount.value * price.value
+    let totalPrice = 0;
+    formItems.value.forEach((item)=>{
+        totalPrice = totalPrice + item.lights.reduce((sum, obj)=> {
+            return obj.isChecked ? sum + (+obj.price) : sum;
+        }, 0)
+    })
+    return totalPrice;
 })
 
 const customerData = ref({
@@ -325,9 +373,10 @@ const createFormItem = () => ({
 //   email: '',
   calendar: 1,
   areas: [],
+  lights: JSON.parse(JSON.stringify(productsInfo))
 });
 
-const formItems = ref([createFormItem()]);
+
 
 //初始選人數
 const initialCount = () => {
@@ -344,7 +393,7 @@ const addCount = () => {
   peopleCount.value = Number(peopleCount.value)
   peopleCount.value += 1;
   activeForm.value = peopleCount.value
-  formItems.value.push(createFormItem());
+  formItems.value.push(createFormItem());   
 };
 
 // 帶入第一位資料
@@ -463,6 +512,15 @@ const checkOrder = () =>{
         return
     }
     errorMessage.value = ''
+    console.log(name);
+    console.log(price);
+    console.log(customerData);
+    console.log(formItems);
+    console.log(remark);
+    console.log(payment);
+    console.log(peopleCount);
+    console.log(productID);
+    console.log(total);
     open()
 }
 

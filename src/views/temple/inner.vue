@@ -303,6 +303,7 @@ import Breadcrumb from "@/components/widget/Breadcrumb.vue";
 import Title from "@/components/widget/Title.vue";
 import TopCover from "@/components/widget/TopCover.vue";
 import { useAuth } from "@/store/auth.js";
+import { useLight } from '@/store/light.js'
 import LoginModal from "@/components/modals/LoginModal.vue";
 import AlertModal from "@/components/modals/AlertModal.vue";
 
@@ -329,6 +330,7 @@ onMounted(() => {
 });
 
 const auth = useAuth();
+const lightStore = useLight();
 const router = useRouter();
 const { open, close } = useModal({
     component: LoginModal,
@@ -341,7 +343,8 @@ const { open, close } = useModal({
 //跳轉點燈內頁
 const shopping = (id) => {
     if (auth.isLogin) {
-        router.push(`/product/light/${id}`);
+        router.push(`/product/light/${templeID.value}/${id}`);
+        
     } else {
         open();
     }
@@ -414,6 +417,7 @@ onMounted(async () => {
         temple.value = response.data.data;
         console.log(temple.value);
         light.value = response.data.light;
+        lightStore.lightList = response.data.light
         shuwen.value = response.data.shuwen;
         todos.value = response.data.todos;
         console.log(todos.value);
