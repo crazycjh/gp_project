@@ -323,11 +323,6 @@ onMounted(() => {
     scroll(0, 0);
     const route = useRoute();
     templeID.value = Number(route.params.templeID);
-    
-    // 監聽螢幕寬度
-    window.addEventListener('resize', updateScreenWidth);
-    // 确保FB SDK解析並且渲染plugin
-    updateScreenWidth();
 });
 
 const auth = useAuth();
@@ -396,14 +391,14 @@ const updateScreenWidth = () => {
         fbWidth.value = window.innerWidth-60;
       }else if(window.innerWidth < 1024 && window.innerWidth > 768){
         fbWidth.value = 300;
-      }else {
+      }else { 
         fbWidth.value = 500;
       } 
       nextTick();
         clearTimeout(timerId);
         timerId = setTimeout(()=> {
             window.FB.XFBML.parse();  
-        },300) 
+        },500) 
     };
 
 // fb 大小調整
@@ -424,6 +419,9 @@ const fullPage = ref(true);
 const FbHtml = ref('');
 onMounted(async () => {
     isLoading.value = true;
+     // 監聽螢幕寬度
+     // 确保FB SDK解析並且渲染plugin
+     window.addEventListener('resize', updateScreenWidth);
     try {
         const response = await axios.get(
             `${backend}api/gc/temple/${templeID.value}`
@@ -437,23 +435,18 @@ onMounted(async () => {
         console.log(todos.value);
         main_god.value = temple.value.main_god.split(",").join("、");
 
-        await nextTick();
-        window.FB.XFBML.parse(); 
+        updateScreenWidth();
+        // await nextTick();
+        // window.FB.XFBML.parse(); 
 
     } catch (error) {
         console.error("API 請求失敗:", error);
     } finally {
         isLoading.value = false;
     }
-// setTimeout(()=> {
-//     window.FB.XFBML.parse(); 
-// }, 2000);
-   
-});
-
-onMounted(() => {
-      window.addEventListener('resize', updateScreenWidth);
-      
+onUnmounted(() => {
+      window.removeEventListener('resize', handleResize);
+    });
 });
 </script>
 
